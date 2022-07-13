@@ -15,5 +15,9 @@ class ViewController: UIViewController {
     }
     
     // とりあえずYoutubeを表示できるような面を作成
+    
+    // IFrameの埋め込みだけ作ってみるViewを作ってそれのDelegateを実装？
+    // 任意のタイミングでloadし直す機能はどうするのがベストだろうか？
+    // Swiftならcsvよりもjsonの方がさそう
 }
 
