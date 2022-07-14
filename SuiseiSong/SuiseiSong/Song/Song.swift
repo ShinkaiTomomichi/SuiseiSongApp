@@ -7,12 +7,14 @@
 
 import Foundation
 
-struct Song {
-    var title: String!
-    var start: Int!
-    var end: Int!
+struct Song: Codable {
+    var videoid: String
+    var songtitle: String
+    var artist: String
+    var starttime: Int
+    var endtime: Int
     
     func calcDuration() -> Int{
-        return end - start
+        return endtime - starttime
     }
 }
