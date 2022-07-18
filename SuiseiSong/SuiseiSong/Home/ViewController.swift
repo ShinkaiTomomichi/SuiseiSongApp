@@ -12,6 +12,10 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var playerView: YTPlayerView!
     @IBOutlet weak var songTableView: UITableView!
+    @IBOutlet weak var playAndStopButton: UIButton!
+    // selectedSongが変更されたら変えたいのだがやり方が分からん
+    @IBOutlet weak var playingSongLabel: UILabel!
+    @IBOutlet weak var playingSlider: UISlider!
     
     private var songs: [Song] = []
     
@@ -28,25 +32,106 @@ class ViewController: UIViewController {
         
         playerView.delegate = self
         
+        // sharedにセット
+        YTPlayerViewWrapper.shared.playerView = playerView
+        YTPlayerViewWrapper.shared.setSelectedIdAndSong(selectedId: 0,
+                                                        selectedSong: songs.first!)
         
-        self.playerView.load(withVideoId: "njGJGwx_eVM")
-        
-        // viewDidLoadだと多分追いつかない
-        // self.playerView.playVideo()
-        // self.playerView.pauseVideo()
-        // self.playerView.stopVideo()
+        // NotificationCenter.default.addObserver(<#T##observer: Any##Any#>, selector: <#T##Selector#>, name: <#T##NSNotification.Name?#>, object: <#T##Any?#>)
     }
     
-    // とりあえずYoutubeを表示できるような面を作成
-    // あーサインインとかが必要か？
-    // 逆にそういうのが必要なければProjectは不要か？
-    // 再生開始からn秒で発火するように拡張する必要がありそう
+    // notificationの際にlabelを修正する
     
-    // IFrameの埋め込みだけ作ってみるViewを作ってそれのDelegateを実装？
-    // 任意のタイミングでloadし直す機能はどうするのがベストだろうか？
-    // Swiftならcsvよりもjsonの方がさそう
+    // またシークバーを使って今の動画の調整をしたい
+    // 直接シークバーを弄らないように独自のシークバーをつくる必要があるのか、難しい
+    // playerのプロパティから取れない気がするので経過時間で頑張るしかないか
+    // Delegateの中で1秒経過ごとに動かすとかかな？
     
-    // あーシークバーから選択するようなメソッドもあるな、使ってみよう
+    // selectedを監視して再生中のラベルを変化させる
+    // NSNotification以外にないのか
+    
+    // 終了時にも利用するためメソッド化
+    // こことシークバーを足したら次はUIをマシにしていく
+    func goToOtherSong (toIndexFromCurrent: Int) {
+        print("debug: 次の動画へ進みます")
+        if let currentSelectedId = YTPlayerViewWrapper.shared.selectedId {
+            var nextSelectedId = currentSelectedId + toIndexFromCurrent
+            if nextSelectedId < 0 {
+                nextSelectedId = 0
+            } else if nextSelectedId >= songs.count {
+                nextSelectedId = songs.count - 1
+            }
+            YTPlayerViewWrapper.shared.setSelectedIdAndSong(selectedId: nextSelectedId,
+                                                            selectedSong: songs[nextSelectedId])
+        }
+    }
+        
+    @IBAction func tapPrevSongButton(_ sender: Any) {
+        // TODO: pause中や再生中にスライダーの変化が遅れるのを修正
+        goToOtherSong(toIndexFromCurrent: -1)
+    }
+    
+    @IBAction func tapBackwordButton(_ sender: Any) {
+        YTPlayerViewWrapper.shared.seek(toSeconds: -10)
+    }
+    
+    @IBAction func tapPlayAndStopButton(_ sender: Any) {
+        if YTPlayerViewWrapper.shared.playing {
+            self.playerView.pauseVideo()
+            playAndStopButton.setTitle("▶︎", for: .normal)
+        } else {
+            self.playerView.playVideo()
+            playAndStopButton.setTitle("■", for: .normal)
+        }
+    }
+    
+    @IBAction func tapForwardButton(_ sender: Any) {
+        YTPlayerViewWrapper.shared.seek(toSeconds: 10)
+    }
+    
+    @IBAction func tapNextSongButton(_ sender: Any) {
+        goToOtherSong(toIndexFromCurrent: 1)
+    }
+    
+    // delegateにsliderやtableViewの値を参照するのはイマイチな気がするが...
+    
+    func calcSliderPosition(currentTime: Float) -> Float {
+        if let starttime = YTPlayerViewWrapper.shared.selectedSong?.starttime, let endtime = YTPlayerViewWrapper.shared.selectedSong?.endtime {
+            let elapsedTime = currentTime - Float(starttime)
+            let allTime = Float(endtime) - Float(starttime)
+            return elapsedTime / allTime
+        }
+        return 0
+    }
+    
+    func calcSliderTime(currentRate: Float) -> Float {
+        if let starttime = YTPlayerViewWrapper.shared.selectedSong?.starttime, let endtime = YTPlayerViewWrapper.shared.selectedSong?.endtime {
+            let allTime = Float(endtime) - Float(starttime)
+            let currentTime = Float(starttime) + currentRate * allTime
+            return currentTime
+        }
+        return 0
+    }
+    
+    // 値が変化した時
+    @IBAction func changeSliderValue(_ sender: Any) {
+        let slider = (sender as! UISlider)
+        // print(slider.value)
+    }
+    
+    // スライダーを触った時
+    @IBAction func touchDownSlider(_ sender: Any) {
+        YTPlayerViewWrapper.shared.playerView?.pauseVideo()
+    }
+    
+    @IBAction func touchUpInsideSlider(_ sender: Any) {
+        let slider = (sender as! UISlider)
+        let currentTime = calcSliderTime(currentRate: slider.value)
+        print(slider.value, currentTime)
+        YTPlayerViewWrapper.shared.seek(toSeconds: currentTime,
+                                        fromCurrent: false)
+        YTPlayerViewWrapper.shared.playerView?.playVideo()
+    }
     
     // stackの上詰めのやり方だけ覚えておきたい
     // tableviewを使ってリストを作ろう
@@ -55,32 +140,16 @@ class ViewController: UIViewController {
     // 検索とお気に入りなどか、その場合テーブルビューの表示部分はモジュール化したいのだけどどうすればいいんだろう。ViewControllerを引数入れてモジュール化とかだろうか？
     // あー検索以外にも歌と他枠とかのフィルタも欲しい（これはバーじゃなくてフィルタリングで実現したい）
     
-    // 直接シークバーを弄らないように独自のシークバーをつくる必要があるのか、難しい
-    // playerのプロパティから取れない気がするので経過時間で頑張るしかないか
-    // Delegateの中で1秒経過ごとに動かすとかかな？
-    
     // Youtubeの高さって可変にするのどうするんだろう
     // 取得時の高さ情報に応じてdelegateで動かすとかかね？
     // その場合TableViewがクソ小さくなってしまう
-}
-
-extension ViewController: YTPlayerViewDelegate {
-    func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
-        switch (state) {
-        case YTPlayerState.unstarted:
-            print("停止中")
-        case YTPlayerState.playing:
-            print("再生中")
-        case YTPlayerState.paused:
-            print("一時停止中")
-        case YTPlayerState.buffering:
-            print("バッファリング中")
-        case YTPlayerState.ended:
-            print("再生終了")
-        default:
-            break
-        }
-    }
+    
+    // ちょっとデータベースのレパートリーを拡張しないと苦しい
+    // あとは終了時の判定をどうするか?
+    
+    // 一旦ここの整理が完了したらDBの拡充をやる
+    
+    // 最初触るとなんでベノムに飛ぶんだ???
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
@@ -92,11 +161,11 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // セルを取得する
         let cell: SongTableCell = tableView.dequeueReusableCell(withIdentifier: "SongTableCell", for: indexPath) as! SongTableCell
-        // セルに表示する値を設定する
-        
+        // セルに表示する画像を仮で設定する
         cell.icon.image = UIImage(systemName: "face.smiling.fill")
-        cell.title.text = songs[indexPath.row].songtitle
-        cell.artist.text = songs[indexPath.row].artist
+        // セルに対応する歌をセット
+        cell.song = songs[indexPath.row]
+        
         return cell
     }
 }

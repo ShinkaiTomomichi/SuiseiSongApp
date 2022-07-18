@@ -29,28 +29,81 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mwO-fI-gc0">
                                         <rect key="frame" x="0.0" y="180" width="414" height="40"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mDm-Di-lO4">
-                                                <rect key="frame" x="0.0" y="0.0" width="138" height="40"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ypl-gc-Lej" userLabel="prevSong">
+                                                <rect key="frame" x="0.0" y="0.0" width="83" height="40"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="&lt;&lt;"/>
+                                                <connections>
+                                                    <action selector="tapPrevSongButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="R6I-f9-ZZr"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wya-US-erv">
-                                                <rect key="frame" x="138" y="0.0" width="138" height="40"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mDm-Di-lO4" userLabel="backword">
+                                                <rect key="frame" x="83" y="0.0" width="82.5" height="40"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="&lt;"/>
+                                                <connections>
+                                                    <action selector="tapBackwordButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="M6r-AX-geJ"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dg0-va-F89">
-                                                <rect key="frame" x="276" y="0.0" width="138" height="40"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wya-US-erv" userLabel="playAndStop">
+                                                <rect key="frame" x="165.5" y="0.0" width="83" height="40"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="▶︎"/>
+                                                <connections>
+                                                    <action selector="tapPlayAndStopButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gzq-cq-ic9"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dg0-va-F89" userLabel="forward">
+                                                <rect key="frame" x="248.5" y="0.0" width="82.5" height="40"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="&gt;"/>
+                                                <connections>
+                                                    <action selector="tapForwardButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jzL-PE-V8d"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VgM-jr-QFz" userLabel="nextSong">
+                                                <rect key="frame" x="331" y="0.0" width="83" height="40"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="&gt;&gt;"/>
+                                                <connections>
+                                                    <action selector="tapNextSongButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0MO-qF-tZj"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="rvM-6H-E8g"/>
                                         </constraints>
                                     </stackView>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="lwX-IK-UxB">
+                                        <rect key="frame" x="-2" y="220" width="418" height="141"/>
+                                        <connections>
+                                            <action selector="changeSliderValue:" destination="BYZ-38-t0r" eventType="valueChanged" id="tjK-ZE-rOK"/>
+                                            <action selector="touchDownSlider:" destination="BYZ-38-t0r" eventType="touchDown" id="Oel-Xa-RRi"/>
+                                            <action selector="touchUpInsideSlider:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gEN-4c-fqE"/>
+                                        </connections>
+                                    </slider>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xp4-wt-UOQ">
+                                        <rect key="frame" x="0.0" y="360" width="414" height="20.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="再生中：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pO7-cU-VR4">
+                                                <rect key="frame" x="0.0" y="0.0" width="314" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BYX-rz-wjx">
+                                                <rect key="frame" x="314" y="0.0" width="100" height="20.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="0H1-aY-Imc"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="fDP-Pi-jZe">
-                                        <rect key="frame" x="0.0" y="220" width="414" height="598"/>
+                                        <rect key="frame" x="0.0" y="380.5" width="414" height="437.5"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SongTableCell" id="sEp-yR-l5d" customClass="SongTableCell" customModule="SuiseiSong" customModuleProvider="target">
@@ -118,7 +171,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="playAndStopButton" destination="Wya-US-erv" id="jBg-es-qa8"/>
                         <outlet property="playerView" destination="wgw-1q-NKg" id="LGO-nt-jCh"/>
+                        <outlet property="playingSlider" destination="lwX-IK-UxB" id="zZc-0B-xeI"/>
+                        <outlet property="playingSongLabel" destination="pO7-cU-VR4" id="fdH-Xr-bgg"/>
                         <outlet property="songTableView" destination="fDP-Pi-jZe" id="lwY-OZ-zM9"/>
                     </connections>
                 </viewController>
