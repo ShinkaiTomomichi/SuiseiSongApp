@@ -10,7 +10,7 @@ import Foundation
 struct GetSongFromJson {
     static func getSongs () -> [Song] {
         /// ①プロジェクト内にある"employees.json"ファイルのパス取得
-        guard let url = Bundle.main.url(forResource: "suisei_song_stream", withExtension: "json") else {
+        guard let url = Bundle.main.url(forResource: "suisei_song", withExtension: "json") else {
            fatalError("ファイルが見つからない")
         }
 

@@ -40,6 +40,9 @@ extension ViewController: YTPlayerViewDelegate {
         // スライダーの値に反映させる
         playingSlider.value = calcSliderPosition(currentTime: playTime)
         
+        // テキストの値に反映させる
+        playingTimeLabel.text = calcPlayingTime(currentTime: playTime)
+        
         // 終了時刻を超えたら次の動画に進む
         if let endtime = YTPlayerViewWrapper.shared.selectedSong?.endtime {
             if playTime >= Float(endtime) {
@@ -49,10 +52,14 @@ extension ViewController: YTPlayerViewDelegate {
         }
     }
     
-
-    
-    // これの扱いをどうしようか...
-//    internal func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
-//        playerView.playVideo()
-//    }
+    // 次の動画に進む時に必要だが、初回から起動されるとやや困る
+    // 初回起動のフラグを管理しておきたい
+    // 画面リセットの際にも起動して欲しくないのでこれの改善も測る
+    func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
+        if FirstLAunchFlag.shared.isFirstLaunch {
+            FirstLAunchFlag.shared.isFirstLaunch = false
+        } else {
+            playerView.playVideo()
+        }
+    }
 }

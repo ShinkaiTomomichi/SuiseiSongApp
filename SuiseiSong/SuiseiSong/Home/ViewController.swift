@@ -12,12 +12,22 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var playerView: YTPlayerView!
     @IBOutlet weak var songTableView: UITableView!
+    
+    // Button
+    @IBOutlet weak var prevSongButton: UIButton!
+    @IBOutlet weak var backwordButton: UIButton!
     @IBOutlet weak var playAndStopButton: UIButton!
+    @IBOutlet weak var forwardButton: UIButton!
+    @IBOutlet weak var nextSongButton: UIButton!
+    
     // selectedSongが変更されたら変えたいのだがやり方が分からん
     @IBOutlet weak var playingSongLabel: UILabel!
+    @IBOutlet weak var playingTimeLabel: UILabel!
+    
     @IBOutlet weak var playingSlider: UISlider!
     
     private var songs: [Song] = []
+    // songsを作り直してreloadする機能が欲しい、とりあえずこれをするために画面をいくつかに分割するUIでやってみる
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,17 +40,29 @@ class ViewController: UIViewController {
         songTableView.delegate = self
         songTableView.dataSource = self
         
+        // playerのdelegateをセット
         playerView.delegate = self
+        
+        // Buttonの絵柄をセット
+        prevSongButton.setImage(UIImage(systemName: "backward.end.fill"), for: .normal)
+        backwordButton.setImage(UIImage(systemName: "backward.fill"), for: .normal)
+        playAndStopButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        forwardButton.setImage(UIImage(systemName: "forward.fill"), for: .normal)
+        nextSongButton.setImage(UIImage(systemName: "forward.end.fill"), for: .normal)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(setPlayingSongLabel), name: Notification.Name("didChangedSelectedSong"), object: nil)
         
         // sharedにセット
         YTPlayerViewWrapper.shared.playerView = playerView
         YTPlayerViewWrapper.shared.setSelectedIdAndSong(selectedId: 0,
                                                         selectedSong: songs.first!)
-        
-        // NotificationCenter.default.addObserver(<#T##observer: Any##Any#>, selector: <#T##Selector#>, name: <#T##NSNotification.Name?#>, object: <#T##Any?#>)
     }
     
     // notificationの際にlabelを修正する
+    @objc func setPlayingSongLabel() {
+        playingSongLabel.text = YTPlayerViewWrapper.shared.selectedSong?.songtitle
+    }
+    
     
     // またシークバーを使って今の動画の調整をしたい
     // 直接シークバーを弄らないように独自のシークバーをつくる必要があるのか、難しい
@@ -51,7 +73,6 @@ class ViewController: UIViewController {
     // NSNotification以外にないのか
     
     // 終了時にも利用するためメソッド化
-    // こことシークバーを足したら次はUIをマシにしていく
     func goToOtherSong (toIndexFromCurrent: Int) {
         print("debug: 次の動画へ進みます")
         if let currentSelectedId = YTPlayerViewWrapper.shared.selectedId {
@@ -78,10 +99,8 @@ class ViewController: UIViewController {
     @IBAction func tapPlayAndStopButton(_ sender: Any) {
         if YTPlayerViewWrapper.shared.playing {
             self.playerView.pauseVideo()
-            playAndStopButton.setTitle("▶︎", for: .normal)
         } else {
             self.playerView.playVideo()
-            playAndStopButton.setTitle("■", for: .normal)
         }
     }
     
@@ -94,7 +113,6 @@ class ViewController: UIViewController {
     }
     
     // delegateにsliderやtableViewの値を参照するのはイマイチな気がするが...
-    
     func calcSliderPosition(currentTime: Float) -> Float {
         if let starttime = YTPlayerViewWrapper.shared.selectedSong?.starttime, let endtime = YTPlayerViewWrapper.shared.selectedSong?.endtime {
             let elapsedTime = currentTime - Float(starttime)
@@ -113,9 +131,20 @@ class ViewController: UIViewController {
         return 0
     }
     
+    func calcPlayingTime(currentTime: Float) -> String {
+        if let starttime = YTPlayerViewWrapper.shared.selectedSong?.starttime, let endtime = YTPlayerViewWrapper.shared.selectedSong?.endtime {
+            let elapsedTime = Int(currentTime) - starttime
+            let elapsedTimeStr = elapsedTime.toTimeStamp()
+            let allTime = Int(endtime) - starttime
+            let allTimeStr = allTime.toTimeStamp()
+            return "\(elapsedTimeStr)/\(allTimeStr)"
+        }
+        return "0:00/0:00"
+    }
+    
     // 値が変化した時
     @IBAction func changeSliderValue(_ sender: Any) {
-        let slider = (sender as! UISlider)
+        let _ = (sender as! UISlider)
         // print(slider.value)
     }
     
@@ -143,13 +172,17 @@ class ViewController: UIViewController {
     // Youtubeの高さって可変にするのどうするんだろう
     // 取得時の高さ情報に応じてdelegateで動かすとかかね？
     // その場合TableViewがクソ小さくなってしまう
-    
-    // ちょっとデータベースのレパートリーを拡張しないと苦しい
-    // あとは終了時の判定をどうするか?
-    
-    // 一旦ここの整理が完了したらDBの拡充をやる
-    
-    // 最初触るとなんでベノムに飛ぶんだ???
+    private func getImageByVideoId(videoId: String) -> UIImage{
+        let urlWithVideoId = "https://i.ytimg.com/vi/\(videoId)/hqdefault.jpg"
+        let url = URL(string: urlWithVideoId)
+        do {
+            let data = try Data(contentsOf: url!)
+            return UIImage(data: data)!
+        } catch let err {
+            print("Error : \(err.localizedDescription)")
+        }
+        return UIImage(systemName: "xmark.circle.fill")!
+    }
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
@@ -162,9 +195,15 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         // セルを取得する
         let cell: SongTableCell = tableView.dequeueReusableCell(withIdentifier: "SongTableCell", for: indexPath) as! SongTableCell
         // セルに表示する画像を仮で設定する
-        cell.icon.image = UIImage(systemName: "face.smiling.fill")
+        let song = songs[indexPath.row]
+        cell.icon.image = getImageByVideoId(videoId: song.videoid)
+        // 角を丸くする
+        cell.icon.layer.cornerRadius = cell.icon.frame.size.width * 0.05
+        cell.icon.clipsToBounds = true
+        
+        // cell.icon.image = UIImage(systemName: "face.smiling.fill")
         // セルに対応する歌をセット
-        cell.song = songs[indexPath.row]
+        cell.song = song
         
         return cell
     }

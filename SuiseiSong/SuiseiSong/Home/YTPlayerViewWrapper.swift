@@ -19,7 +19,7 @@ class YTPlayerViewWrapper {
         didSet {
             print("debug:", selectedSong!.songtitle)
             shouldReload = oldValue?.videoid != selectedSong?.videoid
-            // NotificationCenter.default.post(name: NSNotification.Name(rawValue: "didChangedSelectedSong"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "didChangedSelectedSong"), object: nil)
         }
     }
     
