@@ -17,10 +17,15 @@ final class Songs {
     private(set) var filteredSongs: [Song] = [] {
         didSet {
             NotificationCenter.default.post(name: .didChangedFilteredSong, object: nil)
+            SelectedStatus.shared.setSelectedID()
         }
     }
     
     func setup() {
+        guard YTPlayerViewWrapper.shared.playerView != nil else {
+            Logger.log(message: "setupの前にplayerViewのセットを実施して下さい")
+            return
+        }
         self.allSongs = JSONFileManager.getSuiseiSongs()
         self.filteredSongs = self.allSongs
     }

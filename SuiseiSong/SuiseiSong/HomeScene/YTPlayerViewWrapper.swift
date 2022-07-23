@@ -13,45 +13,21 @@ final class YTPlayerViewWrapper {
     private init() {}
     
     var playerView: YTPlayerView?
-    
-    // Idの管理外したい...なんとかならんのか
-    // IdとSongを管理するクラスに分けるか
-    // Idじゃなくてnextとprevとか持っておくと良いのかな？
-    private(set) var selectedId: Int?
-    private(set) var selectedSong: Song? {
-        didSet {
-            Logger.log(message: selectedSong!.songtitle)
-            shouldReload = oldValue?.videoid != selectedSong?.videoid
-            NotificationCenter.default.post(name: .didChangedSelectedSong, object: nil)
-        }
-    }
-    
-    private var shouldReload: Bool = false
+        
+    var shouldReload: Bool = true
     var playing: Bool = false
-    
-    // selectedIdとselectedSongは同時に決定する
-    func setSelectedIdAndSong (selectedId: Int, selectedSong: Song, withStart: Bool = true) {
-        self.selectedId = selectedId
-        self.selectedSong = selectedSong
-        if withStart {
-            self.start()
-        }
-    }
     
     // autoplayが反応しない...Delegateの方で実装するしかないか?
     // 基本的に制御が増えると面倒なので一旦制御は外しておく
     func start() {
-        if let selectedSong = self.selectedSong {
+        if let selectedSong = SelectedStatus.shared.song {
             if shouldReload {
                 let playerVars = [
                     "controls": 0,
                     "start": Float(selectedSong.starttime)
                 ]
                 self.playerView?.load(withVideoId: selectedSong.videoid,
-                                      playerVars: playerVars)
-                // load中だと再生されない?
-                // ていうかこれいるか？
-                self.playerView?.playVideo()
+                                          playerVars: playerVars)
             } else {
                 // videoIdが同じ場合seekのみにしておく
                 self.playerView?.seek(toSeconds: Float(selectedSong.starttime),
@@ -67,7 +43,7 @@ final class YTPlayerViewWrapper {
             if fromCurrent {
                 timeAfterSeek = result + toSeconds
             }
-            if let selectedSong = self.selectedSong {
+            if let selectedSong = SelectedStatus.shared.song {
                 if timeAfterSeek > Float(selectedSong.endtime) {
                     timeAfterSeek = Float(selectedSong.endtime)
                 } else if timeAfterSeek < Float(selectedSong.starttime) {

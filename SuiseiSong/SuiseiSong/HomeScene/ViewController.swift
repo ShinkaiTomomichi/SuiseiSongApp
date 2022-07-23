@@ -31,11 +31,11 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var playingSlider: UISlider!
     
-    // とりあえずcollectionを追加してジャンルの追加を試みる
-    // その前にジャンル分けとデータセット作成の方をやっておこうかね
-    // サイエンス周りは脳死でやれるので夜にやる
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        YTPlayerViewWrapper.shared.playerView = playerView
+        Songs.shared.setup()
         
         // これを元にtableViewを作成
         songTableView.delegate = self
@@ -56,50 +56,49 @@ class ViewController: UIViewController {
         
         shuffleButton.setImage(UIImage(systemName: "shuffle"), for: .normal)
         repeatButton.setImage(UIImage(systemName: "repeat"), for: .normal)
-        
-        // selectorがlabelに紐づいているのでVCで立てているが重複するケースはないか？
+                
         NotificationCenter.default.addObserver(self, selector: #selector(setPlayingSongLabel), name: .didChangedSelectedSong, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: .didChangedFilteredSong, object: nil)
-        
-        // sharedにセット
-        YTPlayerViewWrapper.shared.playerView = playerView
-        YTPlayerViewWrapper.shared.setSelectedIdAndSong(selectedId: 0,
-                                                        selectedSong: Songs.shared.filteredSongs.first!)
     }
     
     // 再生した曲が変化した際にlabelを修正する
     @objc func setPlayingSongLabel() {
-        playingSongLabel.text = YTPlayerViewWrapper.shared.selectedSong?.songtitle
+        playingSongLabel.text = SelectedStatus.shared.song?.songtitle
+        // cancelHighlightingAllCell()
+        // highlightSelectedCell()
     }
+    
+    // TODO: メモリから外されたセルの状態を管理するのがかなり難しい、、、一旦保留
+    /*
+    private func cancelHighlightingAllCell() {
+        for i in 0..<songTableView.visibleCells.count{
+            let indexPath = IndexPath(row: i, section: 0)
+            let cell = songTableView.cellForRow(at: indexPath) as! SongTableCell
+            cell.selectedView.alpha = 0
+        }
+    }
+    
+    private func highlightSelectedCell() {
+        let indexPath = IndexPath(row: SelectedStatus.shared.id!, section: 0)
+        Logger.log(message: indexPath)
+        let cell = songTableView.cellForRow(at: indexPath) as! SongTableCell
+        cell.selectedView.alpha = 0.1
+    }
+    */
     
     // filteredの中身が変化したらtableViewをリロードするメソッドが欲しい
     @objc func reloadTableView() {
         songTableView.reloadData()
     }
     
-    // 終了時にも利用するためメソッド化
-    // selectedSongに混ぜ込む
-    func goToOtherSong (toIndexFromCurrent: Int) {
-        if let currentSelectedId = YTPlayerViewWrapper.shared.selectedId {
-            var nextSelectedId = currentSelectedId + toIndexFromCurrent
-            if nextSelectedId < 0 {
-                nextSelectedId = 0
-            } else if nextSelectedId >= Songs.shared.filteredSongs.count {
-                nextSelectedId = Songs.shared.filteredSongs.count - 1
-            }
-            YTPlayerViewWrapper.shared.setSelectedIdAndSong(selectedId: nextSelectedId,
-                                                            selectedSong: Songs.shared.filteredSongs[nextSelectedId])
-        }
-    }
-    
     // Buttonの塊は一つのモジュールに入れておきたい
-    // StackViewのクラスを別で切り出した方がいいか？
     @IBAction func tapPrevSongButton(_ sender: Any) {
-        // TODO: pause中や再生中にスライダーの変化が遅れるのを修正
-        goToOtherSong(toIndexFromCurrent: -1)
+        SelectedStatus.shared.selectPrevID()
     }
     
     @IBAction func tapBackwordButton(_ sender: Any) {
+        // TODO: pause中や再生中にスライダーの変化が遅れるのを修正
+        // 移動時に全て反映させるのはYTPlayerのDelegateで管理したい
         YTPlayerViewWrapper.shared.seek(toSeconds: -10)
     }
     
@@ -116,31 +115,30 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapNextSongButton(_ sender: Any) {
-        goToOtherSong(toIndexFromCurrent: 1)
+        SelectedStatus.shared.selectNextID()
     }
     
     @IBAction func tapShuffleButton(_ sender: Any) {
         Songs.shared.shuffle()
-        // これシャッフルではなくて、filteredが変更した時にやりたい
-        YTPlayerViewWrapper.shared.setSelectedIdAndSong(selectedId: 0,
-                                                        selectedSong: Songs.shared.filteredSongs.first!)
     }
     
     @IBAction func tapRepeatButton(_ sender: Any) {
-        // settingのsharedを用意すべきか
-        // それともこの画面限定の機能にするか？
+        Settings.shared.shouldRepeat.toggle()
     }
     
     @IBAction func tapSearchButton(_ sender: Any) {
         // tap用のモーダルが出るようにしたいが、一旦簡略化
+        // 明日以降はViewを呼ぶ処理とHomeまで戻ってくる処理を追加したい
+        // フィルタ内容が反映できればだいぶ上々
         Songs.shared.filter(by: "覚醒")
         
-        // 簡単なViewなら呼べるがどうするのがベストか...
+        // 検索ログは見る必要はあまりないが、、、
+        // もしかしたらこの辺ってFirebaseとかで見れるのか？？？
     }
     
     // delegateにsliderやtableViewの値を参照するのはイマイチな気がするが...
     func calcSliderPosition(currentTime: Float) -> Float {
-        if let starttime = YTPlayerViewWrapper.shared.selectedSong?.starttime, let endtime = YTPlayerViewWrapper.shared.selectedSong?.endtime {
+        if let starttime = SelectedStatus.shared.song?.starttime, let endtime = SelectedStatus.shared.song?.endtime {
             let elapsedTime = currentTime - Float(starttime)
             let allTime = Float(endtime) - Float(starttime)
             return elapsedTime / allTime
@@ -149,7 +147,7 @@ class ViewController: UIViewController {
     }
     
     func calcSliderTime(currentRate: Float) -> Float {
-        if let starttime = YTPlayerViewWrapper.shared.selectedSong?.starttime, let endtime = YTPlayerViewWrapper.shared.selectedSong?.endtime {
+        if let starttime = SelectedStatus.shared.song?.starttime, let endtime = SelectedStatus.shared.song?.endtime {
             let allTime = Float(endtime) - Float(starttime)
             let currentTime = Float(starttime) + currentRate * allTime
             return currentTime
@@ -158,7 +156,7 @@ class ViewController: UIViewController {
     }
     
     func calcPlayingTime(currentTime: Float) -> String {
-        if let starttime = YTPlayerViewWrapper.shared.selectedSong?.starttime, let endtime = YTPlayerViewWrapper.shared.selectedSong?.endtime {
+        if let starttime = SelectedStatus.shared.song?.starttime, let endtime = SelectedStatus.shared.song?.endtime {
             let elapsedTime = Int(currentTime) - starttime
             let elapsedTimeStr = elapsedTime.toTimeStamp()
             let allTime = Int(endtime) - starttime
@@ -190,5 +188,8 @@ class ViewController: UIViewController {
     // Youtubeの高さって可変にするのどうするんだろう
     // 取得時の高さ情報に応じてdelegateで動かすとかかね？
     // その場合TableViewがクソ小さくなってしまう
-
+    
+    // Playerの大きさを可変にしたいな...動画の方でAPI経由でとったほうが楽かも
+    // selectedの管理がクソだった... 治さねば...
+    // 色はとりあえず黒ベースにしてもいいかも
 }

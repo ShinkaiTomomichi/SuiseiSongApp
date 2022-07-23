@@ -8,7 +8,7 @@
 import Foundation
 
 struct Logger {
-    static func log(message: String, style: String = "debug") {
+    static func log(message: Any, style: String = "debug") {
         print("[debug] \(message)")
     }
 }

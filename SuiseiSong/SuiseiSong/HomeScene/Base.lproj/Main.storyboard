@@ -5,7 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,33 +20,14 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tM2-xy-vaI">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="51"/>
                                         <subviews>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kMK-ZU-ncX">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="c0N-61-8z6"/>
-                                                </constraints>
-                                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ELv-Pe-lPu">
-                                                    <size key="itemSize" width="128" height="128"/>
-                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                </collectionViewFlowLayout>
-                                                <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="1hW-fJ-hb5">
-                                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="eSl-Tf-7UJ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                        </collectionViewCellContentView>
-                                                    </collectionViewCell>
-                                                </cells>
-                                            </collectionView>
+                                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="noR-xg-LTI">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="51"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </searchBar>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y0b-2s-aae" userLabel="Search">
-                                                <rect key="frame" x="414" y="0.0" width="0.0" height="30"/>
+                                                <rect key="frame" x="414" y="0.0" width="0.0" height="51"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain"/>
                                                 <connections>
@@ -55,21 +35,21 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Xd-xr-lhN" userLabel="Setting">
-                                                <rect key="frame" x="414" y="0.0" width="0.0" height="30"/>
+                                                <rect key="frame" x="414" y="0.0" width="0.0" height="51"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain"/>
                                             </button>
                                         </subviews>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wgw-1q-NKg" customClass="YTPlayerView">
-                                        <rect key="frame" x="0.0" y="30" width="414" height="180"/>
+                                        <rect key="frame" x="0.0" y="51" width="414" height="180"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="180" id="ce5-zz-7Ux"/>
                                         </constraints>
                                     </view>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="lwX-IK-UxB">
-                                        <rect key="frame" x="-2" y="210" width="418" height="141"/>
+                                        <rect key="frame" x="-2" y="231" width="418" height="120"/>
                                         <connections>
                                             <action selector="changeSliderValue:" destination="BYZ-38-t0r" eventType="valueChanged" id="tjK-ZE-rOK"/>
                                             <action selector="touchDownSlider:" destination="BYZ-38-t0r" eventType="touchDown" id="Oel-Xa-RRi"/>
@@ -135,6 +115,10 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="51.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
+                                                        <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gHl-2O-gvI">
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="51.5"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </view>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="TYc-bp-ZpQ">
                                                             <rect key="frame" x="3" y="3" width="408" height="45.5"/>
                                                             <subviews>
@@ -175,15 +159,20 @@
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="TYc-bp-ZpQ" secondAttribute="bottom" constant="3" id="1MW-w2-jDp"/>
+                                                        <constraint firstAttribute="bottom" secondItem="gHl-2O-gvI" secondAttribute="bottom" id="8z0-UU-CFg"/>
                                                         <constraint firstAttribute="trailing" secondItem="TYc-bp-ZpQ" secondAttribute="trailing" constant="3" id="LTg-aG-5Hf"/>
+                                                        <constraint firstItem="gHl-2O-gvI" firstAttribute="top" secondItem="mLm-fm-0zG" secondAttribute="top" id="LvO-6V-jQk"/>
                                                         <constraint firstItem="TYc-bp-ZpQ" firstAttribute="leading" secondItem="mLm-fm-0zG" secondAttribute="leading" constant="3" id="Pk4-Zm-rcw"/>
                                                         <constraint firstItem="TYc-bp-ZpQ" firstAttribute="top" secondItem="mLm-fm-0zG" secondAttribute="top" constant="3" id="RJv-f9-qSr"/>
+                                                        <constraint firstItem="gHl-2O-gvI" firstAttribute="leading" secondItem="mLm-fm-0zG" secondAttribute="leading" id="s9w-wD-vtS"/>
+                                                        <constraint firstAttribute="trailing" secondItem="gHl-2O-gvI" secondAttribute="trailing" id="z3H-EO-J6Q"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
                                                     <outlet property="artist" destination="W3b-Vf-ZCf" id="SUE-eC-sHU"/>
                                                     <outlet property="favorite" destination="vPV-9W-tH2" id="gHa-qk-gU4"/>
                                                     <outlet property="icon" destination="Hgf-Ih-t5y" id="JFU-ql-2eJ"/>
+                                                    <outlet property="selectedView" destination="gHl-2O-gvI" id="KfC-JB-Mcm"/>
                                                     <outlet property="title" destination="3Em-SZ-mqz" id="ijI-eB-anf"/>
                                                 </connections>
                                             </tableViewCell>

@@ -12,7 +12,7 @@
 		DA6078172886E0270002A524 /* FirstLaunchFlag.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6078162886E0270002A524 /* FirstLaunchFlag.swift */; };
 		DA607819288872040002A524 /* Songs.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA607818288872040002A524 /* Songs.swift */; };
 		DA60781B288B8D020002A524 /* ViewController+TableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60781A288B8D020002A524 /* ViewController+TableDelegate.swift */; };
-		DA60781D288B948D0002A524 /* SelectedSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60781C288B948D0002A524 /* SelectedSong.swift */; };
+		DA60781D288B948D0002A524 /* SelectedStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60781C288B948D0002A524 /* SelectedStatus.swift */; };
 		DA60781F288B9C080002A524 /* NSNotification+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60781E288B9C080002A524 /* NSNotification+.swift */; };
 		DA607821288C034C0002A524 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA607820288C034C0002A524 /* Settings.swift */; };
 		DA9950A9287B271F0037D8E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9950A8287B271F0037D8E5 /* AppDelegate.swift */; };
@@ -57,7 +57,7 @@
 		DA6078162886E0270002A524 /* FirstLaunchFlag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchFlag.swift; sourceTree = "<group>"; };
 		DA607818288872040002A524 /* Songs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Songs.swift; sourceTree = "<group>"; };
 		DA60781A288B8D020002A524 /* ViewController+TableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+TableDelegate.swift"; sourceTree = "<group>"; };
-		DA60781C288B948D0002A524 /* SelectedSong.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedSong.swift; sourceTree = "<group>"; };
+		DA60781C288B948D0002A524 /* SelectedStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedStatus.swift; sourceTree = "<group>"; };
 		DA60781E288B9C080002A524 /* NSNotification+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification+.swift"; sourceTree = "<group>"; };
 		DA607820288C034C0002A524 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		DA9950A5287B271F0037D8E5 /* SuiseiSong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuiseiSong.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -194,7 +194,7 @@
 			children = (
 				DA9950D9287F83F70037D8E5 /* Song.swift */,
 				DA607818288872040002A524 /* Songs.swift */,
-				DA60781C288B948D0002A524 /* SelectedSong.swift */,
+				DA60781C288B948D0002A524 /* SelectedStatus.swift */,
 			);
 			path = Song;
 			sourceTree = "<group>";
@@ -381,7 +381,7 @@
 				DA9950DE288056510037D8E5 /* JSONFileManager.swift in Sources */,
 				DA9950DA287F83F70037D8E5 /* Song.swift in Sources */,
 				DA9950F428852A0D0037D8E5 /* ViewController+YTPlayerViewDelegate.swift in Sources */,
-				DA60781D288B948D0002A524 /* SelectedSong.swift in Sources */,
+				DA60781D288B948D0002A524 /* SelectedStatus.swift in Sources */,
 				DA9950F02880757F0037D8E5 /* SongTableCell.swift in Sources */,
 				DA6078132886D5C20002A524 /* Int+.swift in Sources */,
 				DA9950AD287B271F0037D8E5 /* ViewController.swift in Sources */,

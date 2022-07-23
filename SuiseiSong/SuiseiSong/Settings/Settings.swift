@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+// TODO: 永続化するためにUserDefaultsやRealmを使う
+// Settingsのようなカラム管理が不要なものはUDで良さそう
+final class Settings {
+    static var shared = Settings()
+    private init() {}
+
+    var shouldRepeat: Bool = false
+}

@@ -44,10 +44,10 @@ extension ViewController: YTPlayerViewDelegate {
         playingTimeLabel.text = calcPlayingTime(currentTime: playTime)
         
         // 終了時刻を超えたら次の動画に進む
-        if let endtime = YTPlayerViewWrapper.shared.selectedSong?.endtime {
+        if let endtime = SelectedStatus.shared.song?.endtime {
             if playTime >= Float(endtime) {
                 print("ここに次の動画へ進む処理を挟みたい")
-                goToOtherSong(toIndexFromCurrent: 1)
+                SelectedStatus.shared.selectNextID()
             }
         }
     }

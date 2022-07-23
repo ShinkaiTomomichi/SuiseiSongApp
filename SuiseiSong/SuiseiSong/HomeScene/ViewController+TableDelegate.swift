@@ -15,10 +15,12 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // セルを取得する
-        let cell: SongTableCell = tableView.dequeueReusableCell(withIdentifier: "SongTableCell", for: indexPath) as! SongTableCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SongTableCell", for: indexPath) as! SongTableCell
 
         // セルに対応する歌をセット
-        cell.song = Songs.shared.filteredSongs[indexPath.row]
+        let index = indexPath.row
+        cell.song = Songs.shared.filteredSongs[index]
+        cell.index = index
         
         return cell
     }

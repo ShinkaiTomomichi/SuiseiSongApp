@@ -14,6 +14,8 @@ class SongTableCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var artist: UILabel!
     @IBOutlet weak var favorite: UIButton!
+    // 別で用意する
+    @IBOutlet weak var selectedView: UIView!
     
     var song: Song? = nil {
         // songをセットした際に自動で他の要素をセットする
@@ -25,12 +27,17 @@ class SongTableCell: UITableViewCell {
             }
         }
     }
+    
     // nextを決める際に必要
-    var index: Int = 0
+    var index: Int?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        // 曲の選択はNextに進んだ場合にも反映する必要があるため、タップとは別に実装する必要がある
+        self.selectionStyle = .none
+        // self.selectedView.alpha = 0
+                
         // お気に入り機能を反映させる
         // ここだけDBではなくUDから参照する
         
@@ -41,13 +48,13 @@ class SongTableCell: UITableViewCell {
         // self.favorite.setImage(UIImage(systemName: "star.fill"), for: .normal)
     }
 
+    // これとtableViewのdelegateの使い分けがよく分からん
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // tapした時のみ
-        if selected {
-            YTPlayerViewWrapper.shared.setSelectedIdAndSong(selectedId: index,
-                                                            selectedSong: song!)
+        if let index = index, selected {
+            SelectedStatus.shared.setSelectedID(id: index)
         }
     }
     
