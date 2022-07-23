@@ -7,8 +7,10 @@
 
 import Foundation
 
-struct DebugLog {
-    static func log(message: String) {
+struct Logger {
+    static func log(message: String, style: String = "debug") {
         print("[debug] \(message)")
     }
 }
+
+// TODO: enum型でログの種類を制御したい

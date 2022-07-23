@@ -7,8 +7,10 @@
 
 import Foundation
 
-struct GetSongFromJson {
-    static func getSongs () -> [Song] {
+// 今後DBに移行するため設計は雑で良い
+// クラスなのに動詞から始まるのはどうなのか？
+struct JSONFileManager {
+    static func getSuiseiSongs () -> [Song] {
         /// ①プロジェクト内にある"employees.json"ファイルのパス取得
         guard let url = Bundle.main.url(forResource: "suisei_song", withExtension: "json") else {
            fatalError("ファイルが見つからない")
@@ -25,11 +27,6 @@ struct GetSongFromJson {
            fatalError("JSON読み込みエラー")
         }
 
-        /// ④データ確認
-        for song in songs {
-            // あれ、これOptionalなのか
-           print(song)
-        }
         return songs
     }
 }

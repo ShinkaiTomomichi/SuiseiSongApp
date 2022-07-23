@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FirstLAunchFlag {
+final class FirstLAunchFlag {
     static var shared = FirstLAunchFlag()
     private init() {}
     

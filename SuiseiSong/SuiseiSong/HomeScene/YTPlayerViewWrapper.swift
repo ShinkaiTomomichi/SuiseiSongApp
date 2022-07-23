@@ -8,18 +8,21 @@
 import UIKit
 import YouTubeiOSPlayerHelper
 
-class YTPlayerViewWrapper {
+final class YTPlayerViewWrapper {
     static let shared = YTPlayerViewWrapper()
     private init() {}
     
     var playerView: YTPlayerView?
     
+    // Idの管理外したい...なんとかならんのか
+    // IdとSongを管理するクラスに分けるか
+    // Idじゃなくてnextとprevとか持っておくと良いのかな？
     private(set) var selectedId: Int?
     private(set) var selectedSong: Song? {
         didSet {
-            print("debug:", selectedSong!.songtitle)
+            Logger.log(message: selectedSong!.songtitle)
             shouldReload = oldValue?.videoid != selectedSong?.videoid
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "didChangedSelectedSong"), object: nil)
+            NotificationCenter.default.post(name: .didChangedSelectedSong, object: nil)
         }
     }
     
@@ -47,6 +50,7 @@ class YTPlayerViewWrapper {
                 self.playerView?.load(withVideoId: selectedSong.videoid,
                                       playerVars: playerVars)
                 // load中だと再生されない?
+                // ていうかこれいるか？
                 self.playerView?.playVideo()
             } else {
                 // videoIdが同じ場合seekのみにしておく
@@ -57,7 +61,7 @@ class YTPlayerViewWrapper {
     }
     
     func seek(toSeconds: Float, fromCurrent: Bool = true) {
-        // TODO: 不要な処理が入っているため除く
+        // TODO: fromCurrent=falseの場合に不要な処理が入っているため除く
         var timeAfterSeek = toSeconds
         self.playerView?.currentTime({ result, error in
             if fromCurrent {

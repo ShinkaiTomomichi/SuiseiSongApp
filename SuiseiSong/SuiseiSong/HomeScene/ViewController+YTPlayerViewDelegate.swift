@@ -10,6 +10,7 @@ import YouTubeiOSPlayerHelper
 
 extension ViewController: YTPlayerViewDelegate {
     // stateが変化した時に呼ばれるdelegate
+    // sliderはこれの変化によって変化してもいいかも
     func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
         switch (state) {
         case YTPlayerState.unstarted:
@@ -29,7 +30,6 @@ extension ViewController: YTPlayerViewDelegate {
         default:
             break
         }
-        // 範囲外だと一度ストップする
     }
     
     // 再生中に（0.5秒ごとに?）呼ばれるdelegate

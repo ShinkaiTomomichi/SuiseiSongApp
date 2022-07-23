@@ -9,16 +9,21 @@ import UIKit
 import YouTubeiOSPlayerHelper
 
 class ViewController: UIViewController {
-
+    
+    // PlayerもVCに直書きじゃない方が良いか？
     @IBOutlet weak var playerView: YTPlayerView!
     @IBOutlet weak var songTableView: UITableView!
     
     // Button
+    @IBOutlet weak var searchButton: UIButton!
+    @IBOutlet weak var settingButton: UIButton!
     @IBOutlet weak var prevSongButton: UIButton!
     @IBOutlet weak var backwordButton: UIButton!
     @IBOutlet weak var playAndStopButton: UIButton!
     @IBOutlet weak var forwardButton: UIButton!
     @IBOutlet weak var nextSongButton: UIButton!
+    @IBOutlet weak var shuffleButton: UIButton!
+    @IBOutlet weak var repeatButton: UIButton!
     
     // selectedSongが変更されたら変えたいのだがやり方が分からん
     @IBOutlet weak var playingSongLabel: UILabel!
@@ -26,15 +31,11 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var playingSlider: UISlider!
     
-    private var songs: [Song] = []
-    // songsを作り直してreloadする機能が欲しい、とりあえずこれをするために画面をいくつかに分割するUIでやってみる
-    
+    // とりあえずcollectionを追加してジャンルの追加を試みる
+    // その前にジャンル分けとデータセット作成の方をやっておこうかね
+    // サイエンス周りは脳死でやれるので夜にやる
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // JSONから取得
-        // TODO: データベースからの取得に置き換え
-        songs = GetSongFromJson.getSongs()
         
         // これを元にtableViewを作成
         songTableView.delegate = self
@@ -44,49 +45,55 @@ class ViewController: UIViewController {
         playerView.delegate = self
         
         // Buttonの絵柄をセット
+        searchButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        settingButton.setImage(UIImage(systemName: "gearshape.fill"), for: .normal)
+        
         prevSongButton.setImage(UIImage(systemName: "backward.end.fill"), for: .normal)
-        backwordButton.setImage(UIImage(systemName: "backward.fill"), for: .normal)
+        backwordButton.setImage(UIImage(systemName: "gobackward.10"), for: .normal)
         playAndStopButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-        forwardButton.setImage(UIImage(systemName: "forward.fill"), for: .normal)
+        forwardButton.setImage(UIImage(systemName: "goforward.10"), for: .normal)
         nextSongButton.setImage(UIImage(systemName: "forward.end.fill"), for: .normal)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(setPlayingSongLabel), name: Notification.Name("didChangedSelectedSong"), object: nil)
+        shuffleButton.setImage(UIImage(systemName: "shuffle"), for: .normal)
+        repeatButton.setImage(UIImage(systemName: "repeat"), for: .normal)
+        
+        // selectorがlabelに紐づいているのでVCで立てているが重複するケースはないか？
+        NotificationCenter.default.addObserver(self, selector: #selector(setPlayingSongLabel), name: .didChangedSelectedSong, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: .didChangedFilteredSong, object: nil)
         
         // sharedにセット
         YTPlayerViewWrapper.shared.playerView = playerView
         YTPlayerViewWrapper.shared.setSelectedIdAndSong(selectedId: 0,
-                                                        selectedSong: songs.first!)
+                                                        selectedSong: Songs.shared.filteredSongs.first!)
     }
     
-    // notificationの際にlabelを修正する
+    // 再生した曲が変化した際にlabelを修正する
     @objc func setPlayingSongLabel() {
         playingSongLabel.text = YTPlayerViewWrapper.shared.selectedSong?.songtitle
     }
     
-    
-    // またシークバーを使って今の動画の調整をしたい
-    // 直接シークバーを弄らないように独自のシークバーをつくる必要があるのか、難しい
-    // playerのプロパティから取れない気がするので経過時間で頑張るしかないか
-    // Delegateの中で1秒経過ごとに動かすとかかな？
-    
-    // selectedを監視して再生中のラベルを変化させる
-    // NSNotification以外にないのか
+    // filteredの中身が変化したらtableViewをリロードするメソッドが欲しい
+    @objc func reloadTableView() {
+        songTableView.reloadData()
+    }
     
     // 終了時にも利用するためメソッド化
+    // selectedSongに混ぜ込む
     func goToOtherSong (toIndexFromCurrent: Int) {
-        print("debug: 次の動画へ進みます")
         if let currentSelectedId = YTPlayerViewWrapper.shared.selectedId {
             var nextSelectedId = currentSelectedId + toIndexFromCurrent
             if nextSelectedId < 0 {
                 nextSelectedId = 0
-            } else if nextSelectedId >= songs.count {
-                nextSelectedId = songs.count - 1
+            } else if nextSelectedId >= Songs.shared.filteredSongs.count {
+                nextSelectedId = Songs.shared.filteredSongs.count - 1
             }
             YTPlayerViewWrapper.shared.setSelectedIdAndSong(selectedId: nextSelectedId,
-                                                            selectedSong: songs[nextSelectedId])
+                                                            selectedSong: Songs.shared.filteredSongs[nextSelectedId])
         }
     }
-        
+    
+    // Buttonの塊は一つのモジュールに入れておきたい
+    // StackViewのクラスを別で切り出した方がいいか？
     @IBAction func tapPrevSongButton(_ sender: Any) {
         // TODO: pause中や再生中にスライダーの変化が遅れるのを修正
         goToOtherSong(toIndexFromCurrent: -1)
@@ -110,6 +117,25 @@ class ViewController: UIViewController {
     
     @IBAction func tapNextSongButton(_ sender: Any) {
         goToOtherSong(toIndexFromCurrent: 1)
+    }
+    
+    @IBAction func tapShuffleButton(_ sender: Any) {
+        Songs.shared.shuffle()
+        // これシャッフルではなくて、filteredが変更した時にやりたい
+        YTPlayerViewWrapper.shared.setSelectedIdAndSong(selectedId: 0,
+                                                        selectedSong: Songs.shared.filteredSongs.first!)
+    }
+    
+    @IBAction func tapRepeatButton(_ sender: Any) {
+        // settingのsharedを用意すべきか
+        // それともこの画面限定の機能にするか？
+    }
+    
+    @IBAction func tapSearchButton(_ sender: Any) {
+        // tap用のモーダルが出るようにしたいが、一旦簡略化
+        Songs.shared.filter(by: "覚醒")
+        
+        // 簡単なViewなら呼べるがどうするのがベストか...
     }
     
     // delegateにsliderやtableViewの値を参照するのはイマイチな気がするが...
@@ -156,55 +182,13 @@ class ViewController: UIViewController {
     @IBAction func touchUpInsideSlider(_ sender: Any) {
         let slider = (sender as! UISlider)
         let currentTime = calcSliderTime(currentRate: slider.value)
-        print(slider.value, currentTime)
         YTPlayerViewWrapper.shared.seek(toSeconds: currentTime,
                                         fromCurrent: false)
         YTPlayerViewWrapper.shared.playerView?.playVideo()
     }
     
-    // stackの上詰めのやり方だけ覚えておきたい
-    // tableviewを使ってリストを作ろう
-    
-    // 下のバーに色々用意しておきたい
-    // 検索とお気に入りなどか、その場合テーブルビューの表示部分はモジュール化したいのだけどどうすればいいんだろう。ViewControllerを引数入れてモジュール化とかだろうか？
-    // あー検索以外にも歌と他枠とかのフィルタも欲しい（これはバーじゃなくてフィルタリングで実現したい）
-    
     // Youtubeの高さって可変にするのどうするんだろう
     // 取得時の高さ情報に応じてdelegateで動かすとかかね？
     // その場合TableViewがクソ小さくなってしまう
-    private func getImageByVideoId(videoId: String) -> UIImage{
-        let urlWithVideoId = "https://i.ytimg.com/vi/\(videoId)/hqdefault.jpg"
-        let url = URL(string: urlWithVideoId)
-        do {
-            let data = try Data(contentsOf: url!)
-            return UIImage(data: data)!
-        } catch let err {
-            print("Error : \(err.localizedDescription)")
-        }
-        return UIImage(systemName: "xmark.circle.fill")!
-    }
-}
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(songs.count)
-        return songs.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // セルを取得する
-        let cell: SongTableCell = tableView.dequeueReusableCell(withIdentifier: "SongTableCell", for: indexPath) as! SongTableCell
-        // セルに表示する画像を仮で設定する
-        let song = songs[indexPath.row]
-        cell.icon.image = getImageByVideoId(videoId: song.videoid)
-        // 角を丸くする
-        cell.icon.layer.cornerRadius = cell.icon.frame.size.width * 0.05
-        cell.icon.clipsToBounds = true
-        
-        // cell.icon.image = UIImage(systemName: "face.smiling.fill")
-        // セルに対応する歌をセット
-        cell.song = song
-        
-        return cell
-    }
 }
