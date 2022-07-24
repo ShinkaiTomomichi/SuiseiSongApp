@@ -23,11 +23,11 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="51"/>
                                         <subviews>
                                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="noR-xg-LTI">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="51"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="404" height="51"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </searchBar>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y0b-2s-aae" userLabel="Search">
-                                                <rect key="frame" x="414" y="0.0" width="0.0" height="51"/>
+                                                <rect key="frame" x="404" y="0.0" width="0.0" height="51"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain"/>
                                                 <connections>
@@ -35,7 +35,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Xd-xr-lhN" userLabel="Setting">
-                                                <rect key="frame" x="414" y="0.0" width="0.0" height="51"/>
+                                                <rect key="frame" x="404" y="0.0" width="10" height="51"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain"/>
                                             </button>
@@ -119,8 +119,8 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="51.5"/>
                                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </view>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="TYc-bp-ZpQ">
-                                                            <rect key="frame" x="3" y="3" width="408" height="45.5"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="TYc-bp-ZpQ">
+                                                            <rect key="frame" x="3" y="3" width="401" height="45.5"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hgf-Ih-t5y">
                                                                     <rect key="frame" x="0.0" y="0.0" width="60" height="45.5"/>
@@ -129,17 +129,17 @@
                                                                         <constraint firstAttribute="height" constant="45" id="zOl-zZ-CXq" userLabel="height = 60"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Wih-Fj-EuC">
-                                                                    <rect key="frame" x="65" y="0.0" width="313" height="45.5"/>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="751" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Wih-Fj-EuC">
+                                                                    <rect key="frame" x="70" y="0.0" width="296" height="45.5"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Em-SZ-mqz">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="313" height="23"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="296" height="23"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W3b-Vf-ZCf">
-                                                                            <rect key="frame" x="0.0" y="23" width="313" height="22.5"/>
+                                                                            <rect key="frame" x="0.0" y="23" width="296" height="22.5"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -147,9 +147,9 @@
                                                                     </subviews>
                                                                 </stackView>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vPV-9W-tH2" userLabel="favorite">
-                                                                    <rect key="frame" x="383" y="0.0" width="25" height="45.5"/>
+                                                                    <rect key="frame" x="376" y="0.0" width="25" height="45.5"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="25" id="rsP-vS-FlA"/>
+                                                                        <constraint firstAttribute="width" constant="25" id="2K9-e1-kMC"/>
                                                                     </constraints>
                                                                     <state key="normal" title="Button"/>
                                                                     <buttonConfiguration key="configuration" style="plain"/>
@@ -160,7 +160,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="TYc-bp-ZpQ" secondAttribute="bottom" constant="3" id="1MW-w2-jDp"/>
                                                         <constraint firstAttribute="bottom" secondItem="gHl-2O-gvI" secondAttribute="bottom" id="8z0-UU-CFg"/>
-                                                        <constraint firstAttribute="trailing" secondItem="TYc-bp-ZpQ" secondAttribute="trailing" constant="3" id="LTg-aG-5Hf"/>
+                                                        <constraint firstAttribute="trailing" secondItem="TYc-bp-ZpQ" secondAttribute="trailing" constant="10" id="LTg-aG-5Hf"/>
                                                         <constraint firstItem="gHl-2O-gvI" firstAttribute="top" secondItem="mLm-fm-0zG" secondAttribute="top" id="LvO-6V-jQk"/>
                                                         <constraint firstItem="TYc-bp-ZpQ" firstAttribute="leading" secondItem="mLm-fm-0zG" secondAttribute="leading" constant="3" id="Pk4-Zm-rcw"/>
                                                         <constraint firstItem="TYc-bp-ZpQ" firstAttribute="top" secondItem="mLm-fm-0zG" secondAttribute="top" constant="3" id="RJv-f9-qSr"/>
@@ -178,13 +178,20 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="4sC-xb-Hcj" userLabel="Other Buttons">
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="4sC-xb-Hcj" userLabel="Other Buttons">
                                         <rect key="frame" x="0.0" y="773" width="414" height="45"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Z7-ji-dGi" userLabel="Shuffle">
-                                                <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9K7-SP-53j" userLabel="Spacer">
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="45"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="45" id="yfW-ck-rbN"/>
+                                                    <constraint firstAttribute="width" id="Fhc-Jd-WZb"/>
+                                                </constraints>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Z7-ji-dGi" userLabel="Shuffle">
+                                                <rect key="frame" x="15" y="0.0" width="25" height="45"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="25" id="H1n-rO-LcX"/>
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain"/>
@@ -192,10 +199,10 @@
                                                     <action selector="tapShuffleButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="m9N-QW-Ctd"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4v7-xe-z8h" userLabel="Repeat">
-                                                <rect key="frame" x="50" y="0.0" width="45" height="45"/>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4v7-xe-z8h" userLabel="Repeat">
+                                                <rect key="frame" x="55" y="0.0" width="25" height="45"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="45" id="mnF-uF-L4I"/>
+                                                    <constraint firstAttribute="width" constant="25" id="HKx-75-1kf"/>
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain"/>
@@ -203,11 +210,22 @@
                                                     <action selector="tapRepeatButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="V90-PS-kyv"/>
                                                 </connections>
                                             </button>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="i9T-Yy-KCI">
-                                                <rect key="frame" x="100" y="0.0" width="314" height="45"/>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QOH-2S-sx7" userLabel="SingleRepeat">
+                                                <rect key="frame" x="95" y="0.0" width="25" height="45"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="25" id="FAX-ix-SEi"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain"/>
+                                                <connections>
+                                                    <action selector="tapSingleRepeatButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qWu-tc-kfQ"/>
+                                                </connections>
+                                            </button>
+                                            <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="i9T-Yy-KCI">
+                                                <rect key="frame" x="135" y="0.0" width="279" height="45"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HgR-yY-YMI">
-                                                        <rect key="frame" x="0.0" y="0.0" width="314" height="14.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="279" height="14.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Playing now..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UGo-PK-GZv">
                                                                 <rect key="frame" x="0.0" y="0.0" width="77.5" height="14.5"/>
@@ -216,7 +234,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="0:00/0:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BYX-rz-wjx" userLabel="Playing Time">
-                                                                <rect key="frame" x="77.5" y="0.0" width="236.5" height="14.5"/>
+                                                                <rect key="frame" x="77.5" y="0.0" width="201.5" height="14.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -224,7 +242,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pO7-cU-VR4">
-                                                        <rect key="frame" x="0.0" y="14.5" width="314" height="30.5"/>
+                                                        <rect key="frame" x="0.0" y="14.5" width="279" height="30.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -259,9 +277,11 @@
                         <outlet property="playingTimeLabel" destination="BYX-rz-wjx" id="Rav-LR-YGo"/>
                         <outlet property="prevSongButton" destination="ypl-gc-Lej" id="Ab8-WX-1g8"/>
                         <outlet property="repeatButton" destination="4v7-xe-z8h" id="KhX-bn-eUX"/>
+                        <outlet property="searchBar" destination="noR-xg-LTI" id="poe-A7-73n"/>
                         <outlet property="searchButton" destination="Y0b-2s-aae" id="kOw-2s-KQD"/>
                         <outlet property="settingButton" destination="1Xd-xr-lhN" id="St4-qS-B8d"/>
                         <outlet property="shuffleButton" destination="8Z7-ji-dGi" id="Jlt-jj-0b6"/>
+                        <outlet property="singleRepeatButton" destination="QOH-2S-sx7" id="cXp-D9-6uJ"/>
                         <outlet property="songTableView" destination="fDP-Pi-jZe" id="lwY-OZ-zM9"/>
                     </connections>
                 </viewController>

@@ -7,6 +7,7 @@
 
 import Foundation
 
+// filteredの中身が0の場合の挙動が決まっていない
 final class SelectedStatus {
     static var shared = SelectedStatus()
     private init() {}
@@ -16,6 +17,8 @@ final class SelectedStatus {
         didSet {
             if let id = id {
                 self.song = Songs.shared.filteredSongs[id]
+            } else {
+                self.song = nil
             }
         }
     }
@@ -33,27 +36,44 @@ final class SelectedStatus {
     
     // 選択された曲が変化した場合に呼ばれる
     // TODO: idが負の数で渡された場合nilを返すが、なんらかのerrorを返すのか望ましい
-    func setSelectedID(id: Int = 0) {
-        if id < 0 {
+    func setSelectedID(id: Int? = 0) {
+        guard let id = id, id >= 0 else {
             self.id = nil
             return
         }
         self.id = Songs.shared.filteredSongs.count > id ? id : nil
     }
     
-    func selectNextID() {
-        if let id = self.id, id + 1 < Songs.shared.filteredSongs.count {
+    // TODO: Boolだとなんだかよく分からないのでResult型などに置き換える
+    func selectNextID() -> Bool {
+        guard let id = self.id else {
+            return false
+        }
+        
+        if id + 1 < Songs.shared.filteredSongs.count {
             self.id! += 1
+            return true
         } else if Settings.shared.shouldRepeat {
             self.id! = 0
+            return true
+        } else {
+            return false
         }
     }
     
-    func selectPrevID() {
-        if let id = self.id, id > 0 {
+    func selectPrevID() -> Bool {
+        guard let id = self.id else {
+            return false
+        }
+        
+        if id > 0 {
             self.id! -= 1
+            return true
         } else if Settings.shared.shouldRepeat {
             self.id! = Songs.shared.filteredSongs.count - 1
+            return true
+        } else {
+            return false
         }
     }
 }

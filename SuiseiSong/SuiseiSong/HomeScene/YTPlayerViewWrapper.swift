@@ -21,6 +21,12 @@ final class YTPlayerViewWrapper {
     // 基本的に制御が増えると面倒なので一旦制御は外しておく
     func start() {
         if let selectedSong = SelectedStatus.shared.song {
+            // 選択されていない時の処理を明確にする
+            // 画面のloadをやり直して適当な画像を差し込む
+            if let isHidden = playerView?.isHidden, isHidden {
+                playerView?.isHidden = false
+            }
+            
             if shouldReload {
                 let playerVars = [
                     "controls": 0,
@@ -33,6 +39,10 @@ final class YTPlayerViewWrapper {
                 self.playerView?.seek(toSeconds: Float(selectedSong.starttime),
                                       allowSeekAhead: true)
             }
+        } else {
+            Logger.log(message: "selectedSongが設定されていません")
+            playerView?.pauseVideo()
+            playerView?.isHidden = true
         }
     }
     

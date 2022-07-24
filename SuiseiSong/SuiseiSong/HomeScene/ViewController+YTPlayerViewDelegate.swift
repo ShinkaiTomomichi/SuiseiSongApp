@@ -44,10 +44,24 @@ extension ViewController: YTPlayerViewDelegate {
         playingTimeLabel.text = calcPlayingTime(currentTime: playTime)
         
         // 終了時刻を超えたら次の動画に進む
-        if let endtime = SelectedStatus.shared.song?.endtime {
-            if playTime >= Float(endtime) {
-                print("ここに次の動画へ進む処理を挟みたい")
-                SelectedStatus.shared.selectNextID()
+        // 次の動画に進めない場合は停止する
+        if let endtime = SelectedStatus.shared.song?.endtime,
+            playTime >= Float(endtime) {
+            endtimeExceed()
+        }
+    }
+    
+    private func endtimeExceed() {
+        print("ここに次の動画へ進む処理を挟みたい")
+        // singleRepeatの場合は同じ動画へループする
+        // 現状shouldの挙動がおかしいため修正する
+        if Settings.shared.shouldSingleRepeat {
+            YTPlayerViewWrapper.shared.start()
+        } else {
+            let goNextSuccessed = SelectedStatus.shared.selectNextID()
+            if !goNextSuccessed {
+                playerView.pauseVideo()
+                // TODO: 止めるだけではなく動画を動かなくする必要がある
             }
         }
     }

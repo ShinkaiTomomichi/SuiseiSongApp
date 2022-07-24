@@ -10,26 +10,32 @@ import YouTubeiOSPlayerHelper
 
 class ViewController: UIViewController {
     
-    // PlayerもVCに直書きじゃない方が良いか？
     @IBOutlet weak var playerView: YTPlayerView!
     @IBOutlet weak var songTableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
-    // Button
+    // 画面遷移ボタン
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var settingButton: UIButton!
+    
+    // 動画再生に関するボタン
+    @IBOutlet weak var playingSlider: UISlider!
     @IBOutlet weak var prevSongButton: UIButton!
     @IBOutlet weak var backwordButton: UIButton!
     @IBOutlet weak var playAndStopButton: UIButton!
     @IBOutlet weak var forwardButton: UIButton!
     @IBOutlet weak var nextSongButton: UIButton!
+    
+    // シャッフルとリピート
     @IBOutlet weak var shuffleButton: UIButton!
     @IBOutlet weak var repeatButton: UIButton!
+    @IBOutlet weak var singleRepeatButton: UIButton!
     
-    // selectedSongが変更されたら変えたいのだがやり方が分からん
+    // 再生中の曲と時間を示すラベル
     @IBOutlet weak var playingSongLabel: UILabel!
     @IBOutlet weak var playingTimeLabel: UILabel!
     
-    @IBOutlet weak var playingSlider: UISlider!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,15 +43,13 @@ class ViewController: UIViewController {
         YTPlayerViewWrapper.shared.playerView = playerView
         Songs.shared.setup()
         
-        // これを元にtableViewを作成
-        songTableView.delegate = self
+        // Delegateをセット
         songTableView.dataSource = self
-        
-        // playerのdelegateをセット
         playerView.delegate = self
+        searchBar.delegate = self
         
         // Buttonの絵柄をセット
-        searchButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        searchButton.setImage(UIImage(systemName: "list.bullet"), for: .normal)
         settingButton.setImage(UIImage(systemName: "gearshape.fill"), for: .normal)
         
         prevSongButton.setImage(UIImage(systemName: "backward.end.fill"), for: .normal)
@@ -56,6 +60,7 @@ class ViewController: UIViewController {
         
         shuffleButton.setImage(UIImage(systemName: "shuffle"), for: .normal)
         repeatButton.setImage(UIImage(systemName: "repeat"), for: .normal)
+        singleRepeatButton.setImage(UIImage(systemName: "repeat.1"), for: .normal)
                 
         NotificationCenter.default.addObserver(self, selector: #selector(setPlayingSongLabel), name: .didChangedSelectedSong, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: .didChangedFilteredSong, object: nil)
@@ -93,7 +98,7 @@ class ViewController: UIViewController {
     
     // Buttonの塊は一つのモジュールに入れておきたい
     @IBAction func tapPrevSongButton(_ sender: Any) {
-        SelectedStatus.shared.selectPrevID()
+        let _ = SelectedStatus.shared.selectPrevID()
     }
     
     @IBAction func tapBackwordButton(_ sender: Any) {
@@ -115,7 +120,26 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapNextSongButton(_ sender: Any) {
-        SelectedStatus.shared.selectNextID()
+        let _ = SelectedStatus.shared.selectNextID()
+    }
+    
+    // 値が変化した時
+    @IBAction func changeSliderValue(_ sender: Any) {
+        let _ = (sender as! UISlider)
+        // print(slider.value)
+    }
+    
+    // スライダーを触った時
+    @IBAction func touchDownSlider(_ sender: Any) {
+        YTPlayerViewWrapper.shared.playerView?.pauseVideo()
+    }
+    
+    @IBAction func touchUpInsideSlider(_ sender: Any) {
+        let slider = (sender as! UISlider)
+        let currentTime = calcSliderTime(currentRate: slider.value)
+        YTPlayerViewWrapper.shared.seek(toSeconds: currentTime,
+                                        fromCurrent: false)
+        YTPlayerViewWrapper.shared.playerView?.playVideo()
     }
     
     @IBAction func tapShuffleButton(_ sender: Any) {
@@ -126,17 +150,23 @@ class ViewController: UIViewController {
         Settings.shared.shouldRepeat.toggle()
     }
     
+    @IBAction func tapSingleRepeatButton(_ sender: Any) {
+        Settings.shared.shouldSingleRepeat.toggle()
+    }
+    
     @IBAction func tapSearchButton(_ sender: Any) {
         // tap用のモーダルが出るようにしたいが、一旦簡略化
         // 明日以降はViewを呼ぶ処理とHomeまで戻ってくる処理を追加したい
         // フィルタ内容が反映できればだいぶ上々
-        Songs.shared.filter(by: "覚醒")
+        // ここまでできたらUIの整理をやってみよう
         
         // 検索ログは見る必要はあまりないが、、、
         // もしかしたらこの辺ってFirebaseとかで見れるのか？？？
     }
     
     // delegateにsliderやtableViewの値を参照するのはイマイチな気がするが...
+    // これもテストとかしておきたい
+    // これとcellの部分はstoryboardごと分離したい
     func calcSliderPosition(currentTime: Float) -> Float {
         if let starttime = SelectedStatus.shared.song?.starttime, let endtime = SelectedStatus.shared.song?.endtime {
             let elapsedTime = currentTime - Float(starttime)
@@ -163,26 +193,7 @@ class ViewController: UIViewController {
             let allTimeStr = allTime.toTimeStamp()
             return "\(elapsedTimeStr)/\(allTimeStr)"
         }
-        return "0:00/0:00"
-    }
-    
-    // 値が変化した時
-    @IBAction func changeSliderValue(_ sender: Any) {
-        let _ = (sender as! UISlider)
-        // print(slider.value)
-    }
-    
-    // スライダーを触った時
-    @IBAction func touchDownSlider(_ sender: Any) {
-        YTPlayerViewWrapper.shared.playerView?.pauseVideo()
-    }
-    
-    @IBAction func touchUpInsideSlider(_ sender: Any) {
-        let slider = (sender as! UISlider)
-        let currentTime = calcSliderTime(currentRate: slider.value)
-        YTPlayerViewWrapper.shared.seek(toSeconds: currentTime,
-                                        fromCurrent: false)
-        YTPlayerViewWrapper.shared.playerView?.playVideo()
+        return "ERROR"
     }
     
     // Youtubeの高さって可変にするのどうするんだろう
@@ -190,6 +201,31 @@ class ViewController: UIViewController {
     // その場合TableViewがクソ小さくなってしまう
     
     // Playerの大きさを可変にしたいな...動画の方でAPI経由でとったほうが楽かも
-    // selectedの管理がクソだった... 治さねば...
     // 色はとりあえず黒ベースにしてもいいかも
+    
+    // ちょいちょいWebViewの挙動も変な時があるのは見直したい
+    
+    // searchBarも練習用に一度作っておきたいが、正直検索機能そこまで要らん気もする
+    // UI的にはtabの方が良さそう
+}
+
+extension ViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+    }
+    
+    //  検索バーに入力があったら呼ばれる
+    // func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    // }
+    
+    //
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        // キーボードを閉じる
+        view.endEditing(true)
+        // 入力された値がnilでなければif文のブロック内の処理を実行
+        if let searchText = searchBar.text {
+            Songs.shared.filter(by: searchText)
+            songTableView.reloadData()
+        }
+    }
+    
 }

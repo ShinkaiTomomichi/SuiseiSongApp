@@ -14,4 +14,5 @@ final class Settings {
     private init() {}
 
     var shouldRepeat: Bool = false
+    var shouldSingleRepeat: Bool = false
 }

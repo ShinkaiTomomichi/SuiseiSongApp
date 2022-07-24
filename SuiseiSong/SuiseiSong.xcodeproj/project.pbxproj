@@ -11,10 +11,12 @@
 		DA6078152886DEA10002A524 /* suisei_song.json in Resources */ = {isa = PBXBuildFile; fileRef = DA6078142886DEA10002A524 /* suisei_song.json */; };
 		DA6078172886E0270002A524 /* FirstLaunchFlag.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6078162886E0270002A524 /* FirstLaunchFlag.swift */; };
 		DA607819288872040002A524 /* Songs.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA607818288872040002A524 /* Songs.swift */; };
-		DA60781B288B8D020002A524 /* ViewController+TableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60781A288B8D020002A524 /* ViewController+TableDelegate.swift */; };
+		DA60781B288B8D020002A524 /* ViewController+UITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60781A288B8D020002A524 /* ViewController+UITableViewDataSource.swift */; };
 		DA60781D288B948D0002A524 /* SelectedStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60781C288B948D0002A524 /* SelectedStatus.swift */; };
 		DA60781F288B9C080002A524 /* NSNotification+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60781E288B9C080002A524 /* NSNotification+.swift */; };
 		DA607821288C034C0002A524 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA607820288C034C0002A524 /* Settings.swift */; };
+		DA607827288D1D480002A524 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA607826288D1D480002A524 /* SearchViewController.swift */; };
+		DA607829288D1D5E0002A524 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA607828288D1D5E0002A524 /* Search.storyboard */; };
 		DA9950A9287B271F0037D8E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9950A8287B271F0037D8E5 /* AppDelegate.swift */; };
 		DA9950AB287B271F0037D8E5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9950AA287B271F0037D8E5 /* SceneDelegate.swift */; };
 		DA9950AD287B271F0037D8E5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9950AC287B271F0037D8E5 /* ViewController.swift */; };
@@ -31,7 +33,7 @@
 		DA9950F02880757F0037D8E5 /* SongTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9950EF2880757F0037D8E5 /* SongTableCell.swift */; };
 		DA9950F428852A0D0037D8E5 /* ViewController+YTPlayerViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9950F328852A0D0037D8E5 /* ViewController+YTPlayerViewDelegate.swift */; };
 		DA9950F728852A6F0037D8E5 /* YTPlayerViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9950F628852A6F0037D8E5 /* YTPlayerViewWrapper.swift */; };
-		DA9950F92885874F0037D8E5 /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9950F82885874F0037D8E5 /* DebugLog.swift */; };
+		DA9950F92885874F0037D8E5 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9950F82885874F0037D8E5 /* Logger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,10 +58,12 @@
 		DA6078142886DEA10002A524 /* suisei_song.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = suisei_song.json; path = ../../../Dataset/suisei_song.json; sourceTree = "<group>"; };
 		DA6078162886E0270002A524 /* FirstLaunchFlag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchFlag.swift; sourceTree = "<group>"; };
 		DA607818288872040002A524 /* Songs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Songs.swift; sourceTree = "<group>"; };
-		DA60781A288B8D020002A524 /* ViewController+TableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+TableDelegate.swift"; sourceTree = "<group>"; };
+		DA60781A288B8D020002A524 /* ViewController+UITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+UITableViewDataSource.swift"; sourceTree = "<group>"; };
 		DA60781C288B948D0002A524 /* SelectedStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedStatus.swift; sourceTree = "<group>"; };
 		DA60781E288B9C080002A524 /* NSNotification+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification+.swift"; sourceTree = "<group>"; };
 		DA607820288C034C0002A524 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		DA607826288D1D480002A524 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		DA607828288D1D5E0002A524 /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		DA9950A5287B271F0037D8E5 /* SuiseiSong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuiseiSong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA9950A8287B271F0037D8E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA9950AA287B271F0037D8E5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,7 +83,7 @@
 		DA9950EF2880757F0037D8E5 /* SongTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongTableCell.swift; sourceTree = "<group>"; };
 		DA9950F328852A0D0037D8E5 /* ViewController+YTPlayerViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+YTPlayerViewDelegate.swift"; sourceTree = "<group>"; };
 		DA9950F628852A6F0037D8E5 /* YTPlayerViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTPlayerViewWrapper.swift; sourceTree = "<group>"; };
-		DA9950F82885874F0037D8E5 /* DebugLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugLog.swift; sourceTree = "<group>"; };
+		DA9950F82885874F0037D8E5 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +124,8 @@
 		DA607822288C09430002A524 /* SearchModal */ = {
 			isa = PBXGroup;
 			children = (
+				DA607826288D1D480002A524 /* SearchViewController.swift */,
+				DA607828288D1D5E0002A524 /* Search.storyboard */,
 			);
 			path = SearchModal;
 			sourceTree = "<group>";
@@ -221,7 +227,7 @@
 			children = (
 				DA9950AC287B271F0037D8E5 /* ViewController.swift */,
 				DA9950F328852A0D0037D8E5 /* ViewController+YTPlayerViewDelegate.swift */,
-				DA60781A288B8D020002A524 /* ViewController+TableDelegate.swift */,
+				DA60781A288B8D020002A524 /* ViewController+UITableViewDataSource.swift */,
 				DA9950F628852A6F0037D8E5 /* YTPlayerViewWrapper.swift */,
 				DA9950EF2880757F0037D8E5 /* SongTableCell.swift */,
 				DA9950AE287B271F0037D8E5 /* Main.storyboard */,
@@ -232,7 +238,7 @@
 		DA9950F528852A3D0037D8E5 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				DA9950F82885874F0037D8E5 /* DebugLog.swift */,
+				DA9950F82885874F0037D8E5 /* Logger.swift */,
 				DA6078162886E0270002A524 /* FirstLaunchFlag.swift */,
 			);
 			path = Util;
@@ -352,6 +358,7 @@
 				DA9950B2287B27270037D8E5 /* Assets.xcassets in Resources */,
 				DA6078152886DEA10002A524 /* suisei_song.json in Resources */,
 				DA9950B0287B271F0037D8E5 /* Main.storyboard in Resources */,
+				DA607829288D1D5E0002A524 /* Search.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,9 +383,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA60781B288B8D020002A524 /* ViewController+TableDelegate.swift in Sources */,
+				DA60781B288B8D020002A524 /* ViewController+UITableViewDataSource.swift in Sources */,
 				DA607819288872040002A524 /* Songs.swift in Sources */,
 				DA9950DE288056510037D8E5 /* JSONFileManager.swift in Sources */,
+				DA607827288D1D480002A524 /* SearchViewController.swift in Sources */,
 				DA9950DA287F83F70037D8E5 /* Song.swift in Sources */,
 				DA9950F428852A0D0037D8E5 /* ViewController+YTPlayerViewDelegate.swift in Sources */,
 				DA60781D288B948D0002A524 /* SelectedStatus.swift in Sources */,
@@ -388,7 +396,7 @@
 				DA9950F728852A6F0037D8E5 /* YTPlayerViewWrapper.swift in Sources */,
 				DA607821288C034C0002A524 /* Settings.swift in Sources */,
 				DA9950A9287B271F0037D8E5 /* AppDelegate.swift in Sources */,
-				DA9950F92885874F0037D8E5 /* DebugLog.swift in Sources */,
+				DA9950F92885874F0037D8E5 /* Logger.swift in Sources */,
 				DA6078172886E0270002A524 /* FirstLaunchFlag.swift in Sources */,
 				DA60781F288B9C080002A524 /* NSNotification+.swift in Sources */,
 				DA9950AB287B271F0037D8E5 /* SceneDelegate.swift in Sources */,

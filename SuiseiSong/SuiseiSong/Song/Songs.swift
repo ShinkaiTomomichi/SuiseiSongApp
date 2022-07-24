@@ -14,10 +14,17 @@ final class Songs {
     
     // allSongsは特に更新しない
     var allSongs: [Song] = []
+    // filterごとに機能していると話にならん
+    // filterdごとにselectedが定義されているのがまずいかも
+    // というか自動再生とそうじゃない場合の場合分けがしたい
     private(set) var filteredSongs: [Song] = [] {
         didSet {
             NotificationCenter.default.post(name: .didChangedFilteredSong, object: nil)
-            SelectedStatus.shared.setSelectedID()
+            if filteredSongs.count != 0 {
+                SelectedStatus.shared.setSelectedID()
+            } else {
+                SelectedStatus.shared.setSelectedID(id: nil)
+            }
         }
     }
     
@@ -33,6 +40,10 @@ final class Songs {
     // filter機能はテストを実装しておきたい
     func filter(by: String!) {
         var filteredSongsTmp: [Song] = []
+        guard !by.isEmpty else {
+            self.filteredSongs = allSongs
+            return
+        }
         for song in allSongs {
             if song.songtitle.contains(by) || song.artist.contains(by) {
                 filteredSongsTmp.append(song)
@@ -43,6 +54,10 @@ final class Songs {
 
     func filter(bySongTitle: String!) {
         var filteredSongsTmp: [Song] = []
+        guard !bySongTitle.isEmpty else {
+            self.filteredSongs = allSongs
+            return
+        }
         for song in allSongs {
             if song.songtitle.contains(bySongTitle) {
                 filteredSongsTmp.append(song)
@@ -52,6 +67,10 @@ final class Songs {
     }
     
     func filter(byArtist: String!) {
+        guard !byArtist.isEmpty else {
+            self.filteredSongs = allSongs
+            return
+        }
         var filteredSongsTmp: [Song] = []
         for song in allSongs {
             if song.artist.contains(byArtist) {
