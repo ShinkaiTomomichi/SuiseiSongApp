@@ -44,7 +44,7 @@ class SongTableCell: UITableViewCell {
         // これはローカルのデータベースに保存しておくのが楽か？
         // amazonなどの場合表示する度に描画するべきだが、うちのデータベースは高々1000件と考えると前もった処理の方が単純か？
         
-        self.favorite.setImage(UIImage(systemName: "star"), for: .normal)
+        self.favorite.setImage(UIImage.initWithDarkmode(systemName: "star"), for: .normal)
         // self.favorite.setImage(UIImage(systemName: "star.fill"), for: .normal)
     }
 
@@ -53,8 +53,8 @@ class SongTableCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         
         // tapした時のみ
-        if let index = index, selected {
-            SelectedStatus.shared.setSelectedID(id: index)
+        if let song = song, selected {
+            SelectedStatus.shared.setSelectedSong(song: song)
         }
     }
     

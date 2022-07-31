@@ -12,7 +12,7 @@ import Foundation
 struct JSONFileManager {
     static func getSuiseiSongs () -> [Song] {
         /// ①プロジェクト内にある"employees.json"ファイルのパス取得
-        guard let url = Bundle.main.url(forResource: "suisei_song", withExtension: "json") else {
+        guard let url = Bundle.main.url(forResource: "suisei_song2", withExtension: "json") else {
            fatalError("ファイルが見つからない")
         }
 
@@ -23,8 +23,13 @@ struct JSONFileManager {
 
         /// ③JSONデコード処理
         let decoder = JSONDecoder()
-        guard let songs = try? decoder.decode([Song].self, from: data) else {
-           fatalError("JSON読み込みエラー")
+        var songs: [Song] = []
+        do {
+            songs = try decoder.decode([Song].self, from: data)
+        } catch {
+            print(error)
+            print(error.localizedDescription)
+            fatalError("JSON読み込みエラー")
         }
 
         return songs

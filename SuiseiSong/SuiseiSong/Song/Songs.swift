@@ -20,21 +20,34 @@ final class Songs {
     private(set) var filteredSongs: [Song] = [] {
         didSet {
             NotificationCenter.default.post(name: .didChangedFilteredSong, object: nil)
-            if filteredSongs.count != 0 {
-                SelectedStatus.shared.setSelectedID()
-            } else {
-                SelectedStatus.shared.setSelectedID(id: nil)
-            }
         }
     }
     
     func setup() {
-        guard YTPlayerViewWrapper.shared.playerView != nil else {
-            Logger.log(message: "setupの前にplayerViewのセットを実施して下さい")
-            return
-        }
+//        guard YTPlayerViewWrapper.shared.playerView != nil else {
+//            Logger.log(message: "setupの前にplayerViewのセットを実施して下さい")
+//            return
+//        }
         self.allSongs = JSONFileManager.getSuiseiSongs()
         self.filteredSongs = self.allSongs
+    }
+    
+    func get(byID: Int) -> Song {
+        for song in allSongs {
+            if song.id == byID {
+                return song
+            }
+        }
+        fatalError()
+    }
+    
+    func getFilteredID(bySong: Song) -> Int {
+        for filteredSong in filteredSongs {
+            if bySong.id == filteredSong.id {
+                return filteredSong.id
+            }
+        }
+        fatalError()
     }
     
     // filter機能はテストを実装しておきたい

@@ -11,7 +11,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SuiseiSong" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Play" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ViewController" customModule="SuiseiSong" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -19,37 +19,15 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1s3-MR-CQH">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tM2-xy-vaI">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="51"/>
-                                        <subviews>
-                                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="noR-xg-LTI">
-                                                <rect key="frame" x="0.0" y="0.0" width="404" height="51"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </searchBar>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y0b-2s-aae" userLabel="Search">
-                                                <rect key="frame" x="404" y="0.0" width="0.0" height="51"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain"/>
-                                                <connections>
-                                                    <action selector="tapSearchButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Z2u-H0-kAu"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Xd-xr-lhN" userLabel="Setting">
-                                                <rect key="frame" x="404" y="0.0" width="10" height="51"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain"/>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wgw-1q-NKg" customClass="YTPlayerView">
-                                        <rect key="frame" x="0.0" y="51" width="414" height="180"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="180"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="180" id="ce5-zz-7Ux"/>
                                         </constraints>
                                     </view>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="lwX-IK-UxB">
-                                        <rect key="frame" x="-2" y="231" width="418" height="120"/>
+                                        <rect key="frame" x="-2" y="180" width="418" height="171"/>
                                         <connections>
                                             <action selector="changeSliderValue:" destination="BYZ-38-t0r" eventType="valueChanged" id="tjK-ZE-rOK"/>
                                             <action selector="touchDownSlider:" destination="BYZ-38-t0r" eventType="touchDown" id="Oel-Xa-RRi"/>
@@ -277,9 +255,6 @@
                         <outlet property="playingTimeLabel" destination="BYX-rz-wjx" id="Rav-LR-YGo"/>
                         <outlet property="prevSongButton" destination="ypl-gc-Lej" id="Ab8-WX-1g8"/>
                         <outlet property="repeatButton" destination="4v7-xe-z8h" id="KhX-bn-eUX"/>
-                        <outlet property="searchBar" destination="noR-xg-LTI" id="poe-A7-73n"/>
-                        <outlet property="searchButton" destination="Y0b-2s-aae" id="kOw-2s-KQD"/>
-                        <outlet property="settingButton" destination="1Xd-xr-lhN" id="St4-qS-B8d"/>
                         <outlet property="shuffleButton" destination="8Z7-ji-dGi" id="Jlt-jj-0b6"/>
                         <outlet property="singleRepeatButton" destination="QOH-2S-sx7" id="cXp-D9-6uJ"/>
                         <outlet property="songTableView" destination="fDP-Pi-jZe" id="lwY-OZ-zM9"/>
