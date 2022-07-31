@@ -41,6 +41,10 @@ class SearchViewController: UIViewController {
         // このようなテーブルを複製する場合どのようにモジュール化するのがベストか???
         suggestCollectionView.delegate = self
         suggestCollectionView.dataSource = self
+        
+        // UXが低いので一旦無効化
+        // TODO: ユーザの直感には反するため、改善策を検討
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
 }
 
@@ -74,9 +78,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     // セルタップ時
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         Logger.log(message: "タップされました")
-        // 指定の遷移先に遷移する（最低限の処理）
         
         let storyboard = UIStoryboard(name: "Play", bundle: nil)
         let nextViewController = storyboard.instantiateViewController(withIdentifier: "Play") as! ViewController

@@ -13,7 +13,7 @@ final class SelectedStatus {
     private init() {}
 
     // filtererの中の順番
-    private(set) var id: Int? = nil
+    private(set) var filteredID: Int? = nil
     
     // 最初にここを選択した後にfilteredを更新する処理を入れたい
     private(set) var song: Song? = nil {
@@ -42,7 +42,7 @@ final class SelectedStatus {
         
         // ここのID取得がどうなっているか
         
-        self.id = Songs.shared.getFilteredID(bySong: self.song!)
+        self.filteredID = Songs.shared.getFilteredID(bySong: self.song!)
     }
     
     func setSelectedSong(song: Song) {
@@ -52,21 +52,20 @@ final class SelectedStatus {
     // reset(viewDidDisAppearなどで呼び出さないと問題が起こる)
     func reset() {
         self.song = nil
-        self.id = nil
+        self.filteredID = nil
     }
     
     // TODO: Boolだとなんだかよく分からないのでResult型などに置き換える
-    // IDを加算するだけではstartが走らないようになった
     func selectNextID() -> Bool {
-        guard let id = self.id else {
+        guard let id = self.filteredID else {
             return false
         }
         
         if id + 1 < Songs.shared.filteredSongs.count {
             setSelectedSong(song: Songs.shared.filteredSongs[id+1])
             return true
-        } else if Settings.shared.shouldRepeat {
-            self.id! = 0
+        } else if Settings.shared.repeatType == .allRepeat {
+            setSelectedSong(song: Songs.shared.filteredSongs[0])
             return true
         } else {
             return false
@@ -74,15 +73,17 @@ final class SelectedStatus {
     }
     
     func selectPrevID() -> Bool {
-        guard let id = self.id else {
+        guard let id = self.filteredID else {
             return false
         }
         
+        Logger.log(message: "現在のID \(id)")
         if id > 0 {
+            // TODO: ここバグってる、確実に一個前に進んでいない
             setSelectedSong(song: Songs.shared.filteredSongs[id-1])
             return true
-        } else if Settings.shared.shouldRepeat {
-            self.id! = Songs.shared.filteredSongs.count - 1
+        } else if Settings.shared.repeatType == .allRepeat {
+            setSelectedSong(song: Songs.shared.filteredSongs[Songs.shared.filteredSongs.count - 1])
             return true
         } else {
             return false

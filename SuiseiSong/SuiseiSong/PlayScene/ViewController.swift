@@ -24,7 +24,6 @@ class ViewController: UIViewController {
     // シャッフルとリピート
     @IBOutlet weak var shuffleButton: UIButton!
     @IBOutlet weak var repeatButton: UIButton!
-    @IBOutlet weak var singleRepeatButton: UIButton!
     
     // 再生中の曲と時間を示すラベル
     @IBOutlet weak var playingSongLabel: UILabel!
@@ -49,21 +48,25 @@ class ViewController: UIViewController {
         // これだとアプリ起動中にダークモード切り替えが起きた場合に対応できない
         prevSongButton.setImage(UIImage.initWithDarkmode(systemName: "backward.end.fill"), for: .normal)
         backwordButton.setImage(UIImage.initWithDarkmode(systemName:  "gobackward.10"), for: .normal)
-        playAndStopButton.setImage(UIImage.initWithDarkmode(systemName: "play.fill"), for: .normal)
+        setPlayAndStopButton()
         forwardButton.setImage(UIImage.initWithDarkmode(systemName: "goforward.10"), for: .normal)
         nextSongButton.setImage(UIImage.initWithDarkmode(systemName: "forward.end.fill"), for: .normal)
         
         shuffleButton.setImage(UIImage.initWithDarkmode(systemName: "shuffle"), for: .normal)
-        repeatButton.setImage(UIImage.initWithDarkmode(systemName: "repeat"), for: .normal)
-        singleRepeatButton.setImage(UIImage.initWithDarkmode(systemName: "repeat.1"), for: .normal)
-        
+        reloadRepeatTypeButton()
+        setPlayingSongLabel()
+                
         shareBarButtonItem = UIBarButtonItem(image: UIImage.initWithDarkmode(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(shareBarButtonTapped(_:)))
         settingBarButtonItem = UIBarButtonItem(image: UIImage.initWithDarkmode(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(settingBarButtonTapped(_:)))
         
         self.navigationItem.rightBarButtonItems = [settingBarButtonItem, shareBarButtonItem]
         
+        // Notificationをset
         NotificationCenter.default.addObserver(self, selector: #selector(setPlayingSongLabel), name: .didChangedSelectedSong, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setPlayAndStopButton), name: .didChangedPlaying, object: nil)
+
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: .didChangedFilteredSong, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadRepeatTypeButton), name: .didChangedRepeatType, object: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -71,7 +74,6 @@ class ViewController: UIViewController {
     }
         
     @objc func shareBarButtonTapped(_ sender: UIBarButtonItem) {
-        print("シェアボタンが押された!")
         showShareSheet()
     }
     
@@ -82,37 +84,37 @@ class ViewController: UIViewController {
     }
     
     @objc func settingBarButtonTapped(_ sender: UIBarButtonItem) {
-        print("設定ボタンが押された!")
+        Logger.log(message: "設定ボタンを押しましたが処理がまだありません")
+        
     }
     
     // 再生した曲が変化した際にlabelを修正する
     @objc func setPlayingSongLabel() {
         playingSongLabel.text = SelectedStatus.shared.song?.songtitle
-        // cancelHighlightingAllCell()
-        // highlightSelectedCell()
+        // TODO: 選択中のラベルをハイライトしようとしたが、メモリから外れたセルを管理するのが困難であったため一旦保留
     }
-    
-    // TODO: メモリから外されたセルの状態を管理するのがかなり難しい、、、一旦保留
-    /*
-    private func cancelHighlightingAllCell() {
-        for i in 0..<songTableView.visibleCells.count{
-            let indexPath = IndexPath(row: i, section: 0)
-            let cell = songTableView.cellForRow(at: indexPath) as! SongTableCell
-            cell.selectedView.alpha = 0
-        }
-    }
-    
-    private func highlightSelectedCell() {
-        let indexPath = IndexPath(row: SelectedStatus.shared.id!, section: 0)
-        Logger.log(message: indexPath)
-        let cell = songTableView.cellForRow(at: indexPath) as! SongTableCell
-        cell.selectedView.alpha = 0.1
-    }
-    */
     
     // filteredの中身が変化したらtableViewをリロードするメソッドが欲しい
     @objc func reloadTableView() {
         songTableView.reloadData()
+    }
+    
+    @objc func setPlayAndStopButton() {
+        if YTPlayerViewWrapper.shared.playing {
+            playAndStopButton.setImage(UIImage.initWithDarkmode(systemName: "pause.fill"), for: .normal)
+        } else {
+            playAndStopButton.setImage(UIImage.initWithDarkmode(systemName: "play.fill"), for: .normal)
+        }
+    }
+    
+    @objc func reloadRepeatTypeButton() {
+        if Settings.shared.repeatType == .none {
+            repeatButton.setImage(UIImage.initWithDarkmode(systemName: "repeat.circle"), for: .normal)
+        } else if Settings.shared.repeatType == .allRepeat {
+            repeatButton.setImage(UIImage.initWithDarkmode(systemName: "repeat.circle.fill"), for: .normal)
+        } else {
+            repeatButton.setImage(UIImage.initWithDarkmode(systemName: "repeat.1.circle.fill"), for: .normal)
+        }
     }
     
     // Buttonの塊は一つのモジュールに入れておきたい
@@ -166,21 +168,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapRepeatButton(_ sender: Any) {
-        Settings.shared.shouldRepeat.toggle()
-    }
-    
-    @IBAction func tapSingleRepeatButton(_ sender: Any) {
-        Settings.shared.shouldSingleRepeat.toggle()
-    }
-    
-    @IBAction func tapSearchButton(_ sender: Any) {
-        // tap用のモーダルが出るようにしたいが、一旦簡略化
-        // 明日以降はViewを呼ぶ処理とHomeまで戻ってくる処理を追加したい
-        // フィルタ内容が反映できればだいぶ上々
-        // ここまでできたらUIの整理をやってみよう
-        
-        // 検索ログは見る必要はあまりないが、、、
-        // もしかしたらこの辺ってFirebaseとかで見れるのか？？？
+        Settings.shared.toggleRepeatType()
     }
     
     // delegateにsliderやtableViewの値を参照するのはイマイチな気がするが...
@@ -227,18 +215,3 @@ class ViewController: UIViewController {
     // searchBarも練習用に一度作っておきたいが、正直検索機能そこまで要らん気もする
     // UI的にはtabの方が良さそう
 }
-
-//extension ViewController: UISearchBarDelegate {
-//    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-//    }
-//
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        // キーボードを閉じる
-//        view.endEditing(true)
-//        // 入力された値がnilでなければif文のブロック内の処理を実行
-//        if let searchText = searchBar.text {
-//            Songs.shared.filter(by: searchText)
-//            songTableView.reloadData()
-//        }
-//    }
-//}

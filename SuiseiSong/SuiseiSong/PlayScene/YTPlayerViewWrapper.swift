@@ -15,7 +15,11 @@ final class YTPlayerViewWrapper {
     var playerView: YTPlayerView?
         
     var shouldReload: Bool = true
-    var playing: Bool = false
+    var playing: Bool = false {
+        didSet {
+            NotificationCenter.default.post(name: .didChangedPlaying, object: nil)
+        }
+    }
     
     // autoplayが反応しない...Delegateの方で実装するしかないか?
     // 基本的に制御が増えると面倒なので一旦制御は外しておく

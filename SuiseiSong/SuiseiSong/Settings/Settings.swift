@@ -13,6 +13,25 @@ final class Settings {
     static var shared = Settings()
     private init() {}
 
-    var shouldRepeat: Bool = false
-    var shouldSingleRepeat: Bool = false
+    var repeatType: RepeatType = .none {
+        didSet {
+            NotificationCenter.default.post(name: .didChangedRepeatType, object: nil)
+        }
+    }
+    
+    func toggleRepeatType() {
+        if repeatType == .none {
+            repeatType = .allRepeat
+        } else if repeatType == .allRepeat {
+            repeatType = .singleRepeat
+        } else {
+            repeatType = .none
+        }
+    }
+}
+
+enum RepeatType {
+    case none
+    case allRepeat
+    case singleRepeat
 }

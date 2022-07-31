@@ -24,10 +24,6 @@ final class Songs {
     }
     
     func setup() {
-//        guard YTPlayerViewWrapper.shared.playerView != nil else {
-//            Logger.log(message: "setupの前にplayerViewのセットを実施して下さい")
-//            return
-//        }
         self.allSongs = JSONFileManager.getSuiseiSongs()
         self.filteredSongs = self.allSongs
     }
@@ -42,9 +38,9 @@ final class Songs {
     }
     
     func getFilteredID(bySong: Song) -> Int {
-        for filteredSong in filteredSongs {
+        for (index, filteredSong) in filteredSongs.enumerated() {
             if bySong.id == filteredSong.id {
-                return filteredSong.id
+                return index
             }
         }
         fatalError()
@@ -93,7 +89,8 @@ final class Songs {
         self.filteredSongs = filteredSongsTmp
     }
     
-    // これサーチの二重がけとかどう管理しようか？
+    // そのまま実行するとfiltererIDの管理が面倒になる
+    // 仕様自体を考え直した方が良さそう
     func shuffle() {
         let filteredSongsTmp = self.allSongs.shuffled()
         self.filteredSongs = filteredSongsTmp

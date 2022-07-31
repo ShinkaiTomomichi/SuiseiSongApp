@@ -16,23 +16,17 @@ class SuggestCollectionCell: UICollectionViewCell {
         // songをセットした際に自動で他の要素をセットする
         didSet {
             if let song = self.song {
-                self.label.text = song.songtitle
-                getImageByVideoId(videoId: song.videoid)
+                 self.label.text = song.songtitle
+                 getImageByVideoId(videoId: song.videoid)
             }
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        self.label.text = "サンプル"
-        self.image.image = UIImage(systemName: "xmark.circle.fill")!
-        // self.image.image = UIImage.initWithDarkmode(systemName: "star")
-        // self.label.text = "sample"
     }
     
     // Youtubeのサムネイル画像を取得
-    // 現状cellの描画以外に利用しないためcell直下に用意
     private func getImageByVideoId(videoId: String) {
         let urlWithVideoId = "https://i.ytimg.com/vi/\(videoId)/hqdefault.jpg"
         let url = URL(string: urlWithVideoId)
@@ -43,8 +37,9 @@ class SuggestCollectionCell: UICollectionViewCell {
             print("Error : \(err.localizedDescription)")
             self.image.image = UIImage(systemName: "xmark.circle.fill")!
         }
-        // 角を丸くする（ここは別処理に分割しても良いかも）
-        self.image.layer.cornerRadius = self.image.frame.size.width * 0.05
-        self.image.clipsToBounds = true
+        // 角を丸くする処理が思った感じに動いていない...
+        // こちらはそのうち改善したい
+         self.image.layer.cornerRadius = self.image.frame.size.width * 0.05
+         self.image.clipsToBounds = true
     }
 }
