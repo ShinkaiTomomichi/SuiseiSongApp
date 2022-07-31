@@ -42,6 +42,7 @@ class ViewController: UIViewController {
         
         // Delegateをセット
         songTableView.dataSource = self
+        songTableView.delegate = self
         playerView.delegate = self
         
         // Buttonの絵柄をセット

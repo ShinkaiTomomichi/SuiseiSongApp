@@ -49,14 +49,17 @@ class SongTableCell: UITableViewCell {
     }
 
     // これとtableViewのdelegateの使い分けがよく分からん
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // tapした時のみ
-        if let song = song, selected {
-            SelectedStatus.shared.setSelectedSong(song: song)
-        }
-    }
+    // これの使い方を学ぶまではDelegateの方でも良いかも？（selectedで発火される条件が難しい）
+//    override func setSelected(_ selected: Bool, animated: Bool) {
+//        super.setSelected(selected, animated: animated)
+//
+//        Logger.log(message: "タップされている？")
+//
+//        // tapした時のみ
+//        if let song = song, selected {
+//            SelectedStatus.shared.setSelectedSong(song: song)
+//        }
+//    }
     
     // Youtubeのサムネイル画像を取得
     // 現状cellの描画以外に利用しないためcell直下に用意

@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension ViewController: UITableViewDataSource {
+extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Songs.shared.filteredSongs.count
     }
@@ -22,5 +22,12 @@ extension ViewController: UITableViewDataSource {
         cell.index = index
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if let cell = self.songTableView.cellForRow(at: indexPath) as? SongTableCell {
+            SelectedStatus.shared.setSelectedSong(song: cell.song!)
+        }        
     }
 }
