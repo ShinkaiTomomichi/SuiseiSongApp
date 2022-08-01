@@ -27,6 +27,7 @@ class SearchViewController: UIViewController {
     
     // collectionViewの親クラスを作った方が使いやすそう
     @IBOutlet weak var suggestCollectionView: UICollectionView!
+    @IBOutlet weak var monthlyCollectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +43,12 @@ class SearchViewController: UIViewController {
         suggestCollectionView.delegate = self
         suggestCollectionView.dataSource = self
         
+        // delegateの中身が完全に呼ばれていないのは何故?
+        monthlyCollectionView.delegate = self
+        monthlyCollectionView.dataSource = self
+        
+        // suggestCollectionViewを複製してどのような挙動になるかを確認
+        
         // UXが低いので一旦無効化
         // TODO: ユーザの直感には反するため、改善策を検討
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
@@ -49,25 +56,33 @@ class SearchViewController: UIViewController {
 }
 
 // Delegateをselfにすると複数のTableに対応出来なくなるのか
+//
+// tagを使って利用する方法もあるがあまり綺麗じゃない気がする...
 // tapする時にHome画面に移動する
-// これでCollectionViewの高さ自体を制限すれば問題ないか？？？
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     // セルの数
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        if collectionView == suggestCollectionView{
+            return 5
+        } else {
+            return Songs.shared.favoriteSongs.count
+        }
     }
     
     // セルの中身
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         //storyboard上のセルを生成　storyboardのIdentifierで付けたものをここで設定する
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "suggestCell", for: indexPath) as! SuggestCollectionCell
-
-        // セルに対応する歌をセット
+        var cell: SuggestCollectionCell
         let index = indexPath.row
-        // ここは本来は絞る
-        cell.song = Songs.shared.allSongs[index]
-        
+        if collectionView == suggestCollectionView {
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "suggestCell", for: indexPath) as! SuggestCollectionCell
+            cell.song = Songs.shared.allSongs[index]
+        } else {
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "monthlyCell", for: indexPath) as! SuggestCollectionCell
+            cell.song = Songs.shared.favoriteSongs[index]
+        }
+
         return cell
     }
     
@@ -88,8 +103,18 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         // 今のセルを取り出したい
         // 強制アンラップが雑なので後で直す
-        if let cell = self.suggestCollectionView.cellForItem(at: indexPath) as? SuggestCollectionCell {
-            SelectedStatus.shared.setSelectedSong(song: cell.song!)
+        if collectionView == suggestCollectionView {
+            if let cell = self.suggestCollectionView.cellForItem(at: indexPath) as? SuggestCollectionCell {
+                SelectedStatus.shared.setSelectedSong(song: cell.song!, filterCompletion: {
+                    Songs.shared.reset()
+                })
+            }
+        } else {
+            if let cell = self.monthlyCollectionView.cellForItem(at: indexPath) as? SuggestCollectionCell {
+                SelectedStatus.shared.setSelectedSong(song: cell.song!, filterCompletion: {
+                    Songs.shared.setFavorite()
+                })
+            }
         }
         
         self.navigationController?.pushViewController(nextViewController, animated: true)

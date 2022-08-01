@@ -10,9 +10,9 @@ import Foundation
 // 今後DBに移行するため設計は雑で良い
 // クラスなのに動詞から始まるのはどうなのか？
 struct JSONFileManager {
-    static func getSuiseiSongs () -> [Song] {
+    static func getSuiseiSongs (forResource: String) -> [Song] {
         /// ①プロジェクト内にある"employees.json"ファイルのパス取得
-        guard let url = Bundle.main.url(forResource: "suisei_song2", withExtension: "json") else {
+        guard let url = Bundle.main.url(forResource: forResource, withExtension: "json") else {
            fatalError("ファイルが見つからない")
         }
 

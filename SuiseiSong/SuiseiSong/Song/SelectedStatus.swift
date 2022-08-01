@@ -45,8 +45,8 @@ final class SelectedStatus {
         self.filteredID = Songs.shared.getFilteredID(bySong: self.song!)
     }
     
-    func setSelectedSong(song: Song) {
-        setSelectedID(id: song.id)
+    func setSelectedSong(song: Song, filterCompletion: (() -> Void)? = nil) {
+        setSelectedID(id: song.id, filterCompletion: filterCompletion)
     }
     
     // reset(viewDidDisAppearなどで呼び出さないと問題が起こる)

@@ -14,6 +14,7 @@ final class Songs {
     
     // allSongsは特に更新しない
     var allSongs: [Song] = []
+    var favoriteSongs: [Song] = []
     // filterごとに機能していると話にならん
     // filterdごとにselectedが定義されているのがまずいかも
     // というか自動再生とそうじゃない場合の場合分けがしたい
@@ -24,7 +25,8 @@ final class Songs {
     }
     
     func setup() {
-        self.allSongs = JSONFileManager.getSuiseiSongs()
+        self.allSongs = JSONFileManager.getSuiseiSongs(forResource: "suisei_song2")
+        self.favoriteSongs = JSONFileManager.getSuiseiSongs(forResource: "202207")
         self.filteredSongs = self.allSongs
     }
     
@@ -34,9 +36,15 @@ final class Songs {
                 return song
             }
         }
+        for song in favoriteSongs {
+            if song.id == byID {
+                return song
+            }
+        }
         fatalError()
     }
     
+    // これが存在しない場合はErrorで停止させる
     func getFilteredID(bySong: Song) -> Int {
         for (index, filteredSong) in filteredSongs.enumerated() {
             if bySong.id == filteredSong.id {
@@ -92,7 +100,15 @@ final class Songs {
     // そのまま実行するとfiltererIDの管理が面倒になる
     // 仕様自体を考え直した方が良さそう
     func shuffle() {
-        let filteredSongsTmp = self.allSongs.shuffled()
+        let filteredSongsTmp = self.filteredSongs.shuffled()
         self.filteredSongs = filteredSongsTmp
+    }
+    
+    func setFavorite() {
+        self.filteredSongs = self.favoriteSongs
+    }
+    
+    func reset() {
+        self.filteredSongs = self.allSongs
     }
 }

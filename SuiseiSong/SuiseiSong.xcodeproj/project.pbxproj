@@ -20,6 +20,8 @@
 		DA60782F289540080002A524 /* SuggestCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60782E289540080002A524 /* SuggestCollectionCell.swift */; };
 		DA6078332896B3EB0002A524 /* suisei_song2.json in Resources */ = {isa = PBXBuildFile; fileRef = DA6078322896B3EB0002A524 /* suisei_song2.json */; };
 		DA6078352896B8000002A524 /* suisei_song1.json in Resources */ = {isa = PBXBuildFile; fileRef = DA6078342896B8000002A524 /* suisei_song1.json */; };
+		DA60783928980EB80002A524 /* SuggestCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60783828980EB70002A524 /* SuggestCollectionDelegate.swift */; };
+		DA60783B289811200002A524 /* 202207.json in Resources */ = {isa = PBXBuildFile; fileRef = DA60783A289811200002A524 /* 202207.json */; };
 		DA9950A9287B271F0037D8E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9950A8287B271F0037D8E5 /* AppDelegate.swift */; };
 		DA9950AB287B271F0037D8E5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9950AA287B271F0037D8E5 /* SceneDelegate.swift */; };
 		DA9950AD287B271F0037D8E5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9950AC287B271F0037D8E5 /* ViewController.swift */; };
@@ -70,6 +72,8 @@
 		DA60782E289540080002A524 /* SuggestCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestCollectionCell.swift; sourceTree = "<group>"; };
 		DA6078322896B3EB0002A524 /* suisei_song2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = suisei_song2.json; path = ../../../Dataset/suisei_song2.json; sourceTree = "<group>"; };
 		DA6078342896B8000002A524 /* suisei_song1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = suisei_song1.json; path = ../../../Dataset/suisei_song1.json; sourceTree = "<group>"; };
+		DA60783828980EB70002A524 /* SuggestCollectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestCollectionDelegate.swift; sourceTree = "<group>"; };
+		DA60783A289811200002A524 /* 202207.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = 202207.json; path = ../../../Dataset/202207.json; sourceTree = "<group>"; };
 		DA9950A5287B271F0037D8E5 /* SuiseiSong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuiseiSong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA9950A8287B271F0037D8E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA9950AA287B271F0037D8E5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -132,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				DA607826288D1D480002A524 /* SearchViewController.swift */,
+				DA60783828980EB70002A524 /* SuggestCollectionDelegate.swift */,
 				DA60782E289540080002A524 /* SuggestCollectionCell.swift */,
 				DA607828288D1D5E0002A524 /* Search.storyboard */,
 			);
@@ -216,6 +221,7 @@
 		DA9950DF288056A30037D8E5 /* DataBase */ = {
 			isa = PBXGroup;
 			children = (
+				DA60783A289811200002A524 /* 202207.json */,
 				DA6078342896B8000002A524 /* suisei_song1.json */,
 				DA6078322896B3EB0002A524 /* suisei_song2.json */,
 				DA9950DD288056510037D8E5 /* JSONFileManager.swift */,
@@ -367,6 +373,7 @@
 				DA9950B2287B27270037D8E5 /* Assets.xcassets in Resources */,
 				DA6078352896B8000002A524 /* suisei_song1.json in Resources */,
 				DA9950B0287B271F0037D8E5 /* Play.storyboard in Resources */,
+				DA60783B289811200002A524 /* 202207.json in Resources */,
 				DA607829288D1D5E0002A524 /* Search.storyboard in Resources */,
 				DA6078332896B3EB0002A524 /* suisei_song2.json in Resources */,
 			);
@@ -396,6 +403,7 @@
 				DA60781B288B8D020002A524 /* ViewController+UITableViewDataSource.swift in Sources */,
 				DA607819288872040002A524 /* Songs.swift in Sources */,
 				DA9950DE288056510037D8E5 /* JSONFileManager.swift in Sources */,
+				DA60783928980EB80002A524 /* SuggestCollectionDelegate.swift in Sources */,
 				DA607827288D1D480002A524 /* SearchViewController.swift in Sources */,
 				DA9950DA287F83F70037D8E5 /* Song.swift in Sources */,
 				DA9950F428852A0D0037D8E5 /* ViewController+YTPlayerViewDelegate.swift in Sources */,

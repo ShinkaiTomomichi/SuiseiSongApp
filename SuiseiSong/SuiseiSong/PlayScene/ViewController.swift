@@ -61,6 +61,8 @@ class ViewController: UIViewController {
         
         self.navigationItem.rightBarButtonItems = [settingBarButtonItem, shareBarButtonItem]
         
+        playerView.frame = CGRect(x: 0 , y: 0, width: self.view.frame.width, height: self.view.frame.height * 0.7)
+        
         // Notificationをset
         NotificationCenter.default.addObserver(self, selector: #selector(setPlayingSongLabel), name: .didChangedSelectedSong, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(setPlayAndStopButton), name: .didChangedPlaying, object: nil)
