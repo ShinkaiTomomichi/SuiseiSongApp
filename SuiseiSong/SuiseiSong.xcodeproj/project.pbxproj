@@ -27,6 +27,7 @@
 		DA6078432898A4090002A524 /* Songs.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA607818288872040002A524 /* Songs.swift */; };
 		DA6078442898A5D20002A524 /* NSNotification+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60781E288B9C080002A524 /* NSNotification+.swift */; };
 		DA6078452898A5E10002A524 /* JSONFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9950DD288056510037D8E5 /* JSONFileManager.swift */; };
+		DA60784A2898A9990002A524 /* SongTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA6078482898A9990002A524 /* SongTableCell.xib */; };
 		DA9950A9287B271F0037D8E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9950A8287B271F0037D8E5 /* AppDelegate.swift */; };
 		DA9950AB287B271F0037D8E5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9950AA287B271F0037D8E5 /* SceneDelegate.swift */; };
 		DA9950AD287B271F0037D8E5 /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9950AC287B271F0037D8E5 /* PlayViewController.swift */; };
@@ -80,6 +81,7 @@
 		DA60783A289811200002A524 /* 202207.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = 202207.json; path = ../../../Dataset/202207.json; sourceTree = "<group>"; };
 		DA60783D28989D6E0002A524 /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		DA60783F28989D8F0002A524 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		DA6078482898A9990002A524 /* SongTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SongTableCell.xib; sourceTree = "<group>"; };
 		DA9950A5287B271F0037D8E5 /* SuiseiSong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuiseiSong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA9950A8287B271F0037D8E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA9950AA287B271F0037D8E5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -174,6 +176,15 @@
 			path = SuggestModule;
 			sourceTree = "<group>";
 		};
+		DA6078462898A9460002A524 /* SongTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				DA9950EF2880757F0037D8E5 /* SongTableCell.swift */,
+				DA6078482898A9990002A524 /* SongTableCell.xib */,
+			);
+			path = SongTableViewCell;
+			sourceTree = "<group>";
+		};
 		DA99509C287B271F0037D8E5 = {
 			isa = PBXGroup;
 			children = (
@@ -264,11 +275,11 @@
 		DA9950EE288075480037D8E5 /* PlayScene */ = {
 			isa = PBXGroup;
 			children = (
+				DA6078462898A9460002A524 /* SongTableViewCell */,
 				DA9950AC287B271F0037D8E5 /* PlayViewController.swift */,
 				DA9950F328852A0D0037D8E5 /* PlayViewController+YTPlayerViewDelegate.swift */,
 				DA60781A288B8D020002A524 /* PlayViewController+UITableViewDataSource.swift */,
 				DA9950F628852A6F0037D8E5 /* YTPlayerViewWrapper.swift */,
-				DA9950EF2880757F0037D8E5 /* SongTableCell.swift */,
 				DA9950AE287B271F0037D8E5 /* Play.storyboard */,
 			);
 			path = PlayScene;
@@ -396,6 +407,7 @@
 				DA9950B2287B27270037D8E5 /* Assets.xcassets in Resources */,
 				DA60783E28989D6E0002A524 /* Search.storyboard in Resources */,
 				DA6078352896B8000002A524 /* suisei_song1.json in Resources */,
+				DA60784A2898A9990002A524 /* SongTableCell.xib in Resources */,
 				DA9950B0287B271F0037D8E5 /* Play.storyboard in Resources */,
 				DA60783B289811200002A524 /* 202207.json in Resources */,
 				DA607829288D1D5E0002A524 /* Home.storyboard in Resources */,
