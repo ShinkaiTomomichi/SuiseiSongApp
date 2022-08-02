@@ -47,7 +47,7 @@ class PlayViewController: UIViewController {
         playerView.delegate = self
         
         // Buttonの絵柄をセット
-        // これだとアプリ起動中にダークモード切り替えが起きた場合に対応できない
+        // TODO: これだとアプリ起動中にダークモード切り替えが起きた場合に対応できない
         prevSongButton.setImage(UIImage.initWithDarkmode(systemName: "backward.end.fill"), for: .normal)
         backwordButton.setImage(UIImage.initWithDarkmode(systemName:  "gobackward.10"), for: .normal)
         setPlayAndStopButton()

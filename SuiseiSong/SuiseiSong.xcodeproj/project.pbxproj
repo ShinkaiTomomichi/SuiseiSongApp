@@ -19,7 +19,7 @@
 		DA60782F289540080002A524 /* SuggestVideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60782E289540080002A524 /* SuggestVideoCollectionViewCell.swift */; };
 		DA6078332896B3EB0002A524 /* suisei_song2.json in Resources */ = {isa = PBXBuildFile; fileRef = DA6078322896B3EB0002A524 /* suisei_song2.json */; };
 		DA6078352896B8000002A524 /* suisei_song1.json in Resources */ = {isa = PBXBuildFile; fileRef = DA6078342896B8000002A524 /* suisei_song1.json */; };
-		DA60783928980EB80002A524 /* HomeCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60783828980EB70002A524 /* HomeCollectionDelegate.swift */; };
+		DA60783928980EB80002A524 /* SampleDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60783828980EB70002A524 /* SampleDelegate.swift */; };
 		DA60783B289811200002A524 /* 202207.json in Resources */ = {isa = PBXBuildFile; fileRef = DA60783A289811200002A524 /* 202207.json */; };
 		DA60783E28989D6E0002A524 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA60783D28989D6E0002A524 /* Search.storyboard */; };
 		DA60784028989D8F0002A524 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60783F28989D8F0002A524 /* SearchViewController.swift */; };
@@ -28,6 +28,10 @@
 		DA6078442898A5D20002A524 /* NSNotification+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60781E288B9C080002A524 /* NSNotification+.swift */; };
 		DA6078452898A5E10002A524 /* JSONFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9950DD288056510037D8E5 /* JSONFileManager.swift */; };
 		DA60784A2898A9990002A524 /* SongTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA6078482898A9990002A524 /* SongTableViewCell.xib */; };
+		DA60784C28994A7B0002A524 /* SuggestModule.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA60784B28994A7A0002A524 /* SuggestModule.xib */; };
+		DA60784E28994A9E0002A524 /* SuggestModuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60784D28994A9E0002A524 /* SuggestModuleView.swift */; };
+		DA60785328995A2E0002A524 /* SuggestModuleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60785128995A2E0002A524 /* SuggestModuleCollectionViewCell.swift */; };
+		DA60785428995A2E0002A524 /* SuggestModuleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA60785228995A2E0002A524 /* SuggestModuleCollectionViewCell.xib */; };
 		DA9950A9287B271F0037D8E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9950A8287B271F0037D8E5 /* AppDelegate.swift */; };
 		DA9950AB287B271F0037D8E5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9950AA287B271F0037D8E5 /* SceneDelegate.swift */; };
 		DA9950AD287B271F0037D8E5 /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9950AC287B271F0037D8E5 /* PlayViewController.swift */; };
@@ -77,11 +81,15 @@
 		DA60782E289540080002A524 /* SuggestVideoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestVideoCollectionViewCell.swift; sourceTree = "<group>"; };
 		DA6078322896B3EB0002A524 /* suisei_song2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = suisei_song2.json; path = ../../../Dataset/suisei_song2.json; sourceTree = "<group>"; };
 		DA6078342896B8000002A524 /* suisei_song1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = suisei_song1.json; path = ../../../Dataset/suisei_song1.json; sourceTree = "<group>"; };
-		DA60783828980EB70002A524 /* HomeCollectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionDelegate.swift; sourceTree = "<group>"; };
+		DA60783828980EB70002A524 /* SampleDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleDelegate.swift; sourceTree = "<group>"; };
 		DA60783A289811200002A524 /* 202207.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = 202207.json; path = ../../../Dataset/202207.json; sourceTree = "<group>"; };
 		DA60783D28989D6E0002A524 /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		DA60783F28989D8F0002A524 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		DA6078482898A9990002A524 /* SongTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SongTableViewCell.xib; sourceTree = "<group>"; };
+		DA60784B28994A7A0002A524 /* SuggestModule.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuggestModule.xib; sourceTree = "<group>"; };
+		DA60784D28994A9E0002A524 /* SuggestModuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestModuleView.swift; sourceTree = "<group>"; };
+		DA60785128995A2E0002A524 /* SuggestModuleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestModuleCollectionViewCell.swift; sourceTree = "<group>"; };
+		DA60785228995A2E0002A524 /* SuggestModuleCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuggestModuleCollectionViewCell.xib; sourceTree = "<group>"; };
 		DA9950A5287B271F0037D8E5 /* SuiseiSong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuiseiSong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA9950A8287B271F0037D8E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA9950AA287B271F0037D8E5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -145,7 +153,6 @@
 			children = (
 				DA6078412898A2AD0002A524 /* SuggestModule */,
 				DA607826288D1D480002A524 /* HomeViewController.swift */,
-				DA60783828980EB70002A524 /* HomeCollectionDelegate.swift */,
 				DA60782E289540080002A524 /* SuggestVideoCollectionViewCell.swift */,
 				DA607828288D1D5E0002A524 /* Home.storyboard */,
 			);
@@ -172,6 +179,11 @@
 		DA6078412898A2AD0002A524 /* SuggestModule */ = {
 			isa = PBXGroup;
 			children = (
+				DA60784D28994A9E0002A524 /* SuggestModuleView.swift */,
+				DA60784B28994A7A0002A524 /* SuggestModule.xib */,
+				DA60785128995A2E0002A524 /* SuggestModuleCollectionViewCell.swift */,
+				DA60785228995A2E0002A524 /* SuggestModuleCollectionViewCell.xib */,
+				DA60783828980EB70002A524 /* SampleDelegate.swift */,
 			);
 			path = SuggestModule;
 			sourceTree = "<group>";
@@ -407,10 +419,12 @@
 				DA9950B2287B27270037D8E5 /* Assets.xcassets in Resources */,
 				DA60783E28989D6E0002A524 /* Search.storyboard in Resources */,
 				DA6078352896B8000002A524 /* suisei_song1.json in Resources */,
+				DA60784C28994A7B0002A524 /* SuggestModule.xib in Resources */,
 				DA60784A2898A9990002A524 /* SongTableViewCell.xib in Resources */,
 				DA9950B0287B271F0037D8E5 /* Play.storyboard in Resources */,
 				DA60783B289811200002A524 /* 202207.json in Resources */,
 				DA607829288D1D5E0002A524 /* Home.storyboard in Resources */,
+				DA60785428995A2E0002A524 /* SuggestModuleCollectionViewCell.xib in Resources */,
 				DA6078332896B3EB0002A524 /* suisei_song2.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -436,12 +450,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA60784E28994A9E0002A524 /* SuggestModuleView.swift in Sources */,
 				DA60781B288B8D020002A524 /* PlayViewController+UITableViewDataSource.swift in Sources */,
 				DA607819288872040002A524 /* Songs.swift in Sources */,
 				DA9950DE288056510037D8E5 /* JSONFileManager.swift in Sources */,
-				DA60783928980EB80002A524 /* HomeCollectionDelegate.swift in Sources */,
+				DA60783928980EB80002A524 /* SampleDelegate.swift in Sources */,
 				DA607827288D1D480002A524 /* HomeViewController.swift in Sources */,
 				DA9950DA287F83F70037D8E5 /* Song.swift in Sources */,
+				DA60785328995A2E0002A524 /* SuggestModuleCollectionViewCell.swift in Sources */,
 				DA9950F428852A0D0037D8E5 /* PlayViewController+YTPlayerViewDelegate.swift in Sources */,
 				DA60781D288B948D0002A524 /* SelectedStatus.swift in Sources */,
 				DA9950F02880757F0037D8E5 /* SongTableViewCell.swift in Sources */,
@@ -645,6 +661,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Home;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -673,6 +690,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Home;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

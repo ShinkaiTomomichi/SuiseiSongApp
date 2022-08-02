@@ -52,7 +52,7 @@
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="suggestCell" id="q16-0s-lCt" userLabel="Suggest Collection Cell" customClass="SuggestVideoCollectionViewCell" customModule="SuiseiSong" customModuleProvider="target">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SuggestCell" id="q16-0s-lCt" userLabel="Suggest Collection Cell" customClass="SuggestVideoCollectionViewCell" customModule="SuiseiSong" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="-4" width="259" height="179"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="n7s-ah-Cd7">
@@ -101,89 +101,22 @@
                                             <constraint firstAttribute="height" constant="200" id="qBP-46-hF4"/>
                                         </constraints>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="68M-o1-guM">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7bj-Bt-c8A" customClass="SuggestModuleView" customModule="SuiseiSong" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="200" width="414" height="200"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ohs-PX-Cfk">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="29"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ホロライブ 7月" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zIR-mL-2ia">
-                                                        <rect key="frame" x="0.0" y="0.0" width="304" height="29"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jrO-Nb-6xl">
-                                                        <rect key="frame" x="304" y="0.0" width="110" height="29"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="110" id="nne-EV-5le"/>
-                                                        </constraints>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="もっと見る"/>
-                                                    </button>
-                                                </subviews>
-                                            </stackView>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jY0-sd-ZHp" userLabel="Monthly Collection">
-                                                <rect key="frame" x="0.0" y="29" width="414" height="171"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ur9-pK-GaE">
-                                                    <size key="itemSize" width="259" height="179"/>
-                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                </collectionViewFlowLayout>
-                                                <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="monthlyCell" id="PEh-Dz-0Mm" userLabel="Monthly Collection Cell" customClass="SuggestVideoCollectionViewCell" customModule="SuiseiSong" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="-4" width="259" height="179"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Zl1-eX-vVC">
-                                                            <rect key="frame" x="0.0" y="0.0" width="259" height="179"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <subviews>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7HT-i6-PCk">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="259" height="179"/>
-                                                                    <subviews>
-                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7wX-Ex-LjA">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="259" height="158.5"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="width" constant="200" id="OmO-9e-3Cb"/>
-                                                                            </constraints>
-                                                                        </imageView>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SCv-55-Jkp" userLabel="label">
-                                                                            <rect key="frame" x="0.0" y="158.5" width="259" height="20.5"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                            <nil key="textColor"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
-                                                                    </subviews>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" constant="200" id="V52-9J-Y27"/>
-                                                                        <constraint firstAttribute="height" constant="150" id="asv-ko-y5Z"/>
-                                                                    </constraints>
-                                                                </stackView>
-                                                            </subviews>
-                                                            <constraints>
-                                                                <constraint firstItem="7HT-i6-PCk" firstAttribute="leading" secondItem="Zl1-eX-vVC" secondAttribute="leading" id="e2o-NZ-smw"/>
-                                                                <constraint firstItem="7HT-i6-PCk" firstAttribute="top" secondItem="Zl1-eX-vVC" secondAttribute="top" id="fgb-Gi-vCc"/>
-                                                                <constraint firstAttribute="bottom" secondItem="7HT-i6-PCk" secondAttribute="bottom" id="hXQ-9k-Rvy"/>
-                                                                <constraint firstAttribute="trailing" secondItem="7HT-i6-PCk" secondAttribute="trailing" id="vvu-to-SP1"/>
-                                                            </constraints>
-                                                        </collectionViewCellContentView>
-                                                        <size key="customSize" width="259" height="179"/>
-                                                        <connections>
-                                                            <outlet property="image" destination="7wX-Ex-LjA" id="pNu-pz-CNg"/>
-                                                            <outlet property="label" destination="SCv-55-Jkp" id="eDv-V6-iR0"/>
-                                                        </connections>
-                                                    </collectionViewCell>
-                                                </cells>
-                                            </collectionView>
-                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="200" id="8ph-F9-BHd"/>
+                                            <constraint firstAttribute="height" constant="200" id="ubZ-mI-tgw"/>
                                         </constraints>
-                                    </stackView>
+                                    </view>
+                                    <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bsw-2A-Byz" userLabel="Suggest Module View2" customClass="SuggestModuleView" customModule="SuiseiSong" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="400" width="414" height="200"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="2dn-Pa-ODe"/>
+                                        </constraints>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CWD-sS-CAy" userLabel="Spacer">
-                                        <rect key="frame" x="0.0" y="400" width="414" height="374"/>
+                                        <rect key="frame" x="0.0" y="600" width="414" height="174"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
                                 </subviews>
@@ -200,8 +133,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="7DR-gY-bjp"/>
                     <connections>
-                        <outlet property="monthlyCollectionView" destination="jY0-sd-ZHp" id="l4W-Wf-woP"/>
                         <outlet property="suggestCollectionView" destination="IQm-Vg-bir" id="50a-GE-qHD"/>
+                        <outlet property="suggestModuleView" destination="7bj-Bt-c8A" id="DyU-ZR-p3n"/>
+                        <outlet property="suggestModuleView2" destination="Bsw-2A-Byz" id="ge6-YT-wfL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

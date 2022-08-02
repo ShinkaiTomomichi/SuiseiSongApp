@@ -12,9 +12,9 @@ class HomeViewController: UIViewController {
     // このモジュールは明らかに複製しておく必要がある
     // 現状テーブルなのでscrollViewにしておきたい
     
-    // collectionViewの親クラスを作った方が使いやすそう
     @IBOutlet weak var suggestCollectionView: UICollectionView!
-    @IBOutlet weak var monthlyCollectionView: UICollectionView!
+    @IBOutlet weak var suggestModuleView: SuggestModuleView!
+    @IBOutlet weak var suggestModuleView2: SuggestModuleView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,9 +29,11 @@ class HomeViewController: UIViewController {
         suggestCollectionView.delegate = self
         suggestCollectionView.dataSource = self
         
-        // Delegateを他のクラスに切り分ける方法がうまく機能しなかった、TODO: 要調査
-        monthlyCollectionView.delegate = self
-        monthlyCollectionView.dataSource = self
+        // モジュールにセットすれば大丈夫なように変更
+        suggestModuleView.setup(navigationController: self.navigationController,
+                                title: "7月のお気に入り")
+        suggestModuleView2.setup(navigationController: self.navigationController,
+                                 title: "8月のお気に入り")
         
         // UXが低いので一旦無効化、TODO: ユーザの直感には反するため、改善策を検討
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
@@ -55,20 +57,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         //storyboard上のセルを生成　storyboardのIdentifierで付けたものをここで設定する
         var cell: SuggestVideoCollectionViewCell
         let index = indexPath.row
-        if collectionView == suggestCollectionView {
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "suggestCell", for: indexPath) as! SuggestVideoCollectionViewCell
-            cell.song = Songs.shared.allSongs[index]
-        } else {
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "monthlyCell", for: indexPath) as! SuggestVideoCollectionViewCell
-            cell.song = Songs.shared.favoriteSongs[index]
-        }
-
+        // if collectionView == suggestCollectionView {
+        cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SuggestCell", for: indexPath) as! SuggestVideoCollectionViewCell
+        cell.song = Songs.shared.allSongs[index]
+        
         return cell
-    }
-    
-    // セルの間隔
-    private func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimunLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
     }
     
     // セルタップ時
@@ -79,18 +72,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let nextViewController = storyboard.instantiateViewController(withIdentifier: "Play") as! PlayViewController
         
         // TODO: 強制アンラップが雑なので後で直す
-        if collectionView == suggestCollectionView {
-            if let cell = self.suggestCollectionView.cellForItem(at: indexPath) as? SuggestVideoCollectionViewCell {
-                SelectedStatus.shared.setSelectedSong(song: cell.song!, filterCompletion: {
-                    Songs.shared.reset()
-                })
-            }
-        } else {
-            if let cell = self.monthlyCollectionView.cellForItem(at: indexPath) as? SuggestVideoCollectionViewCell {
-                SelectedStatus.shared.setSelectedSong(song: cell.song!, filterCompletion: {
-                    Songs.shared.setFavorite()
-                })
-            }
+        // if collectionView == suggestCollectionView {
+        if let cell = self.suggestCollectionView.cellForItem(at: indexPath) as? SuggestVideoCollectionViewCell {
+            SelectedStatus.shared.setSelectedSong(song: cell.song!, filterCompletion: {
+                Songs.shared.reset()
+            })
         }
         
         self.navigationController?.pushViewController(nextViewController, animated: true)
