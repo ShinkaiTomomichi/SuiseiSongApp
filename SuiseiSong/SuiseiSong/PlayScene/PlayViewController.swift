@@ -42,6 +42,8 @@ class PlayViewController: UIViewController {
         // Delegateをセット
         songTableView.dataSource = self
         songTableView.delegate = self
+        // xibファイルからUIコンポーネントを参照する際に必要
+        songTableView.register(UINib(nibName: "SongTableViewCell", bundle: nil), forCellReuseIdentifier: "SongTableViewCell")
         playerView.delegate = self
         
         // Buttonの絵柄をセット
