@@ -8,7 +8,7 @@
 import UIKit
 import YouTubeiOSPlayerHelper
 
-class ViewController: UIViewController {
+class PlayViewController: UIViewController {
     
     @IBOutlet weak var playerView: YTPlayerView!
     @IBOutlet weak var songTableView: UITableView!
@@ -80,7 +80,10 @@ class ViewController: UIViewController {
     }
     
     private func showShareSheet() {
-        let shareText = "SelectedIDの曲名とアプリ名 & appstoreのリンクがあると望ましい"
+        let selectedSong = SelectedStatus.shared.song
+        var shareText = "\(selectedSong!.songtitle)を聴いてます。\n"
+        shareText += "https://youtu.be/\(selectedSong!.videoid)?t=\(selectedSong!.starttime)\n"
+        shareText += "(サンプル)" // 各配信のハッシュタグを添えられると良さそう、配信者名でいいか？
         let activityVC = UIActivityViewController(activityItems: [shareText], applicationActivities: nil)
         present(activityVC, animated: true, completion: nil)
     }

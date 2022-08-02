@@ -13,7 +13,7 @@ final class YTPlayerViewWrapper {
     private init() {}
     
     var playerView: YTPlayerView?
-        
+    
     var shouldReload: Bool = true
     var playing: Bool = false {
         didSet {

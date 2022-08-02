@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SuggestCollectionCell: UICollectionViewCell {
+class SuggestVideoCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var image: UIImageView!

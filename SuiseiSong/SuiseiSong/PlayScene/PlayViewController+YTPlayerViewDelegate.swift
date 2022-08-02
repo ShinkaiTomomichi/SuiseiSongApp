@@ -8,7 +8,7 @@
 import UIKit
 import YouTubeiOSPlayerHelper
 
-extension ViewController: YTPlayerViewDelegate {
+extension PlayViewController: YTPlayerViewDelegate {
     // stateが変化した時に呼ばれるdelegate
     // sliderはこれの変化によって変化してもいいかも
     func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
@@ -71,10 +71,6 @@ extension ViewController: YTPlayerViewDelegate {
     // 初回起動のフラグを管理しておきたい
     // 画面リセットの際にも起動して欲しくないのでこれの改善も測る
     func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
-        if FirstLAunchFlag.shared.isFirstLaunch {
-            FirstLAunchFlag.shared.isFirstLaunch = false
-        } else {
-            playerView.playVideo()
-        }
+        playerView.playVideo()
     }
 }
