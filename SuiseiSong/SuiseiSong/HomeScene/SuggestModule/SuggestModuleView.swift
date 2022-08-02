@@ -11,7 +11,6 @@ import UIKit
 class SuggestModuleView: UIView {
     
     var view: UIView!
-    var navigationController: UINavigationController?
     let tagList: Dictionary = [
         0: "",
         1: "",
@@ -25,6 +24,8 @@ class SuggestModuleView: UIView {
     @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    // 互いに参照するため、どちらかを弱依存にしたい
+    // TODO: この辺りの挙動を要確認
     var myDelegate : SampleDelegate?
     
     // TODO: 丸々コピペなので内容の理解
@@ -65,55 +66,56 @@ class SuggestModuleView: UIView {
         self.collectionView.register(UINib(nibName: "SuggestModuleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SuggestModuleCollectionViewCell")
     }
     
+    // これが呼ばれる前にtapが走るとフリーズする
     func setup(navigationController: UINavigationController?, title: String) {
-        self.navigationController = navigationController
+        myDelegate?.navigationController = navigationController
         self.title.text = title
     }
 }
 
 // 現状モジュールの種別をtagによって分類できているが、もう少し分かりやすい管理がしたい
-extension SuggestModuleView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
-    // セルの数
-    // モジュールによって変える
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if self.tag == 0 {
-            return Songs.shared.favoriteSongs.count
-        } else if self.tag == 1 {
-            return 5
-        } else {
-            return Songs.shared.favoriteSongs.count
-        }
-    }
-    
-    // セルの中身
-    // モジュールによって変える
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        //storyboard上のセルを生成　storyboardのIdentifierで付けたものをここで設定する
-        var cell: SuggestModuleCollectionViewCell
-        let index = indexPath.row
-        cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SuggestModuleCollectionViewCell", for: indexPath) as! SuggestModuleCollectionViewCell
-        cell.song = Songs.shared.favoriteSongs[index]
-        
-        return cell
-    }
-    
-    // セルタップ時
-    // モジュールによって変える
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        Logger.log(message: "タップされました")
-        
-        let storyboard = UIStoryboard(name: "Play", bundle: nil)
-        let nextViewController = storyboard.instantiateViewController(withIdentifier: "Play") as! PlayViewController
-
-        // TODO: 強制アンラップが雑なので後で直す
-        if let cell = self.collectionView.cellForItem(at: indexPath) as? SuggestModuleCollectionViewCell {
-            SelectedStatus.shared.setSelectedSong(song: cell.song!, filterCompletion: {
-                Songs.shared.setFavorite()
-            })
-        }
-        
-        // viewControllerを渡す必要がある
-        self.navigationController?.pushViewController(nextViewController, animated: true)
-    }
-}
+//extension SuggestModuleView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+//
+//    // セルの数
+//    // モジュールによって変える
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        if self.tag == 0 {
+//            return Songs.shared.favoriteSongs.count
+//        } else if self.tag == 1 {
+//            return 5
+//        } else {
+//            return Songs.shared.favoriteSongs.count
+//        }
+//    }
+//
+//    // セルの中身
+//    // モジュールによって変える
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        //storyboard上のセルを生成　storyboardのIdentifierで付けたものをここで設定する
+//        var cell: SuggestModuleCollectionViewCell
+//        let index = indexPath.row
+//        cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SuggestModuleCollectionViewCell", for: indexPath) as! SuggestModuleCollectionViewCell
+//        cell.song = Songs.shared.favoriteSongs[index]
+//
+//        return cell
+//    }
+//
+//    // セルタップ時
+//    // モジュールによって変える
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        Logger.log(message: "タップされました")
+//
+//        let storyboard = UIStoryboard(name: "Play", bundle: nil)
+//        let nextViewController = storyboard.instantiateViewController(withIdentifier: "Play") as! PlayViewController
+//
+//        // TODO: 強制アンラップが雑なので後で直す
+//        if let cell = self.collectionView.cellForItem(at: indexPath) as? SuggestModuleCollectionViewCell {
+//            SelectedStatus.shared.setSelectedSong(song: cell.song!, filterCompletion: {
+//                Songs.shared.setFavorite()
+//            })
+//        }
+//
+//        // viewControllerを渡す必要がある
+//        self.navigationController?.pushViewController(nextViewController, animated: true)
+//    }
+//}

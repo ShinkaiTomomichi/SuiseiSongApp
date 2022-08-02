@@ -179,11 +179,11 @@
 		DA6078412898A2AD0002A524 /* SuggestModule */ = {
 			isa = PBXGroup;
 			children = (
+				DA6078552899D5040002A524 /* Delegates */,
 				DA60784D28994A9E0002A524 /* SuggestModuleView.swift */,
 				DA60784B28994A7A0002A524 /* SuggestModule.xib */,
 				DA60785128995A2E0002A524 /* SuggestModuleCollectionViewCell.swift */,
 				DA60785228995A2E0002A524 /* SuggestModuleCollectionViewCell.xib */,
-				DA60783828980EB70002A524 /* SampleDelegate.swift */,
 			);
 			path = SuggestModule;
 			sourceTree = "<group>";
@@ -195,6 +195,14 @@
 				DA6078482898A9990002A524 /* SongTableViewCell.xib */,
 			);
 			path = SongTableViewCell;
+			sourceTree = "<group>";
+		};
+		DA6078552899D5040002A524 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				DA60783828980EB70002A524 /* SampleDelegate.swift */,
+			);
+			path = Delegates;
 			sourceTree = "<group>";
 		};
 		DA99509C287B271F0037D8E5 = {

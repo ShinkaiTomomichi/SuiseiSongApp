@@ -8,6 +8,8 @@
 import UIKit
 
 class SampleDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDataSource {
+    var navigationController: UINavigationController?
+    
     // セルの数
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return Songs.shared.favoriteSongs.count
@@ -29,13 +31,19 @@ class SampleDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDataSo
         Logger.log(message: "タップされました")
         
         // cellを使う時はVCの方から渡してやる
-//        let storyboard = UIStoryboard(name: "Play", bundle: nil)
-//        let nextViewController = storyboard.instantiateViewController(withIdentifier: "Play") as! PlayViewController
-//
-//        if let cell = self.collectionView.cellForItem(at: indexPath) as? SuggestModuleCollectionViewCell {
-//            SelectedStatus.shared.setSelectedSong(song: cell.song!, filterCompletion: {
-//                Songs.shared.setFavorite()
-//            })
-//        }
+        let storyboard = UIStoryboard(name: "Play", bundle: nil)
+        let nextViewController = storyboard.instantiateViewController(withIdentifier: "Play") as! PlayViewController
+        
+        if let cell = collectionView.cellForItem(at: indexPath) as? SuggestModuleCollectionViewCell {
+            SelectedStatus.shared.setSelectedSong(song: cell.song!, filterCompletion: {
+                Songs.shared.setFavorite()
+            })
+        }
+        
+        if let navigationController = navigationController {
+            navigationController.pushViewController(nextViewController, animated: true)
+        } else {
+            Logger.log(message: "navigationControllerへのセットが完了していません")
+        }
     }
 }
