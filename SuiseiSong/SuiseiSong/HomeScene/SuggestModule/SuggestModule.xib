@@ -40,6 +40,9 @@
                                     </constraints>
                                     <state key="normal" title="Button"/>
                                     <buttonConfiguration key="configuration" style="plain" title="もっと見る"/>
+                                    <connections>
+                                        <action selector="tapMoreButton:" destination="-1" eventType="touchUpInside" id="BWF-nX-LJl"/>
+                                    </connections>
                                 </button>
                             </subviews>
                         </stackView>

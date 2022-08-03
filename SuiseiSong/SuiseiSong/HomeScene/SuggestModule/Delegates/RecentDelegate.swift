@@ -1,18 +1,19 @@
 //
-//  SuggestCollectionDelegate.swift
+//  RecentDelegate.swift
 //  SuiseiSong
 //
-//  Created by shinkaitomomichi on 2022/08/01.
+//  Created by shinkaitomomichi on 2022/08/03.
 //
 
 import UIKit
 
-class SampleDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDataSource {
+class RecentDelegate: NSObject, SuggestModuleViewDelegateProtocol {
     var navigationController: UINavigationController?
+    var filterCompletion: (() -> Void)?
     
     // セルの数
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Songs.shared.favoriteSongs.count
+        return 5
     }
     
     // セルの中身
@@ -21,7 +22,7 @@ class SampleDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDataSo
         var cell: SuggestModuleCollectionViewCell
         let index = indexPath.row
         cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SuggestModuleCollectionViewCell", for: indexPath) as! SuggestModuleCollectionViewCell
-        cell.song = Songs.shared.favoriteSongs[index]
+        cell.song = Songs.shared.allSongs[index]
         
         return cell
     }
@@ -34,16 +35,17 @@ class SampleDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDataSo
         let storyboard = UIStoryboard(name: "Play", bundle: nil)
         let nextViewController = storyboard.instantiateViewController(withIdentifier: "Play") as! PlayViewController
         
-        if let cell = collectionView.cellForItem(at: indexPath) as? SuggestModuleCollectionViewCell {
+        if let cell = collectionView.cellForItem(at: indexPath) as? SuggestModuleCollectionViewCell,
+            let filterCompletion = self.filterCompletion {
             SelectedStatus.shared.setSelectedSong(song: cell.song!, filterCompletion: {
-                Songs.shared.setFavorite()
+                filterCompletion()
             })
         }
         
         if let navigationController = navigationController {
             navigationController.pushViewController(nextViewController, animated: true)
         } else {
-            Logger.log(message: "navigationControllerへのセットが完了していません")
+            Logger.log(message: "navigationControllerのセットが完了していません")
         }
     }
 }

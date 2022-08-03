@@ -14,7 +14,7 @@ final class Songs {
     
     // allSongsは特に更新しない
     var allSongs: [Song] = []
-    var favoriteSongs: [Song] = []
+    var favorite202207Songs: [Song] = []
     // filterごとに機能していると話にならん
     // filterdごとにselectedが定義されているのがまずいかも
     // というか自動再生とそうじゃない場合の場合分けがしたい
@@ -26,7 +26,7 @@ final class Songs {
     
     func setup() {
         self.allSongs = JSONFileManager.getSuiseiSongs(forResource: "suisei_song2")
-        self.favoriteSongs = JSONFileManager.getSuiseiSongs(forResource: "202207")
+        self.favorite202207Songs = JSONFileManager.getSuiseiSongs(forResource: "202207")
         self.filteredSongs = self.allSongs
     }
     
@@ -36,7 +36,7 @@ final class Songs {
                 return song
             }
         }
-        for song in favoriteSongs {
+        for song in favorite202207Songs {
             if song.id == byID {
                 return song
             }
@@ -104,8 +104,8 @@ final class Songs {
         self.filteredSongs = filteredSongsTmp
     }
     
-    func setFavorite() {
-        self.filteredSongs = self.favoriteSongs
+    func setFilteredSongs(songs: [Song]) {
+        self.filteredSongs = songs
     }
     
     func reset() {
