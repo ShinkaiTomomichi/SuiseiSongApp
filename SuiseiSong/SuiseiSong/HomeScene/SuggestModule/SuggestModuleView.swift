@@ -24,8 +24,6 @@ class SuggestModuleView: UIView {
     @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    // 互いに参照するため、どちらかを弱依存にしたい
-    // TODO: この辺りの挙動を要確認
     var delegate : SuggestModuleViewDelegateProtocol?
     var suggestModuleViewType: SuggestModuleViewType?
     var filteredCompletion: (() -> Void)?
@@ -66,9 +64,9 @@ class SuggestModuleView: UIView {
             }
             self.title.text = "7月のおすすめ"
         case .favorite202206:
-            delegate = Favorite202207Delegate()
+            delegate = Favorite202206Delegate()
             filteredCompletion = {
-                Songs.shared.setFilteredSongs(songs: Songs.shared.favorite202207Songs)
+                Songs.shared.setFilteredSongs(songs: Songs.shared.favorite202206Songs)
             }
             self.title.text = "6月のおすすめ"
         default:

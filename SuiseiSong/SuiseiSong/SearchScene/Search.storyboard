@@ -50,6 +50,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="searchBar" destination="5h4-eG-Ldl" id="fOV-sh-cxy"/>
                         <outlet property="songTableView" destination="mWF-R5-DeC" id="Xqt-Ti-s5N"/>
                     </connections>
                 </viewController>

@@ -34,6 +34,8 @@
 		DA60785428995A2E0002A524 /* SuggestModuleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA60785228995A2E0002A524 /* SuggestModuleCollectionViewCell.xib */; };
 		DA607857289AC1AB0002A524 /* SuggestModuleViewDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA607856289AC1AB0002A524 /* SuggestModuleViewDelegateProtocol.swift */; };
 		DA607859289AC4930002A524 /* RecentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA607858289AC4930002A524 /* RecentDelegate.swift */; };
+		DA60785B289ADEA20002A524 /* 202206.json in Resources */ = {isa = PBXBuildFile; fileRef = DA60785A289ADEA20002A524 /* 202206.json */; };
+		DA60785D289ADEF40002A524 /* Favorite202206Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60785C289ADEF40002A524 /* Favorite202206Delegate.swift */; };
 		DA9950A9287B271F0037D8E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9950A8287B271F0037D8E5 /* AppDelegate.swift */; };
 		DA9950AB287B271F0037D8E5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9950AA287B271F0037D8E5 /* SceneDelegate.swift */; };
 		DA9950AD287B271F0037D8E5 /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9950AC287B271F0037D8E5 /* PlayViewController.swift */; };
@@ -94,6 +96,8 @@
 		DA60785228995A2E0002A524 /* SuggestModuleCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuggestModuleCollectionViewCell.xib; sourceTree = "<group>"; };
 		DA607856289AC1AB0002A524 /* SuggestModuleViewDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestModuleViewDelegateProtocol.swift; sourceTree = "<group>"; };
 		DA607858289AC4930002A524 /* RecentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentDelegate.swift; sourceTree = "<group>"; };
+		DA60785A289ADEA20002A524 /* 202206.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = 202206.json; path = ../../../Dataset/202206.json; sourceTree = "<group>"; };
+		DA60785C289ADEF40002A524 /* Favorite202206Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite202206Delegate.swift; sourceTree = "<group>"; };
 		DA9950A5287B271F0037D8E5 /* SuiseiSong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuiseiSong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA9950A8287B271F0037D8E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA9950AA287B271F0037D8E5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -205,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				DA60783828980EB70002A524 /* Favorite202207Delegate.swift */,
+				DA60785C289ADEF40002A524 /* Favorite202206Delegate.swift */,
 				DA607858289AC4930002A524 /* RecentDelegate.swift */,
 				DA607856289AC1AB0002A524 /* SuggestModuleViewDelegateProtocol.swift */,
 			);
@@ -282,6 +287,7 @@
 		DA9950DF288056A30037D8E5 /* DataBase */ = {
 			isa = PBXGroup;
 			children = (
+				DA60785A289ADEA20002A524 /* 202206.json */,
 				DA60783A289811200002A524 /* 202207.json */,
 				DA6078342896B8000002A524 /* suisei_song1.json */,
 				DA6078322896B3EB0002A524 /* suisei_song2.json */,
@@ -440,6 +446,7 @@
 				DA607829288D1D5E0002A524 /* Home.storyboard in Resources */,
 				DA60785428995A2E0002A524 /* SuggestModuleCollectionViewCell.xib in Resources */,
 				DA6078332896B3EB0002A524 /* suisei_song2.json in Resources */,
+				DA60785B289ADEA20002A524 /* 202206.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,6 +471,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA60785D289ADEF40002A524 /* Favorite202206Delegate.swift in Sources */,
 				DA60784E28994A9E0002A524 /* SuggestModuleView.swift in Sources */,
 				DA60781B288B8D020002A524 /* PlayViewController+UITableViewDataSource.swift in Sources */,
 				DA607819288872040002A524 /* Songs.swift in Sources */,

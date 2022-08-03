@@ -10,6 +10,7 @@ import UIKit
 // 検索のためにcellをnibファイルにして共通化する
 class SearchViewController: UIViewController {
     @IBOutlet weak var songTableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,6 +18,7 @@ class SearchViewController: UIViewController {
         songTableView.dataSource = self
         songTableView.delegate = self
         songTableView.register(UINib(nibName: "SongTableViewCell", bundle: nil), forCellReuseIdentifier: "SongTableViewCell")
+        searchBar.delegate = self
     }
 }
 
@@ -48,5 +50,16 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-// searchBarの検索機能を追加したい
+extension SearchViewController: UISearchBarDelegate {
+    // TODO: 確定後以外のタイミングでも発火できるようにしておきたい
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        // キーボードを閉じる
+        view.endEditing(true)
+        // 入力された値がnilでなければif文のブロック内の処理を実行
+        if let searchText = searchBar.text {
+            Songs.shared.filter(by: searchText)
+            songTableView.reloadData()
+        }
+    }
+}
 
