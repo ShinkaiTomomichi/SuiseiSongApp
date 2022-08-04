@@ -23,14 +23,13 @@ final class SelectedStatus {
             YTPlayerViewWrapper.shared.shouldReload = oldValue?.videoid != song?.videoid
             // 動画を再生する
             // 画面に表示されている場合はreloadする
-            if YTPlayerViewWrapper.shared.playerView != nil {
+            if YTPlayerViewWrapper.shared.playerView != nil, oldValue?.id != song?.id {
                 YTPlayerViewWrapper.shared.start()
             }
         }
     }
     
     // 選択された曲が変化した場合に呼ばれる
-    
     // songIDで選択する
     func setSelectedID(id: Int, filterCompletion: (() -> Void)? = nil) {
         self.song = Songs.shared.get(byID: id)
@@ -40,11 +39,10 @@ final class SelectedStatus {
             filterCompletion()
         }
         
-        // ここのID取得がどうなっているか
-        
         self.filteredID = Songs.shared.getFilteredID(bySong: self.song!)
     }
     
+    // songで選択する
     func setSelectedSong(song: Song, filterCompletion: (() -> Void)? = nil) {
         setSelectedID(id: song.id, filterCompletion: filterCompletion)
     }

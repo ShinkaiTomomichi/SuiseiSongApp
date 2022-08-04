@@ -78,8 +78,17 @@ final class Songs {
     // そのまま実行するとfiltererIDの管理が面倒になる
     // 仕様自体を考え直した方が良さそう
     func shuffle() {
-        let filteredSongsTmp = self.filteredSongs.shuffled()
+        var filteredSongsTmp = self.filteredSongs.shuffled()
+        if let selectedSong = SelectedStatus.shared.song {
+            filteredSongsTmp.removeAll(where: {$0.id == selectedSong.id})
+            filteredSongsTmp.insert(selectedSong, at: 0)
+        } else {
+            Logger.log(message: "selectedSongが存在しません")
+        }
         self.filteredSongs = filteredSongsTmp
+        if let selectedSong = SelectedStatus.shared.song {
+            SelectedStatus.shared.setSelectedSong(song: selectedSong)
+        }
     }
     
     func setFilteredSongs(songs: [Song]) {

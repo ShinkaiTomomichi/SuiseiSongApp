@@ -20,14 +20,14 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wgw-1q-NKg" customClass="YTPlayerView">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="180"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="180" id="ce5-zz-7Ux"/>
+                                            <constraint firstAttribute="height" constant="200" id="ce5-zz-7Ux"/>
                                         </constraints>
                                     </view>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="lwX-IK-UxB">
-                                        <rect key="frame" x="-2" y="180" width="418" height="171"/>
+                                        <rect key="frame" x="-2" y="200" width="418" height="151"/>
                                         <connections>
                                             <action selector="changeSliderValue:" destination="BYZ-38-t0r" eventType="valueChanged" id="tjK-ZE-rOK"/>
                                             <action selector="touchDownSlider:" destination="BYZ-38-t0r" eventType="touchDown" id="Oel-Xa-RRi"/>
