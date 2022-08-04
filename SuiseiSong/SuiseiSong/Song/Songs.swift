@@ -17,8 +17,10 @@ final class Songs {
     private(set) var filteredSongs: [Song] = [] {
         didSet {
             NotificationCenter.default.post(name: .didChangedFilteredSong, object: nil)
+            self.filteredSongsForSearch = filteredSongs
         }
     }
+    var filteredSongsForSearch: [Song] = []
     
     // 重くないのであればジャンルごとのリストは最初から保持しておく
     var favorite202207Songs: [Song] = []
@@ -35,19 +37,12 @@ final class Songs {
     }
     
     func get(byID: Int) -> Song {
-        for song in allSongs {
-            if song.id == byID {
-                return song
-            }
-        }
-        for song in favorite202207Songs {
-            if song.id == byID {
-                return song
-            }
-        }
-        for song in favorite202206Songs {
-            if song.id == byID {
-                return song
+        let songsList = [allSongs, favorite202207Songs, favorite202206Songs]
+        for songs in songsList {
+            for song in songs {
+                if song.id == byID {
+                    return song
+                }
             }
         }
         fatalError()
@@ -69,43 +64,15 @@ final class Songs {
         guard !by.isEmpty else {
             // TODO: 全動画ではなく初期値が出るように変えたい
             // filtered2の中身を変えるなど段階を分ける
-            self.filteredSongs = allSongs
+            self.filteredSongsForSearch = filteredSongs
             return
         }
-        for song in allSongs {
+        for song in filteredSongs {
             if song.songtitle.contains(by) || song.artist.contains(by) {
                 filteredSongsTmp.append(song)
             }
         }
-        self.filteredSongs = filteredSongsTmp
-    }
-
-    func filter(bySongTitle: String!) {
-        var filteredSongsTmp: [Song] = []
-        guard !bySongTitle.isEmpty else {
-            self.filteredSongs = allSongs
-            return
-        }
-        for song in allSongs {
-            if song.songtitle.contains(bySongTitle) {
-                filteredSongsTmp.append(song)
-            }
-        }
-        self.filteredSongs = filteredSongsTmp
-    }
-    
-    func filter(byArtist: String!) {
-        guard !byArtist.isEmpty else {
-            self.filteredSongs = allSongs
-            return
-        }
-        var filteredSongsTmp: [Song] = []
-        for song in allSongs {
-            if song.artist.contains(byArtist) {
-                filteredSongsTmp.append(song)
-            }
-        }
-        self.filteredSongs = filteredSongsTmp
+        self.filteredSongsForSearch = filteredSongsTmp
     }
     
     // そのまま実行するとfiltererIDの管理が面倒になる

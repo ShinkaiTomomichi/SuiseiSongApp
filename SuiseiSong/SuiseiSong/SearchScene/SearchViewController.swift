@@ -24,7 +24,7 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Songs.shared.filteredSongs.count
+        return Songs.shared.filteredSongsForSearch.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -33,7 +33,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
 
         // セルに対応する歌をセット
         let index = indexPath.row
-        cell.song = Songs.shared.filteredSongs[index]
+        cell.song = Songs.shared.filteredSongsForSearch[index]
         
         return cell
     }
