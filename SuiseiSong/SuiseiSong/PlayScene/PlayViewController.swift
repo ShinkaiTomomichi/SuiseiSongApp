@@ -31,6 +31,7 @@ class PlayViewController: UIViewController {
     
     // NavigationBarに追加するボタン
     var shareBarButtonItem: UIBarButtonItem!
+    var debugBarButtonItem: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,11 +59,11 @@ class PlayViewController: UIViewController {
         setPlayingSongLabel()
                 
         shareBarButtonItem = UIBarButtonItem(image: UIImage.initWithDarkmode(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(shareBarButtonTapped(_:)))
+        debugBarButtonItem = UIBarButtonItem(image: UIImage.initWithDarkmode(systemName: "hammer.fill"), style: .plain, target: self, action: #selector(debugBarButtonTapped(_:)))
         
-        self.navigationItem.rightBarButtonItems = [shareBarButtonItem]
-        
-        playerView.frame = CGRect(x: 0 , y: 0, width: self.view.frame.width, height: self.view.frame.height * 0.7)
-        
+        // debug用のボタンと併せて表示
+        self.navigationItem.rightBarButtonItems = [debugBarButtonItem, shareBarButtonItem]
+                
         // Notificationをset
         NotificationCenter.default.addObserver(self, selector: #selector(setPlayingSongLabel), name: .didChangedSelectedSong, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(setPlayAndStopButton), name: .didChangedPlaying, object: nil)
@@ -72,7 +73,7 @@ class PlayViewController: UIViewController {
     }
     
     // 再度復帰した際に画面が表示されなくなる不具合がある
-    // 導線次第では修正したい
+    // TODO: そもそもこれ必要なのか検討
     override func viewDidDisappear(_ animated: Bool) {
         SelectedStatus.shared.reset()
     }
@@ -216,4 +217,55 @@ class PlayViewController: UIViewController {
     
     // searchBarも練習用に一度作っておきたいが、正直検索機能そこまで要らん気もする
     // UI的にはtabの方が良さそう
+}
+
+// debug用のボタンなので不要になったら削除する
+extension PlayViewController {
+    func sampleAlert() {
+        let alert = UIAlertController(title: "アノテーション修正",
+                                      message: "正しい開始時刻と終了時刻を以下に記入してください",
+                                      preferredStyle: .alert)
+        var startTime = SelectedStatus.shared.song?.starttime
+        var endTime = SelectedStatus.shared.song?.endtime
+        
+        // textFieldを追加
+        var alertTextField1: UITextField?
+        alert.addTextField(configurationHandler: {(textField) -> Void in
+            alertTextField1 = textField
+            if let startTime = startTime {
+                alertTextField1?.placeholder = String(startTime)
+            }
+        })
+        
+        var alertTextField2: UITextField?
+        alert.addTextField(configurationHandler: {(textField) -> Void in
+            alertTextField2 = textField
+            if let endTime = endTime {
+                alertTextField2?.placeholder = String(endTime)
+            }
+        })
+        // 決定ボタンを追加
+        alert.addAction(UIAlertAction(title: "決定", style: .default, handler: {(action) -> Void in
+            if let text1 = alertTextField1?.text, let text1Int = Int(text1) {
+                startTime = text1Int
+            }
+            if let text2 = alertTextField2?.text, let text2Int = Int(text2) {
+                endTime = text2Int
+            }
+            if let selectedSong = SelectedStatus.shared.song {
+                let id = selectedSong.id
+                UserDefaults.saveModifiedTime(id: id, startTime: startTime!, endTime: endTime!)
+            }
+        }))
+        // キャンセルボタンを追加
+        alert.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler: {_ in
+            UserDefaults.printAll()
+        }))
+        // AlertViewを表示
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func debugBarButtonTapped(_ sender: UIBarButtonItem) {
+        sampleAlert()
+    }
 }
