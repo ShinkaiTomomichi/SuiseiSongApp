@@ -31,7 +31,6 @@ class PlayViewController: UIViewController {
     
     // NavigationBarに追加するボタン
     var shareBarButtonItem: UIBarButtonItem!
-    var settingBarButtonItem: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,9 +58,8 @@ class PlayViewController: UIViewController {
         setPlayingSongLabel()
                 
         shareBarButtonItem = UIBarButtonItem(image: UIImage.initWithDarkmode(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(shareBarButtonTapped(_:)))
-        settingBarButtonItem = UIBarButtonItem(image: UIImage.initWithDarkmode(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(settingBarButtonTapped(_:)))
         
-        self.navigationItem.rightBarButtonItems = [settingBarButtonItem, shareBarButtonItem]
+        self.navigationItem.rightBarButtonItems = [shareBarButtonItem]
         
         playerView.frame = CGRect(x: 0 , y: 0, width: self.view.frame.width, height: self.view.frame.height * 0.7)
         
@@ -73,6 +71,8 @@ class PlayViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadRepeatTypeButton), name: .didChangedRepeatType, object: nil)
     }
     
+    // 再度復帰した際に画面が表示されなくなる不具合がある
+    // 導線次第では修正したい
     override func viewDidDisappear(_ animated: Bool) {
         SelectedStatus.shared.reset()
     }
@@ -88,11 +88,6 @@ class PlayViewController: UIViewController {
         shareText += "(サンプル)" // 各配信のハッシュタグを添えられると良さそう、配信者名でいいか？
         let activityVC = UIActivityViewController(activityItems: [shareText], applicationActivities: nil)
         present(activityVC, animated: true, completion: nil)
-    }
-    
-    @objc func settingBarButtonTapped(_ sender: UIBarButtonItem) {
-        Logger.log(message: "設定ボタンを押しましたが処理がまだありません")
-        
     }
     
     // 再生した曲が変化した際にlabelを修正する

@@ -16,6 +16,9 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var favorite202207View: SuggestModuleView!
     @IBOutlet weak var favorite202206View: SuggestModuleView!
     
+    // NavigationBarに追加するボタン
+    var settingBarButtonItem: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,7 +33,20 @@ class HomeViewController: UIViewController {
         favorite202207View.setNavigationController(self.navigationController)
         favorite202206View.setNavigationController(self.navigationController)
 
+        settingBarButtonItem = UIBarButtonItem(image: UIImage.initWithDarkmode(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(settingBarButtonTapped(_:)))
+        
+        self.navigationItem.rightBarButtonItems = [settingBarButtonItem]
+        
         // UXが低いので一旦無効化、TODO: ユーザの直感には反するため、改善策を検討
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
+
+    @objc func settingBarButtonTapped(_ sender: UIBarButtonItem) {
+        let storyboard = UIStoryboard(name: "Setting", bundle: nil)
+        let nextViewController = storyboard.instantiateViewController(withIdentifier: "Setting") as! SettingViewController
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+        
+    }
 }
+
+
