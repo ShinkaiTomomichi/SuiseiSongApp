@@ -77,7 +77,8 @@ class PlayViewController: UIViewController {
         releaseButton.imageView?.contentMode = .scaleAspectFill
         releaseButton.contentHorizontalAlignment = .fill
         releaseButton.contentVerticalAlignment = .fill
-        releaseButton.setImage(UIImage.initWithDarkmode(systemName: "lock.fill"), for: .normal)
+        // 白色に固定
+        releaseButton.setImage(UIImage(systemName: "lock.fill")?.withTintColor(.white, renderingMode: .alwaysOriginal), for: .normal)
         
         // debug用のボタンと併せて表示
         self.navigationItem.rightBarButtonItems = [debugBarButtonItem, lockBarButtonItem, shareBarButtonItem]
