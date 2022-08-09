@@ -31,7 +31,7 @@ class SuggestVideoCollectionViewCell: UICollectionViewCell {
         if let image = song?.thumbnail {
             self.image.image = image
         } else {
-            let urlWithVideoId = "https://i.ytimg.com/vi/\(videoId)/hqdefault.jpg"
+            let urlWithVideoId = "https://i.ytimg.com/vi/\(videoId)/default.jpg"
             let url = URL(string: urlWithVideoId)
             do {
                 let data = try Data(contentsOf: url!)

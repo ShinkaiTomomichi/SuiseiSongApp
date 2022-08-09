@@ -57,6 +57,8 @@
 		DA9950F728852A6F0037D8E5 /* YTPlayerViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9950F628852A6F0037D8E5 /* YTPlayerViewWrapper.swift */; };
 		DA9950F92885874F0037D8E5 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9950F82885874F0037D8E5 /* Logger.swift */; };
 		DAC2392728A29F1800091E1D /* SongForJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC2392628A29F1800091E1D /* SongForJSON.swift */; };
+		DAC2392928A3220600091E1D /* Favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC2392828A3220600091E1D /* Favorites.swift */; };
+		DAC2392B28A3258A00091E1D /* Histories.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC2392A28A3258A00091E1D /* Histories.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +128,8 @@
 		DA9950F628852A6F0037D8E5 /* YTPlayerViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTPlayerViewWrapper.swift; sourceTree = "<group>"; };
 		DA9950F82885874F0037D8E5 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		DAC2392628A29F1800091E1D /* SongForJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongForJSON.swift; sourceTree = "<group>"; };
+		DAC2392828A3220600091E1D /* Favorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorites.swift; sourceTree = "<group>"; };
+		DAC2392A28A3258A00091E1D /* Histories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Histories.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -341,6 +345,8 @@
 			children = (
 				DA607820288C034C0002A524 /* Settings.swift */,
 				DA9950F82885874F0037D8E5 /* Logger.swift */,
+				DAC2392828A3220600091E1D /* Favorites.swift */,
+				DAC2392A28A3258A00091E1D /* Histories.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -508,6 +514,7 @@
 				DA607859289AC4930002A524 /* RecentDelegate.swift in Sources */,
 				DA9950F02880757F0037D8E5 /* SongTableViewCell.swift in Sources */,
 				DA60782F289540080002A524 /* SuggestVideoCollectionViewCell.swift in Sources */,
+				DAC2392928A3220600091E1D /* Favorites.swift in Sources */,
 				DAC2392728A29F1800091E1D /* SongForJSON.swift in Sources */,
 				DA6078132886D5C20002A524 /* Int+.swift in Sources */,
 				DA9950AD287B271F0037D8E5 /* PlayViewController.swift in Sources */,
@@ -515,6 +522,7 @@
 				DA607821288C034C0002A524 /* Settings.swift in Sources */,
 				DA9950A9287B271F0037D8E5 /* AppDelegate.swift in Sources */,
 				DA9950F92885874F0037D8E5 /* Logger.swift in Sources */,
+				DAC2392B28A3258A00091E1D /* Histories.swift in Sources */,
 				DA60782D288D3B190002A524 /* UIImage+.swift in Sources */,
 				DA607866289C31F60002A524 /* UserDefaults+.swift in Sources */,
 				DA60781F288B9C080002A524 /* NSNotification+.swift in Sources */,

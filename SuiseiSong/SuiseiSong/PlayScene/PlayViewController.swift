@@ -300,7 +300,7 @@ extension PlayViewController {
         }))
         // キャンセルボタンを追加
         alert.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler: {_ in
-            UserDefaults.printAll()
+            UserDefaults.printModifiled()
         }))
         // AlertViewを表示
         self.present(alert, animated: true, completion: nil)

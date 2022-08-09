@@ -25,6 +25,7 @@ struct Song {
     var acappella: Bool
     var live3d: Bool
     
+    // TODO: キャッシュの大きさを調査
     var thumbnail: UIImage?
     
     init(songForJSON: SongForJSON) {
