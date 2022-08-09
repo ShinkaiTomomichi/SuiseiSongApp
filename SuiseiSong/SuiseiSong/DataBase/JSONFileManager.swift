@@ -23,15 +23,25 @@ struct JSONFileManager {
 
         /// ③JSONデコード処理
         let decoder = JSONDecoder()
-        var songs: [Song] = []
+        var songsForJSON: [SongForJSON] = []
         do {
-            songs = try decoder.decode([Song].self, from: data)
+            songsForJSON = try decoder.decode([SongForJSON].self, from: data)
         } catch {
             print(error)
             print(error.localizedDescription)
             fatalError("JSON読み込みエラー")
         }
-
+        
+        let songs = translateSongs(songsForJSON)
+        
+        return songs
+    }
+    
+    private static func translateSongs(_ songsForJSON: [SongForJSON]) -> [Song] {
+        var songs: [Song] = []
+        for songForJSON in songsForJSON {
+            songs.append(Song.init(songForJSON: songForJSON))
+        }
         return songs
     }
 }

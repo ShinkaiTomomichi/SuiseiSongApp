@@ -6,20 +6,10 @@
 //
 
 import Foundation
+import UIKit
 
-//struct Song: Codable {
-//    var videoid: String
-//    var songtitle: String
-//    var artist: String
-//    var starttime: Int
-//    var endtime: Int
-//
-//    func calcDuration() -> Int{
-//        return endtime - starttime
-//    }
-//}
-
-struct Song: Codable {
+// キャッシュを入れるためCodableではないstructを新たに作成
+struct Song {
     var id: Int
     var members: String
     var videoid: String
@@ -35,7 +25,23 @@ struct Song: Codable {
     var acappella: Bool
     var live3d: Bool
     
-    func calcDuration() -> Int{
-        return endtime - starttime
+    var thumbnail: UIImage?
+    
+    init(songForJSON: SongForJSON) {
+        self.id = songForJSON.id
+        self.members = songForJSON.members
+        self.videoid = songForJSON.videoid
+        self.songtitle = songForJSON.songtitle
+        self.starttime = songForJSON.starttime
+        self.endtime = songForJSON.endtime
+        self.artist = songForJSON.artist
+        self.artisturl = songForJSON.artisturl
+        self.collaboration = songForJSON.collaboration
+        self.anime = songForJSON.anime
+        self.rock = songForJSON.rock
+        self.vocaloid = songForJSON.vocaloid
+        self.acappella = songForJSON.acappella
+        self.live3d = songForJSON.live3d
+        self.thumbnail = nil
     }
 }

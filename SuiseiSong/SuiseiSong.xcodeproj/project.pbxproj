@@ -56,6 +56,7 @@
 		DA9950F428852A0D0037D8E5 /* PlayViewController+YTPlayerViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9950F328852A0D0037D8E5 /* PlayViewController+YTPlayerViewDelegate.swift */; };
 		DA9950F728852A6F0037D8E5 /* YTPlayerViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9950F628852A6F0037D8E5 /* YTPlayerViewWrapper.swift */; };
 		DA9950F92885874F0037D8E5 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9950F82885874F0037D8E5 /* Logger.swift */; };
+		DAC2392728A29F1800091E1D /* SongForJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC2392628A29F1800091E1D /* SongForJSON.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +125,7 @@
 		DA9950F328852A0D0037D8E5 /* PlayViewController+YTPlayerViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayViewController+YTPlayerViewDelegate.swift"; sourceTree = "<group>"; };
 		DA9950F628852A6F0037D8E5 /* YTPlayerViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTPlayerViewWrapper.swift; sourceTree = "<group>"; };
 		DA9950F82885874F0037D8E5 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		DAC2392628A29F1800091E1D /* SongForJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongForJSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -294,6 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				DA9950D9287F83F70037D8E5 /* Song.swift */,
+				DAC2392628A29F1800091E1D /* SongForJSON.swift */,
 				DA607818288872040002A524 /* Songs.swift */,
 				DA60781C288B948D0002A524 /* SelectedStatus.swift */,
 			);
@@ -505,6 +508,7 @@
 				DA607859289AC4930002A524 /* RecentDelegate.swift in Sources */,
 				DA9950F02880757F0037D8E5 /* SongTableViewCell.swift in Sources */,
 				DA60782F289540080002A524 /* SuggestVideoCollectionViewCell.swift in Sources */,
+				DAC2392728A29F1800091E1D /* SongForJSON.swift in Sources */,
 				DA6078132886D5C20002A524 /* Int+.swift in Sources */,
 				DA9950AD287B271F0037D8E5 /* PlayViewController.swift in Sources */,
 				DA9950F728852A6F0037D8E5 /* YTPlayerViewWrapper.swift in Sources */,

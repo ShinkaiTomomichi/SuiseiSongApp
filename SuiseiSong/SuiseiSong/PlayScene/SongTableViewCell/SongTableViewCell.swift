@@ -42,14 +42,20 @@ class SongTableViewCell: UITableViewCell {
     // Youtubeのサムネイル画像を取得
     // 現状cellの描画以外に利用しないためcell直下に用意
     private func getImageByVideoId(videoId: String) {
-        let urlWithVideoId = "https://i.ytimg.com/vi/\(videoId)/hqdefault.jpg"
-        let url = URL(string: urlWithVideoId)
-        do {
-            let data = try Data(contentsOf: url!)
-            self.icon.image = UIImage(data: data)!
-        } catch let err {
-            print("Error : \(err.localizedDescription)")
-            self.icon.image = UIImage(systemName: "xmark.circle.fill")!
+        if let image = song?.thumbnail {
+            self.icon.image = image
+        } else {
+            let urlWithVideoId = "https://i.ytimg.com/vi/\(videoId)/hqdefault.jpg"
+            let url = URL(string: urlWithVideoId)
+            do {
+                let data = try Data(contentsOf: url!)
+                let image = UIImage(data: data)!
+                self.icon.image = image
+                song?.thumbnail = image
+            } catch let err {
+                print("Error : \(err.localizedDescription)")
+                self.icon.image = UIImage(systemName: "xmark.circle.fill")!
+            }
         }
         // 角を丸くする（ここは別処理に分割しても良いかも）
         self.icon.layer.cornerRadius = self.icon.frame.size.width * 0.05

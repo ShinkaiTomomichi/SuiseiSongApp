@@ -28,18 +28,23 @@ class SuggestVideoCollectionViewCell: UICollectionViewCell {
     
     // Youtubeのサムネイル画像を取得
     private func getImageByVideoId(videoId: String) {
-        let urlWithVideoId = "https://i.ytimg.com/vi/\(videoId)/hqdefault.jpg"
-        let url = URL(string: urlWithVideoId)
-        do {
-            let data = try Data(contentsOf: url!)
-            self.image.image = UIImage(data: data)!
-        } catch let err {
-            print("Error : \(err.localizedDescription)")
-            self.image.image = UIImage(systemName: "xmark.circle.fill")!
+        if let image = song?.thumbnail {
+            self.image.image = image
+        } else {
+            let urlWithVideoId = "https://i.ytimg.com/vi/\(videoId)/hqdefault.jpg"
+            let url = URL(string: urlWithVideoId)
+            do {
+                let data = try Data(contentsOf: url!)
+                let image = UIImage(data: data)!
+                self.image.image = image
+                song?.thumbnail = image
+            } catch let err {
+                print("Error : \(err.localizedDescription)")
+                self.image.image = UIImage(systemName: "xmark.circle.fill")!
+            }
         }
-        // 角を丸くする処理が思った感じに動いていない...
-        // こちらはそのうち改善したい
-         self.image.layer.cornerRadius = self.image.frame.size.width * 0.05
-         self.image.clipsToBounds = true
+        // 角を丸くする（ここは別処理に分割しても良いかも）
+        self.image.layer.cornerRadius = self.image.frame.size.width * 0.05
+        self.image.clipsToBounds = true
     }
 }
