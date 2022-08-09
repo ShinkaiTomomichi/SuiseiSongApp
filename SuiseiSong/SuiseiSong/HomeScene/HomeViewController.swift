@@ -26,7 +26,7 @@ class HomeViewController: UIViewController {
         
         // NavigationBarのタイトル
         // ここは画像などに差し替えた方が良さそう
-        self.title = "すいちゃんのうた"
+        // self.title = "すいちゃんのうた"
                 
         // 煩雑なので効率化したい
         recentView.setNavigationController(self.navigationController)
@@ -37,7 +37,8 @@ class HomeViewController: UIViewController {
         
         self.navigationItem.rightBarButtonItems = [settingBarButtonItem]
         
-        // UXが低いので一旦無効化、TODO: ユーザの直感には反するため、改善策を検討
+        // UXが低いので一旦無効化
+        // TODO: ユーザの直感には反するため改善策を検討
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
 
@@ -45,7 +46,6 @@ class HomeViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Setting", bundle: nil)
         let nextViewController = storyboard.instantiateViewController(withIdentifier: "Setting") as! SettingViewController
         self.navigationController?.pushViewController(nextViewController, animated: true)
-        
     }
 }
 

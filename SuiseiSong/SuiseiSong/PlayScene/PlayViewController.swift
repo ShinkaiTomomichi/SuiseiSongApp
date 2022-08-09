@@ -29,9 +29,14 @@ class PlayViewController: UIViewController {
     @IBOutlet weak var playingSongLabel: UILabel!
     @IBOutlet weak var playingTimeLabel: UILabel!
     
+    @IBOutlet weak var lockView: UIView!
+    @IBOutlet weak var releaseButton: UIButton!
+    @IBOutlet weak var releaseLabel: UILabel!
+    
     // NavigationBarに追加するボタン
     var shareBarButtonItem: UIBarButtonItem!
     var debugBarButtonItem: UIBarButtonItem!
+    var lockBarButtonItem: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,9 +65,21 @@ class PlayViewController: UIViewController {
                 
         shareBarButtonItem = UIBarButtonItem(image: UIImage.initWithDarkmode(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(shareBarButtonTapped(_:)))
         debugBarButtonItem = UIBarButtonItem(image: UIImage.initWithDarkmode(systemName: "hammer.fill"), style: .plain, target: self, action: #selector(debugBarButtonTapped(_:)))
+        lockBarButtonItem = UIBarButtonItem(image: UIImage.initWithDarkmode(systemName: "lock"), style: .plain, target: self, action: #selector(lockBarButtonTapped(_:)))
+        
+        lockView(true)
+        // 長押しアクションを登録する
+        // TODO: 長押しよりも解除しにくいアクションに変更する
+        let recognizer = UILongPressGestureRecognizer(target: self, action: #selector(onLongPress))
+        releaseButton.addGestureRecognizer(recognizer)
+        // ボタンの大きさ変更
+        releaseButton.imageView?.contentMode = .scaleAspectFill
+        releaseButton.contentHorizontalAlignment = .fill
+        releaseButton.contentVerticalAlignment = .fill
+        releaseButton.setImage(UIImage.initWithDarkmode(systemName: "lock.fill"), for: .normal)
         
         // debug用のボタンと併せて表示
-        self.navigationItem.rightBarButtonItems = [debugBarButtonItem, shareBarButtonItem]
+        self.navigationItem.rightBarButtonItems = [debugBarButtonItem, lockBarButtonItem, shareBarButtonItem]
                 
         // Notificationをset
         NotificationCenter.default.addObserver(self, selector: #selector(setPlayingSongLabel), name: .didChangedSelectedSong, object: nil)
@@ -204,6 +221,27 @@ class PlayViewController: UIViewController {
             return "\(elapsedTimeStr)/\(allTimeStr)"
         }
         return "ERROR"
+    }
+    
+    @objc func lockBarButtonTapped(_ sender: UIBarButtonItem) {
+        lockView(false)
+    }
+        
+    @objc func onLongPress() {
+        lockView(true)
+    }
+    
+    private func lockView(_ state: Bool) {
+        // lockViewの表示を切り替える
+        lockView.isHidden = state
+        releaseButton.isHidden = state
+        releaseLabel.isHidden = state
+        
+        // BarButtonを切り替える
+        debugBarButtonItem.isEnabled = state
+        lockBarButtonItem.isEnabled = state
+        shareBarButtonItem.isEnabled = state
+        navigationItem.hidesBackButton = !state
     }
     
     // Youtubeの高さって可変にするのどうするんだろう

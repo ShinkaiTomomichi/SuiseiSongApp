@@ -159,19 +159,51 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wmh-cC-WWd" userLabel="Lock View">
+                                <rect key="frame" x="0.0" y="244" width="414" height="618"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xFd-D2-spl" userLabel="Release">
+                                <rect key="frame" x="152" y="631.5" width="110" height="130.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lhC-Js-1aZ" userLabel="Release Button">
+                                        <rect key="frame" x="0.0" y="0.0" width="110" height="110"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="110" id="D3j-La-FLh"/>
+                                            <constraint firstAttribute="height" constant="110" id="iVH-F6-eng"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="長押しで解除" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9yf-UI-s2H">
+                                        <rect key="frame" x="0.0" y="110" width="110" height="20.5"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="wmh-cC-WWd" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="1Ns-oB-AnI"/>
                             <constraint firstItem="1s3-MR-CQH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="3j2-RA-cd9"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="xFd-D2-spl" secondAttribute="bottom" constant="100" id="4tc-P6-RMu"/>
+                            <constraint firstItem="wmh-cC-WWd" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="200" id="F50-Pg-d5m"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="1s3-MR-CQH" secondAttribute="bottom" id="HGr-0P-DsZ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="wmh-cC-WWd" secondAttribute="bottom" id="MLE-12-nDj"/>
                             <constraint firstItem="1s3-MR-CQH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Nwz-tr-vqo"/>
+                            <constraint firstItem="wmh-cC-WWd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="PRG-2R-Wzt"/>
+                            <constraint firstItem="xFd-D2-spl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="h3k-4p-KFq"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1s3-MR-CQH" secondAttribute="trailing" id="kgn-Oj-OMS"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="backwordButton" destination="mDm-Di-lO4" id="F7N-gU-aeg"/>
                         <outlet property="forwardButton" destination="dg0-va-F89" id="rg8-6d-8Xg"/>
+                        <outlet property="lockView" destination="wmh-cC-WWd" id="zs4-tE-Y3h"/>
                         <outlet property="nextSongButton" destination="VgM-jr-QFz" id="GAH-pL-aD9"/>
                         <outlet property="playAndStopButton" destination="Wya-US-erv" id="jBg-es-qa8"/>
                         <outlet property="playerView" destination="wgw-1q-NKg" id="LGO-nt-jCh"/>
@@ -179,6 +211,8 @@
                         <outlet property="playingSongLabel" destination="pO7-cU-VR4" id="fdH-Xr-bgg"/>
                         <outlet property="playingTimeLabel" destination="BYX-rz-wjx" id="Rav-LR-YGo"/>
                         <outlet property="prevSongButton" destination="ypl-gc-Lej" id="Ab8-WX-1g8"/>
+                        <outlet property="releaseButton" destination="lhC-Js-1aZ" id="1md-ae-n9e"/>
+                        <outlet property="releaseLabel" destination="9yf-UI-s2H" id="sV4-8K-Nyo"/>
                         <outlet property="repeatButton" destination="4v7-xe-z8h" id="KhX-bn-eUX"/>
                         <outlet property="shuffleButton" destination="8Z7-ji-dGi" id="Jlt-jj-0b6"/>
                         <outlet property="songTableView" destination="fDP-Pi-jZe" id="lwY-OZ-zM9"/>
@@ -186,7 +220,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-419" y="-62"/>
+            <point key="canvasLocation" x="-420.28985507246381" y="-62.276785714285708"/>
         </scene>
     </scenes>
     <resources>
