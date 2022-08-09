@@ -30,6 +30,7 @@ class PlayViewController: UIViewController {
     @IBOutlet weak var playingTimeLabel: UILabel!
     
     @IBOutlet weak var lockView: UIView!
+    @IBOutlet weak var hiddenView: UIView!
     @IBOutlet weak var releaseButton: UIButton!
     @IBOutlet weak var releaseLabel: UILabel!
     
@@ -234,6 +235,7 @@ class PlayViewController: UIViewController {
     private func lockView(_ state: Bool) {
         // lockViewの表示を切り替える
         lockView.isHidden = state
+        hiddenView.isHidden = state
         releaseButton.isHidden = state
         releaseLabel.isHidden = state
         

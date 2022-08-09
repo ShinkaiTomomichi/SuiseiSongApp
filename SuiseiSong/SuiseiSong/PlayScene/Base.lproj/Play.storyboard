@@ -160,8 +160,19 @@
                                 </subviews>
                             </stackView>
                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wmh-cC-WWd" userLabel="Lock View">
-                                <rect key="frame" x="0.0" y="244" width="414" height="618"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d9z-tp-Rb8" userLabel="Hidden View">
+                                        <rect key="frame" x="0.0" y="200" width="414" height="618"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="d9z-tp-Rb8" secondAttribute="bottom" id="NZ8-BU-AdR"/>
+                                    <constraint firstItem="d9z-tp-Rb8" firstAttribute="leading" secondItem="wmh-cC-WWd" secondAttribute="leading" id="Z1y-ZK-6kW"/>
+                                    <constraint firstItem="d9z-tp-Rb8" firstAttribute="top" secondItem="wmh-cC-WWd" secondAttribute="top" constant="200" id="bJC-xu-cE0"/>
+                                    <constraint firstAttribute="trailing" secondItem="d9z-tp-Rb8" secondAttribute="trailing" id="fRj-wA-rt8"/>
+                                </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xFd-D2-spl" userLabel="Release">
                                 <rect key="frame" x="152" y="631.5" width="110" height="130.5"/>
@@ -191,7 +202,7 @@
                             <constraint firstItem="wmh-cC-WWd" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="1Ns-oB-AnI"/>
                             <constraint firstItem="1s3-MR-CQH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="3j2-RA-cd9"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="xFd-D2-spl" secondAttribute="bottom" constant="100" id="4tc-P6-RMu"/>
-                            <constraint firstItem="wmh-cC-WWd" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="200" id="F50-Pg-d5m"/>
+                            <constraint firstItem="wmh-cC-WWd" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="F50-Pg-d5m"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="1s3-MR-CQH" secondAttribute="bottom" id="HGr-0P-DsZ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="wmh-cC-WWd" secondAttribute="bottom" id="MLE-12-nDj"/>
                             <constraint firstItem="1s3-MR-CQH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Nwz-tr-vqo"/>
@@ -203,6 +214,7 @@
                     <connections>
                         <outlet property="backwordButton" destination="mDm-Di-lO4" id="F7N-gU-aeg"/>
                         <outlet property="forwardButton" destination="dg0-va-F89" id="rg8-6d-8Xg"/>
+                        <outlet property="hiddenView" destination="d9z-tp-Rb8" id="cbq-dV-VvD"/>
                         <outlet property="lockView" destination="wmh-cC-WWd" id="zs4-tE-Y3h"/>
                         <outlet property="nextSongButton" destination="VgM-jr-QFz" id="GAH-pL-aD9"/>
                         <outlet property="playAndStopButton" destination="Wya-US-erv" id="jBg-es-qa8"/>
