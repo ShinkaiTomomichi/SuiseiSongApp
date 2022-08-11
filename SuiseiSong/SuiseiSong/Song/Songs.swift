@@ -28,6 +28,8 @@ final class Songs {
     var collabSongs: [Song] = []
     var Live3DSongs: [Song] = []
     var originalSongs: [Song] = []
+    var favoriteSongs: [Song] = []
+    var HistorySongs: [Song] = []
     
     func setup() {
         self.allSongs = JSONFileManager.getSuiseiSongs(forResource: "suisei_song2")
@@ -97,5 +99,17 @@ final class Songs {
     
     func reset() {
         self.filteredSongs = self.allSongs
+    }
+    
+    func setupCollabSongs() {
+        Logger.log(message: "未実装")
+    }
+    
+    func setupFavoriteSongs() {
+        Logger.log(message: "未実装")
+    }
+    
+    func updateFavoriteSongs() {
+        Logger.log(message: "未実装")
     }
 }

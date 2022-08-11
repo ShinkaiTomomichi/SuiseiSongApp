@@ -10,6 +10,7 @@ import UIKit
 
 // キャッシュを入れるためCodableではないstructを新たに作成
 struct Song {
+    // JSONから取得する情報
     var id: Int
     var members: String
     var videoid: String
@@ -25,8 +26,10 @@ struct Song {
     var acappella: Bool
     var live3d: Bool
     
-    // TODO: キャッシュの大きさを調査
-    var thumbnail: UIImage?
+    // アプリの中で付与する情報
+    var thumbnail: UIImage? // TODO: キャッシュの大きさを調査
+    var favorite: Bool
+    var debugCheck: Bool // タイムスタンプが正しい場合にはTrueを返す（UD保存か？）
     
     init(songForJSON: SongForJSON) {
         self.id = songForJSON.id
@@ -44,5 +47,7 @@ struct Song {
         self.acappella = songForJSON.acappella
         self.live3d = songForJSON.live3d
         self.thumbnail = nil
+        self.favorite = false
+        self.debugCheck = false
     }
 }

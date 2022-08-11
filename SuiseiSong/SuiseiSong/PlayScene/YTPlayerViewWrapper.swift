@@ -21,8 +21,8 @@ final class YTPlayerViewWrapper {
         }
     }
     
-    // autoplayが反応しない...Delegateの方で実装するしかないか?
-    // 基本的に制御が増えると面倒なので一旦制御は外しておく
+    // TODO: ここで履歴情報を追加する
+    // 履歴情報は別途で動画譲歩も必要なので面倒かも
     func start() {
         if let selectedSong = SelectedStatus.shared.song {
             // 選択されていない時の処理を明確にする

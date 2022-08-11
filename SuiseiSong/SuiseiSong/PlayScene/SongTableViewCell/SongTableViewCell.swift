@@ -39,6 +39,9 @@ class SongTableViewCell: UITableViewCell {
         // self.favorite.setImage(UIImage(systemName: "star.fill"), for: .normal)
     }
     
+    @IBAction func tapFavoriteButton(_ sender: Any) {
+        Logger.log(message: "お気に入りボタンをタップ")
+    }
     // Youtubeのサムネイル画像を取得
     // 現状cellの描画以外に利用しないためcell直下に用意
     private func getImageByVideoId(videoId: String) {
