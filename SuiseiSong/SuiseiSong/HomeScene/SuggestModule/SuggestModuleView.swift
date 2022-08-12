@@ -8,10 +8,10 @@
 import UIKit
 
 // @IBDesignable // TODO: バグるため修正
-// レイアウトが異なるためアーティストやジャンル用のモジュールは別で用意する TODO: 共通化の検討
 class SuggestModuleView: UIView {
     
     var view: UIView!
+    // TODO: 番号じゃなくてIDで管理したい
     let tagAndSuggestModuleViewTypeDict: Dictionary<Int, SuggestModuleViewType> = [
         0: .recent,
         1: .favorite202207,
@@ -44,6 +44,7 @@ class SuggestModuleView: UIView {
     
     func setupXib() {
         let nib = UINib(nibName: "SuggestModule", bundle: nil)
+        // xibのCustomClassではなくOwnerFileに設定する
         view = nib.instantiate(withOwner: self, options: nil).first as? UIView
         view.frame = bounds
         addSubview(view)

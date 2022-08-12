@@ -37,9 +37,6 @@ class SuggestModuleCollectionViewCell: UICollectionViewCell {
         } catch let err {
             print("Error : \(err.localizedDescription)")
             self.icon.image = UIImage(systemName: "xmark.circle.fill")!
-        }
-        
-         self.icon.layer.cornerRadius = self.icon.frame.size.width * 0.05
-         self.icon.clipsToBounds = true
+        }        
     }
 }

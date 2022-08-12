@@ -15,7 +15,6 @@ final class Histories {
     }() ?? []
     private init() {}
     
-    
     func addHistory(songId: Int) {
         // 同じ動画を連続で履歴に追加しないようにする
         // ただし挙動のバグっぽいものもあるので後に直す

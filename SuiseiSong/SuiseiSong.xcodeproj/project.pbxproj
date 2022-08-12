@@ -63,6 +63,8 @@
 		DAC2392F28A4929300091E1D /* RockDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC2392E28A4929300091E1D /* RockDelegate.swift */; };
 		DAC2393128A492A000091E1D /* Live3DDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC2393028A492A000091E1D /* Live3DDelegate.swift */; };
 		DAC2393328A5CEF500091E1D /* ImageCaches.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC2393228A5CEF500091E1D /* ImageCaches.swift */; };
+		DAC2393628A6F98600091E1D /* PlayListModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC2393528A6F98600091E1D /* PlayListModule.swift */; };
+		DAC2393828A6F9CB00091E1D /* PlayListModule.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAC2393728A6F9CB00091E1D /* PlayListModule.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +140,8 @@
 		DAC2392E28A4929300091E1D /* RockDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RockDelegate.swift; sourceTree = "<group>"; };
 		DAC2393028A492A000091E1D /* Live3DDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Live3DDelegate.swift; sourceTree = "<group>"; };
 		DAC2393228A5CEF500091E1D /* ImageCaches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCaches.swift; sourceTree = "<group>"; };
+		DAC2393528A6F98600091E1D /* PlayListModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayListModule.swift; sourceTree = "<group>"; };
+		DAC2393728A6F9CB00091E1D /* PlayListModule.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayListModule.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +184,7 @@
 		DA607822288C09430002A524 /* HomeScene */ = {
 			isa = PBXGroup;
 			children = (
+				DAC2393428A6853600091E1D /* PlayListModule */,
 				DA6078412898A2AD0002A524 /* SuggestModule */,
 				DA607826288D1D480002A524 /* HomeViewController.swift */,
 				DA60782E289540080002A524 /* SuggestVideoCollectionViewCell.swift */,
@@ -355,12 +360,21 @@
 		DA9950F528852A3D0037D8E5 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				DA607820288C034C0002A524 /* Settings.swift */,
 				DA9950F82885874F0037D8E5 /* Logger.swift */,
+				DA607820288C034C0002A524 /* Settings.swift */,
 				DAC2392828A3220600091E1D /* Favorites.swift */,
 				DAC2392A28A3258A00091E1D /* Histories.swift */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		DAC2393428A6853600091E1D /* PlayListModule */ = {
+			isa = PBXGroup;
+			children = (
+				DAC2393528A6F98600091E1D /* PlayListModule.swift */,
+				DAC2393728A6F9CB00091E1D /* PlayListModule.xib */,
+			);
+			path = PlayListModule;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -484,6 +498,7 @@
 				DA607829288D1D5E0002A524 /* Home.storyboard in Resources */,
 				DA60785428995A2E0002A524 /* SuggestModuleCollectionViewCell.xib in Resources */,
 				DA6078332896B3EB0002A524 /* suisei_song2.json in Resources */,
+				DAC2393828A6F9CB00091E1D /* PlayListModule.xib in Resources */,
 				DA60785B289ADEA20002A524 /* 202206.json in Resources */,
 				DA60785F289C214E0002A524 /* Setting.storyboard in Resources */,
 			);
@@ -535,6 +550,7 @@
 				DA9950F728852A6F0037D8E5 /* YTPlayerViewWrapper.swift in Sources */,
 				DA607821288C034C0002A524 /* Settings.swift in Sources */,
 				DAC2392F28A4929300091E1D /* RockDelegate.swift in Sources */,
+				DAC2393628A6F98600091E1D /* PlayListModule.swift in Sources */,
 				DA9950A9287B271F0037D8E5 /* AppDelegate.swift in Sources */,
 				DA9950F92885874F0037D8E5 /* Logger.swift in Sources */,
 				DAC2392B28A3258A00091E1D /* Histories.swift in Sources */,
