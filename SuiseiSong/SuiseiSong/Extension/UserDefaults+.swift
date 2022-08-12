@@ -42,6 +42,10 @@ extension UserDefaults {
         return history.compactMap { $0 as? Int }
     }
     
+    static func removeHistory() {
+        UserDefaults.standard.removeObject(forKey: keyHistory())
+    }
+    
     // お気に入りの保存
     static func keyFavorite() -> String {
         return "Favorite"
@@ -57,6 +61,10 @@ extension UserDefaults {
             return nil
         }
         return Set(favorite.compactMap { $0 as? Int })
+    }
+    
+    static func removeFavorite() {
+        UserDefaults.standard.removeObject(forKey: keyFavorite())
     }
     
     static func removeAll() {

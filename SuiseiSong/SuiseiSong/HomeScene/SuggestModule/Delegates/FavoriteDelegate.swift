@@ -1,21 +1,19 @@
 //
-//  RockDelegate.swift
+//  FavoriteDelegate.swift
 //  SuiseiSong
 //
-//  Created by shinkaitomomichi on 2022/08/11.
+//  Created by shinkaitomomichi on 2022/08/13.
 //
 
 import UIKit
 
-// これDelegateファイルに分けるの面倒だな
-// データソースさえ引数に渡せば共通化できる気がする
-class RockDelegate: NSObject, SuggestModuleViewDelegateProtocol {
+class FavoriteDelegate: NSObject, SuggestModuleViewDelegateProtocol {
     var navigationController: UINavigationController?
     var filterCompletion: (() -> Void)?
     
     // セルの数
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Songs.shared.rockSongs.count
+        return Songs.shared.favoriteSongs.count
     }
     
     // セルの中身
@@ -24,7 +22,7 @@ class RockDelegate: NSObject, SuggestModuleViewDelegateProtocol {
         var cell: SuggestModuleCollectionViewCell
         let index = indexPath.row
         cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SuggestModuleCollectionViewCell", for: indexPath) as! SuggestModuleCollectionViewCell
-        cell.song = Songs.shared.rockSongs[index]
+        cell.song = Songs.shared.favoriteSongs[index]
         
         return cell
     }

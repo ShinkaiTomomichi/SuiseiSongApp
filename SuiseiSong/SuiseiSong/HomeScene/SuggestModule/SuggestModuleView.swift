@@ -19,6 +19,8 @@ class SuggestModuleView: UIView {
         3: .rock,
         4: .anime,
         5: .live3d,
+        6: .favorite,
+        7: .history,
     ]
     
     // もしかしたらデータ自体を持った方が良いか？
@@ -92,6 +94,18 @@ class SuggestModuleView: UIView {
                 Songs.shared.setFilteredSongs(songs: Songs.shared.getSongs(byFilterType: .live3d))
             }
             self.title.text = "3Dライブ"
+        case .history:
+            delegate = HistoryDelegate()
+            filteredCompletion = {
+                Songs.shared.setFilteredSongs(songs: Songs.shared.getSongs(byFilterType: .history))
+            }
+            self.title.text = "履歴"
+        case .favorite:
+            delegate = FavoriteDelegate()
+            filteredCompletion = {
+                Songs.shared.setFilteredSongs(songs: Songs.shared.getSongs(byFilterType: .favorite))
+            }
+            self.title.text = "お気に入り"
         default:
             fatalError("suggestModuleViewTypeの設定でエラーが発生しました")
         }
@@ -129,4 +143,6 @@ enum SuggestModuleViewType {
     case anime
     case rock
     case live3d
+    case history
+    case favorite
 }

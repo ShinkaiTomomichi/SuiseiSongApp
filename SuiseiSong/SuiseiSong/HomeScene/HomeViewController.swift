@@ -9,8 +9,8 @@ import UIKit
 
 class HomeViewController: UIViewController {
     // 新着、お気に入り、履歴、ライブ、オリジナル曲、コラボ、くらいのジャンル分け
-    // このモジュールは明らかに複製しておく必要がある
-    // 現状テーブルなのでscrollViewにしておきたい
+    // ScrollViewよりもcellを可変にしたTableViewの方が良いか？？？
+    // お気に入りと履歴は読みこむたびに更新してほしい（willAppearで）
     
     @IBOutlet weak var recentView: SuggestModuleView!
     @IBOutlet weak var favorite202207View: SuggestModuleView!
@@ -18,12 +18,23 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var rockView: SuggestModuleView!
     @IBOutlet weak var animeView: SuggestModuleView!
     @IBOutlet weak var live3DView: SuggestModuleView!
+    @IBOutlet weak var historyView: SuggestModuleView!
+    @IBOutlet weak var favoriteView: SuggestModuleView!
     
     // NavigationBarに追加するボタン
     var settingBarButtonItem: UIBarButtonItem!
     
+    override func viewWillAppear(_ animated: Bool) {
+        Songs.shared.resetHeaders()
+        historyView.collectionView.reloadData()
+        favoriteView.collectionView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Debug
+        UserDefaults.removeHistory()
         
         Songs.shared.setup()
         
@@ -38,6 +49,8 @@ class HomeViewController: UIViewController {
         rockView.setNavigationController(self.navigationController)
         animeView.setNavigationController(self.navigationController)
         live3DView.setNavigationController(self.navigationController)
+        historyView.setNavigationController(self.navigationController)
+        favoriteView.setNavigationController(self.navigationController)
 
         settingBarButtonItem = UIBarButtonItem(image: UIImage.initWithDarkmode(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(settingBarButtonTapped(_:)))
         

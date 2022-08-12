@@ -16,6 +16,7 @@ final class Histories {
     private init() {}
     
     func addHistory(songId: Int) {
+        Logger.log(message: historyIds)
         // 同じ動画を連続で履歴に追加しないようにする
         // ただし挙動のバグっぽいものもあるので後に直す
         guard historyIds.last != songId else {
@@ -25,7 +26,7 @@ final class Histories {
         if historyIds.count > maxSize {
             rotateHistory()
         }
-        Logger.log(message: historyIds)
+        UserDefaults.saveHistory()
     }
     
     func rotateHistory() {

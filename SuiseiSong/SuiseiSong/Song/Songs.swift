@@ -33,7 +33,7 @@ final class Songs {
     var vocaloidSongs: [Song] = []
     var originalSongs: [Song] = []
     var favoriteSongs: [Song] = []
-    var HistorySongs: [Song] = []
+    var historySongs: [Song] = []
     
     func setup() {
         self.allSongs = JSONFileManager.getSuiseiSongs(forResource: "suisei_song2")
@@ -138,12 +138,21 @@ final class Songs {
                 if song.vocaloid {
                     tmpSongs.append(song)
                 }
+            case .favorite:
+                if Favorites.shared.favoriteIds.contains(song.id) {
+                    tmpSongs.append(song)
+                }
+            case .history:
+                if Histories.shared.historyIds.contains(song.id) {
+                    tmpSongs.append(song)
+                }
             }
         }
         return tmpSongs
     }
     
     func setHeaders() {
+        // 最新の動画順になるため順序を検討したい
         for song in allSongs {
             if song.collaboration && collabSongs.count < 10 {
                 collabSongs.append(song)
@@ -159,6 +168,25 @@ final class Songs {
             }
             if song.vocaloid && vocaloidSongs.count < 10 {
                 vocaloidSongs.append(song)
+            }
+            if Favorites.shared.favoriteIds.contains(song.id) && favoriteSongs.count < 10 {
+                favoriteSongs.append(song)
+            }
+            if Histories.shared.historyIds.contains(song.id) && historySongs.count < 10 {
+                historySongs.append(song)
+            }
+        }
+    }
+    
+    func resetHeaders() {
+        favoriteSongs.removeAll()
+        historySongs.removeAll()
+        for song in allSongs {
+            if Favorites.shared.favoriteIds.contains(song.id) && favoriteSongs.count < 10 {
+                favoriteSongs.append(song)
+            }
+            if Histories.shared.historyIds.contains(song.id) && historySongs.count < 10 {
+                historySongs.append(song)
             }
         }
     }
@@ -198,4 +226,6 @@ enum FilterType {
     case rock
     case live3d
     case vocaloid
+    case favorite
+    case history
 }
