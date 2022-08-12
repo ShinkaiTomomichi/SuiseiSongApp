@@ -10,17 +10,23 @@ import Foundation
 final class Histories {
     static var shared = Histories()
     let maxSize = 100
-    var historyIds: [String] = {
+    var historyIds: [Int] = {
         UserDefaults.loadHistory()
     }() ?? []
     private init() {}
     
-    func addHistory(videoId: String) {
-        historyIds.append(videoId)
+    
+    func addHistory(songId: Int) {
+        // 同じ動画を連続で履歴に追加しないようにする
+        // ただし挙動のバグっぽいものもあるので後に直す
+        guard historyIds.last != songId else {
+            return
+        }
+        historyIds.append(songId)
         if historyIds.count > maxSize {
             rotateHistory()
         }
-        NotificationCenter.default.post(name: .didChangedHistory, object: nil)
+        Logger.log(message: historyIds)
     }
     
     func rotateHistory() {

@@ -63,6 +63,7 @@ class SuggestModuleView: UIView {
         case .favorite202207:
             delegate = Favorite202207Delegate()
             filteredCompletion = {
+                // 画面に送る時にfilteredにセットする方式にする
                 Songs.shared.setFilteredSongs(songs: Songs.shared.favorite202207Songs)
             }
             self.title.text = "7月のおすすめ"
@@ -75,19 +76,19 @@ class SuggestModuleView: UIView {
         case .rock:
             delegate = RockDelegate()
             filteredCompletion = {
-                Songs.shared.setFilteredSongs(songs: Songs.shared.rockSongs)
+                Songs.shared.setFilteredSongs(songs: Songs.shared.getSongs(byFilterType: .rock))
             }
             self.title.text = "ロック"
         case .anime:
             delegate = AnimeDelegate()
             filteredCompletion = {
-                Songs.shared.setFilteredSongs(songs: Songs.shared.animeSongs)
+                Songs.shared.setFilteredSongs(songs: Songs.shared.getSongs(byFilterType: .anime))
             }
             self.title.text = "アニメ"
         case .live3d:
             delegate = Live3DDelegate()
             filteredCompletion = {
-                Songs.shared.setFilteredSongs(songs: Songs.shared.live3DSongs)
+                Songs.shared.setFilteredSongs(songs: Songs.shared.getSongs(byFilterType: .live3d))
             }
             self.title.text = "3Dライブ"
         default:

@@ -25,6 +25,7 @@ final class Songs {
     // 重くないのであればジャンルごとのリストは最初から保持しておく
     var favorite202207Songs: [Song] = []
     var favorite202206Songs: [Song] = []
+    // header用に10件ほど格納する
     var collabSongs: [Song] = []
     var live3DSongs: [Song] = []
     var animeSongs: [Song] = []
@@ -36,14 +37,16 @@ final class Songs {
     
     func setup() {
         self.allSongs = JSONFileManager.getSuiseiSongs(forResource: "suisei_song2")
+        setFavorites()
         sortAllSongs()
+
+        // お気に入りに入れた動画を復元
         self.favorite202207Songs = JSONFileManager.getSuiseiSongs(forResource: "202207")
         self.favorite202206Songs = JSONFileManager.getSuiseiSongs(forResource: "202206")
-        setupCollabSongs()
-        setupRockSongs()
-        setupAnimeSongs()
-        setupVocaloidSongs()
-        setup3DLiveSongs()
+
+        setHeaders()
+        
+        // allSongsに一元管理しないとお気に入り管理がとても面倒
         self.filteredSongs = self.allSongs
         ImageCaches.shared.setup()
     }
@@ -111,59 +114,73 @@ final class Songs {
         self.filteredSongs = self.allSongs
     }
     
-    func setupCollabSongs() {
-        var filteredSongsTmp: [Song] = []
+    func getSongs(byFilterType: FilterType) -> [Song] {
+        var tmpSongs: [Song] = []
         for song in allSongs {
-            if song.collaboration {
-                filteredSongsTmp.append(song)
+            switch byFilterType {
+            case .collaboration:
+                if song.collaboration {
+                    tmpSongs.append(song)
+                }
+            case .anime:
+                if song.anime {
+                    tmpSongs.append(song)
+                }
+            case .rock:
+                if song.rock {
+                    tmpSongs.append(song)
+                }
+            case .live3d:
+                if song.live3d {
+                    tmpSongs.append(song)
+                }
+            case .vocaloid:
+                if song.vocaloid {
+                    tmpSongs.append(song)
+                }
             }
         }
-        self.collabSongs = filteredSongsTmp
+        return tmpSongs
     }
     
-    func setup3DLiveSongs() {
-        var filteredSongsTmp: [Song] = []
+    func setHeaders() {
         for song in allSongs {
-            if song.live3d {
-                filteredSongsTmp.append(song)
+            if song.collaboration && collabSongs.count < 10 {
+                collabSongs.append(song)
+            }
+            if song.anime && animeSongs.count < 10  {
+                animeSongs.append(song)
+            }
+            if song.rock && rockSongs.count < 10  {
+                rockSongs.append(song)
+            }
+            if song.live3d && live3DSongs.count < 10 {
+                live3DSongs.append(song)
+            }
+            if song.vocaloid && vocaloidSongs.count < 10 {
+                vocaloidSongs.append(song)
             }
         }
-        self.live3DSongs =  filteredSongsTmp
-    }
-    
-    func setupAnimeSongs() {
-        var filteredSongsTmp: [Song] = []
-        for song in allSongs {
-            if song.anime {
-                filteredSongsTmp.append(song)
-            }
-        }
-        self.animeSongs = filteredSongsTmp
-    }
-    
-    // あれボカロがない？
-    func setupVocaloidSongs() {
-        var filteredSongsTmp: [Song] = []
-        for song in allSongs {
-            if song.vocaloid {
-                filteredSongsTmp.append(song)
-            }
-        }
-        self.vocaloidSongs = filteredSongsTmp
-    }
-    
-    func setupRockSongs() {
-        var filteredSongsTmp: [Song] = []
-        for song in allSongs {
-            if song.rock {
-                filteredSongsTmp.append(song)
-            }
-        }
-        self.rockSongs = filteredSongsTmp
     }
     
     func sortAllSongs() {
         allSongs.sort { $0.date-$0.starttime > $1.date-$1.starttime }
+    }
+    
+    func setFavorites() {
+        for (i, song) in allSongs.enumerated() {
+            if Favorites.shared.favoriteIds.contains(song.id) {
+                allSongs[i].favorite = true
+            }
+        }
+    }
+    
+    func setFavorite(songId: Int, favorite: Bool) {
+        for (i, song) in allSongs.enumerated() {
+            if song.id == songId {
+                allSongs[i].favorite = favorite
+            }
+        }
     }
     
     func setupFavoriteSongs() {
@@ -173,4 +190,12 @@ final class Songs {
     func updateFavoriteSongs() {
         Logger.log(message: "未実装")
     }
+}
+
+enum FilterType {
+    case collaboration
+    case anime
+    case rock
+    case live3d
+    case vocaloid
 }

@@ -21,30 +21,51 @@ class SongTableViewCell: UITableViewCell {
                 self.title.text = song.songtitle
                 self.artist.text = song.artist
                 getImageByVideoId(videoId: song.videoid)
+                setFavoriteStar()
             }
         }
     }
         
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         // 曲の選択はNextに進んだ場合にも反映する必要があるため、タップとは別に実装する必要がある
         self.selectionStyle = .none
-                
-        // お気に入り機能を反映させる
-        // ここだけDBではなくUDから参照する
-        // これはローカルのデータベースに保存しておくのが楽か？
-        // amazonなどの場合表示する度に描画するべきだが、うちのデータベースは高々1000件と考えると前もった処理の方が単純か？
-        self.favorite.setImage(UIImage.initWithDarkmode(systemName: "star"), for: .normal)
-        // self.favorite.setImage(UIImage(systemName: "star.fill"), for: .normal)
     }
     
     @IBAction func tapFavoriteButton(_ sender: Any) {
-        Logger.log(message: "お気に入りボタンをタップ")
+        song?.favorite.toggle()
+        setFavoriteStar()
+        if let song = song {
+            setFavorites(videoId: song.videoid)
+        }
     }
+    
     // Youtubeのサムネイル画像を取得
     // 現状cellの描画以外に利用しないためcell直下に用意
     private func getImageByVideoId(videoId: String) {
         self.icon.image = ImageCaches.shared.caches[videoId]        
+    }
+    
+    private func setFavoriteStar() {
+        guard let song = self.song else {
+            return
+        }
+        if song.favorite {
+            self.favorite.setImage(UIImage.initWithDarkmode(systemName: "star.fill"), for: .normal)
+        } else {
+            self.favorite.setImage(UIImage.initWithDarkmode(systemName: "star"), for: .normal)
+        }
+    }
+    
+    private func setFavorites(videoId: String) {
+        guard let song = self.song else {
+            return
+        }
+        if song.favorite {
+            Favorites.shared.addFavorite(songId: song.id)
+        } else {
+            Favorites.shared.removeFavorite(songId: song.id)
+        }
+        Songs.shared.setFavorite(songId: song.id, favorite: song.favorite)
     }
 }

@@ -9,18 +9,18 @@ import Foundation
 
 final class Favorites {
     static var shared = Favorites()
-    var favoriteIds: Set<String> = {
+    var favoriteIds: Set<Int> = {
         UserDefaults.loadFavorite()
     }() ?? []
     private init() {}
     
-    func addFavorite(videoId: String) {
-        favoriteIds.insert(videoId)
-        NotificationCenter.default.post(name: .didChangedFavorite, object: nil)
+    func addFavorite(songId: Int) {
+        favoriteIds.insert(songId)
+        UserDefaults.saveFavorite()
     }
     
-    func removeFavorite(videoId: String) {
-        favoriteIds.remove(videoId)
-        NotificationCenter.default.post(name: .didChangedFavorite, object: nil)
+    func removeFavorite(songId: Int) {
+        favoriteIds.remove(songId)
+        UserDefaults.saveFavorite()
     }
 }

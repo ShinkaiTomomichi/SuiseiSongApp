@@ -31,15 +31,15 @@ extension UserDefaults {
     }
     
     static func saveHistory() {
-        let favorite = Favorites.shared.favoriteIds
-        UserDefaults.standard.set(favorite, forKey: keyFavorite())
+        let histories = Histories.shared.historyIds
+        UserDefaults.standard.set(histories, forKey: keyHistory())
     }
     
-    static func loadHistory() -> [String]? {
-        guard let history = UserDefaults.standard.stringArray(forKey: keyHistory()) else {
+    static func loadHistory() -> [Int]? {
+        guard let history = UserDefaults.standard.array(forKey: keyHistory()) else {
             return nil
         }
-        return history
+        return history.compactMap { $0 as? Int }
     }
     
     // お気に入りの保存
@@ -52,11 +52,11 @@ extension UserDefaults {
         UserDefaults.standard.set(Array(favorite), forKey: keyFavorite())
     }
     
-    static func loadFavorite() -> Set<String>? {
-        guard let favorite = UserDefaults.standard.stringArray(forKey: keyFavorite()) else {
+    static func loadFavorite() -> Set<Int>? {
+        guard let favorite = UserDefaults.standard.array(forKey: keyFavorite()) else {
             return nil
         }
-        return Set(favorite)
+        return Set(favorite.compactMap { $0 as? Int })
     }
     
     static func removeAll() {

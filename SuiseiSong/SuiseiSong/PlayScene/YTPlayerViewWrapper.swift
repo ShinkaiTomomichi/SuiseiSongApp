@@ -22,9 +22,11 @@ final class YTPlayerViewWrapper {
     }
     
     // TODO: ここで履歴情報を追加する
-    // 履歴情報は別途で動画譲歩も必要なので面倒かも
+    // 2回起動している？選択時と画面起動時っぽい
+    // Homeでの選択時に発火しているのがまずいな
     func start() {
         if let selectedSong = SelectedStatus.shared.song {
+            Histories.shared.addHistory(songId: selectedSong.id)
             // 選択されていない時の処理を明確にする
             // 画面のloadをやり直して適当な画像を差し込む
             if let isHidden = playerView?.isHidden, isHidden {

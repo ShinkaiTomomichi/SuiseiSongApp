@@ -15,9 +15,5 @@ extension NSNotification.Name {
     
     static let didChangedRepeatType = Notification.Name("didChangedRepeatType")
     
-    static let didChangedPlaying = Notification.Name("didChangedPlaying")
-    
-    static let didChangedFavorite = Notification.Name("didChangedFavorite")
-    
-    static let didChangedHistory = Notification.Name("didChangedHistory")
+    static let didChangedPlaying = Notification.Name("didChangedPlaying")    
 }
