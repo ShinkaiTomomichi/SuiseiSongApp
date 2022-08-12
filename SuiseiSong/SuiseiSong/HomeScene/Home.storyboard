@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="1078"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="NYh-f2-ghW">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="800"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1200"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kww-cB-7o7" userLabel="Recent" customClass="SuggestModuleView" customModule="SuiseiSong" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
@@ -43,25 +43,30 @@
                                                     <constraint firstAttribute="height" constant="200" id="g9Z-cp-ZHa"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CWD-sS-CAy" userLabel="Spacer">
+                                            <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EZS-7Z-KS1" userLabel="Rock" customClass="SuggestModuleView" customModule="SuiseiSong" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="600" width="414" height="200"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ここに追加のモジュールを追加します" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G5b-gY-r3X">
-                                                        <rect key="frame" x="60" y="90" width="294.5" height="20.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstItem="G5b-gY-r3X" firstAttribute="centerX" secondItem="CWD-sS-CAy" secondAttribute="centerX" id="mJ7-at-mcJ"/>
-                                                    <constraint firstItem="G5b-gY-r3X" firstAttribute="centerY" secondItem="CWD-sS-CAy" secondAttribute="centerY" id="nm5-lw-BgY"/>
+                                                    <constraint firstAttribute="height" constant="200" id="O7g-er-Qv1"/>
+                                                </constraints>
+                                            </view>
+                                            <view tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HFu-zx-a2A" userLabel="Anime" customClass="SuggestModuleView" customModule="SuiseiSong" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="800" width="414" height="200"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="200" id="bcy-k2-iPf"/>
+                                                </constraints>
+                                            </view>
+                                            <view tag="5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j46-g9-711" userLabel="3DLive" customClass="SuggestModuleView" customModule="SuiseiSong" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="1000" width="414" height="200"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="200" id="ESn-2s-bMj"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="800" id="vmQ-TB-Ac5"/>
+                                            <constraint firstAttribute="height" constant="1200" id="vmQ-TB-Ac5"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
@@ -88,9 +93,12 @@
                     <navigationItem key="navigationItem" id="7DR-gY-bjp"/>
                     <size key="freeformSize" width="414" height="1200"/>
                     <connections>
+                        <outlet property="animeView" destination="HFu-zx-a2A" id="8GQ-zW-Ahf"/>
                         <outlet property="favorite202206View" destination="Bsw-2A-Byz" id="cbc-Qq-V9F"/>
                         <outlet property="favorite202207View" destination="7bj-Bt-c8A" id="Nlg-4X-MQG"/>
+                        <outlet property="live3DView" destination="j46-g9-711" id="Ksd-xg-OUT"/>
                         <outlet property="recentView" destination="kww-cB-7o7" id="pGB-Pa-abh"/>
+                        <outlet property="rockView" destination="EZS-7Z-KS1" id="Na8-0D-bMB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

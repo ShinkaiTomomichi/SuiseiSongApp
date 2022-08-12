@@ -25,9 +25,10 @@ struct Song {
     var vocaloid: Bool
     var acappella: Bool
     var live3d: Bool
+    // var date: Int
     
     // アプリの中で付与する情報
-    var thumbnail: UIImage? // TODO: キャッシュの大きさを調査
+    // var thumbnail: UIImage? // videoIdごとの管理で十分
     var favorite: Bool
     var debugCheck: Bool // タイムスタンプが正しい場合にはTrueを返す（UD保存か？）
     
@@ -46,7 +47,8 @@ struct Song {
         self.vocaloid = songForJSON.vocaloid
         self.acappella = songForJSON.acappella
         self.live3d = songForJSON.live3d
-        self.thumbnail = nil
+        self.live3d = songForJSON.live3d
+        // self.date = songForJSON.date
         self.favorite = false
         self.debugCheck = false
     }

@@ -27,7 +27,6 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         return Songs.shared.filteredSongsForSearch.count
     }
     
-    // 推定の高さを指定することでパフォーマンス改善を測る
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }

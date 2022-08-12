@@ -22,6 +22,7 @@ struct SongForJSON: Codable {
     var vocaloid: Bool
     var acappella: Bool
     var live3d: Bool
+    // var date: Int
     
     func calcDuration() -> Int{
         return endtime - starttime

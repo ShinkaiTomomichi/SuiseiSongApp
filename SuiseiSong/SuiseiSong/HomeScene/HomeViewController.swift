@@ -15,6 +15,9 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var recentView: SuggestModuleView!
     @IBOutlet weak var favorite202207View: SuggestModuleView!
     @IBOutlet weak var favorite202206View: SuggestModuleView!
+    @IBOutlet weak var rockView: SuggestModuleView!
+    @IBOutlet weak var animeView: SuggestModuleView!
+    @IBOutlet weak var live3DView: SuggestModuleView!
     
     // NavigationBarに追加するボタン
     var settingBarButtonItem: UIBarButtonItem!
@@ -32,6 +35,9 @@ class HomeViewController: UIViewController {
         recentView.setNavigationController(self.navigationController)
         favorite202207View.setNavigationController(self.navigationController)
         favorite202206View.setNavigationController(self.navigationController)
+        rockView.setNavigationController(self.navigationController)
+        animeView.setNavigationController(self.navigationController)
+        live3DView.setNavigationController(self.navigationController)
 
         settingBarButtonItem = UIBarButtonItem(image: UIImage.initWithDarkmode(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(settingBarButtonTapped(_:)))
         

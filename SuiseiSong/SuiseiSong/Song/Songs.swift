@@ -26,7 +26,10 @@ final class Songs {
     var favorite202207Songs: [Song] = []
     var favorite202206Songs: [Song] = []
     var collabSongs: [Song] = []
-    var Live3DSongs: [Song] = []
+    var live3DSongs: [Song] = []
+    var animeSongs: [Song] = []
+    var rockSongs: [Song] = []
+    var vocaloidSongs: [Song] = []
     var originalSongs: [Song] = []
     var favoriteSongs: [Song] = []
     var HistorySongs: [Song] = []
@@ -35,7 +38,18 @@ final class Songs {
         self.allSongs = JSONFileManager.getSuiseiSongs(forResource: "suisei_song2")
         self.favorite202207Songs = JSONFileManager.getSuiseiSongs(forResource: "202207")
         self.favorite202206Songs = JSONFileManager.getSuiseiSongs(forResource: "202206")
+        setupCollabSongs()
+        Logger.log(message: "コラボ: \(collabSongs.count)")
+        setupRockSongs()
+        Logger.log(message: "ロック: \(rockSongs.count)")
+        setupAnimeSongs()
+        Logger.log(message: "アニメ: \(animeSongs.count)")
+        setupVocaloidSongs()
+        Logger.log(message: "ボカロ: \(vocaloidSongs.count)")
+        setup3DLiveSongs()
+        Logger.log(message: "3DLive: \(live3DSongs.count)")
         self.filteredSongs = self.allSongs
+        ImageCaches.shared.setup()
     }
     
     func get(byID: Int) -> Song {
@@ -102,7 +116,54 @@ final class Songs {
     }
     
     func setupCollabSongs() {
-        Logger.log(message: "未実装")
+        var filteredSongsTmp: [Song] = []
+        for song in allSongs {
+            if song.collaboration {
+                filteredSongsTmp.append(song)
+            }
+        }
+        self.collabSongs = filteredSongsTmp
+    }
+    
+    func setup3DLiveSongs() {
+        var filteredSongsTmp: [Song] = []
+        for song in allSongs {
+            if song.live3d {
+                filteredSongsTmp.append(song)
+            }
+        }
+        self.live3DSongs =  filteredSongsTmp
+    }
+    
+    func setupAnimeSongs() {
+        var filteredSongsTmp: [Song] = []
+        for song in allSongs {
+            if song.anime {
+                filteredSongsTmp.append(song)
+            }
+        }
+        self.animeSongs = filteredSongsTmp
+    }
+    
+    // あれボカロがない？
+    func setupVocaloidSongs() {
+        var filteredSongsTmp: [Song] = []
+        for song in allSongs {
+            if song.vocaloid {
+                filteredSongsTmp.append(song)
+            }
+        }
+        self.vocaloidSongs = filteredSongsTmp
+    }
+    
+    func setupRockSongs() {
+        var filteredSongsTmp: [Song] = []
+        for song in allSongs {
+            if song.rock {
+                filteredSongsTmp.append(song)
+            }
+        }
+        self.rockSongs = filteredSongsTmp
     }
     
     func setupFavoriteSongs() {
