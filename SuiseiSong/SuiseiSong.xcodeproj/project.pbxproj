@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA4D2C0F28A707BF00260B4C /* PlayListModuleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4D2C0D28A707BF00260B4C /* PlayListModuleCollectionViewCell.swift */; };
+		DA4D2C1028A707BF00260B4C /* PlayListModuleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA4D2C0E28A707BF00260B4C /* PlayListModuleCollectionViewCell.xib */; };
 		DA6078132886D5C20002A524 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6078122886D5C20002A524 /* Int+.swift */; };
 		DA607819288872040002A524 /* Songs.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA607818288872040002A524 /* Songs.swift */; };
 		DA60781B288B8D020002A524 /* PlayViewController+UITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60781A288B8D020002A524 /* PlayViewController+UITableViewDataSource.swift */; };
@@ -85,6 +87,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DA4D2C0D28A707BF00260B4C /* PlayListModuleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayListModuleCollectionViewCell.swift; sourceTree = "<group>"; };
+		DA4D2C0E28A707BF00260B4C /* PlayListModuleCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayListModuleCollectionViewCell.xib; sourceTree = "<group>"; };
 		DA6078122886D5C20002A524 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		DA607818288872040002A524 /* Songs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Songs.swift; sourceTree = "<group>"; };
 		DA60781A288B8D020002A524 /* PlayViewController+UITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayViewController+UITableViewDataSource.swift"; sourceTree = "<group>"; };
@@ -373,6 +377,8 @@
 			children = (
 				DAC2393528A6F98600091E1D /* PlayListModule.swift */,
 				DAC2393728A6F9CB00091E1D /* PlayListModule.xib */,
+				DA4D2C0D28A707BF00260B4C /* PlayListModuleCollectionViewCell.swift */,
+				DA4D2C0E28A707BF00260B4C /* PlayListModuleCollectionViewCell.xib */,
 			);
 			path = PlayListModule;
 			sourceTree = "<group>";
@@ -497,6 +503,7 @@
 				DA60783B289811200002A524 /* 202207.json in Resources */,
 				DA607829288D1D5E0002A524 /* Home.storyboard in Resources */,
 				DA60785428995A2E0002A524 /* SuggestModuleCollectionViewCell.xib in Resources */,
+				DA4D2C1028A707BF00260B4C /* PlayListModuleCollectionViewCell.xib in Resources */,
 				DA6078332896B3EB0002A524 /* suisei_song2.json in Resources */,
 				DAC2393828A6F9CB00091E1D /* PlayListModule.xib in Resources */,
 				DA60785B289ADEA20002A524 /* 202206.json in Resources */,
@@ -525,6 +532,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA4D2C0F28A707BF00260B4C /* PlayListModuleCollectionViewCell.swift in Sources */,
 				DA60785D289ADEF40002A524 /* Favorite202206Delegate.swift in Sources */,
 				DA60784E28994A9E0002A524 /* SuggestModuleView.swift in Sources */,
 				DA60781B288B8D020002A524 /* PlayViewController+UITableViewDataSource.swift in Sources */,

@@ -31,27 +31,23 @@ class PlayListView: UIView {
     }
     
     func setupDelegate() {
-        let delegate = RockDelegate()
-        self.collectionView.delegate = delegate
-        self.collectionView.dataSource = delegate
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
         // モジュールによってセルを変える場合は上記if分に含める
-        self.collectionView.register(UINib(nibName: "SuggestModuleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SuggestModuleCollectionViewCell")
+        self.collectionView.register(UINib(nibName: "PlayListModuleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PlayListModuleCollectionViewCell")
     }
 }
 
 extension PlayListView: UICollectionViewDelegate, UICollectionViewDataSource {
     // セルの数
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Songs.shared.rockSongs.count
+        return 3
     }
     
     // セルの中身
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        //storyboard上のセルを生成　storyboardのIdentifierで付けたものをここで設定する
-        var cell: SuggestModuleCollectionViewCell
-        let index = indexPath.row
-        cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SuggestModuleCollectionViewCell", for: indexPath) as! SuggestModuleCollectionViewCell
-        cell.song = Songs.shared.rockSongs[index]
+        var cell: PlayListModuleCollectionViewCell
+        cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PlayListModuleCollectionViewCell", for: indexPath) as! PlayListModuleCollectionViewCell
         
         return cell
     }
