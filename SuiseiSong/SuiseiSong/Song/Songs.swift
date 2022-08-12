@@ -36,18 +36,14 @@ final class Songs {
     
     func setup() {
         self.allSongs = JSONFileManager.getSuiseiSongs(forResource: "suisei_song2")
+        sortAllSongs()
         self.favorite202207Songs = JSONFileManager.getSuiseiSongs(forResource: "202207")
         self.favorite202206Songs = JSONFileManager.getSuiseiSongs(forResource: "202206")
         setupCollabSongs()
-        Logger.log(message: "コラボ: \(collabSongs.count)")
         setupRockSongs()
-        Logger.log(message: "ロック: \(rockSongs.count)")
         setupAnimeSongs()
-        Logger.log(message: "アニメ: \(animeSongs.count)")
         setupVocaloidSongs()
-        Logger.log(message: "ボカロ: \(vocaloidSongs.count)")
         setup3DLiveSongs()
-        Logger.log(message: "3DLive: \(live3DSongs.count)")
         self.filteredSongs = self.allSongs
         ImageCaches.shared.setup()
     }
@@ -164,6 +160,10 @@ final class Songs {
             }
         }
         self.rockSongs = filteredSongsTmp
+    }
+    
+    func sortAllSongs() {
+        allSongs.sort { $0.date-$0.starttime > $1.date-$1.starttime }
     }
     
     func setupFavoriteSongs() {

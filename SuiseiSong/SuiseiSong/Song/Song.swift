@@ -25,7 +25,7 @@ struct Song {
     var vocaloid: Bool
     var acappella: Bool
     var live3d: Bool
-    // var date: Int
+    var date: Int
     
     // アプリの中で付与する情報
     // var thumbnail: UIImage? // videoIdごとの管理で十分
@@ -48,7 +48,7 @@ struct Song {
         self.acappella = songForJSON.acappella
         self.live3d = songForJSON.live3d
         self.live3d = songForJSON.live3d
-        // self.date = songForJSON.date
+        self.date = songForJSON.date
         self.favorite = false
         self.debugCheck = false
     }
