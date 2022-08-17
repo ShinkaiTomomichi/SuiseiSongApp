@@ -47,7 +47,8 @@ final class ImageCaches {
     }
     
     private func getImageByVideoId(videoId: String) -> UIImage {
-        let urlWithVideoId = "https://i.ytimg.com/vi/\(videoId)/default.jpg"
+        // let urlWithVideoId = "https://i.ytimg.com/vi/\(videoId)/default.jpg"
+        let urlWithVideoId = "https://i.ytimg.com/vi/\(videoId)/mqdefault.jpg"
         let url = URL(string: urlWithVideoId)
         do {
             let data = try Data(contentsOf: url!)

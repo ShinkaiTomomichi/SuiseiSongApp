@@ -20,7 +20,6 @@
 		DA607827288D1D480002A524 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA607826288D1D480002A524 /* HomeViewController.swift */; };
 		DA607829288D1D5E0002A524 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA607828288D1D5E0002A524 /* Home.storyboard */; };
 		DA60782D288D3B190002A524 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60782C288D3B190002A524 /* UIImage+.swift */; };
-		DA60782F289540080002A524 /* SuggestVideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60782E289540080002A524 /* SuggestVideoCollectionViewCell.swift */; };
 		DA6078332896B3EB0002A524 /* suisei_song2.json in Resources */ = {isa = PBXBuildFile; fileRef = DA6078322896B3EB0002A524 /* suisei_song2.json */; };
 		DA6078352896B8000002A524 /* suisei_song1.json in Resources */ = {isa = PBXBuildFile; fileRef = DA6078342896B8000002A524 /* suisei_song1.json */; };
 		DA60783928980EB80002A524 /* Favorite202207Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60783828980EB70002A524 /* Favorite202207Delegate.swift */; };
@@ -103,7 +102,6 @@
 		DA607826288D1D480002A524 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		DA607828288D1D5E0002A524 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		DA60782C288D3B190002A524 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
-		DA60782E289540080002A524 /* SuggestVideoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestVideoCollectionViewCell.swift; sourceTree = "<group>"; };
 		DA6078322896B3EB0002A524 /* suisei_song2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = suisei_song2.json; path = ../../../Dataset/suisei_song2.json; sourceTree = "<group>"; };
 		DA6078342896B8000002A524 /* suisei_song1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = suisei_song1.json; path = ../../../Dataset/suisei_song1.json; sourceTree = "<group>"; };
 		DA60783828980EB70002A524 /* Favorite202207Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite202207Delegate.swift; sourceTree = "<group>"; };
@@ -197,7 +195,6 @@
 				DAC2393428A6853600091E1D /* PlayListModule */,
 				DA6078412898A2AD0002A524 /* SuggestModule */,
 				DA607826288D1D480002A524 /* HomeViewController.swift */,
-				DA60782E289540080002A524 /* SuggestVideoCollectionViewCell.swift */,
 				DA607828288D1D5E0002A524 /* Home.storyboard */,
 			);
 			path = HomeScene;
@@ -560,7 +557,6 @@
 				DA60781D288B948D0002A524 /* SelectedStatus.swift in Sources */,
 				DA607859289AC4930002A524 /* RecentDelegate.swift in Sources */,
 				DA9950F02880757F0037D8E5 /* SongTableViewCell.swift in Sources */,
-				DA60782F289540080002A524 /* SuggestVideoCollectionViewCell.swift in Sources */,
 				DAC2392928A3220600091E1D /* Favorites.swift in Sources */,
 				DAC2392728A29F1800091E1D /* SongForJSON.swift in Sources */,
 				DA6078132886D5C20002A524 /* Int+.swift in Sources */,

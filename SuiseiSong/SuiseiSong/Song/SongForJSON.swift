@@ -7,6 +7,7 @@
 
 import Foundation
 
+// メモリが大きい気がするので
 struct SongForJSON: Codable {
     var id: Int
     var members: String

@@ -29,14 +29,6 @@ class SuggestModuleCollectionViewCell: UICollectionViewCell {
     
     // Youtubeのサムネイル画像を取得
     private func getImageByVideoId(videoId: String) {
-        let urlWithVideoId = "https://i.ytimg.com/vi/\(videoId)/hqdefault.jpg"
-        let url = URL(string: urlWithVideoId)
-        do {
-            let data = try Data(contentsOf: url!)
-            self.icon.image = UIImage(data: data)!
-        } catch let err {
-            print("Error : \(err.localizedDescription)")
-            self.icon.image = UIImage(systemName: "xmark.circle.fill")!
-        }        
+        self.icon.image = ImageCaches.shared.caches[videoId]
     }
 }
