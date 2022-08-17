@@ -36,10 +36,6 @@ struct Song {
         self.id = songForJSON.id
         self.members = songForJSON.members
         self.videoid = songForJSON.videoid
-        self.songtitle = songForJSON.songtitle
-        self.starttime = songForJSON.starttime
-        self.endtime = songForJSON.endtime
-        self.artist = songForJSON.artist
         self.artisturl = songForJSON.artisturl
         self.collaboration = songForJSON.collaboration
         self.anime = songForJSON.anime
@@ -51,5 +47,12 @@ struct Song {
         self.date = songForJSON.date
         self.favorite = false
         self.debugCheck = false
+        
+        // 以下修正
+        self.songtitle = songForJSON.songnameremake
+        self.starttime = songForJSON.starttimeremake
+        self.endtime = songForJSON.endtimeremake
+        self.artist = songForJSON.artistnameremake
+        
     }
 }

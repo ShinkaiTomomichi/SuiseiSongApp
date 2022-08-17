@@ -69,6 +69,7 @@
 		DAC2393328A5CEF500091E1D /* ImageCaches.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC2393228A5CEF500091E1D /* ImageCaches.swift */; };
 		DAC2393628A6F98600091E1D /* PlayListModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC2393528A6F98600091E1D /* PlayListModule.swift */; };
 		DAC2393828A6F9CB00091E1D /* PlayListModule.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAC2393728A6F9CB00091E1D /* PlayListModule.xib */; };
+		DADC8D8228AD400C004860E0 /* suisei_song3.json in Resources */ = {isa = PBXBuildFile; fileRef = DADC8D8128AD400C004860E0 /* suisei_song3.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,6 +151,7 @@
 		DAC2393228A5CEF500091E1D /* ImageCaches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCaches.swift; sourceTree = "<group>"; };
 		DAC2393528A6F98600091E1D /* PlayListModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayListModule.swift; sourceTree = "<group>"; };
 		DAC2393728A6F9CB00091E1D /* PlayListModule.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayListModule.xib; sourceTree = "<group>"; };
+		DADC8D8128AD400C004860E0 /* suisei_song3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = suisei_song3.json; path = ../../../Dataset/suisei_song3.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -341,6 +343,7 @@
 				DA60783A289811200002A524 /* 202207.json */,
 				DA6078342896B8000002A524 /* suisei_song1.json */,
 				DA6078322896B3EB0002A524 /* suisei_song2.json */,
+				DADC8D8128AD400C004860E0 /* suisei_song3.json */,
 				DA9950DD288056510037D8E5 /* JSONFileManager.swift */,
 			);
 			path = DataBase;
@@ -503,6 +506,7 @@
 				DA9950B2287B27270037D8E5 /* Assets.xcassets in Resources */,
 				DA60783E28989D6E0002A524 /* Search.storyboard in Resources */,
 				DA6078352896B8000002A524 /* suisei_song1.json in Resources */,
+				DADC8D8228AD400C004860E0 /* suisei_song3.json in Resources */,
 				DA60784C28994A7B0002A524 /* SuggestModule.xib in Resources */,
 				DA60784A2898A9990002A524 /* SongTableViewCell.xib in Resources */,
 				DA9950B0287B271F0037D8E5 /* Play.storyboard in Resources */,

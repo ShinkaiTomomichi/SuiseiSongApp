@@ -33,9 +33,6 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Debug
-        UserDefaults.removeHistory()
-        
         Songs.shared.setup()
         
         // NavigationBarのタイトル

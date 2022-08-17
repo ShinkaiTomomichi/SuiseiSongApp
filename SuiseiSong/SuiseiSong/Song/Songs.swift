@@ -36,7 +36,7 @@ final class Songs {
     var historySongs: [Song] = []
     
     func setup() {
-        self.allSongs = JSONFileManager.getSuiseiSongs(forResource: "suisei_song2")
+        self.allSongs = JSONFileManager.getSuiseiSongs(forResource: "suisei_song3")
         setFavorites()
         sortAllSongs()
 

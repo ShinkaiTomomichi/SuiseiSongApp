@@ -23,6 +23,10 @@ struct SongForJSON: Codable {
     var acappella: Bool
     var live3d: Bool
     var date: Int
+    var songnameremake: String
+    var artistnameremake: String
+    var starttimeremake: Int
+    var endtimeremake: Int
     
     func calcDuration() -> Int{
         return endtime - starttime

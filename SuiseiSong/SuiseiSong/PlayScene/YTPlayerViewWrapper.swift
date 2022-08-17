@@ -36,10 +36,13 @@ final class YTPlayerViewWrapper {
             if shouldReload {
                 let playerVars = [
                     "controls": 0,
-                    "start": Float(selectedSong.starttime)
+                    "start": Float(selectedSong.starttime),
+                    "rel": 0,
+                    
                 ]
+                
                 self.playerView?.load(withVideoId: selectedSong.videoid,
-                                          playerVars: playerVars)
+                                      playerVars: playerVars)
             } else {
                 // videoIdが同じ場合seekのみにしておく
                 self.playerView?.seek(toSeconds: Float(selectedSong.starttime),
