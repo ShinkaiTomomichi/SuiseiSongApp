@@ -9,18 +9,21 @@ import Foundation
 
 final class Favorites {
     static var shared = Favorites()
-    var favoriteIds: Set<Int> = {
+    // Setの方が望ましいが、順序列を維持するためにArrayにする
+    var favoriteIds: [Int] = {
         UserDefaults.loadFavorite()
     }() ?? []
     private init() {}
     
     func addFavorite(songId: Int) {
-        favoriteIds.insert(songId)
+        if !favoriteIds.contains(songId) {
+            favoriteIds.append(songId)
+        }
         UserDefaults.saveFavorite()
     }
     
     func removeFavorite(songId: Int) {
-        favoriteIds.remove(songId)
+        favoriteIds.removeAll(where: {$0 == songId})
         UserDefaults.saveFavorite()
     }
 }

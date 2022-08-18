@@ -13,7 +13,11 @@ class HistoryDelegate: NSObject, SuggestModuleViewDelegateProtocol {
     
     // セルの数
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Songs.shared.historySongs.count
+        if Songs.shared.historySongs.count < 10 {
+            return Songs.shared.historySongs.count
+        } else {
+            return 10
+        }
     }
     
     // セルの中身

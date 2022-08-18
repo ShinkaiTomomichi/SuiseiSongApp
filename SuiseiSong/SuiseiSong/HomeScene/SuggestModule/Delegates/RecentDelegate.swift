@@ -13,7 +13,11 @@ class RecentDelegate: NSObject, SuggestModuleViewDelegateProtocol {
     
     // セルの数
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        if Songs.shared.allSongs.count < 10 {
+            return Songs.shared.allSongs.count
+        } else {
+            return 10
+        }
     }
     
     // セルの中身

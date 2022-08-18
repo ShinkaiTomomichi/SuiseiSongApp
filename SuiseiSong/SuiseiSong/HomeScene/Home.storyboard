@@ -120,6 +120,7 @@
                         <outlet property="favoriteView" destination="MPf-4o-xG2" id="gFH-m9-MtD"/>
                         <outlet property="historyView" destination="pNo-N4-RPd" id="Buo-IG-L6g"/>
                         <outlet property="live3DView" destination="j46-g9-711" id="Ksd-xg-OUT"/>
+                        <outlet property="playlistView" destination="zbS-Dm-pdf" id="vBn-Tw-NRT"/>
                         <outlet property="recentView" destination="kww-cB-7o7" id="pGB-Pa-abh"/>
                         <outlet property="rockView" destination="EZS-7Z-KS1" id="Na8-0D-bMB"/>
                     </connections>

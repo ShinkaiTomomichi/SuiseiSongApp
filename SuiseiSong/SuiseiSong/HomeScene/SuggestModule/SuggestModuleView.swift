@@ -79,31 +79,31 @@ class SuggestModuleView: UIView {
         case .rock:
             delegate = RockDelegate()
             filteredCompletion = {
-                Songs.shared.setFilteredSongs(songs: Songs.shared.getSongs(byFilterType: .rock))
+                Songs.shared.setFilteredSongs(songs: Songs.shared.rockSongs)
             }
             self.title.text = "ロック"
         case .anime:
             delegate = AnimeDelegate()
             filteredCompletion = {
-                Songs.shared.setFilteredSongs(songs: Songs.shared.getSongs(byFilterType: .anime))
+                Songs.shared.setFilteredSongs(songs: Songs.shared.animeSongs)
             }
             self.title.text = "アニメ"
         case .live3d:
             delegate = Live3DDelegate()
             filteredCompletion = {
-                Songs.shared.setFilteredSongs(songs: Songs.shared.getSongs(byFilterType: .live3d))
+                Songs.shared.setFilteredSongs(songs: Songs.shared.live3DSongs)
             }
             self.title.text = "3Dライブ"
         case .history:
             delegate = HistoryDelegate()
             filteredCompletion = {
-                Songs.shared.setFilteredSongs(songs: Songs.shared.getSongs(byFilterType: .history))
+                Songs.shared.setFilteredSongs(songs: Songs.shared.historySongs)
             }
             self.title.text = "履歴"
         case .favorite:
             delegate = FavoriteDelegate()
             filteredCompletion = {
-                Songs.shared.setFilteredSongs(songs: Songs.shared.getSongs(byFilterType: .favorite))
+                Songs.shared.setFilteredSongs(songs: Songs.shared.favoriteSongs)
             }
             self.title.text = "お気に入り"
         default:

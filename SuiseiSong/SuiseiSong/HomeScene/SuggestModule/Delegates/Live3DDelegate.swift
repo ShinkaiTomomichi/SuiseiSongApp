@@ -13,7 +13,11 @@ class Live3DDelegate: NSObject, SuggestModuleViewDelegateProtocol {
     
     // セルの数
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Songs.shared.live3DSongs.count
+        if Songs.shared.live3DSongs.count < 10 {
+            return Songs.shared.live3DSongs.count
+        } else {
+            return 10
+        }
     }
     
     // セルの中身

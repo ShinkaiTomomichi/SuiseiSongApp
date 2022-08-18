@@ -21,6 +21,10 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var historyView: SuggestModuleView!
     @IBOutlet weak var favoriteView: SuggestModuleView!
     
+    // 暫定的なplaylistview
+    @IBOutlet weak var playlistView: PlayListView!
+    
+    
     // NavigationBarに追加するボタン
     var settingBarButtonItem: UIBarButtonItem!
     
@@ -48,6 +52,10 @@ class HomeViewController: UIViewController {
         live3DView.setNavigationController(self.navigationController)
         historyView.setNavigationController(self.navigationController)
         favoriteView.setNavigationController(self.navigationController)
+        
+        // PlayListModuleにも渡す
+        playlistView.setNavigationController(self.navigationController)
+        
 
         settingBarButtonItem = UIBarButtonItem(image: UIImage.initWithDarkmode(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(settingBarButtonTapped(_:)))
         

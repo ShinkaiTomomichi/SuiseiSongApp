@@ -13,7 +13,11 @@ class FavoriteDelegate: NSObject, SuggestModuleViewDelegateProtocol {
     
     // セルの数
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Songs.shared.favoriteSongs.count
+        if Songs.shared.favoriteSongs.count < 10 {
+            return Songs.shared.favoriteSongs.count
+        } else {
+            return 10
+        }
     }
     
     // セルの中身

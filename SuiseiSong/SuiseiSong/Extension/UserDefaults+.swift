@@ -56,11 +56,11 @@ extension UserDefaults {
         UserDefaults.standard.set(Array(favorite), forKey: keyFavorite())
     }
     
-    static func loadFavorite() -> Set<Int>? {
+    static func loadFavorite() -> [Int]? {
         guard let favorite = UserDefaults.standard.array(forKey: keyFavorite()) else {
             return nil
         }
-        return Set(favorite.compactMap { $0 as? Int })
+        return favorite.compactMap { $0 as? Int }
     }
     
     static func removeFavorite() {

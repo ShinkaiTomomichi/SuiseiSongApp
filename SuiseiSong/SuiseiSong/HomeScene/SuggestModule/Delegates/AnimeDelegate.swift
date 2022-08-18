@@ -13,7 +13,11 @@ class AnimeDelegate: NSObject, SuggestModuleViewDelegateProtocol {
     
     // セルの数
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Songs.shared.animeSongs.count
+        if Songs.shared.animeSongs.count < 10 {
+            return Songs.shared.animeSongs.count
+        } else {
+            return 10
+        }
     }
     
     // セルの中身

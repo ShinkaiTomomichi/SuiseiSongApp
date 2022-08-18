@@ -12,7 +12,7 @@ import UIKit
 struct Song {
     // JSONから取得する情報
     var id: Int
-    var members: String
+    var members: [String]
     var videoid: String
     var songtitle: String
     var starttime: Int
@@ -26,15 +26,12 @@ struct Song {
     var acappella: Bool
     var live3d: Bool
     var date: Int
-    
-    // アプリの中で付与する情報
-    // var thumbnail: UIImage? // videoIdごとの管理で十分
     var favorite: Bool
-    var debugCheck: Bool // タイムスタンプが正しい場合にはTrueを返す（UD保存か？）
+    var score: Double
     
     init(songForJSON: SongForJSON) {
         self.id = songForJSON.id
-        self.members = songForJSON.members
+        self.members = songForJSON.members.components(separatedBy: ",")
         self.videoid = songForJSON.videoid
         self.artisturl = songForJSON.artisturl
         self.collaboration = songForJSON.collaboration
@@ -45,14 +42,13 @@ struct Song {
         self.live3d = songForJSON.live3d
         self.live3d = songForJSON.live3d
         self.date = songForJSON.date
-        self.favorite = false
-        self.debugCheck = false
-        
-        // 以下修正
+        // 以下修正した値を利用する
         self.songtitle = songForJSON.songnameremake
         self.starttime = songForJSON.starttimeremake
         self.endtime = songForJSON.endtimeremake
         self.artist = songForJSON.artistnameremake
-        
+        // 以下独自の値を利用する
+        self.favorite = false
+        self.score = 0
     }
 }
