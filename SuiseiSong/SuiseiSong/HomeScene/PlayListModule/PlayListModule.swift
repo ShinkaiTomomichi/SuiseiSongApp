@@ -48,7 +48,7 @@ class PlayListView: UIView {
 extension PlayListView: UICollectionViewDelegate, UICollectionViewDataSource {
     // セルの数
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return Songs.shared.holomembers.count
     }
     
     // セルの中身
