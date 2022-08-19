@@ -11,13 +11,15 @@ class SuggestModuleCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var artist: UILabel!
     
     var song: Song? = nil {
         // songをセットした際に自動で他の要素をセットする
         didSet {
             if let song = self.song {
-                 self.title.text = song.songtitle
-                 getImageByVideoId(videoId: song.videoid)
+                self.title.text = song.songtitle
+                self.artist.text = song.artist
+                getImageByVideoId(videoId: song.videoid)
             }
         }
     }

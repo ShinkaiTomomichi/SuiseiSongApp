@@ -19,76 +19,59 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LjC-Gr-5ga">
                                 <rect key="frame" x="0.0" y="88" width="414" height="1278"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="NYh-f2-ghW">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1800"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="NYh-f2-ghW">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="2010"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kww-cB-7o7" userLabel="Recent" customClass="SuggestModuleView" customModule="SuiseiSong" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="270"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="200" id="trE-rR-yRi"/>
-                                                </constraints>
-                                            </view>
-                                            <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7bj-Bt-c8A" userLabel="Favorite 202207" customClass="SuggestModuleView" customModule="SuiseiSong" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="200" width="414" height="200"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="200" id="ad0-I4-xmT"/>
-                                                </constraints>
-                                            </view>
-                                            <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bsw-2A-Byz" userLabel="Favorite 202206" customClass="SuggestModuleView" customModule="SuiseiSong" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="400" width="414" height="200"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="200" id="g9Z-cp-ZHa"/>
-                                                </constraints>
-                                            </view>
-                                            <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EZS-7Z-KS1" userLabel="Rock" customClass="SuggestModuleView" customModule="SuiseiSong" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="600" width="414" height="200"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="200" id="O7g-er-Qv1"/>
-                                                </constraints>
-                                            </view>
-                                            <view tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HFu-zx-a2A" userLabel="Anime" customClass="SuggestModuleView" customModule="SuiseiSong" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="800" width="414" height="200"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="200" id="bcy-k2-iPf"/>
+                                                    <constraint firstAttribute="height" constant="270" id="trE-rR-yRi"/>
                                                 </constraints>
                                             </view>
                                             <view tag="5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j46-g9-711" userLabel="3DLive" customClass="SuggestModuleView" customModule="SuiseiSong" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="1000" width="414" height="200"/>
+                                                <rect key="frame" x="0.0" y="290" width="414" height="270"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="200" id="ESn-2s-bMj"/>
-                                                </constraints>
-                                            </view>
-                                            <view tag="6" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pNo-N4-RPd" customClass="SuggestModuleView" customModule="SuiseiSong" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="1200" width="414" height="200"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="200" id="4fc-d3-6Ld"/>
-                                                </constraints>
-                                            </view>
-                                            <view tag="7" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MPf-4o-xG2" customClass="SuggestModuleView" customModule="SuiseiSong" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="1400" width="414" height="200"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="200" id="Hr8-RI-Hmw"/>
+                                                    <constraint firstAttribute="height" constant="270" id="ESn-2s-bMj"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zbS-Dm-pdf" customClass="PlayListView" customModule="SuiseiSong" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="1600" width="414" height="200"/>
+                                                <rect key="frame" x="0.0" y="580" width="414" height="270"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="200" id="NsC-rI-cKY"/>
+                                                    <constraint firstAttribute="height" constant="270" id="NsC-rI-cKY"/>
+                                                </constraints>
+                                            </view>
+                                            <view tag="6" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pNo-N4-RPd" customClass="SuggestModuleView" customModule="SuiseiSong" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="870" width="414" height="270"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="270" id="4fc-d3-6Ld"/>
+                                                </constraints>
+                                            </view>
+                                            <view tag="7" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MPf-4o-xG2" customClass="SuggestModuleView" customModule="SuiseiSong" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="1160" width="414" height="270"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="270" id="Hr8-RI-Hmw"/>
+                                                </constraints>
+                                            </view>
+                                            <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7bj-Bt-c8A" userLabel="Favorite 202207" customClass="SuggestModuleView" customModule="SuiseiSong" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="1450" width="414" height="270"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="270" id="ad0-I4-xmT"/>
+                                                </constraints>
+                                            </view>
+                                            <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bsw-2A-Byz" userLabel="Favorite 202206" customClass="SuggestModuleView" customModule="SuiseiSong" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="1740" width="414" height="270"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="270" id="g9Z-cp-ZHa"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="1800" id="vmQ-TB-Ac5"/>
-                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
@@ -114,7 +97,6 @@
                     <navigationItem key="navigationItem" id="7DR-gY-bjp"/>
                     <size key="freeformSize" width="414" height="1400"/>
                     <connections>
-                        <outlet property="animeView" destination="HFu-zx-a2A" id="8GQ-zW-Ahf"/>
                         <outlet property="favorite202206View" destination="Bsw-2A-Byz" id="cbc-Qq-V9F"/>
                         <outlet property="favorite202207View" destination="7bj-Bt-c8A" id="Nlg-4X-MQG"/>
                         <outlet property="favoriteView" destination="MPf-4o-xG2" id="gFH-m9-MtD"/>
@@ -122,7 +104,6 @@
                         <outlet property="live3DView" destination="j46-g9-711" id="Ksd-xg-OUT"/>
                         <outlet property="playlistView" destination="zbS-Dm-pdf" id="vBn-Tw-NRT"/>
                         <outlet property="recentView" destination="kww-cB-7o7" id="pGB-Pa-abh"/>
-                        <outlet property="rockView" destination="EZS-7Z-KS1" id="Na8-0D-bMB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
