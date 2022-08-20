@@ -49,6 +49,7 @@ class SuggestModuleView: UIView {
         // xibのCustomClassではなくOwnerFileに設定する
         view = nib.instantiate(withOwner: self, options: nil).first as? UIView
         view.frame = bounds
+
         addSubview(view)
         setupDelegate()
     }

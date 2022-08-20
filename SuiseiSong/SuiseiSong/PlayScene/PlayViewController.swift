@@ -36,7 +36,6 @@ class PlayViewController: UIViewController {
     
     // NavigationBarに追加するボタン
     var shareBarButtonItem: UIBarButtonItem!
-    var debugBarButtonItem: UIBarButtonItem!
     var lockBarButtonItem: UIBarButtonItem!
     
     override func viewDidLoad() {
@@ -65,7 +64,6 @@ class PlayViewController: UIViewController {
         setPlayingSongLabel()
                 
         shareBarButtonItem = UIBarButtonItem(image: UIImage.initWithDarkmode(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(shareBarButtonTapped(_:)))
-        debugBarButtonItem = UIBarButtonItem(image: UIImage.initWithDarkmode(systemName: "hammer.fill"), style: .plain, target: self, action: #selector(debugBarButtonTapped(_:)))
         lockBarButtonItem = UIBarButtonItem(image: UIImage.initWithDarkmode(systemName: "lock"), style: .plain, target: self, action: #selector(lockBarButtonTapped(_:)))
         
         lockView(true)
@@ -81,7 +79,7 @@ class PlayViewController: UIViewController {
         releaseButton.setImage(UIImage(systemName: "lock.fill")?.withTintColor(.white, renderingMode: .alwaysOriginal), for: .normal)
         
         // debug用のボタンと併せて表示
-        self.navigationItem.rightBarButtonItems = [debugBarButtonItem, lockBarButtonItem, shareBarButtonItem]
+        self.navigationItem.rightBarButtonItems = [shareBarButtonItem, lockBarButtonItem]
                 
         // Notificationをset
         NotificationCenter.default.addObserver(self, selector: #selector(setPlayingSongLabel), name: .didChangedSelectedSong, object: nil)
@@ -89,6 +87,12 @@ class PlayViewController: UIViewController {
 
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: .didChangedFilteredSong, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadRepeatTypeButton), name: .didChangedRepeatType, object: nil)
+        
+        setupBackground()
+    }
+    
+    private func setupBackground() {
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.png")!)
     }
     
     // 再度復帰した際に画面が表示されなくなる不具合がある
@@ -241,7 +245,6 @@ class PlayViewController: UIViewController {
         releaseLabel.isHidden = state
         
         // BarButtonを切り替える
-        debugBarButtonItem.isEnabled = state
         lockBarButtonItem.isEnabled = state
         shareBarButtonItem.isEnabled = state
         navigationItem.hidesBackButton = !state
@@ -258,55 +261,4 @@ class PlayViewController: UIViewController {
     
     // searchBarも練習用に一度作っておきたいが、正直検索機能そこまで要らん気もする
     // UI的にはtabの方が良さそう
-}
-
-// debug用のボタンなので不要になったら削除する
-extension PlayViewController {
-    func sampleAlert() {
-        let alert = UIAlertController(title: "アノテーション修正",
-                                      message: "正しい開始時刻と終了時刻を以下に記入してください",
-                                      preferredStyle: .alert)
-        var startTime = SelectedStatus.shared.song?.starttime
-        var endTime = SelectedStatus.shared.song?.endtime
-        
-        // textFieldを追加
-        var alertTextField1: UITextField?
-        alert.addTextField(configurationHandler: {(textField) -> Void in
-            alertTextField1 = textField
-            if let startTime = startTime {
-                alertTextField1?.placeholder = String(startTime)
-            }
-        })
-        
-        var alertTextField2: UITextField?
-        alert.addTextField(configurationHandler: {(textField) -> Void in
-            alertTextField2 = textField
-            if let endTime = endTime {
-                alertTextField2?.placeholder = String(endTime)
-            }
-        })
-        // 決定ボタンを追加
-        alert.addAction(UIAlertAction(title: "決定", style: .default, handler: {(action) -> Void in
-            if let text1 = alertTextField1?.text, let text1Int = Int(text1) {
-                startTime = text1Int
-            }
-            if let text2 = alertTextField2?.text, let text2Int = Int(text2) {
-                endTime = text2Int
-            }
-            if let selectedSong = SelectedStatus.shared.song {
-                let id = selectedSong.id
-                UserDefaults.saveModifiedTime(id: id, startTime: startTime!, endTime: endTime!)
-            }
-        }))
-        // キャンセルボタンを追加
-        alert.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler: {_ in
-            UserDefaults.printModifiled()
-        }))
-        // AlertViewを表示
-        self.present(alert, animated: true, completion: nil)
-    }
-    
-    @objc func debugBarButtonTapped(_ sender: UIBarButtonItem) {
-        sampleAlert()
-    }
 }

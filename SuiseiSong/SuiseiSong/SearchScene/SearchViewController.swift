@@ -19,6 +19,15 @@ class SearchViewController: UIViewController {
         songTableView.delegate = self
         songTableView.register(UINib(nibName: "SongTableViewCell", bundle: nil), forCellReuseIdentifier: "SongTableViewCell")
         searchBar.delegate = self
+        
+        setupBackground()
+    }
+    
+    private func setupBackground() {
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.png")!)
+        
+        // searchBarは背景に画像がセットされているためこれを削除する
+        searchBar.backgroundImage = UIImage()
     }
 }
 

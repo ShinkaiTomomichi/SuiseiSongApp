@@ -24,49 +24,49 @@
                                         <subviews>
                                             <view contentMode="scaleToFill" restorationIdentifier="Recent" translatesAutoresizingMaskIntoConstraints="NO" id="kww-cB-7o7" userLabel="Recent" customClass="SuggestModuleView" customModule="SuiseiSong" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="270"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="270" id="trE-rR-yRi"/>
                                                 </constraints>
                                             </view>
                                             <view tag="5" contentMode="scaleToFill" restorationIdentifier="3DLive" translatesAutoresizingMaskIntoConstraints="NO" id="j46-g9-711" userLabel="3DLive" customClass="SuggestModuleView" customModule="SuiseiSong" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="290" width="414" height="270"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="270" id="ESn-2s-bMj"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zbS-Dm-pdf" customClass="PlayListView" customModule="SuiseiSong" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="580" width="414" height="270"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="270" id="NsC-rI-cKY"/>
                                                 </constraints>
                                             </view>
                                             <view tag="6" contentMode="scaleToFill" restorationIdentifier="History" translatesAutoresizingMaskIntoConstraints="NO" id="pNo-N4-RPd" customClass="SuggestModuleView" customModule="SuiseiSong" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="870" width="414" height="270"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="270" id="4fc-d3-6Ld"/>
                                                 </constraints>
                                             </view>
                                             <view tag="7" contentMode="scaleToFill" restorationIdentifier="Favorite" translatesAutoresizingMaskIntoConstraints="NO" id="MPf-4o-xG2" customClass="SuggestModuleView" customModule="SuiseiSong" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="1160" width="414" height="270"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="270" id="Hr8-RI-Hmw"/>
                                                 </constraints>
                                             </view>
                                             <view tag="1" contentMode="scaleToFill" restorationIdentifier="Favorite202207" translatesAutoresizingMaskIntoConstraints="NO" id="7bj-Bt-c8A" userLabel="Favorite 202207" customClass="SuggestModuleView" customModule="SuiseiSong" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="1450" width="414" height="270"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="270" id="ad0-I4-xmT"/>
                                                 </constraints>
                                             </view>
                                             <view tag="2" contentMode="scaleToFill" restorationIdentifier="Favorite202206" translatesAutoresizingMaskIntoConstraints="NO" id="Bsw-2A-Byz" userLabel="Favorite 202206" customClass="SuggestModuleView" customModule="SuiseiSong" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="1740" width="414" height="270"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="270" id="g9Z-cp-ZHa"/>
                                                 </constraints>

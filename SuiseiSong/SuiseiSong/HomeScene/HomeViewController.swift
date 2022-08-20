@@ -63,6 +63,12 @@ class HomeViewController: UIViewController {
         // UXが低いので一旦無効化
         // TODO: ユーザの直感には反するため改善策を検討
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        
+        setupBackground()
+    }
+    
+    private func setupBackground() {
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.png")!)
     }
 
     @objc func settingBarButtonTapped(_ sender: UIBarButtonItem) {
