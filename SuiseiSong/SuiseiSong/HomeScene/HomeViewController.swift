@@ -60,9 +60,10 @@ class HomeViewController: UIViewController {
         
         self.navigationItem.rightBarButtonItems = [settingBarButtonItem]
         
-        // UXが低いので一旦無効化
-        // TODO: ユーザの直感には反するため改善策を検討
+        // フリックを入れるとスライダーと相性が悪いので無効化
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        // NavigationBarの文字色を変更
+        self.navigationController?.navigationBar.tintColor = .white
         
         setupBackground()
     }

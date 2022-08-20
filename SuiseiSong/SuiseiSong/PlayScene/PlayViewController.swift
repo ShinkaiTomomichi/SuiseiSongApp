@@ -78,7 +78,6 @@ class PlayViewController: UIViewController {
         // 白色に固定
         releaseButton.setImage(UIImage(systemName: "lock.fill")?.withTintColor(.white, renderingMode: .alwaysOriginal), for: .normal)
         
-        // debug用のボタンと併せて表示
         self.navigationItem.rightBarButtonItems = [shareBarButtonItem, lockBarButtonItem]
                 
         // Notificationをset
