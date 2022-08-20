@@ -24,14 +24,18 @@ class HomeViewController: UIViewController {
     // 暫定的なplaylistview
     @IBOutlet weak var playlistView: PlayListView!
     
-    
     // NavigationBarに追加するボタン
     var settingBarButtonItem: UIBarButtonItem!
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
         Songs.shared.resetHeaders()
         historyView.collectionView.reloadData()
         favoriteView.collectionView.reloadData()
+        
+        historyView.isHidden = Histories.shared.historyIds.count == 0
+        favoriteView.isHidden = Favorites.shared.favoriteIds.count == 0
     }
     
     override func viewDidLoad() {
@@ -39,11 +43,8 @@ class HomeViewController: UIViewController {
         
         Songs.shared.setup()
         
-        // NavigationBarのタイトル
-        // ここは画像などに差し替えた方が良さそう
-        // self.title = "すいちゃんのうた"
-                
         // 煩雑なので効率化したい
+        // property一覧を取得するなど少しトリッキーな実装が必要そう
         recentView.setNavigationController(self.navigationController)
         favorite202207View.setNavigationController(self.navigationController)
         favorite202206View.setNavigationController(self.navigationController)
@@ -52,11 +53,9 @@ class HomeViewController: UIViewController {
         live3DView.setNavigationController(self.navigationController)
         historyView.setNavigationController(self.navigationController)
         favoriteView.setNavigationController(self.navigationController)
-        
         // PlayListModuleにも渡す
         playlistView.setNavigationController(self.navigationController)
         
-
         settingBarButtonItem = UIBarButtonItem(image: UIImage.initWithDarkmode(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(settingBarButtonTapped(_:)))
         
         self.navigationItem.rightBarButtonItems = [settingBarButtonItem]
