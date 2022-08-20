@@ -11,6 +11,7 @@ class PlayListModuleCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var songCount: UILabel!
     
     // セットした時にアイコンなどを設定する
     var holomember: String? = nil {
@@ -19,6 +20,9 @@ class PlayListModuleCollectionViewCell: UICollectionViewCell {
             if let holomember = self.holomember{
                 self.title.text = holomember
                 self.icon.image = ImageCaches.shared.holomembersCaches[holomember]
+                if let holomembersSongs = Songs.shared.holomembersSongs[holomember] {
+                    self.songCount.text = String(holomembersSongs.count) + "曲"
+                }
             }
         }
     }

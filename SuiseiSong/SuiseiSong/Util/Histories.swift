@@ -16,10 +16,9 @@ final class Histories {
     private init() {}
     
     func addHistory(songId: Int) {
-        // 同じ動画を連続で履歴に追加しないようにする
-        // TODO: ただし挙動のバグっぽいものもあるので後に直す
-        guard historyIds.last != songId else {
-            return
+        // 重複して存在する場合は削除してから追加する
+        if historyIds.contains(songId) {
+            historyIds.removeAll(where: {$0 == songId})
         }
         historyIds.append(songId)
         if historyIds.count > maxSize {

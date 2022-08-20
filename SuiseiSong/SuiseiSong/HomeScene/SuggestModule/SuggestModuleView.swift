@@ -12,15 +12,15 @@ class SuggestModuleView: UIView {
     
     var view: UIView!
     // TODO: 番号じゃなくてIDで管理したい
-    let tagAndSuggestModuleViewTypeDict: Dictionary<Int, SuggestModuleViewType> = [
-        0: .recent,
-        1: .favorite202207,
-        2: .favorite202206,
-        3: .rock,
-        4: .anime,
-        5: .live3d,
-        6: .favorite,
-        7: .history,
+    let suggestModuleViewTypeDict: Dictionary<String, SuggestModuleViewType> = [
+        "Recent": .recent,
+        "Favorite202207": .favorite202207,
+        "Favorite202206": .favorite202206,
+        "Rock": .rock,
+        "Anime": .anime,
+        "3DLive": .live3d,
+        "History": .history,
+        "Favorite": .favorite,
     ]
     
     // もしかしたらデータ自体を持った方が良いか？
@@ -54,8 +54,10 @@ class SuggestModuleView: UIView {
     }
     
     func setupDelegate() {
-        // ここでtagを取得して解釈のしやすいenumに変換する
-        suggestModuleViewType = tagAndSuggestModuleViewTypeDict[tag]
+        guard let restorationIdentifier = self.restorationIdentifier else {
+            return
+        }
+        suggestModuleViewType = suggestModuleViewTypeDict[restorationIdentifier]
         switch suggestModuleViewType {
         case .recent:
             delegate = RecentDelegate()
