@@ -36,6 +36,8 @@ class HomeViewController: UIViewController {
         
         historyView.isHidden = Histories.shared.historyIds.count == 0
         favoriteView.isHidden = Favorites.shared.favoriteIds.count == 0
+        
+        Logger.log(message: self.view.bounds)
     }
     
     override func viewDidLoad() {
@@ -56,7 +58,7 @@ class HomeViewController: UIViewController {
         // PlayListModuleにも渡す
         playlistView.setNavigationController(self.navigationController)
         
-        settingBarButtonItem = UIBarButtonItem(image: UIImage.initWithDarkmode(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(settingBarButtonTapped(_:)))
+        settingBarButtonItem = UIBarButtonItem(image: UIImage.initWithTintColorWhite(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(settingBarButtonTapped(_:)))
         
         self.navigationItem.rightBarButtonItems = [settingBarButtonItem]
         

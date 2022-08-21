@@ -51,9 +51,11 @@ class SongTableViewCell: UITableViewCell {
             return
         }
         if song.favorite {
-            self.favorite.setImage(UIImage.initWithDarkmode(systemName: "star.fill"), for: .normal)
+            // ここだけ水色に変えておく
+            let suiseiColor = UIColor(red: 29/255, green: 167/255, blue: 250/255, alpha: 1.0)
+            self.favorite.setImage(UIImage(systemName: "star.fill")?.withTintColor(suiseiColor, renderingMode: .alwaysOriginal), for: .normal)
         } else {
-            self.favorite.setImage(UIImage.initWithDarkmode(systemName: "star"), for: .normal)
+            self.favorite.setImage(UIImage.initWithTintColorWhite(systemName: "star"), for: .normal)
         }
     }
     

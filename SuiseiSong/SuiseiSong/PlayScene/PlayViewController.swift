@@ -53,18 +53,18 @@ class PlayViewController: UIViewController {
         
         // Buttonの絵柄をセット
         // TODO: これだとアプリ起動中にダークモード切り替えが起きた場合に対応できない
-        prevSongButton.setImage(UIImage.initWithDarkmode(systemName: "backward.end.fill"), for: .normal)
-        backwordButton.setImage(UIImage.initWithDarkmode(systemName:  "gobackward.10"), for: .normal)
+        prevSongButton.setImage(UIImage.initWithTintColorWhite(systemName: "backward.end.fill"), for: .normal)
+        backwordButton.setImage(UIImage.initWithTintColorWhite(systemName:  "gobackward.10"), for: .normal)
         setPlayAndStopButton()
-        forwardButton.setImage(UIImage.initWithDarkmode(systemName: "goforward.10"), for: .normal)
-        nextSongButton.setImage(UIImage.initWithDarkmode(systemName: "forward.end.fill"), for: .normal)
+        forwardButton.setImage(UIImage.initWithTintColorWhite(systemName: "goforward.10"), for: .normal)
+        nextSongButton.setImage(UIImage.initWithTintColorWhite(systemName: "forward.end.fill"), for: .normal)
         
-        shuffleButton.setImage(UIImage.initWithDarkmode(systemName: "shuffle"), for: .normal)
+        shuffleButton.setImage(UIImage.initWithTintColorWhite(systemName: "shuffle"), for: .normal)
         reloadRepeatTypeButton()
         setPlayingSongLabel()
                 
-        shareBarButtonItem = UIBarButtonItem(image: UIImage.initWithDarkmode(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(shareBarButtonTapped(_:)))
-        lockBarButtonItem = UIBarButtonItem(image: UIImage.initWithDarkmode(systemName: "lock"), style: .plain, target: self, action: #selector(lockBarButtonTapped(_:)))
+        shareBarButtonItem = UIBarButtonItem(image: UIImage.initWithTintColorWhite(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(shareBarButtonTapped(_:)))
+        lockBarButtonItem = UIBarButtonItem(image: UIImage.initWithTintColorWhite(systemName: "lock"), style: .plain, target: self, action: #selector(lockBarButtonTapped(_:)))
         
         lockView(true)
         // 長押しアクションを登録する
@@ -108,7 +108,7 @@ class PlayViewController: UIViewController {
         let selectedSong = SelectedStatus.shared.song
         var shareText = "\(selectedSong!.songtitle)を聴いてます。\n"
         shareText += "https://youtu.be/\(selectedSong!.videoid)?t=\(selectedSong!.starttime)\n"
-        shareText += "(サンプル)" // 各配信のハッシュタグを添えられると良さそう、配信者名でいいか？
+        // shareText += "#星街すいせい" // 各配信のハッシュタグを添えられると良さそう、配信者名でいいか？
         let activityVC = UIActivityViewController(activityItems: [shareText], applicationActivities: nil)
         present(activityVC, animated: true, completion: nil)
     }
@@ -126,19 +126,19 @@ class PlayViewController: UIViewController {
     
     @objc func setPlayAndStopButton() {
         if YTPlayerViewWrapper.shared.playing {
-            playAndStopButton.setImage(UIImage.initWithDarkmode(systemName: "pause.fill"), for: .normal)
+            playAndStopButton.setImage(UIImage.initWithTintColorWhite(systemName: "pause.fill"), for: .normal)
         } else {
-            playAndStopButton.setImage(UIImage.initWithDarkmode(systemName: "play.fill"), for: .normal)
+            playAndStopButton.setImage(UIImage.initWithTintColorWhite(systemName: "play.fill"), for: .normal)
         }
     }
     
     @objc func reloadRepeatTypeButton() {
         if Settings.shared.repeatType == .none {
-            repeatButton.setImage(UIImage.initWithDarkmode(systemName: "repeat.circle"), for: .normal)
+            repeatButton.setImage(UIImage.initWithTintColorWhite(systemName: "repeat.circle"), for: .normal)
         } else if Settings.shared.repeatType == .allRepeat {
-            repeatButton.setImage(UIImage.initWithDarkmode(systemName: "repeat.circle.fill"), for: .normal)
+            repeatButton.setImage(UIImage.initWithTintColorWhite(systemName: "repeat.circle.fill"), for: .normal)
         } else {
-            repeatButton.setImage(UIImage.initWithDarkmode(systemName: "repeat.1.circle.fill"), for: .normal)
+            repeatButton.setImage(UIImage.initWithTintColorWhite(systemName: "repeat.1.circle.fill"), for: .normal)
         }
     }
     
