@@ -75,8 +75,8 @@ class PlayViewController: UIViewController {
         releaseButton.imageView?.contentMode = .scaleAspectFill
         releaseButton.contentHorizontalAlignment = .fill
         releaseButton.contentVerticalAlignment = .fill
-        // 白色に固定
-        releaseButton.setImage(UIImage(systemName: "lock.fill")?.withTintColor(.white, renderingMode: .alwaysOriginal), for: .normal)
+        // ボタンタイプをCustomにする必要がある        
+        releaseButton.setImage(UIImage(named: "suisei_lock.png"), for: .normal)
         
         self.navigationItem.rightBarButtonItems = [shareBarButtonItem, lockBarButtonItem]
                 

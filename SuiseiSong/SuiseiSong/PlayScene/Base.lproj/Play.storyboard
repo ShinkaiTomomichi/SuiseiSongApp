@@ -149,12 +149,12 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wmh-cC-WWd" userLabel="Lock View">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wmh-cC-WWd" userLabel="Lock View">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
-                                    <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d9z-tp-Rb8" userLabel="Hidden View">
+                                    <view alpha="0.45000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d9z-tp-Rb8" userLabel="Hidden View">
                                         <rect key="frame" x="0.0" y="200" width="414" height="618"/>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -165,21 +165,21 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xFd-D2-spl" userLabel="Release">
-                                <rect key="frame" x="152" y="631.5" width="110" height="130.5"/>
+                                <rect key="frame" x="117" y="485" width="180" height="197"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lhC-Js-1aZ" userLabel="Release Button">
-                                        <rect key="frame" x="0.0" y="0.0" width="110" height="110"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lhC-Js-1aZ" userLabel="Release Button">
+                                        <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="110" id="D3j-La-FLh"/>
-                                            <constraint firstAttribute="height" constant="110" id="iVH-F6-eng"/>
+                                            <constraint firstAttribute="width" constant="180" id="D3j-La-FLh"/>
+                                            <constraint firstAttribute="height" constant="180" id="iVH-F6-eng"/>
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="長押しで解除" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9yf-UI-s2H">
-                                        <rect key="frame" x="0.0" y="110" width="110" height="20.5"/>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="長押しでロックを解除します" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9yf-UI-s2H">
+                                        <rect key="frame" x="0.0" y="180" width="180" height="17"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -191,7 +191,7 @@
                         <constraints>
                             <constraint firstItem="wmh-cC-WWd" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="1Ns-oB-AnI"/>
                             <constraint firstItem="1s3-MR-CQH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="3j2-RA-cd9"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="xFd-D2-spl" secondAttribute="bottom" constant="100" id="4tc-P6-RMu"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="xFd-D2-spl" secondAttribute="bottom" constant="180" id="4tc-P6-RMu"/>
                             <constraint firstItem="wmh-cC-WWd" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="F50-Pg-d5m"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="1s3-MR-CQH" secondAttribute="bottom" id="HGr-0P-DsZ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="wmh-cC-WWd" secondAttribute="bottom" id="MLE-12-nDj"/>
