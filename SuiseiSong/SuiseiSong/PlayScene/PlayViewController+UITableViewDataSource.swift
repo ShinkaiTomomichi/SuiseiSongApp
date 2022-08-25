@@ -26,7 +26,7 @@ extension PlayViewController: UITableViewDelegate, UITableViewDataSource {
         cell.song = Songs.shared.filteredSongs[index]
         
         // cellの再利用で変な挙動になっている
-        // cell.reloadSelected()
+        cell.reloadSelected()
         
         return cell
     }
@@ -35,6 +35,7 @@ extension PlayViewController: UITableViewDelegate, UITableViewDataSource {
         
         if let cell = self.songTableView.cellForRow(at: indexPath) as? SongTableViewCell {
             SelectedStatus.shared.setSelectedSong(song: cell.song!)
-        }        
+        }
+        tableView.reloadData()
     }
 }

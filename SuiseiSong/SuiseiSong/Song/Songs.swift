@@ -47,11 +47,6 @@ final class Songs {
         setupAllSongs()
         setupOtherSongs()
         setupHoloMeberSongs()
-
-        // お気に入りに入れた動画を復元
-        // TODO: allSongsに一元化しないとお気に入り管理などができないため修正
-        self.favorite202207Songs = JSONFileManager.getSuiseiSongs(forResource: "202207")
-        self.favorite202206Songs = JSONFileManager.getSuiseiSongs(forResource: "202206")
         
         resetFilteredSong()
         ImageCaches.shared.setup()
@@ -89,6 +84,10 @@ final class Songs {
         historySongs = allSongs.filter {
             Histories.shared.historyIds.contains($0.id)
         }
+        // 他のデータベースから動画をセット
+        favorite202207Songs = JSONFileManager.getSuiseiSongs(forResource: "202207")
+        favorite202206Songs = JSONFileManager.getSuiseiSongs(forResource: "202206")
+        
         sortOtherSongs()
     }
     
@@ -110,6 +109,10 @@ final class Songs {
         // 履歴とお気に入りは追加順で固定
         favoriteSongs = sorted(byIds: Favorites.shared.favoriteIds.reversed())
         historySongs = sorted(byIds: Histories.shared.historyIds.reversed())
+    }
+    
+    private func sorted(byIds: [Int]) -> [Song] {
+        return byIds.map { get(byId: $0) }
     }
     
     private func setupHoloMeberSongs() {
@@ -165,10 +168,6 @@ final class Songs {
     
     func setFilteredSongs(songs: [Song]) {
         self.filteredSongs = songs
-    }
-    
-    private func sorted(byIds: [Int]) -> [Song] {
-        return byIds.map { get(byId: $0) }
     }
     
     // filter機能はテストを実装しておきたい

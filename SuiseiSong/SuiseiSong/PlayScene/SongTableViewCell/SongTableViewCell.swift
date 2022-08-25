@@ -40,13 +40,15 @@ class SongTableViewCell: UITableViewCell {
         }
     }
 
-//    func reloadSelected() {
-//        if let song = self.song,
-//            let selectedSong = SelectedStatus.shared.song,
-//           song.id == selectedSong.id {
-//            selectedView.alpha = 0.5
-//        }
-//    }
+    func reloadSelected() {
+        if let song = self.song,
+            let selectedSong = SelectedStatus.shared.song,
+           song.id == selectedSong.id {
+            selectedView.alpha = 0.5
+        } else {
+            selectedView.alpha = 0.0
+        }
+    }
     
     // Youtubeのサムネイル画像を取得
     // 現状cellの描画以外に利用しないためcell直下に用意
