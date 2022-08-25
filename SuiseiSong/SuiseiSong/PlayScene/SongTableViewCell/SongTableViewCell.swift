@@ -13,6 +13,7 @@ class SongTableViewCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var artist: UILabel!
     @IBOutlet weak var favorite: UIButton!
+    @IBOutlet weak var selectedView: UIView!
     
     var song: Song? = nil {
         // songをセットした際に自動で他の要素をセットする
@@ -28,7 +29,6 @@ class SongTableViewCell: UITableViewCell {
         
     override func awakeFromNib() {
         super.awakeFromNib()
-        // 曲の選択はNextに進んだ場合にも反映する必要があるため、タップとは別に実装する必要がある
         self.selectionStyle = .none
     }
     
@@ -39,6 +39,14 @@ class SongTableViewCell: UITableViewCell {
             setFavorites(videoId: song.videoid)
         }
     }
+
+//    func reloadSelected() {
+//        if let song = self.song,
+//            let selectedSong = SelectedStatus.shared.song,
+//           song.id == selectedSong.id {
+//            selectedView.alpha = 0.5
+//        }
+//    }
     
     // Youtubeのサムネイル画像を取得
     // 現状cellの描画以外に利用しないためcell直下に用意
@@ -68,6 +76,6 @@ class SongTableViewCell: UITableViewCell {
         } else {
             Favorites.shared.removeFavorite(songId: song.id)
         }
-        Songs.shared.setFavorite(songId: song.id, favorite: song.favorite)
+        // Songs.shared.setFavorite(songId: song.id, favorite: song.favorite)
     }
 }

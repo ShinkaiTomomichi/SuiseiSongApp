@@ -63,7 +63,7 @@ class SuggestModuleView: UIView {
         case .recent:
             delegate = RecentDelegate()
             filteredCompletion = {
-                Songs.shared.reset()
+                Songs.shared.resetFilteredSong()
             }
             self.title.text = "最近の動画"
         case .favorite202207:

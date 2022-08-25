@@ -48,14 +48,14 @@ class PlayListView: UIView {
 extension PlayListView: UICollectionViewDelegate, UICollectionViewDataSource {
     // セルの数
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Songs.shared.holomembers.count
+        return Songs.shared.holoMembers.count
     }
     
     // セルの中身
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cell: PlayListModuleCollectionViewCell
         cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PlayListModuleCollectionViewCell", for: indexPath) as! PlayListModuleCollectionViewCell
-        cell.holomember = Songs.shared.holomembers[indexPath.row]
+        cell.holoMember = Songs.shared.holoMembers[indexPath.row]
         return cell
     }
     
@@ -67,7 +67,7 @@ extension PlayListView: UICollectionViewDelegate, UICollectionViewDataSource {
         let nextViewController = storyboard.instantiateViewController(withIdentifier: "Search") as! SearchViewController
         
         if let navigationController = self.navigationController,
-            let song = Songs.shared.holomembersSongs[Songs.shared.holomembers[indexPath.row]] {
+            let song = Songs.shared.holoMembersSongs[Songs.shared.holoMembers[indexPath.row]] {
             Songs.shared.setFilteredSongs(songs: song)
             navigationController.pushViewController(nextViewController, animated: true)
         } else {

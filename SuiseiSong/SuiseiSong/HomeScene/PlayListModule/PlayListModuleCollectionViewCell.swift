@@ -14,14 +14,14 @@ class PlayListModuleCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var songCount: UILabel!
     
     // セットした時にアイコンなどを設定する
-    var holomember: String? = nil {
+    var holoMember: String? = nil {
         // songをセットした際に自動で他の要素をセットする
         didSet {
-            if let holomember = self.holomember{
-                self.title.text = holomember
-                self.icon.image = ImageCaches.shared.holomembersCaches[holomember]
-                if let holomembersSongs = Songs.shared.holomembersSongs[holomember] {
-                    self.songCount.text = String(holomembersSongs.count) + "曲"
+            if let holoMember = self.holoMember{
+                self.title.text = holoMember
+                self.icon.image = ImageCaches.shared.holomembersCaches[holoMember]
+                if let holoMembersSongs = Songs.shared.holoMembersSongs[holoMember] {
+                    self.songCount.text = String(holoMembersSongs.count) + "曲"
                 }
             }
         }

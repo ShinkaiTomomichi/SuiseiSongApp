@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -55,10 +56,18 @@
                             </button>
                         </subviews>
                     </stackView>
+                    <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n0E-OZ-ar4" userLabel="Select">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="n0E-OZ-ar4" secondAttribute="bottom" id="9nG-zr-5qA"/>
                     <constraint firstAttribute="trailing" secondItem="msp-eU-psw" secondAttribute="trailing" id="Bqc-4u-PKm"/>
                     <constraint firstItem="msp-eU-psw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="W2A-zf-sAn"/>
+                    <constraint firstItem="n0E-OZ-ar4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="bxU-Hn-klt"/>
+                    <constraint firstItem="n0E-OZ-ar4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="eEK-Qw-GJV"/>
+                    <constraint firstAttribute="trailing" secondItem="n0E-OZ-ar4" secondAttribute="trailing" id="kGC-m0-Ldq"/>
                     <constraint firstAttribute="bottom" secondItem="msp-eU-psw" secondAttribute="bottom" id="knB-KR-Yg7"/>
                     <constraint firstItem="msp-eU-psw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="sXB-7R-pb7"/>
                 </constraints>
@@ -69,9 +78,15 @@
                 <outlet property="artist" destination="ECu-Sg-Vzi" id="1Dd-W6-EhW"/>
                 <outlet property="favorite" destination="Nzw-5z-dWs" id="edb-d6-Jqr"/>
                 <outlet property="icon" destination="MzB-5Z-Ve3" id="fJW-iB-DqA"/>
+                <outlet property="selectedView" destination="n0E-OZ-ar4" id="Ii7-xC-AEW"/>
                 <outlet property="title" destination="gbu-Sf-LQs" id="1rF-Mn-HRZ"/>
             </connections>
             <point key="canvasLocation" x="139" y="96"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

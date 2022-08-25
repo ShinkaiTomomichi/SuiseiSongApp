@@ -32,7 +32,7 @@ final class SelectedStatus {
     // 選択された曲が変化した場合に呼ばれる
     // songIDで選択する
     func setSelectedID(id: Int, filterCompletion: (() -> Void)? = nil) {
-        self.song = Songs.shared.get(byID: id)
+        self.song = Songs.shared.get(byId: id)
         
         // 選択後にIDを指定するためfilteringを実施（これはもっといい方法がありそう）
         if let filterCompletion = filterCompletion {

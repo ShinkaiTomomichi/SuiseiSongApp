@@ -70,7 +70,7 @@ extension SearchViewController: UISearchBarDelegate {
         view.endEditing(true)
         // 入力された値がnilでなければif文のブロック内の処理を実行
         if let searchText = searchBar.text {
-            Songs.shared.filter(by: searchText)
+            Songs.shared.setFilteredSongsForSearch(by: searchText)
             songTableView.reloadData()
         }
     }

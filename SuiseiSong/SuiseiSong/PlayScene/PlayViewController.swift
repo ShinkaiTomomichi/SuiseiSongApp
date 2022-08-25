@@ -189,7 +189,7 @@ class PlayViewController: UIViewController {
     }
     
     @IBAction func tapShuffleButton(_ sender: Any) {
-        Songs.shared.shuffle()
+        Songs.shared.shuffleFilteredSongsExpectSelectedSong()
     }
     
     @IBAction func tapRepeatButton(_ sender: Any) {

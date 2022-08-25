@@ -8,8 +8,8 @@
 import Foundation
 import UIKit
 
-// キャッシュを入れるためCodableではないstructを新たに作成
-struct Song {
+// お気に入り情報を単一ソースで管理するためclassにする
+final class Song {
     // JSONから取得する情報
     var id: Int
     var members: [String]
@@ -26,8 +26,8 @@ struct Song {
     var acappella: Bool
     var live3d: Bool
     var date: Int
+    // 独自に追加する情報
     var favorite: Bool
-    var score: Double
     
     init(songForJSON: SongForJSON) {
         self.id = songForJSON.id
@@ -49,6 +49,5 @@ struct Song {
         self.artist = songForJSON.artistnameremake
         // 以下独自の値を利用する
         self.favorite = false
-        self.score = 0
     }
 }

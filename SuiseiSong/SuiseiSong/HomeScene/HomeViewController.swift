@@ -29,21 +29,14 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        Songs.shared.resetHeaders()
-        historyView.collectionView.reloadData()
-        favoriteView.collectionView.reloadData()
-        
-        historyView.isHidden = Histories.shared.historyIds.count == 0
-        favoriteView.isHidden = Favorites.shared.favoriteIds.count == 0
-        
-        Logger.log(message: self.view.bounds)
+        // ここで毎回シャッフルすると
+        // あー他のテーブルを更新してないから変な感じになるのか
+        Songs.shared.sortOtherSongs()
+        loadHistoryAndFavoriteView()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        Songs.shared.setup()
         
         // 煩雑なので効率化したい
         // property一覧を取得するなど少しトリッキーな実装が必要そう
@@ -68,6 +61,18 @@ class HomeViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = .white
         
         setupBackground()
+    }
+    
+    private func loadHistoryAndFavoriteView() {
+        recentView.collectionView.reloadData()
+        live3DView.collectionView.reloadData()
+        favorite202206View.collectionView.reloadData()
+        favorite202207View.collectionView.reloadData()
+        historyView.collectionView.reloadData()
+        favoriteView.collectionView.reloadData()
+        
+        historyView.isHidden = Histories.shared.historyIds.count == 0
+        favoriteView.isHidden = Favorites.shared.favoriteIds.count == 0
     }
     
     private func setupBackground() {
