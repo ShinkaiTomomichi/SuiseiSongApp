@@ -60,6 +60,8 @@
 		DA9950F728852A6F0037D8E5 /* YTPlayerViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9950F628852A6F0037D8E5 /* YTPlayerViewWrapper.swift */; };
 		DA9950F92885874F0037D8E5 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9950F82885874F0037D8E5 /* Logger.swift */; };
 		DAA257EA28B7D11C00728EF0 /* Recommend.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA257E928B7D11C00728EF0 /* Recommend.swift */; };
+		DAA257EE28B8539300728EF0 /* AddPlayListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA257EC28B8539200728EF0 /* AddPlayListViewController.swift */; };
+		DAA257F128B853AB00728EF0 /* AddPlayList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAA257F028B853AB00728EF0 /* AddPlayList.storyboard */; };
 		DAC2392728A29F1800091E1D /* SongForJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC2392628A29F1800091E1D /* SongForJSON.swift */; };
 		DAC2392928A3220600091E1D /* Favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC2392828A3220600091E1D /* Favorites.swift */; };
 		DAC2392B28A3258A00091E1D /* Histories.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC2392A28A3258A00091E1D /* Histories.swift */; };
@@ -142,6 +144,8 @@
 		DA9950F628852A6F0037D8E5 /* YTPlayerViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTPlayerViewWrapper.swift; sourceTree = "<group>"; };
 		DA9950F82885874F0037D8E5 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		DAA257E928B7D11C00728EF0 /* Recommend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommend.swift; sourceTree = "<group>"; };
+		DAA257EC28B8539200728EF0 /* AddPlayListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayListViewController.swift; sourceTree = "<group>"; };
+		DAA257F028B853AB00728EF0 /* AddPlayList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddPlayList.storyboard; sourceTree = "<group>"; };
 		DAC2392628A29F1800091E1D /* SongForJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongForJSON.swift; sourceTree = "<group>"; };
 		DAC2392828A3220600091E1D /* Favorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorites.swift; sourceTree = "<group>"; };
 		DAC2392A28A3258A00091E1D /* Histories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Histories.swift; sourceTree = "<group>"; };
@@ -296,6 +300,7 @@
 				DA9950EE288075480037D8E5 /* PlayScene */,
 				DA607822288C09430002A524 /* HomeScene */,
 				DA60783C28989D460002A524 /* SearchScene */,
+				DAA257EB28B8531B00728EF0 /* AddPlayListScene */,
 				DA607823288C094F0002A524 /* SettingScene */,
 				DA9950A8287B271F0037D8E5 /* AppDelegate.swift */,
 				DA9950AA287B271F0037D8E5 /* SceneDelegate.swift */,
@@ -387,6 +392,15 @@
 				DAA257E928B7D11C00728EF0 /* Recommend.swift */,
 			);
 			path = Recommend;
+			sourceTree = "<group>";
+		};
+		DAA257EB28B8531B00728EF0 /* AddPlayListScene */ = {
+			isa = PBXGroup;
+			children = (
+				DAA257F028B853AB00728EF0 /* AddPlayList.storyboard */,
+				DAA257EC28B8539200728EF0 /* AddPlayListViewController.swift */,
+			);
+			path = AddPlayListScene;
 			sourceTree = "<group>";
 		};
 		DAC2393428A6853600091E1D /* PlayListModule */ = {
@@ -525,6 +539,7 @@
 				DA6078332896B3EB0002A524 /* suisei_song2.json in Resources */,
 				DAC2393828A6F9CB00091E1D /* PlayListModule.xib in Resources */,
 				DA60785B289ADEA20002A524 /* 202206.json in Resources */,
+				DAA257F128B853AB00728EF0 /* AddPlayList.storyboard in Resources */,
 				DA60785F289C214E0002A524 /* Setting.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -588,6 +603,7 @@
 				DA60781F288B9C080002A524 /* NSNotification+.swift in Sources */,
 				DA60784028989D8F0002A524 /* SearchViewController.swift in Sources */,
 				DA9950AB287B271F0037D8E5 /* SceneDelegate.swift in Sources */,
+				DAA257EE28B8539300728EF0 /* AddPlayListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -772,11 +788,13 @@
 				DEVELOPMENT_TEAM = X566S736X4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SuiseiSong/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "すいちゃんのうた";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Home;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -802,11 +820,13 @@
 				DEVELOPMENT_TEAM = X566S736X4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SuiseiSong/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "すいちゃんのうた";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Home;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

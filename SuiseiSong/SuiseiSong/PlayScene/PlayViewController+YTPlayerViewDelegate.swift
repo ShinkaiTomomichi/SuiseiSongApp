@@ -67,9 +67,6 @@ extension PlayViewController: YTPlayerViewDelegate {
         }
     }
     
-    // 次の動画に進む時に必要だが、初回から起動されるとやや困る
-    // 初回起動のフラグを管理しておきたい
-    // 画面リセットの際にも起動して欲しくないのでこれの改善も測る
     func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
         playerView.playVideo()
     }

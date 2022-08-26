@@ -26,6 +26,7 @@ class HomeViewController: UIViewController {
     
     // NavigationBarに追加するボタン
     var settingBarButtonItem: UIBarButtonItem!
+    var addPlayListBarButtonItem: UIBarButtonItem!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -52,8 +53,9 @@ class HomeViewController: UIViewController {
         playlistView.setNavigationController(self.navigationController)
         
         settingBarButtonItem = UIBarButtonItem(image: UIImage.initWithTintColorWhite(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(settingBarButtonTapped(_:)))
+        addPlayListBarButtonItem = UIBarButtonItem(image: UIImage.initWithTintColorWhite(systemName: "plus"), style: .plain, target: self, action: #selector(addPlayListBarButtonTapped(_:)))
         
-        self.navigationItem.rightBarButtonItems = [settingBarButtonItem]
+        self.navigationItem.rightBarButtonItems = [settingBarButtonItem, addPlayListBarButtonItem]
         
         // フリックを入れるとスライダーと相性が悪いので無効化
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
@@ -89,6 +91,11 @@ class HomeViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Setting", bundle: nil)
         let nextViewController = storyboard.instantiateViewController(withIdentifier: "Setting") as! SettingViewController
         self.navigationController?.pushViewController(nextViewController, animated: true)
+    }
+    
+    @objc func addPlayListBarButtonTapped(_ sender: UIBarButtonItem) {
+        // PlayList作成ページへ遷移
+        Logger.log(message: "未作成")
     }
 }
 
