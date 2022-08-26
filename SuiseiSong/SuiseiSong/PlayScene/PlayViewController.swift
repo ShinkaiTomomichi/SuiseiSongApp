@@ -84,7 +84,6 @@ class PlayViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(setPlayingSongLabel), name: .didChangedSelectedSong, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(setPlayAndStopButton), name: .didChangedPlaying, object: nil)
 
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: .didChangedFilteredSong, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadRepeatTypeButton), name: .didChangedRepeatType, object: nil)
         
         setupBackground()
@@ -116,11 +115,6 @@ class PlayViewController: UIViewController {
     // 再生した曲が変化した際にlabelを修正する
     @objc func setPlayingSongLabel() {
         playingSongLabel.text = SelectedStatus.shared.song?.songtitle
-        // TODO: 選択中のラベルをハイライトしようとしたが、メモリから外れたセルを管理するのが困難であったため一旦保留
-    }
-    
-    // filteredの中身が変化したらtableViewをリロードするメソッドが欲しい
-    @objc func reloadTableView() {
         songTableView.reloadData()
     }
     
@@ -190,6 +184,9 @@ class PlayViewController: UIViewController {
     
     @IBAction func tapShuffleButton(_ sender: Any) {
         Songs.shared.shuffleFilteredSongsExpectSelectedSong()
+        // TODO: ここでTableViewのスクロールが実行されない
+        songTableView.setContentOffset(.zero, animated: false)
+        // songTableView.reloadData()
     }
     
     @IBAction func tapRepeatButton(_ sender: Any) {

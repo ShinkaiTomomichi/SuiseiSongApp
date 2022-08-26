@@ -94,8 +94,9 @@ class HomeViewController: UIViewController {
     }
     
     @objc func addPlayListBarButtonTapped(_ sender: UIBarButtonItem) {
-        // PlayList作成ページへ遷移
-        Logger.log(message: "未作成")
+        let storyboard = UIStoryboard(name: "AddPlayList", bundle: nil)
+        let nextViewController = storyboard.instantiateViewController(withIdentifier: "AddPlayList") as! AddPlayListViewController
+        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
 }
 

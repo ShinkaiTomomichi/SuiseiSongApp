@@ -64,13 +64,21 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension SearchViewController: UISearchBarDelegate {
-    // TODO: 確定後以外のタイミングでも発火できるようにしておきたい
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         // キーボードを閉じる
         view.endEditing(true)
-        // 入力された値がnilでなければif文のブロック内の処理を実行
+        
         if let searchText = searchBar.text {
             Songs.shared.setFilteredSongsForSearch(by: searchText)
+            songTableView.setContentOffset(.zero, animated: false)
+            songTableView.reloadData()
+        }
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if let searchText = searchBar.text {
+            Songs.shared.setFilteredSongsForSearch(by: searchText)
+            songTableView.setContentOffset(.zero, animated: false)
             songTableView.reloadData()
         }
     }

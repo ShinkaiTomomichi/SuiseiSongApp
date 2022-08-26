@@ -18,7 +18,9 @@ final class SelectedStatus {
     // 最初にここを選択した後にfilteredを更新する処理を入れたい
     private(set) var song: Song? = nil {
         didSet {
-            NotificationCenter.default.post(name: .didChangedSelectedSong, object: nil)
+            if oldValue?.id != song?.id {
+                NotificationCenter.default.post(name: .didChangedSelectedSong, object: nil)
+            }
             // videoIDが異なるかを確認する
             YTPlayerViewWrapper.shared.shouldReload = oldValue?.videoid != song?.videoid
             // 動画を再生する
@@ -77,7 +79,6 @@ final class SelectedStatus {
         
         Logger.log(message: "現在のID \(id)")
         if id > 0 {
-            // TODO: ここバグってる、確実に一個前に進んでいない
             setSelectedSong(song: Songs.shared.filteredSongs[id-1])
             return true
         } else if Settings.shared.repeatType == .allRepeat {

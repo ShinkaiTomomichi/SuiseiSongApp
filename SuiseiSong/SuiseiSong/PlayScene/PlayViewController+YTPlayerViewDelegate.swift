@@ -54,7 +54,6 @@ extension PlayViewController: YTPlayerViewDelegate {
     private func endtimeExceed() {
         // ここに次の動画へ進む処理を挟みたい
         // singleRepeatの場合は同じ動画へループする
-        // 現状shouldの挙動がおかしいため修正する
         if Settings.shared.repeatType == .singleRepeat {
             // ここで再度選択する挙動を示さないと再リロードが入る
             YTPlayerViewWrapper.shared.start()

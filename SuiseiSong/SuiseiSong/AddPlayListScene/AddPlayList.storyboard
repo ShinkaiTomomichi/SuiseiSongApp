@@ -11,13 +11,56 @@
         <!--Add Play List View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" customClass="AddPlayListViewController" customModule="SuiseiSong" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddPlayList" id="Y6W-OH-hqX" customClass="AddPlayListViewController" customModule="SuiseiSong" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="lGV-Pi-JWX">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="プレイリスト名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfA-B9-OGn">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1sH-fV-qS8">
+                                        <rect key="frame" x="0.0" y="25.5" width="414" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="12N-yq-h90"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="W7T-it-FxJ">
+                                        <rect key="frame" x="0.0" y="71" width="414" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="Zyg-Z8-a9v"/>
+                                        </constraints>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </searchBar>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="oPA-yo-7St">
+                                        <rect key="frame" x="0.0" y="115.5" width="414" height="702.5"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </tableView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="lGV-Pi-JWX" secondAttribute="bottom" id="FM2-eH-hLB"/>
+                            <constraint firstItem="lGV-Pi-JWX" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="GBP-0N-FkA"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="lGV-Pi-JWX" secondAttribute="trailing" id="Joa-Bu-DmT"/>
+                            <constraint firstItem="lGV-Pi-JWX" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="aR9-oY-byL"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="playListTitleTextField" destination="1sH-fV-qS8" id="nKZ-oP-Oe6"/>
+                        <outlet property="searchBar" destination="W7T-it-FxJ" id="lLY-eF-woA"/>
+                        <outlet property="songTableView" destination="oPA-yo-7St" id="5pL-Uo-YBd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

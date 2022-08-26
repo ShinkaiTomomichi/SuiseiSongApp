@@ -62,6 +62,8 @@
 		DAA257EA28B7D11C00728EF0 /* Recommend.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA257E928B7D11C00728EF0 /* Recommend.swift */; };
 		DAA257EE28B8539300728EF0 /* AddPlayListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA257EC28B8539200728EF0 /* AddPlayListViewController.swift */; };
 		DAA257F128B853AB00728EF0 /* AddPlayList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAA257F028B853AB00728EF0 /* AddPlayList.storyboard */; };
+		DAA257F528B91E7900728EF0 /* SongTableViewForChoiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA257F328B91E7900728EF0 /* SongTableViewForChoiceCell.swift */; };
+		DAA257F628B91E7900728EF0 /* SongTableViewForChoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAA257F428B91E7900728EF0 /* SongTableViewForChoiceCell.xib */; };
 		DAC2392728A29F1800091E1D /* SongForJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC2392628A29F1800091E1D /* SongForJSON.swift */; };
 		DAC2392928A3220600091E1D /* Favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC2392828A3220600091E1D /* Favorites.swift */; };
 		DAC2392B28A3258A00091E1D /* Histories.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC2392A28A3258A00091E1D /* Histories.swift */; };
@@ -146,6 +148,8 @@
 		DAA257E928B7D11C00728EF0 /* Recommend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommend.swift; sourceTree = "<group>"; };
 		DAA257EC28B8539200728EF0 /* AddPlayListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayListViewController.swift; sourceTree = "<group>"; };
 		DAA257F028B853AB00728EF0 /* AddPlayList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddPlayList.storyboard; sourceTree = "<group>"; };
+		DAA257F328B91E7900728EF0 /* SongTableViewForChoiceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongTableViewForChoiceCell.swift; sourceTree = "<group>"; };
+		DAA257F428B91E7900728EF0 /* SongTableViewForChoiceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SongTableViewForChoiceCell.xib; sourceTree = "<group>"; };
 		DAC2392628A29F1800091E1D /* SongForJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongForJSON.swift; sourceTree = "<group>"; };
 		DAC2392828A3220600091E1D /* Favorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorites.swift; sourceTree = "<group>"; };
 		DAC2392A28A3258A00091E1D /* Histories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Histories.swift; sourceTree = "<group>"; };
@@ -397,10 +401,20 @@
 		DAA257EB28B8531B00728EF0 /* AddPlayListScene */ = {
 			isa = PBXGroup;
 			children = (
-				DAA257F028B853AB00728EF0 /* AddPlayList.storyboard */,
+				DAA257F228B91E3E00728EF0 /* SongTableViewForChoiceCell */,
 				DAA257EC28B8539200728EF0 /* AddPlayListViewController.swift */,
+				DAA257F028B853AB00728EF0 /* AddPlayList.storyboard */,
 			);
 			path = AddPlayListScene;
+			sourceTree = "<group>";
+		};
+		DAA257F228B91E3E00728EF0 /* SongTableViewForChoiceCell */ = {
+			isa = PBXGroup;
+			children = (
+				DAA257F328B91E7900728EF0 /* SongTableViewForChoiceCell.swift */,
+				DAA257F428B91E7900728EF0 /* SongTableViewForChoiceCell.xib */,
+			);
+			path = SongTableViewForChoiceCell;
 			sourceTree = "<group>";
 		};
 		DAC2393428A6853600091E1D /* PlayListModule */ = {
@@ -527,6 +541,7 @@
 				DA9950B5287B27270037D8E5 /* LaunchScreen.storyboard in Resources */,
 				DA9950B2287B27270037D8E5 /* Assets.xcassets in Resources */,
 				DA60783E28989D6E0002A524 /* Search.storyboard in Resources */,
+				DAA257F628B91E7900728EF0 /* SongTableViewForChoiceCell.xib in Resources */,
 				DA6078352896B8000002A524 /* suisei_song1.json in Resources */,
 				DADC8D8228AD400C004860E0 /* suisei_song3.json in Resources */,
 				DA60784C28994A7B0002A524 /* SuggestModule.xib in Resources */,
@@ -595,6 +610,7 @@
 				DAC2392F28A4929300091E1D /* RockDelegate.swift in Sources */,
 				DAC2393628A6F98600091E1D /* PlayListModule.swift in Sources */,
 				DA9950A9287B271F0037D8E5 /* AppDelegate.swift in Sources */,
+				DAA257F528B91E7900728EF0 /* SongTableViewForChoiceCell.swift in Sources */,
 				DA9950F92885874F0037D8E5 /* Logger.swift in Sources */,
 				DAC2392B28A3258A00091E1D /* Histories.swift in Sources */,
 				DAC2393328A5CEF500091E1D /* ImageCaches.swift in Sources */,
@@ -815,9 +831,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = X566S736X4;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SuiseiSong/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "すいちゃんのうた";

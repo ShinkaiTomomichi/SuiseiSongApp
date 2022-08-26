@@ -11,8 +11,6 @@ import Foundation
 extension NSNotification.Name {
     static let didChangedSelectedSong = Notification.Name("didChangedSelectedSong")
     
-    static let didChangedFilteredSong = Notification.Name("didChangedFilteredSong")
-    
     static let didChangedRepeatType = Notification.Name("didChangedRepeatType")
     
     static let didChangedPlaying = Notification.Name("didChangedPlaying")    

@@ -14,9 +14,11 @@ final class Songs {
     
     // allSongsは特に更新しない
     var allSongs: [Song] = []
+    // filter後のデータセット
+    
+    // filteredではなくplaySongs
     private(set) var filteredSongs: [Song] = [] {
         didSet {
-            NotificationCenter.default.post(name: .didChangedFilteredSong, object: nil)
             self.filteredSongsForSearch = filteredSongs
         }
     }
@@ -84,6 +86,7 @@ final class Songs {
         historySongs = allSongs.filter {
             Histories.shared.historyIds.contains($0.id)
         }
+        
         // 他のデータベースから動画をセット
         favorite202207Songs = JSONFileManager.getSuiseiSongs(forResource: "202207")
         favorite202206Songs = JSONFileManager.getSuiseiSongs(forResource: "202206")
