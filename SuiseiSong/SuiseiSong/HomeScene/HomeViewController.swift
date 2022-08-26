@@ -64,15 +64,21 @@ class HomeViewController: UIViewController {
     }
     
     private func loadHistoryAndFavoriteView() {
-        recentView.collectionView.reloadData()
-        live3DView.collectionView.reloadData()
-        favorite202206View.collectionView.reloadData()
-        favorite202207View.collectionView.reloadData()
-        historyView.collectionView.reloadData()
-        favoriteView.collectionView.reloadData()
+        reloadSuggestModule(recentView)
+        reloadSuggestModule(live3DView)
+        reloadSuggestModule(favorite202207View)
+        reloadSuggestModule(favorite202206View)
+        reloadSuggestModule(historyView)
+        reloadSuggestModule(favoriteView)
         
+        // TODO: 汎用化して存在しないモジュールは表示できないようにしておきたい
         historyView.isHidden = Histories.shared.historyIds.count == 0
         favoriteView.isHidden = Favorites.shared.favoriteIds.count == 0
+    }
+    
+    private func reloadSuggestModule(_ suggestModuleView: SuggestModuleView) {
+        suggestModuleView.collectionView.setContentOffset(.zero, animated: false)
+        suggestModuleView.collectionView.reloadData()
     }
     
     private func setupBackground() {
