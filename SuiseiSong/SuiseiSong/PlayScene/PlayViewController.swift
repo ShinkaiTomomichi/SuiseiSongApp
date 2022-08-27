@@ -183,7 +183,7 @@ class PlayViewController: UIViewController {
     }
     
     @IBAction func tapShuffleButton(_ sender: Any) {
-        Songs.shared.shuffleFilteredSongsExpectSelectedSong()
+        Songs.shared.shuffleDisplaySongsExpectSelectedSong()
         // TODO: ここでTableViewのスクロールが実行されない
         songTableView.setContentOffset(.zero, animated: false)
         // songTableView.reloadData()

@@ -13,6 +13,9 @@ class AddPlayListViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var songTableView: UITableView!
     
+    // NavigationBarに追加するボタン
+    var shareBarButtonItem: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,12 +23,20 @@ class AddPlayListViewController: UIViewController {
         songTableView.delegate = self
         songTableView.register(UINib(nibName: "SongTableViewCell", bundle: nil), forCellReuseIdentifier: "SongTableViewCell")
         searchBar.delegate = self
+        
+        shareBarButtonItem = UIBarButtonItem(image: UIImage.initWithTintColorWhite(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(shareBarButtonTapped(_:)))
+        
+        self.navigationItem.rightBarButtonItems = [shareBarButtonItem]
+    }
+    
+    @objc func shareBarButtonTapped(_ sender: UIBarButtonItem) {
+        Logger.log(message: "")
     }
 }
 
 extension AddPlayListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Songs.shared.filteredSongsForSearch.count
+        return Songs.shared.displaySongsForSearch.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -38,7 +49,7 @@ extension AddPlayListViewController: UITableViewDelegate, UITableViewDataSource 
 
         // セルに対応する歌をセット
         let index = indexPath.row
-        cell.song = Songs.shared.filteredSongsForSearch[index]
+        cell.song = Songs.shared.displaySongsForSearch[index]
         
         return cell
     }
@@ -50,7 +61,7 @@ extension AddPlayListViewController: UISearchBarDelegate {
         view.endEditing(true)
         
         if let searchText = searchBar.text {
-            Songs.shared.setFilteredSongsForSearch(by: searchText)
+            Songs.shared.setDisplaySongsForSearch(by: searchText)
             songTableView.setContentOffset(.zero, animated: false)
             songTableView.reloadData()
         }
@@ -58,7 +69,7 @@ extension AddPlayListViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if let searchText = searchBar.text {
-            Songs.shared.setFilteredSongsForSearch(by: searchText)
+            Songs.shared.setDisplaySongsForSearch(by: searchText)
             songTableView.setContentOffset(.zero, animated: false)
             songTableView.reloadData()
         }

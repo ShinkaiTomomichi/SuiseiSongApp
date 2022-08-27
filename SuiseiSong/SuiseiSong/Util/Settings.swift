@@ -18,6 +18,8 @@ final class Settings {
             NotificationCenter.default.post(name: .didChangedRepeatType, object: nil)
         }
     }
+    var filteredDuplication: Bool = true
+    var filteredAcappella: Bool = true
     
     func toggleRepeatType() {
         if repeatType == .none {

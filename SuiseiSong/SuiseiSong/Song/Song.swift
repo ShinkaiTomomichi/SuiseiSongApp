@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 // お気に入り情報を単一ソースで管理するためclassにする
-final class Song {
+final class Song: Equatable {
     // JSONから取得する情報
     var id: Int
     var members: [String]
@@ -28,6 +28,7 @@ final class Song {
     var date: Int
     // 独自に追加する情報
     var favorite: Bool
+    var filter: Bool
     
     init(songForJSON: SongForJSON) {
         self.id = songForJSON.id
@@ -49,5 +50,11 @@ final class Song {
         self.artist = songForJSON.artistnameremake
         // 以下独自の値を利用する
         self.favorite = false
+        self.filter = false
+    }
+    
+    // IDが一致するものは同じとする
+    static func == (lhs: Song, rhs: Song) -> Bool {
+        return lhs.id == rhs.id
     }
 }

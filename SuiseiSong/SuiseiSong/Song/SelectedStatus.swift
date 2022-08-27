@@ -34,14 +34,14 @@ final class SelectedStatus {
     // 選択された曲が変化した場合に呼ばれる
     // songIDで選択する
     func setSelectedID(id: Int, filterCompletion: (() -> Void)? = nil) {
-        self.song = Songs.shared.get(byId: id)
+        self.song = Songs.shared.getSong(byId: id)
         
         // 選択後にIDを指定するためfilteringを実施（これはもっといい方法がありそう）
         if let filterCompletion = filterCompletion {
             filterCompletion()
         }
         
-        self.filteredID = Songs.shared.getFilteredID(bySong: self.song!)
+        self.filteredID = Songs.shared.getFilteredId(bySong: self.song!)
     }
     
     // songで選択する
@@ -61,11 +61,11 @@ final class SelectedStatus {
             return false
         }
         
-        if id + 1 < Songs.shared.filteredSongs.count {
-            setSelectedSong(song: Songs.shared.filteredSongs[id+1])
+        if id + 1 < Songs.shared.displaySongs.count {
+            setSelectedSong(song: Songs.shared.displaySongs[id+1])
             return true
         } else if Settings.shared.repeatType == .allRepeat {
-            setSelectedSong(song: Songs.shared.filteredSongs[0])
+            setSelectedSong(song: Songs.shared.displaySongs[0])
             return true
         } else {
             return false
@@ -79,10 +79,10 @@ final class SelectedStatus {
         
         Logger.log(message: "現在のID \(id)")
         if id > 0 {
-            setSelectedSong(song: Songs.shared.filteredSongs[id-1])
+            setSelectedSong(song: Songs.shared.displaySongs[id-1])
             return true
         } else if Settings.shared.repeatType == .allRepeat {
-            setSelectedSong(song: Songs.shared.filteredSongs[Songs.shared.filteredSongs.count - 1])
+            setSelectedSong(song: Songs.shared.displaySongs[Songs.shared.displaySongs.count - 1])
             return true
         } else {
             return false

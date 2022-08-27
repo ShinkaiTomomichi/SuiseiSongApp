@@ -30,6 +30,7 @@ class SongTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+        selectedView.isUserInteractionEnabled = false
     }
     
     @IBAction func tapFavoriteButton(_ sender: Any) {
@@ -44,7 +45,7 @@ class SongTableViewCell: UITableViewCell {
         if let song = self.song,
             let selectedSong = SelectedStatus.shared.song,
            song.id == selectedSong.id {
-            selectedView.alpha = 0.5
+            selectedView.alpha = 0.5            
         } else {
             selectedView.alpha = 0.0
         }

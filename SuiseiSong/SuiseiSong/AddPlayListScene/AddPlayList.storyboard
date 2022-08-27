@@ -19,14 +19,14 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="lGV-Pi-JWX">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="プレイリスト名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfA-B9-OGn">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="プレイリストに追加する曲を選択してください" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfA-B9-OGn">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1sH-fV-qS8">
-                                        <rect key="frame" x="0.0" y="25.5" width="414" height="40"/>
+                                        <rect key="frame" x="0.0" y="22" width="414" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="12N-yq-h90"/>
                                         </constraints>
@@ -34,14 +34,14 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="W7T-it-FxJ">
-                                        <rect key="frame" x="0.0" y="71" width="414" height="40"/>
+                                        <rect key="frame" x="0.0" y="67" width="414" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Zyg-Z8-a9v"/>
                                         </constraints>
                                         <textInputTraits key="textInputTraits"/>
                                     </searchBar>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="oPA-yo-7St">
-                                        <rect key="frame" x="0.0" y="115.5" width="414" height="702.5"/>
+                                        <rect key="frame" x="0.0" y="112" width="414" height="706"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </tableView>
                                 </subviews>

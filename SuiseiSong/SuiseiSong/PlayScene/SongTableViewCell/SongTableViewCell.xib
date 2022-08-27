@@ -59,6 +59,10 @@
                     <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n0E-OZ-ar4" userLabel="Select">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                            <bool key="isElement" value="NO"/>
+                        </accessibility>
                     </view>
                 </subviews>
                 <constraints>

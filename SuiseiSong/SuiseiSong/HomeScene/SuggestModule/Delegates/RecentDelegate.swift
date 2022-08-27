@@ -13,8 +13,8 @@ class RecentDelegate: NSObject, SuggestModuleViewDelegateProtocol {
     
     // セルの数
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if Songs.shared.allSongs.count < 10 {
-            return Songs.shared.allSongs.count
+        if Songs.shared.filteredSongs.count < 10 {
+            return Songs.shared.filteredSongs.count
         } else {
             return 10
         }
@@ -26,7 +26,7 @@ class RecentDelegate: NSObject, SuggestModuleViewDelegateProtocol {
         var cell: SuggestModuleCollectionViewCell
         let index = indexPath.row
         cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SuggestModuleCollectionViewCell", for: indexPath) as! SuggestModuleCollectionViewCell
-        cell.song = Songs.shared.allSongs[index]
+        cell.song = Songs.shared.filteredSongs[index]
         
         return cell
     }

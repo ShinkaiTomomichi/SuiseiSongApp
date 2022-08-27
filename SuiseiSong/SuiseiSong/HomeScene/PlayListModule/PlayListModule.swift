@@ -68,7 +68,7 @@ extension PlayListView: UICollectionViewDelegate, UICollectionViewDataSource {
         
         if let navigationController = self.navigationController,
             let song = Songs.shared.holoMembersSongs[Songs.shared.holoMembers[indexPath.row]] {
-            Songs.shared.setFilteredSongs(songs: song)
+            Songs.shared.setDisplaySongs(songs: song)
             navigationController.pushViewController(nextViewController, animated: true)
         } else {
             Logger.log(message: "navigationControllerのセットが完了していません")

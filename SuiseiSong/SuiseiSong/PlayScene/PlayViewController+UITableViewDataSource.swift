@@ -9,7 +9,7 @@ import UIKit
 
 extension PlayViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Songs.shared.filteredSongs.count
+        return Songs.shared.displaySongs.count
     }
     
     // 推定の高さを指定することでパフォーマンス改善を測る
@@ -23,7 +23,7 @@ extension PlayViewController: UITableViewDelegate, UITableViewDataSource {
 
         // セルに対応する歌をセット
         let index = indexPath.row
-        cell.song = Songs.shared.filteredSongs[index]
+        cell.song = Songs.shared.displaySongs[index]
         
         cell.reloadSelected()
         

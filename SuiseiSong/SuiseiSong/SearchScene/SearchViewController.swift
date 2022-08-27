@@ -33,7 +33,7 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Songs.shared.filteredSongsForSearch.count
+        return Songs.shared.displaySongsForSearch.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -46,7 +46,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
 
         // セルに対応する歌をセット
         let index = indexPath.row
-        cell.song = Songs.shared.filteredSongsForSearch[index]
+        cell.song = Songs.shared.displaySongsForSearch[index]
         
         return cell
     }
@@ -69,7 +69,7 @@ extension SearchViewController: UISearchBarDelegate {
         view.endEditing(true)
         
         if let searchText = searchBar.text {
-            Songs.shared.setFilteredSongsForSearch(by: searchText)
+            Songs.shared.setDisplaySongsForSearch(by: searchText)
             songTableView.setContentOffset(.zero, animated: false)
             songTableView.reloadData()
         }
@@ -77,7 +77,7 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if let searchText = searchBar.text {
-            Songs.shared.setFilteredSongsForSearch(by: searchText)
+            Songs.shared.setDisplaySongsForSearch(by: searchText)
             songTableView.setContentOffset(.zero, animated: false)
             songTableView.reloadData()
         }

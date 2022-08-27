@@ -63,50 +63,50 @@ class SuggestModuleView: UIView {
         case .recent:
             delegate = RecentDelegate()
             filteredCompletion = {
-                Songs.shared.resetFilteredSong()
+                Songs.shared.resetDisplaySongs()
             }
             self.title.text = "最近の動画"
         case .favorite202207:
             delegate = Favorite202207Delegate()
             filteredCompletion = {
                 // 画面に送る時にfilteredにセットする方式にする
-                Songs.shared.setFilteredSongs(songs: Songs.shared.favorite202207Songs)
+                Songs.shared.setDisplaySongs(songs: Songs.shared.favorite202207Songs)
             }
             self.title.text = "7月のおすすめ"
         case .favorite202206:
             delegate = Favorite202206Delegate()
             filteredCompletion = {
-                Songs.shared.setFilteredSongs(songs: Songs.shared.favorite202206Songs)
+                Songs.shared.setDisplaySongs(songs: Songs.shared.favorite202206Songs)
             }
             self.title.text = "6月のおすすめ"
         case .rock:
             delegate = RockDelegate()
             filteredCompletion = {
-                Songs.shared.setFilteredSongs(songs: Songs.shared.rockSongs)
+                Songs.shared.setDisplaySongs(songs: Songs.shared.rockSongs)
             }
             self.title.text = "ロック"
         case .anime:
             delegate = AnimeDelegate()
             filteredCompletion = {
-                Songs.shared.setFilteredSongs(songs: Songs.shared.animeSongs)
+                Songs.shared.setDisplaySongs(songs: Songs.shared.animeSongs)
             }
             self.title.text = "アニメ"
         case .live3d:
             delegate = Live3DDelegate()
             filteredCompletion = {
-                Songs.shared.setFilteredSongs(songs: Songs.shared.live3DSongs)
+                Songs.shared.setDisplaySongs(songs: Songs.shared.live3DSongs)
             }
             self.title.text = "3Dライブ"
         case .history:
             delegate = HistoryDelegate()
             filteredCompletion = {
-                Songs.shared.setFilteredSongs(songs: Songs.shared.historySongs)
+                Songs.shared.setDisplaySongs(songs: Songs.shared.historySongs)
             }
             self.title.text = "履歴"
         case .favorite:
             delegate = FavoriteDelegate()
             filteredCompletion = {
-                Songs.shared.setFilteredSongs(songs: Songs.shared.favoriteSongs)
+                Songs.shared.setDisplaySongs(songs: Songs.shared.favoriteSongs)
             }
             self.title.text = "お気に入り"
         default:
