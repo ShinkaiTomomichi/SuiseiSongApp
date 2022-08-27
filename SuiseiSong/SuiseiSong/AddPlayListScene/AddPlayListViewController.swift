@@ -9,28 +9,36 @@ import UIKit
 
 class AddPlayListViewController: UIViewController {
 
-    @IBOutlet weak var playListTitleTextField: UITextField!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var sortButton: UIButton!
     @IBOutlet weak var songTableView: UITableView!
     
+    var playListIds: [Int] = []
+    
     // NavigationBarに追加するボタン
-    var shareBarButtonItem: UIBarButtonItem!
+    var saveBarButtonItem: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         songTableView.dataSource = self
         songTableView.delegate = self
-        songTableView.register(UINib(nibName: "SongTableViewCell", bundle: nil), forCellReuseIdentifier: "SongTableViewCell")
+        songTableView.register(UINib(nibName: "SongTableViewForChoiceCell", bundle: nil), forCellReuseIdentifier: "SongTableViewForChoiceCell")
         searchBar.delegate = self
         
-        shareBarButtonItem = UIBarButtonItem(image: UIImage.initWithTintColorWhite(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(shareBarButtonTapped(_:)))
+        saveBarButtonItem = UIBarButtonItem(image: UIImage.initWithTintColorWhite(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(saveBarButtonTapped(_:)))
         
-        self.navigationItem.rightBarButtonItems = [shareBarButtonItem]
+        self.navigationItem.rightBarButtonItems = [saveBarButtonItem]
     }
     
-    @objc func shareBarButtonTapped(_ sender: UIBarButtonItem) {
-        Logger.log(message: "")
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        Songs.shared.resetChoicies()
+    }
+    
+    @IBAction func tapSortButton(_ sender: Any) {
+        // sort形式をtoggleする
+        // displaySongsを再セットするとかか?
     }
 }
 
@@ -45,7 +53,7 @@ extension AddPlayListViewController: UITableViewDelegate, UITableViewDataSource 
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // セルを取得する
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SongTableViewCell", for: indexPath) as! SongTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SongTableViewForChoiceCell", for: indexPath) as! SongTableViewForChoiceCell
 
         // セルに対応する歌をセット
         let index = indexPath.row
@@ -74,4 +82,66 @@ extension AddPlayListViewController: UISearchBarDelegate {
             songTableView.reloadData()
         }
     }
+}
+
+// 保存ボタンに関するextension
+extension AddPlayListViewController {
+    @objc func saveBarButtonTapped(_ sender: UIBarButtonItem) {
+        presentSaveAlert()
+    }
+    
+    private func presentSaveAlert() {
+        let alert = UIAlertController(title: "新しいプレイリスト",
+                                      message: "プレイリスト名を入力し保存ボタンを押してください",
+                                      preferredStyle: .alert)
+
+        // textFieldを追加
+        var playListTitleTextField: UITextField?
+        alert.addTextField(configurationHandler: {(textField) -> Void in
+            playListTitleTextField = textField
+            playListTitleTextField?.placeholder = "プレイリスト名"
+            }
+        )
+
+        // 実行ボタンを追加
+        alert.addAction(UIAlertAction(title: "保存", style: .default, handler: {(action) -> Void in
+            
+            guard let title = playListTitleTextField?.text, !title.isEmpty else {
+                self.presentCautionAlert(message: "プレイリスト名が不正です")
+                return
+            }
+            
+            guard Songs.shared.allSongs.filter({ $0.choice }).count != 0 else {
+                self.presentCautionAlert(message: "プレイリストに追加する曲を選択してください")
+                return
+            }
+            
+            // TODO: プレイリスト名が重複する場合も気をつけたい
+            self.savePlayList(title: title)
+        }))
+        
+        // キャンセルボタンを追加
+        alert.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler: nil))
+        
+        // AlertViewを表示
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func presentCautionAlert(message: String) {
+        let alert = UIAlertController(title: "不正な入力です",
+                                      message: message,
+                                      preferredStyle: .alert)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func savePlayList(title: String) {
+        Logger.log(message: "ここでUDに保存")
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+}
+
+enum SortType {
+    case recent
+    case history
 }

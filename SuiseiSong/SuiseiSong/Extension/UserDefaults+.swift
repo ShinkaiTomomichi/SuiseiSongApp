@@ -8,21 +8,26 @@
 import Foundation
 
 extension UserDefaults {
-    // デバッグ用の修正時刻の保存
-    static func saveModifiedTime(id: Int, startTime: Int, endTime: Int) {
-        let idString = "modified:"+String(id)
-        let value = String(startTime) + "&" + String(endTime)
-        UserDefaults.standard.set(value, forKey: idString)
+    // プレイリストの保存
+    // 面倒なのでKeyChainでもいいかも
+    static func keyPlayList() -> String {
+        return "playlist"
     }
     
-    static func printModifiled() {
-        UserDefaults.standard.dictionaryRepresentation().forEach {
-            let key = $0.key
-            if key.contains("modified:") {
-                let value = $0.value as! String
-                Logger.log(message: "key:\(key), value:\(value)")
-            }
+    static func savePlayList() {
+        let histories = Histories.shared.historyIds
+        UserDefaults.standard.set(histories, forKey: keyHistory())
+    }
+    
+    static func loadPlayList() -> [Int]? {
+        guard let history = UserDefaults.standard.array(forKey: keyHistory()) else {
+            return nil
         }
+        return history.compactMap { $0 as? Int }
+    }
+    
+    static func removePlayList() {
+        UserDefaults.standard.removeObject(forKey: keyPlayList())
     }
     
     // 履歴の保存

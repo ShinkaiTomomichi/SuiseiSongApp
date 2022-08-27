@@ -18,7 +18,8 @@ class SongTableViewForChoiceCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var artist: UILabel!
     @IBOutlet weak var choice: UIButton!
-    
+
+    // うーむ、Songに格納してしまうのが楽かね???
     var song: Song? = nil {
         // songをセットした際に自動で他の要素をセットする
         didSet {
@@ -26,12 +27,10 @@ class SongTableViewForChoiceCell: UITableViewCell {
                 self.title.text = song.songtitle
                 self.artist.text = song.artist
                 getImageByVideoId(videoId: song.videoid)
-                // setChoice()
+                setChoiceButton(enable: song.choice)
             }
         }
     }
-    
-    var viewController: UIViewController?
         
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,10 +38,9 @@ class SongTableViewForChoiceCell: UITableViewCell {
     }
     
     @IBAction func tapChoiceButton(_ sender: Any) {
-        song?.favorite.toggle()
-        // setFavoriteStar()
         if let song = song {
-            setFavorites(videoId: song.videoid)
+            song.choice.toggle()
+            setChoiceButton(enable: song.choice)
         }
     }
     
@@ -52,29 +50,11 @@ class SongTableViewForChoiceCell: UITableViewCell {
         self.icon.image = ImageCaches.shared.caches[videoId]
     }
     
-    //
-    private func setChoiceButton() {
-        guard let song = self.song else {
-            return
-        }
-        if song.favorite {
-            // ここだけ水色に変えておく
-            let suiseiColor = UIColor(red: 29/255, green: 167/255, blue: 250/255, alpha: 1.0)
-            self.choice.setImage(UIImage(systemName: "star.fill")?.withTintColor(suiseiColor, renderingMode: .alwaysOriginal), for: .normal)
+    private func setChoiceButton(enable: Bool) {
+        if enable {
+            self.choice.setImage(UIImage.initWithTintColorWhite(systemName: "checkmark.square.fill"), for: .normal)
         } else {
-            self.choice.setImage(UIImage.initWithTintColorWhite(systemName: "star"), for: .normal)
+            self.choice.setImage(UIImage.initWithTintColorWhite(systemName: "square"), for: .normal)
         }
-    }
-    
-    private func setFavorites(videoId: String) {
-        guard let song = self.song else {
-            return
-        }
-        if song.favorite {
-            Favorites.shared.addFavorite(songId: song.id)
-        } else {
-            Favorites.shared.removeFavorite(songId: song.id)
-        }
-        // Songs.shared.setFavorite(songId: song.id, favorite: song.favorite)
     }
 }

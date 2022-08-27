@@ -49,6 +49,9 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain"/>
+                                <connections>
+                                    <action selector="tapChoiceButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="zya-Dj-qTu"/>
+                                </connections>
                             </button>
                         </subviews>
                     </stackView>

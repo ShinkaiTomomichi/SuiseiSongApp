@@ -212,6 +212,12 @@ final class Songs {
         }
     }
     
+    func resetChoicies() {
+        for song in allSongs {
+            song.choice = false
+        }
+    }
+    
     private func checkIdForDebug() {
         var ids: [Int] = []
         for song in allSongs {

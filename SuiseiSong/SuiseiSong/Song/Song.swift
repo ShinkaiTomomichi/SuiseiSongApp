@@ -29,6 +29,7 @@ final class Song: Equatable {
     // 独自に追加する情報
     var favorite: Bool
     var filter: Bool
+    var choice: Bool
     
     init(songForJSON: SongForJSON) {
         self.id = songForJSON.id
@@ -51,6 +52,7 @@ final class Song: Equatable {
         // 以下独自の値を利用する
         self.favorite = false
         self.filter = false
+        self.choice = false
     }
     
     // IDが一致するものは同じとする
