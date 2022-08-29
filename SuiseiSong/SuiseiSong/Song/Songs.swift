@@ -27,14 +27,13 @@ final class Songs {
     // 暫定的なジャンル分け
     var collabSongs: [Song] = []
     var live3DSongs: [Song] = []
-    var animeSongs: [Song] = []
-    var rockSongs: [Song] = []
-    var vocaloidSongs: [Song] = []
-    var originalSongs: [Song] = []
     // 暫定的なホロメン分け
     // TODO: JSONでメンバーリストを控えておく
     let holoMembers: [String] = ["天音かなた", "常闇トワ", "桃鈴ねね", "宝鐘マリン", "湊あくあ"]
     var holoMembersSongs: [String: [Song]] = [:]
+    
+    let myFavorites: [String] = ["7月のおすすめ", "6月のおすすめ"]
+    var myFavoriteSongs: [String: [Song]] = [:]
     
     // TODO: 暫定的なアーティスト分け
     let artists: [String] = []
@@ -57,9 +56,9 @@ final class Songs {
     }
     
     private func setupAllSongs() {
-        self.allSongs = JSONFileManager.getSuiseiSongs(forResource: "suisei_song3")
-        allSongs.append(contentsOf: JSONFileManager.getSuiseiSongs(forResource: "202207"))
-        allSongs.append(contentsOf: JSONFileManager.getSuiseiSongs(forResource: "202206"))
+        self.allSongs = JSONFileManager.getSuiseiSongs(forResource: "suisei_songs")
+        // allSongs.append(contentsOf: JSONFileManager.getSuiseiSongs(forResource: "202207"))
+        // allSongs.append(contentsOf: JSONFileManager.getSuiseiSongs(forResource: "202206"))
         
         sortAllSongs()
         setFavoriteAllSongs()
@@ -79,10 +78,10 @@ final class Songs {
     private func removeDuplication(enable: Bool) {
         var songTitles: [String] = []
         for song in allSongs {
-            if song.members.count == 1 && songTitles.contains(song.songtitle) {
+            if song.members.count == 1 && songTitles.contains(song.songname) {
                 song.filter = enable
             } else if song.members.count == 1 {
-                songTitles.append(song.songtitle)
+                songTitles.append(song.songname)
             }
         }
     }
@@ -115,9 +114,6 @@ final class Songs {
     private func setupOtherSongs() {
         // 特定のジャンルの動画をセット
         collabSongs = filteredSongs.filter { $0.collaboration }
-        animeSongs = filteredSongs.filter { $0.anime }
-        vocaloidSongs = filteredSongs.filter { $0.vocaloid }
-        rockSongs = filteredSongs.filter { $0.rock }
         live3DSongs = filteredSongs.filter { $0.live3d }
         // お気に入りと履歴をセット
         favoriteSongs = allSongs.filter {
@@ -139,12 +135,6 @@ final class Songs {
         // recommendから任意のIDを返せるようにする
         let collabIds = Recommend.randomize(songs: collabSongs)
         collabSongs = sorted(byIds: collabIds)
-        let animeIds = Recommend.randomize(songs: animeSongs)
-        animeSongs = sorted(byIds: animeIds)
-        let vocaloidIds = Recommend.randomize(songs: vocaloidSongs)
-        vocaloidSongs = sorted(byIds: vocaloidIds)
-        let rockIds = Recommend.randomize(songs: rockSongs)
-        rockSongs = sorted(byIds: rockIds)
         let live3DIds = Recommend.randomize(songs: live3DSongs)
         live3DSongs = sorted(byIds: live3DIds)
         
@@ -165,12 +155,22 @@ final class Songs {
         }
     }
     
+    private func setupMyFavoriteSongs() {
+        for myFavorite in myFavorites {
+            myFavoriteSongs[myFavorite] = allSongs.filter {
+                $0.listtype == myFavorite
+            }
+        }
+    }
+    
     func resetDisplaySongs() {
         self.displaySongs = self.filteredSongs
     }
     
     // 現状allSongsを別に切り出している
     // allSongsを一つにまとめたい
+    // TODO: IDを変えた時にクラッシュするので修正する
+    // 動画が消える場合を想定しなくてはならない
     func getSong(byId: Int) -> Song {
         return allSongs.filter { $0.id == byId }[0]
     }
@@ -208,7 +208,7 @@ final class Songs {
             return
         }
         displaySongsForSearch = displaySongs.filter {
-            $0.songtitle.contains(by) || $0.artist.contains(by)
+            $0.songname.contains(by) || $0.artistname.contains(by)
         }
     }
     

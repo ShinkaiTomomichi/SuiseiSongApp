@@ -10,24 +10,19 @@ import Foundation
 // メモリが大きい気がするので
 struct SongForJSON: Codable {
     var id: Int
-    var members: String
-    var videoid: String
-    var songtitle: String
+    var songname: String
+    var artistname: String
     var starttime: Int
     var endtime: Int
-    var artist: String
-    var artisturl: String
+    var members: String
+    var videoid: String
+    var date: Int
     var collaboration: Bool
-    var anime: Bool
-    var rock: Bool
-    var vocaloid: Bool
     var acappella: Bool
     var live3d: Bool
-    var date: Int
-    var songnameremake: String
-    var artistnameremake: String
-    var starttimeremake: Int
-    var endtimeremake: Int
+    var suisei: Bool
+    var stream: Bool
+    var listtype: String
     
     func calcDuration() -> Int{
         return endtime - starttime

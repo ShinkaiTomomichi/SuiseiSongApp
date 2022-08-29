@@ -7,12 +7,16 @@
 
 import UIKit
 
-// 一旦ホロメン用のモジュールとして作成
 class PlayListView: UIView {
     
     var view: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     var navigationController: UINavigationController?
+    
+    // 多重リストとiconのキャッシュをプロパティとして持つ
+    var playListKeys: [String] = []
+    var playListSongs: [String: [Song]] = [:]
+    var playListIcons: [String: UIImage] = [:]
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -43,32 +47,41 @@ class PlayListView: UIView {
     func setNavigationController(_ navigationController: UINavigationController?) {
         self.navigationController = navigationController
     }
+    
+    func setPlayList(keys: [String], songs: [String: [Song]], icons: [String: UIImage]) {
+        self.playListKeys = keys
+        self.playListSongs = songs
+        self.playListIcons = icons
+    }
 }
 
 extension PlayListView: UICollectionViewDelegate, UICollectionViewDataSource {
     // セルの数
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Songs.shared.holoMembers.count
+        return playListSongs.keys.count
     }
     
     // セルの中身
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cell: PlayListModuleCollectionViewCell
         cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PlayListModuleCollectionViewCell", for: indexPath) as! PlayListModuleCollectionViewCell
-        cell.holoMember = Songs.shared.holoMembers[indexPath.row]
+        
+        let key = playListKeys[indexPath.row]
+        if let songs = playListSongs[key], let icon = playListIcons[key] {
+            cell.setCell(title: key, songsCount: songs.count, icon: icon)
+        }
         return cell
     }
     
     // セルタップ時
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        Logger.log(message: "タップされました")
         
         let storyboard = UIStoryboard(name: "Search", bundle: nil)
         let nextViewController = storyboard.instantiateViewController(withIdentifier: "Search") as! SearchViewController
         
         if let navigationController = self.navigationController,
-            let song = Songs.shared.holoMembersSongs[Songs.shared.holoMembers[indexPath.row]] {
-            Songs.shared.setDisplaySongs(songs: song)
+            let songs = playListSongs[playListKeys[indexPath.row]] {
+            Songs.shared.setDisplaySongs(songs: songs)
             navigationController.pushViewController(nextViewController, animated: true)
         } else {
             Logger.log(message: "navigationControllerのセットが完了していません")

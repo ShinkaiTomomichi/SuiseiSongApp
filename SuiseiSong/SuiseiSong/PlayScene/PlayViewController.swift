@@ -105,7 +105,7 @@ class PlayViewController: UIViewController {
     
     private func showShareSheet() {
         let selectedSong = SelectedStatus.shared.song
-        var shareText = "\(selectedSong!.songtitle)を聴いてます。\n"
+        var shareText = "\(selectedSong!.songname)を聴いてます。\n"
         shareText += "https://youtu.be/\(selectedSong!.videoid)?t=\(selectedSong!.starttime)\n"
         // shareText += "#星街すいせい" // 各配信のハッシュタグを添えられると良さそう、配信者名でいいか？
         let activityVC = UIActivityViewController(activityItems: [shareText], applicationActivities: nil)
@@ -114,7 +114,7 @@ class PlayViewController: UIViewController {
     
     // 再生した曲が変化した際にlabelを修正する
     @objc func setPlayingSongLabel() {
-        playingSongLabel.text = SelectedStatus.shared.song?.songtitle
+        playingSongLabel.text = SelectedStatus.shared.song?.songname
         songTableView.reloadData()
     }
     

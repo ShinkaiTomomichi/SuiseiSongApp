@@ -16,8 +16,6 @@ class SuggestModuleView: UIView {
         "Recent": .recent,
         "Favorite202207": .favorite202207,
         "Favorite202206": .favorite202206,
-        "Rock": .rock,
-        "Anime": .anime,
         "3DLive": .live3d,
         "History": .history,
         "Favorite": .favorite,
@@ -28,6 +26,9 @@ class SuggestModuleView: UIView {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    // 直接Songsを渡せば早いのでは？
+    var songs: [Song]
     
     var delegate : SuggestModuleViewDelegateProtocol?
     var suggestModuleViewType: SuggestModuleViewType?
@@ -79,18 +80,6 @@ class SuggestModuleView: UIView {
                 Songs.shared.setDisplaySongs(songs: Songs.shared.favorite202206Songs)
             }
             self.title.text = "6月のおすすめ"
-        case .rock:
-            delegate = RockDelegate()
-            filteredCompletion = {
-                Songs.shared.setDisplaySongs(songs: Songs.shared.rockSongs)
-            }
-            self.title.text = "ロック"
-        case .anime:
-            delegate = AnimeDelegate()
-            filteredCompletion = {
-                Songs.shared.setDisplaySongs(songs: Songs.shared.animeSongs)
-            }
-            self.title.text = "アニメ"
         case .live3d:
             delegate = Live3DDelegate()
             filteredCompletion = {
@@ -143,8 +132,6 @@ enum SuggestModuleViewType {
     case recent
     case favorite202207
     case favorite202206
-    case anime
-    case rock
     case live3d
     case history
     case favorite

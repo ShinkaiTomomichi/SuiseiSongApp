@@ -17,8 +17,8 @@ class SuggestModuleCollectionViewCell: UICollectionViewCell {
         // songをセットした際に自動で他の要素をセットする
         didSet {
             if let song = self.song {
-                self.title.text = song.songtitle
-                self.artist.text = song.artist
+                self.title.text = song.songname
+                self.artist.text = song.artistname
                 getImageByVideoId(videoId: song.videoid)
             }
         }

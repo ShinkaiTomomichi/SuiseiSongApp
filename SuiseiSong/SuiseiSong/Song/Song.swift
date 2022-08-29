@@ -12,20 +12,19 @@ import UIKit
 final class Song: Equatable {
     // JSONから取得する情報
     var id: Int
-    var members: [String]
-    var videoid: String
-    var songtitle: String
+    var songname: String
+    var artistname: String
     var starttime: Int
     var endtime: Int
-    var artist: String
-    var artisturl: String
+    var members: [String]
+    var videoid: String
+    var date: Int
     var collaboration: Bool
-    var anime: Bool
-    var rock: Bool
-    var vocaloid: Bool
     var acappella: Bool
     var live3d: Bool
-    var date: Int
+    var suisei: Bool
+    var stream: Bool
+    var listtype: String
     // 独自に追加する情報
     var favorite: Bool
     var filter: Bool
@@ -33,26 +32,23 @@ final class Song: Equatable {
     
     init(songForJSON: SongForJSON) {
         self.id = songForJSON.id
+        self.songname = songForJSON.songname
+        self.artistname = songForJSON.artistname
+        self.starttime = songForJSON.starttime
+        self.endtime = songForJSON.endtime
         self.members = songForJSON.members.components(separatedBy: ",")
         self.videoid = songForJSON.videoid
-        self.artisturl = songForJSON.artisturl
+        self.date = songForJSON.date
         self.collaboration = songForJSON.collaboration
-        self.anime = songForJSON.anime
-        self.rock = songForJSON.rock
-        self.vocaloid = songForJSON.vocaloid
         self.acappella = songForJSON.acappella
         self.live3d = songForJSON.live3d
-        self.live3d = songForJSON.live3d
-        self.date = songForJSON.date
-        // 以下修正した値を利用する
-        self.songtitle = songForJSON.songnameremake
-        self.starttime = songForJSON.starttimeremake
-        self.endtime = songForJSON.endtimeremake
-        self.artist = songForJSON.artistnameremake
+        self.suisei = songForJSON.suisei
+        self.stream = songForJSON.stream
+        self.listtype = songForJSON.listtype
         // 以下独自の値を利用する
         self.favorite = false
         self.filter = false
-        self.choice = false
+        self.choice = false        
     }
     
     // IDが一致するものは同じとする
