@@ -42,16 +42,12 @@ class PlayListView: UIView {
         // モジュールによってセルを変える場合は上記if分に含める
         self.collectionView.register(UINib(nibName: "PlayListModuleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PlayListModuleCollectionViewCell")
     }
-    
-    // tapする前に
-    func setNavigationController(_ navigationController: UINavigationController?) {
-        self.navigationController = navigationController
-    }
-    
-    func setPlayList(keys: [String], songs: [String: [Song]], icons: [String: UIImage]) {
+        
+    func setupPlayListModule(keys: [String], songs: [String: [Song]], icons: [String: UIImage], navigationController: UINavigationController?) {
         self.playListKeys = keys
         self.playListSongs = songs
         self.playListIcons = icons
+        self.navigationController = navigationController
     }
 }
 

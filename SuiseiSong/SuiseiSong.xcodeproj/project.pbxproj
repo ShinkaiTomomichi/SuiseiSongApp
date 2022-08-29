@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		DA4D2C0F28A707BF00260B4C /* PlayListModuleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4D2C0D28A707BF00260B4C /* PlayListModuleCollectionViewCell.swift */; };
 		DA4D2C1028A707BF00260B4C /* PlayListModuleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA4D2C0E28A707BF00260B4C /* PlayListModuleCollectionViewCell.xib */; };
-		DA4D2C1228A70F5300260B4C /* FavoriteDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4D2C1128A70F5300260B4C /* FavoriteDelegate.swift */; };
-		DA4D2C1428A70F6200260B4C /* HistoryDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4D2C1328A70F6200260B4C /* HistoryDelegate.swift */; };
 		DA6078132886D5C20002A524 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6078122886D5C20002A524 /* Int+.swift */; };
 		DA607819288872040002A524 /* Songs.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA607818288872040002A524 /* Songs.swift */; };
 		DA60781B288B8D020002A524 /* PlayViewController+UITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60781A288B8D020002A524 /* PlayViewController+UITableViewDataSource.swift */; };
@@ -20,7 +18,6 @@
 		DA607827288D1D480002A524 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA607826288D1D480002A524 /* HomeViewController.swift */; };
 		DA607829288D1D5E0002A524 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA607828288D1D5E0002A524 /* Home.storyboard */; };
 		DA60782D288D3B190002A524 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60782C288D3B190002A524 /* UIImage+.swift */; };
-		DA60783928980EB80002A524 /* Favorite202207Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60783828980EB70002A524 /* Favorite202207Delegate.swift */; };
 		DA60783E28989D6E0002A524 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA60783D28989D6E0002A524 /* Search.storyboard */; };
 		DA60784028989D8F0002A524 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60783F28989D8F0002A524 /* SearchViewController.swift */; };
 		DA6078422898A4060002A524 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9950D9287F83F70037D8E5 /* Song.swift */; };
@@ -32,9 +29,6 @@
 		DA60784E28994A9E0002A524 /* SuggestModuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60784D28994A9E0002A524 /* SuggestModuleView.swift */; };
 		DA60785328995A2E0002A524 /* SuggestModuleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60785128995A2E0002A524 /* SuggestModuleCollectionViewCell.swift */; };
 		DA60785428995A2E0002A524 /* SuggestModuleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA60785228995A2E0002A524 /* SuggestModuleCollectionViewCell.xib */; };
-		DA607857289AC1AB0002A524 /* SuggestModuleViewDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA607856289AC1AB0002A524 /* SuggestModuleViewDelegateProtocol.swift */; };
-		DA607859289AC4930002A524 /* RecentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA607858289AC4930002A524 /* RecentDelegate.swift */; };
-		DA60785D289ADEF40002A524 /* Favorite202206Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA60785C289ADEF40002A524 /* Favorite202206Delegate.swift */; };
 		DA60785F289C214E0002A524 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA60785E289C214E0002A524 /* Setting.storyboard */; };
 		DA607861289C21630002A524 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA607860289C21630002A524 /* SettingViewController.swift */; };
 		DA607866289C31F60002A524 /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA607865289C31F60002A524 /* UserDefaults+.swift */; };
@@ -63,7 +57,6 @@
 		DAC2392728A29F1800091E1D /* SongForJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC2392628A29F1800091E1D /* SongForJSON.swift */; };
 		DAC2392928A3220600091E1D /* Favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC2392828A3220600091E1D /* Favorites.swift */; };
 		DAC2392B28A3258A00091E1D /* Histories.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC2392A28A3258A00091E1D /* Histories.swift */; };
-		DAC2393128A492A000091E1D /* Live3DDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC2393028A492A000091E1D /* Live3DDelegate.swift */; };
 		DAC2393328A5CEF500091E1D /* ImageCaches.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC2393228A5CEF500091E1D /* ImageCaches.swift */; };
 		DAC2393628A6F98600091E1D /* PlayListModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC2393528A6F98600091E1D /* PlayListModule.swift */; };
 		DAC2393828A6F9CB00091E1D /* PlayListModule.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAC2393728A6F9CB00091E1D /* PlayListModule.xib */; };
@@ -90,8 +83,6 @@
 /* Begin PBXFileReference section */
 		DA4D2C0D28A707BF00260B4C /* PlayListModuleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayListModuleCollectionViewCell.swift; sourceTree = "<group>"; };
 		DA4D2C0E28A707BF00260B4C /* PlayListModuleCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayListModuleCollectionViewCell.xib; sourceTree = "<group>"; };
-		DA4D2C1128A70F5300260B4C /* FavoriteDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteDelegate.swift; sourceTree = "<group>"; };
-		DA4D2C1328A70F6200260B4C /* HistoryDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDelegate.swift; sourceTree = "<group>"; };
 		DA6078122886D5C20002A524 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		DA607818288872040002A524 /* Songs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Songs.swift; sourceTree = "<group>"; };
 		DA60781A288B8D020002A524 /* PlayViewController+UITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayViewController+UITableViewDataSource.swift"; sourceTree = "<group>"; };
@@ -101,7 +92,6 @@
 		DA607826288D1D480002A524 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		DA607828288D1D5E0002A524 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		DA60782C288D3B190002A524 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
-		DA60783828980EB70002A524 /* Favorite202207Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite202207Delegate.swift; sourceTree = "<group>"; };
 		DA60783D28989D6E0002A524 /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		DA60783F28989D8F0002A524 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		DA6078482898A9990002A524 /* SongTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SongTableViewCell.xib; sourceTree = "<group>"; };
@@ -109,9 +99,6 @@
 		DA60784D28994A9E0002A524 /* SuggestModuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestModuleView.swift; sourceTree = "<group>"; };
 		DA60785128995A2E0002A524 /* SuggestModuleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestModuleCollectionViewCell.swift; sourceTree = "<group>"; };
 		DA60785228995A2E0002A524 /* SuggestModuleCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuggestModuleCollectionViewCell.xib; sourceTree = "<group>"; };
-		DA607856289AC1AB0002A524 /* SuggestModuleViewDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestModuleViewDelegateProtocol.swift; sourceTree = "<group>"; };
-		DA607858289AC4930002A524 /* RecentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentDelegate.swift; sourceTree = "<group>"; };
-		DA60785C289ADEF40002A524 /* Favorite202206Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite202206Delegate.swift; sourceTree = "<group>"; };
 		DA60785E289C214E0002A524 /* Setting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
 		DA607860289C21630002A524 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		DA607865289C31F60002A524 /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
@@ -143,7 +130,6 @@
 		DAC2392628A29F1800091E1D /* SongForJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongForJSON.swift; sourceTree = "<group>"; };
 		DAC2392828A3220600091E1D /* Favorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorites.swift; sourceTree = "<group>"; };
 		DAC2392A28A3258A00091E1D /* Histories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Histories.swift; sourceTree = "<group>"; };
-		DAC2393028A492A000091E1D /* Live3DDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Live3DDelegate.swift; sourceTree = "<group>"; };
 		DAC2393228A5CEF500091E1D /* ImageCaches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCaches.swift; sourceTree = "<group>"; };
 		DAC2393528A6F98600091E1D /* PlayListModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayListModule.swift; sourceTree = "<group>"; };
 		DAC2393728A6F9CB00091E1D /* PlayListModule.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayListModule.xib; sourceTree = "<group>"; };
@@ -220,7 +206,6 @@
 		DA6078412898A2AD0002A524 /* SuggestModule */ = {
 			isa = PBXGroup;
 			children = (
-				DA6078552899D5040002A524 /* Delegates */,
 				DA60784D28994A9E0002A524 /* SuggestModuleView.swift */,
 				DA60784B28994A7A0002A524 /* SuggestModule.xib */,
 				DA60785128995A2E0002A524 /* SuggestModuleCollectionViewCell.swift */,
@@ -236,20 +221,6 @@
 				DA6078482898A9990002A524 /* SongTableViewCell.xib */,
 			);
 			path = SongTableViewCell;
-			sourceTree = "<group>";
-		};
-		DA6078552899D5040002A524 /* Delegates */ = {
-			isa = PBXGroup;
-			children = (
-				DAC2393028A492A000091E1D /* Live3DDelegate.swift */,
-				DA60783828980EB70002A524 /* Favorite202207Delegate.swift */,
-				DA60785C289ADEF40002A524 /* Favorite202206Delegate.swift */,
-				DA607858289AC4930002A524 /* RecentDelegate.swift */,
-				DA4D2C1128A70F5300260B4C /* FavoriteDelegate.swift */,
-				DA4D2C1328A70F6200260B4C /* HistoryDelegate.swift */,
-				DA607856289AC1AB0002A524 /* SuggestModuleViewDelegateProtocol.swift */,
-			);
-			path = Delegates;
 			sourceTree = "<group>";
 		};
 		DA607862289C23140002A524 /* SettingContentScene */ = {
@@ -559,28 +530,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA4D2C0F28A707BF00260B4C /* PlayListModuleCollectionViewCell.swift in Sources */,
-				DA60785D289ADEF40002A524 /* Favorite202206Delegate.swift in Sources */,
 				DA60784E28994A9E0002A524 /* SuggestModuleView.swift in Sources */,
 				DA60781B288B8D020002A524 /* PlayViewController+UITableViewDataSource.swift in Sources */,
 				DA607861289C21630002A524 /* SettingViewController.swift in Sources */,
 				DA607819288872040002A524 /* Songs.swift in Sources */,
 				DA9950DE288056510037D8E5 /* JSONFileManager.swift in Sources */,
-				DA60783928980EB80002A524 /* Favorite202207Delegate.swift in Sources */,
 				DA607827288D1D480002A524 /* HomeViewController.swift in Sources */,
-				DA607857289AC1AB0002A524 /* SuggestModuleViewDelegateProtocol.swift in Sources */,
 				DA9950DA287F83F70037D8E5 /* Song.swift in Sources */,
-				DAC2393128A492A000091E1D /* Live3DDelegate.swift in Sources */,
 				DA60785328995A2E0002A524 /* SuggestModuleCollectionViewCell.swift in Sources */,
 				DA9950F428852A0D0037D8E5 /* PlayViewController+YTPlayerViewDelegate.swift in Sources */,
 				DA60781D288B948D0002A524 /* SelectedStatus.swift in Sources */,
-				DA607859289AC4930002A524 /* RecentDelegate.swift in Sources */,
 				DA9950F02880757F0037D8E5 /* SongTableViewCell.swift in Sources */,
 				DAA257EA28B7D11C00728EF0 /* Recommend.swift in Sources */,
 				DAC2392928A3220600091E1D /* Favorites.swift in Sources */,
 				DAC2392728A29F1800091E1D /* SongForJSON.swift in Sources */,
 				DA6078132886D5C20002A524 /* Int+.swift in Sources */,
-				DA4D2C1228A70F5300260B4C /* FavoriteDelegate.swift in Sources */,
-				DA4D2C1428A70F6200260B4C /* HistoryDelegate.swift in Sources */,
 				DA9950AD287B271F0037D8E5 /* PlayViewController.swift in Sources */,
 				DA9950F728852A6F0037D8E5 /* YTPlayerViewWrapper.swift in Sources */,
 				DA607821288C034C0002A524 /* Settings.swift in Sources */,

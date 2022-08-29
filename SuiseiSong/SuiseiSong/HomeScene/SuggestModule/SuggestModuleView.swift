@@ -11,29 +11,15 @@ import UIKit
 class SuggestModuleView: UIView {
     
     var view: UIView!
-    // TODO: 番号じゃなくてIDで管理したい
-    let suggestModuleViewTypeDict: Dictionary<String, SuggestModuleViewType> = [
-        "Recent": .recent,
-        "Favorite202207": .favorite202207,
-        "Favorite202206": .favorite202206,
-        "3DLive": .live3d,
-        "History": .history,
-        "Favorite": .favorite,
-    ]
     
-    // もしかしたらデータ自体を持った方が良いか？
-    // 10000件コピーとかだと困るが、少数ならメモリ管理も考える
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     
     // 直接Songsを渡せば早いのでは？
-    var songs: [Song]
-    
-    var delegate : SuggestModuleViewDelegateProtocol?
-    var suggestModuleViewType: SuggestModuleViewType?
-    var filteredCompletion: (() -> Void)?
-    
+    var songs: [Song] = []
+    var navigationController: UINavigationController?
+        
     // TODO: 丸々コピペなので内容の理解
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -50,89 +36,79 @@ class SuggestModuleView: UIView {
         // xibのCustomClassではなくOwnerFileに設定する
         view = nib.instantiate(withOwner: self, options: nil).first as? UIView
         view.frame = bounds
-
         addSubview(view)
         setupDelegate()
     }
     
     func setupDelegate() {
-        guard let restorationIdentifier = self.restorationIdentifier else {
-            return
-        }
-        suggestModuleViewType = suggestModuleViewTypeDict[restorationIdentifier]
-        switch suggestModuleViewType {
-        case .recent:
-            delegate = RecentDelegate()
-            filteredCompletion = {
-                Songs.shared.resetDisplaySongs()
-            }
-            self.title.text = "最近の動画"
-        case .favorite202207:
-            delegate = Favorite202207Delegate()
-            filteredCompletion = {
-                // 画面に送る時にfilteredにセットする方式にする
-                Songs.shared.setDisplaySongs(songs: Songs.shared.favorite202207Songs)
-            }
-            self.title.text = "7月のおすすめ"
-        case .favorite202206:
-            delegate = Favorite202206Delegate()
-            filteredCompletion = {
-                Songs.shared.setDisplaySongs(songs: Songs.shared.favorite202206Songs)
-            }
-            self.title.text = "6月のおすすめ"
-        case .live3d:
-            delegate = Live3DDelegate()
-            filteredCompletion = {
-                Songs.shared.setDisplaySongs(songs: Songs.shared.live3DSongs)
-            }
-            self.title.text = "3Dライブ"
-        case .history:
-            delegate = HistoryDelegate()
-            filteredCompletion = {
-                Songs.shared.setDisplaySongs(songs: Songs.shared.historySongs)
-            }
-            self.title.text = "履歴"
-        case .favorite:
-            delegate = FavoriteDelegate()
-            filteredCompletion = {
-                Songs.shared.setDisplaySongs(songs: Songs.shared.favoriteSongs)
-            }
-            self.title.text = "お気に入り"
-        default:
-            fatalError("suggestModuleViewTypeの設定でエラーが発生しました")
-        }
-
-        delegate?.filterCompletion = filteredCompletion
-        self.collectionView.delegate = delegate
-        self.collectionView.dataSource = delegate
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
         // モジュールによってセルを変える場合は上記if分に含める
         self.collectionView.register(UINib(nibName: "SuggestModuleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SuggestModuleCollectionViewCell")
     }
     
-    // tapする前に
-    func setNavigationController(_ navigationController: UINavigationController?) {
-        delegate?.navigationController = navigationController
-    }
-    
-    @IBAction func tapMoreButton(_ sender: Any) {        
+    @IBAction func tapMoreButton(_ sender: Any) {
+        // 遷移する前にdiplaySongsに現在の情報をセットする
+        Songs.shared.setDisplaySongs(songs: self.songs)
         let storyboard = UIStoryboard(name: "Search", bundle: nil)
         let nextViewController = storyboard.instantiateViewController(withIdentifier: "Search") as! SearchViewController
-        
-        if let navigationController = delegate?.navigationController,
-            let filteredCompletion = filteredCompletion {
-            filteredCompletion()
+        if let navigationController = navigationController {
             navigationController.pushViewController(nextViewController, animated: true)
         } else {
             Logger.log(message: "navigationControllerのセットが完了していません")
         }
     }
+        
+    func setupSuggestModule(title: String, songs: [Song], navigationController: UINavigationController?) {
+        self.navigationController = navigationController
+        self.title.text = title
+        self.songs = songs
+    }
+    
+    func resetSongs(songs: [Song]) {
+        self.songs = songs
+    }
 }
 
-enum SuggestModuleViewType {
-    case recent
-    case favorite202207
-    case favorite202206
-    case live3d
-    case history
-    case favorite
+extension SuggestModuleView: UICollectionViewDelegate, UICollectionViewDataSource {
+    // セルの数
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if songs.count < 10 {
+            return songs.count
+        } else {
+            return 10
+        }
+    }
+    
+    // セルの中身
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        //storyboard上のセルを生成　storyboardのIdentifierで付けたものをここで設定する
+        var cell: SuggestModuleCollectionViewCell
+        let index = indexPath.row
+        cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SuggestModuleCollectionViewCell", for: indexPath) as! SuggestModuleCollectionViewCell
+        cell.song = songs[index]
+        
+        return cell
+    }
+    
+    // セルタップ時
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        Logger.log(message: "タップされました")
+        
+        // cellを使う時はVCの方から渡してやる
+        let storyboard = UIStoryboard(name: "Play", bundle: nil)
+        let nextViewController = storyboard.instantiateViewController(withIdentifier: "Play") as! PlayViewController
+        
+        if let cell = collectionView.cellForItem(at: indexPath) as? SuggestModuleCollectionViewCell {
+            SelectedStatus.shared.setSelectedSong(song: cell.song!, filterCompletion: {
+                Songs.shared.setDisplaySongs(songs: self.songs)
+            })
+        }
+        
+        if let navigationController = navigationController {
+            navigationController.pushViewController(nextViewController, animated: true)
+        } else {
+            Logger.log(message: "navigationControllerのセットが完了していません")
+        }
+    }
 }

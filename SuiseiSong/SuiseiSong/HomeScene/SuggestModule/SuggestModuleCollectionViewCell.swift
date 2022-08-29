@@ -26,7 +26,6 @@ class SuggestModuleCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
     
     // Youtubeのサムネイル画像を取得

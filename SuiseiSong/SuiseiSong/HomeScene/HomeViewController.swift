@@ -9,18 +9,13 @@ import UIKit
 
 class HomeViewController: UIViewController {
     // 新着、お気に入り、履歴、ライブ、オリジナル曲、コラボ、くらいのジャンル分け
-    // ScrollViewよりもcellを可変にしたTableViewの方が良いか？？？
-    // お気に入りと履歴は読みこむたびに更新してほしい（willAppearで）
     
     @IBOutlet weak var recentView: SuggestModuleView!
-    @IBOutlet weak var favorite202207View: SuggestModuleView!
-    @IBOutlet weak var favorite202206View: SuggestModuleView!
     @IBOutlet weak var live3DView: SuggestModuleView!
     @IBOutlet weak var historyView: SuggestModuleView!
     @IBOutlet weak var favoriteView: SuggestModuleView!
     
-    // 暫定的なplaylistview
-    @IBOutlet weak var playlistView: PlayListView!
+    @IBOutlet weak var collabView: PlayListView!
     
     // NavigationBarに追加するボタン
     var settingBarButtonItem: UIBarButtonItem!
@@ -28,28 +23,25 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // ここで毎回シャッフルすると
-        // あー他のテーブルを更新してないから変な感じになるのか
+        // 表示する度にシャッフルする
         Songs.shared.sortOtherSongs()
-        loadHistoryAndFavoriteView()
+        reloadSuggestAndPlayListModule()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 煩雑なので効率化したい
-        // property一覧を取得するなど少しトリッキーな実装が必要そう
-        recentView.setNavigationController(self.navigationController)
-        favorite202207View.setNavigationController(self.navigationController)
-        favorite202206View.setNavigationController(self.navigationController)
-        live3DView.setNavigationController(self.navigationController)
-        historyView.setNavigationController(self.navigationController)
-        favoriteView.setNavigationController(self.navigationController)
-        // PlayListModuleにも渡す
-        playlistView.setNavigationController(self.navigationController)
-        playlistView.setPlayList(keys: Songs.shared.holoMembers,
-                                 songs: Songs.shared.holoMembersSongs,
-                                 icons: ImageCaches.shared.holomembersCaches)
+        let nc = self.navigationController
+        recentView.setupSuggestModule(title: "最近の動画", songs: Songs.shared.displaySongs, navigationController: nc)
+        live3DView.setupSuggestModule(title: "3Dライブ", songs: Songs.shared.live3DSongs, navigationController: nc)
+        historyView.setupSuggestModule(title: "履歴", songs: Songs.shared.historySongs, navigationController: nc)
+        favoriteView.setupSuggestModule(title: "お気に入り", songs: Songs.shared.favoriteSongs, navigationController: nc)
+        
+        collabView.setupPlayListModule(keys: Songs.shared.holoMembers,
+                                       songs: Songs.shared.holoMembersSongs,
+                                       icons: ImageCaches.shared.holomembersCaches,
+                                       navigationController: nc)
+        
         
         settingBarButtonItem = UIBarButtonItem(image: UIImage.initWithTintColorWhite(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(settingBarButtonTapped(_:)))
         addPlayListBarButtonItem = UIBarButtonItem(image: UIImage.initWithTintColorWhite(systemName: "plus"), style: .plain, target: self, action: #selector(addPlayListBarButtonTapped(_:)))
@@ -64,22 +56,31 @@ class HomeViewController: UIViewController {
         setupBackground()
     }
     
-    private func loadHistoryAndFavoriteView() {
-        reloadSuggestModule(recentView)
-        reloadSuggestModule(live3DView)
-        reloadSuggestModule(favorite202207View)
-        reloadSuggestModule(favorite202206View)
-        reloadSuggestModule(historyView)
-        reloadSuggestModule(favoriteView)
+    private func reloadSuggestAndPlayListModule() {
+        resetScrollSuggestModule(recentView)
+        resetScrollSuggestModule(live3DView)
+        resetScrollSuggestModule(historyView)
+        resetScrollSuggestModule(favoriteView)
+        resetScrollPlayListModule(collabView)
+        
+        // 順序が変わらないものは適用しない
+        live3DView.resetSongs(songs: Songs.shared.live3DSongs)
+        favoriteView.resetSongs(songs: Songs.shared.favoriteSongs)
+        historyView.resetSongs(songs: Songs.shared.historySongs)
         
         // TODO: 汎用化して存在しないモジュールは表示できないようにしておきたい
         historyView.isHidden = Histories.shared.historyIds.count == 0
         favoriteView.isHidden = Favorites.shared.favoriteIds.count == 0
     }
     
-    private func reloadSuggestModule(_ suggestModuleView: SuggestModuleView) {
+    private func resetScrollSuggestModule(_ suggestModuleView: SuggestModuleView) {
         suggestModuleView.collectionView.setContentOffset(.zero, animated: false)
         suggestModuleView.collectionView.reloadData()
+    }
+    
+    private func resetScrollPlayListModule(_ playListView: PlayListView) {
+        playListView.collectionView.setContentOffset(.zero, animated: false)
+        playListView.collectionView.reloadData()
     }
     
     private func setupBackground() {
