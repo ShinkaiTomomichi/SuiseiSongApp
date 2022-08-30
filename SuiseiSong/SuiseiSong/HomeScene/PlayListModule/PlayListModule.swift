@@ -10,6 +10,7 @@ import UIKit
 class PlayListView: UIView {
     
     var view: UIView!
+    @IBOutlet weak var title: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     var navigationController: UINavigationController?
     
@@ -43,7 +44,8 @@ class PlayListView: UIView {
         self.collectionView.register(UINib(nibName: "PlayListModuleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PlayListModuleCollectionViewCell")
     }
         
-    func setupPlayListModule(keys: [String], songs: [String: [Song]], icons: [String: UIImage], navigationController: UINavigationController?) {
+    func setupPlayListModule(title: String, keys: [String], songs: [String: [Song]], icons: [String: UIImage], navigationController: UINavigationController?) {
+        self.title.text = title
         self.playListKeys = keys
         self.playListSongs = songs
         self.playListIcons = icons

@@ -15,10 +15,12 @@ final class ImageCaches {
     // 最初にここを選択した後にfilteredを更新する処理を入れたい
     private(set) var caches: [String:UIImage] = [:]
     private(set) var holomembersCaches: [String:UIImage] = [:]
+    private(set) var tmp: [String:UIImage] = [:]
     
     func setup() {
         setupThumbnails()
         setupHoloMemberIcons()
+        setupTmps()
     }
     
     private func setupThumbnails() {
@@ -28,22 +30,6 @@ final class ImageCaches {
         }
         
         for song in Songs.shared.allSongs {
-            let videoId = song.videoid
-            if !caches.keys.contains(videoId) {
-                let image = getImageByVideoId(videoId: videoId)
-                caches.updateValue(image, forKey: videoId)
-            }
-        }
-        
-        for song in Songs.shared.favorite202206Songs {
-            let videoId = song.videoid
-            if !caches.keys.contains(videoId) {
-                let image = getImageByVideoId(videoId: videoId)
-                caches.updateValue(image, forKey: videoId)
-            }
-        }
-        
-        for song in Songs.shared.favorite202207Songs {
             let videoId = song.videoid
             if !caches.keys.contains(videoId) {
                 let image = getImageByVideoId(videoId: videoId)
@@ -90,4 +76,9 @@ final class ImageCaches {
         }
     }
     
+    private func setupTmps() {
+        tmp.updateValue(UIImage.initWithTintColorWhite(systemName: "xmark.circle.fill")!, forKey: "8月のおすすめ")
+        tmp.updateValue(UIImage.initWithTintColorWhite(systemName: "xmark.circle.fill")!, forKey: "7月のおすすめ")
+        tmp.updateValue(UIImage.initWithTintColorWhite(systemName: "xmark.circle.fill")!, forKey: "6月のおすすめ")
+    }
 }

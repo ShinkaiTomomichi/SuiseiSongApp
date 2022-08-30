@@ -16,6 +16,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var favoriteView: SuggestModuleView!
     
     @IBOutlet weak var collabView: PlayListView!
+    @IBOutlet weak var myPlayListView: PlayListView!
     
     // NavigationBarに追加するボタン
     var settingBarButtonItem: UIBarButtonItem!
@@ -36,12 +37,16 @@ class HomeViewController: UIViewController {
         live3DView.setupSuggestModule(title: "3Dライブ", songs: Songs.shared.live3DSongs, navigationController: nc)
         historyView.setupSuggestModule(title: "履歴", songs: Songs.shared.historySongs, navigationController: nc)
         favoriteView.setupSuggestModule(title: "お気に入り", songs: Songs.shared.favoriteSongs, navigationController: nc)
-        
-        collabView.setupPlayListModule(keys: Songs.shared.holoMembers,
+        collabView.setupPlayListModule(title: "コラボ",
+                                       keys: Songs.shared.holoMembers,
                                        songs: Songs.shared.holoMembersSongs,
                                        icons: ImageCaches.shared.holomembersCaches,
                                        navigationController: nc)
-        
+        myPlayListView.setupPlayListModule(title: "ホロライブおすすめ",
+                                           keys: Songs.shared.myFavorites,
+                                           songs: Songs.shared.myFavoriteSongs,
+                                           icons: ImageCaches.shared.tmp,
+                                           navigationController: nc)
         
         settingBarButtonItem = UIBarButtonItem(image: UIImage.initWithTintColorWhite(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(settingBarButtonTapped(_:)))
         addPlayListBarButtonItem = UIBarButtonItem(image: UIImage.initWithTintColorWhite(systemName: "plus"), style: .plain, target: self, action: #selector(addPlayListBarButtonTapped(_:)))
@@ -62,6 +67,7 @@ class HomeViewController: UIViewController {
         resetScrollSuggestModule(historyView)
         resetScrollSuggestModule(favoriteView)
         resetScrollPlayListModule(collabView)
+        resetScrollPlayListModule(myPlayListView)
         
         // 順序が変わらないものは適用しない
         live3DView.resetSongs(songs: Songs.shared.live3DSongs)

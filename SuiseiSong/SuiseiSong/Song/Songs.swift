@@ -21,9 +21,6 @@ final class Songs {
         }
     }
     var displaySongsForSearch: [Song] = []
-    // 暫定的に用意した個人的なお気に入り
-    var favorite202207Songs: [Song] = []
-    var favorite202206Songs: [Song] = []
     // 暫定的なジャンル分け
     var collabSongs: [Song] = []
     var live3DSongs: [Song] = []
@@ -32,7 +29,7 @@ final class Songs {
     let holoMembers: [String] = ["天音かなた", "常闇トワ", "桃鈴ねね", "宝鐘マリン", "湊あくあ"]
     var holoMembersSongs: [String: [Song]] = [:]
     
-    let myFavorites: [String] = ["7月のおすすめ", "6月のおすすめ"]
+    let myFavorites: [String] = ["8月のおすすめ", "7月のおすすめ", "6月のおすすめ"]
     var myFavoriteSongs: [String: [Song]] = [:]
     
     // TODO: 暫定的なアーティスト分け
@@ -47,6 +44,7 @@ final class Songs {
         setupFilteredSongs()
         setupOtherSongs()
         setupHoloMeberSongs()
+        setupMyFavoriteSongs()
         
         resetDisplaySongs()
         ImageCaches.shared.setup()
@@ -57,13 +55,12 @@ final class Songs {
     
     private func setupAllSongs() {
         self.allSongs = JSONFileManager.getSuiseiSongs(forResource: "suisei_songs")
-        // allSongs.append(contentsOf: JSONFileManager.getSuiseiSongs(forResource: "202207"))
-        // allSongs.append(contentsOf: JSONFileManager.getSuiseiSongs(forResource: "202206"))
         
         sortAllSongs()
         setFavoriteAllSongs()
     }
     
+    // TODO: 投稿日が同じだと不適当なソートになる
     private func sortAllSongs() {
         allSongs.sort { $0.date-$0.starttime > $1.date-$1.starttime }
     }
@@ -97,7 +94,7 @@ final class Songs {
     // TODO: 別途フラグを用意したい
     private func removeNotSuisei(enable: Bool) {
         for song in allSongs {
-            if song.id > 10000 {
+            if !song.suisei {
                 song.filter = enable
             }
         }
@@ -122,9 +119,6 @@ final class Songs {
         historySongs = allSongs.filter {
             Histories.shared.historyIds.contains($0.id)
         }
-        // 別で追加する
-        favorite202207Songs = allSongs.filter { $0.id >= 20220700 && $0.id < 20220800 }
-        favorite202206Songs = allSongs.filter { $0.id >= 20220600 && $0.id < 20220700 }
         
         sortOtherSongs()
     }
