@@ -21,18 +21,20 @@ final class Songs {
         }
     }
     var displaySongsForSearch: [Song] = []
-    // 暫定的なジャンル分け
-    var collabSongs: [Song] = []
+    
+    // ジャンルごとにリスト化
+    var notStreamSongs: [Song] = []
     var live3DSongs: [Song] = []
-    // 暫定的なホロメン分け
-    // TODO: JSONでメンバーリストを控えておく
-    let holoMembers: [String] = ["天音かなた", "常闇トワ", "桃鈴ねね", "宝鐘マリン", "湊あくあ"]
+    
+    // ホロメンごとにリスト化
+    var holoMembers: [String] = []
     var holoMembersSongs: [String: [Song]] = [:]
     
-    let myFavorites: [String] = ["8月のおすすめ", "7月のおすすめ", "6月のおすすめ"]
+    // 月ごとのお気に入りでリスト化
+    var myFavorites: [String] = []
     var myFavoriteSongs: [String: [Song]] = [:]
     
-    // TODO: 暫定的なアーティスト分け
+    // アーティストごとでリスト化
     let artists: [String] = []
     var artistsSongs: [String: [Song]] = [:]
     // お気に入りと履歴
@@ -60,24 +62,27 @@ final class Songs {
         setFavoriteAllSongs()
     }
     
-    // TODO: 投稿日が同じだと不適当なソートになる
     private func sortAllSongs() {
-        allSongs.sort { $0.date-$0.starttime > $1.date-$1.starttime }
+        // 登校日が同じ場合に同じ動画が繋がるよう修正
+        allSongs.sort { Double($0.date*10000)-Double($0.starttime) > Double($1.date*10000)-Double($1.starttime) }
     }
     
     private func setupFilteredSongs() {
+        // TODO: オプションで変更できるようにしておく
         removeDuplication(enable: Settings.shared.filteredDuplication)
         removeAcappella(enable: Settings.shared.filteredAcappella)
         removeNotSuisei(enable: true)
         filteredSongs = allSongs.filter { !$0.filter }
     }
     
+    // 重複する動画を削除
+    // ただし、コラボとライブは対象から除外
     private func removeDuplication(enable: Bool) {
         var songTitles: [String] = []
         for song in allSongs {
-            if song.members.count == 1 && songTitles.contains(song.songname) {
+            if song.members.count == 1 && !song.live3d && song.stream && songTitles.contains(song.songname) {
                 song.filter = enable
-            } else if song.members.count == 1 {
+            } else if song.members.count == 1 && !song.live3d && song.stream {
                 songTitles.append(song.songname)
             }
         }
@@ -110,7 +115,7 @@ final class Songs {
     
     private func setupOtherSongs() {
         // 特定のジャンルの動画をセット
-        collabSongs = filteredSongs.filter { $0.collaboration }
+        notStreamSongs = filteredSongs.filter { !$0.stream }
         live3DSongs = filteredSongs.filter { $0.live3d }
         // お気に入りと履歴をセット
         favoriteSongs = allSongs.filter {
@@ -127,8 +132,8 @@ final class Songs {
     func sortOtherSongs() {
         // 表示順のIDを返す仕様とする
         // recommendから任意のIDを返せるようにする
-        let collabIds = Recommend.randomize(songs: collabSongs)
-        collabSongs = sorted(byIds: collabIds)
+        let notStreamIds = Recommend.randomize(songs: notStreamSongs)
+        notStreamSongs = sorted(byIds: notStreamIds)
         let live3DIds = Recommend.randomize(songs: live3DSongs)
         live3DSongs = sorted(byIds: live3DIds)
         
@@ -142,6 +147,16 @@ final class Songs {
     }
     
     private func setupHoloMeberSongs() {
+        var holoMembersTmp: [String] = []
+        for song in filteredSongs {
+            for member in song.members {
+                if member != "星街すいせい" {
+                    holoMembersTmp.append(member)
+                }
+            }
+        }
+        holoMembers = holoMembersTmp.uniqueSortedByCount().prefix(5).map { $0 }
+        
         for holoMember in holoMembers {
             holoMembersSongs[holoMember] = filteredSongs.filter {
                 $0.members.contains(holoMember)
@@ -150,6 +165,14 @@ final class Songs {
     }
     
     private func setupMyFavoriteSongs() {
+        var myFavoritesTmp: [String] = []
+        for song in allSongs {
+            if song.listtype != "None" {
+                myFavoritesTmp.append(song.listtype)
+            }
+        }
+        myFavorites = myFavoritesTmp.uniqueSortedByName()
+        
         for myFavorite in myFavorites {
             myFavoriteSongs[myFavorite] = allSongs.filter {
                 $0.listtype == myFavorite
@@ -161,8 +184,6 @@ final class Songs {
         self.displaySongs = self.filteredSongs
     }
     
-    // 現状allSongsを別に切り出している
-    // allSongsを一つにまとめたい
     // TODO: IDを変えた時にクラッシュするので修正する
     // 動画が消える場合を想定しなくてはならない
     func getSong(byId: Int) -> Song {

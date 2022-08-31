@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA41E86F28BF80AB0092DFA3 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA41E86E28BF80AB0092DFA3 /* Array+.swift */; };
 		DA4D2C0F28A707BF00260B4C /* PlayListModuleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4D2C0D28A707BF00260B4C /* PlayListModuleCollectionViewCell.swift */; };
 		DA4D2C1028A707BF00260B4C /* PlayListModuleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA4D2C0E28A707BF00260B4C /* PlayListModuleCollectionViewCell.xib */; };
 		DA6078132886D5C20002A524 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6078122886D5C20002A524 /* Int+.swift */; };
@@ -81,6 +82,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DA41E86E28BF80AB0092DFA3 /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		DA4D2C0D28A707BF00260B4C /* PlayListModuleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayListModuleCollectionViewCell.swift; sourceTree = "<group>"; };
 		DA4D2C0E28A707BF00260B4C /* PlayListModuleCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayListModuleCollectionViewCell.xib; sourceTree = "<group>"; };
 		DA6078122886D5C20002A524 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 		DA6078112886D5B00002A524 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				DA41E86E28BF80AB0092DFA3 /* Array+.swift */,
 				DA60781E288B9C080002A524 /* NSNotification+.swift */,
 				DA6078122886D5C20002A524 /* Int+.swift */,
 				DA60782C288D3B190002A524 /* UIImage+.swift */,
@@ -546,6 +549,7 @@
 				DAC2392728A29F1800091E1D /* SongForJSON.swift in Sources */,
 				DA6078132886D5C20002A524 /* Int+.swift in Sources */,
 				DA9950AD287B271F0037D8E5 /* PlayViewController.swift in Sources */,
+				DA41E86F28BF80AB0092DFA3 /* Array+.swift in Sources */,
 				DA9950F728852A6F0037D8E5 /* YTPlayerViewWrapper.swift in Sources */,
 				DA607821288C034C0002A524 /* Settings.swift in Sources */,
 				DAC2393628A6F98600091E1D /* PlayListModule.swift in Sources */,

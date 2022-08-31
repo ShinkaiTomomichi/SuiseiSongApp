@@ -11,12 +11,12 @@ class HomeViewController: UIViewController {
     // 新着、お気に入り、履歴、ライブ、オリジナル曲、コラボ、くらいのジャンル分け
     
     @IBOutlet weak var recentView: SuggestModuleView!
-    @IBOutlet weak var live3DView: SuggestModuleView!
-    @IBOutlet weak var historyView: SuggestModuleView!
     @IBOutlet weak var favoriteView: SuggestModuleView!
-    
-    @IBOutlet weak var collabView: PlayListView!
+    @IBOutlet weak var live3DView: SuggestModuleView!
+    @IBOutlet weak var notStreamView: SuggestModuleView!
     @IBOutlet weak var myPlayListView: PlayListView!
+    @IBOutlet weak var collabView: PlayListView!
+    @IBOutlet weak var historyView: SuggestModuleView!
     
     // NavigationBarに追加するボタン
     var settingBarButtonItem: UIBarButtonItem!
@@ -37,6 +37,7 @@ class HomeViewController: UIViewController {
         live3DView.setupSuggestModule(title: "3Dライブ", songs: Songs.shared.live3DSongs, navigationController: nc)
         historyView.setupSuggestModule(title: "履歴", songs: Songs.shared.historySongs, navigationController: nc)
         favoriteView.setupSuggestModule(title: "お気に入り", songs: Songs.shared.favoriteSongs, navigationController: nc)
+        notStreamView.setupSuggestModule(title: "歌動画", songs: Songs.shared.notStreamSongs, navigationController: nc)
         collabView.setupPlayListModule(title: "コラボ",
                                        keys: Songs.shared.holoMembers,
                                        songs: Songs.shared.holoMembersSongs,
@@ -45,7 +46,7 @@ class HomeViewController: UIViewController {
         myPlayListView.setupPlayListModule(title: "ホロライブおすすめ",
                                            keys: Songs.shared.myFavorites,
                                            songs: Songs.shared.myFavoriteSongs,
-                                           icons: ImageCaches.shared.tmp,
+                                           icons: ImageCaches.shared.myFavoritesCaches,
                                            navigationController: nc)
         
         settingBarButtonItem = UIBarButtonItem(image: UIImage.initWithTintColorWhite(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(settingBarButtonTapped(_:)))
@@ -66,11 +67,13 @@ class HomeViewController: UIViewController {
         resetScrollSuggestModule(live3DView)
         resetScrollSuggestModule(historyView)
         resetScrollSuggestModule(favoriteView)
+        resetScrollSuggestModule(notStreamView)
         resetScrollPlayListModule(collabView)
         resetScrollPlayListModule(myPlayListView)
         
         // 順序が変わらないものは適用しない
         live3DView.resetSongs(songs: Songs.shared.live3DSongs)
+        notStreamView.resetSongs(songs: Songs.shared.notStreamSongs)
         favoriteView.resetSongs(songs: Songs.shared.favoriteSongs)
         historyView.resetSongs(songs: Songs.shared.historySongs)
         

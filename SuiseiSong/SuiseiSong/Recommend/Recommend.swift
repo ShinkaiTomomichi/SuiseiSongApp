@@ -14,7 +14,6 @@ struct Recommend {
     
     static func personalize(songs: [Song]) -> [Int] {
         // TODO: なんか履歴とかお気に入りを使っていい感じにする
-        // scoreを付与してやる方法だとやりやすそう
         return songs.map { $0.id }.shuffled()
     }
 }

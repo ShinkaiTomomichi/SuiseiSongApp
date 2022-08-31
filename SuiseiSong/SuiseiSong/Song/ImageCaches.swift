@@ -15,12 +15,12 @@ final class ImageCaches {
     // 最初にここを選択した後にfilteredを更新する処理を入れたい
     private(set) var caches: [String:UIImage] = [:]
     private(set) var holomembersCaches: [String:UIImage] = [:]
-    private(set) var tmp: [String:UIImage] = [:]
+    private(set) var myFavoritesCaches: [String:UIImage] = [:]
     
     func setup() {
         setupThumbnails()
         setupHoloMemberIcons()
-        setupTmps()
+        setupMyFavoriteIcons()
     }
     
     private func setupThumbnails() {
@@ -32,15 +32,15 @@ final class ImageCaches {
         for song in Songs.shared.allSongs {
             let videoId = song.videoid
             if !caches.keys.contains(videoId) {
-                let image = getImageByVideoId(videoId: videoId)
+                let image = getImage(byVideoId: videoId)
                 caches.updateValue(image, forKey: videoId)
             }
         }
     }
     
-    private func getImageByVideoId(videoId: String) -> UIImage {
+    private func getImage(byVideoId: String) -> UIImage {
         // let urlWithVideoId = "https://i.ytimg.com/vi/\(videoId)/default.jpg"
-        let urlWithVideoId = "https://i.ytimg.com/vi/\(videoId)/mqdefault.jpg"
+        let urlWithVideoId = "https://i.ytimg.com/vi/\(byVideoId)/mqdefault.jpg"
         let url = URL(string: urlWithVideoId)
         do {
             let data = try Data(contentsOf: url!)
@@ -59,14 +59,13 @@ final class ImageCaches {
     
     private func setupHoloMemberIcons() {
         for elem in holomembersImages {
-            let image = getImageByVideoId(url: elem.value)
+            let image = getImage(byUrl: elem.value)
             holomembersCaches.updateValue(image, forKey: elem.key)
         }
     }
     
-    private func getImageByVideoId(url: String) -> UIImage {
-        let urlWithVideoId = url
-        let url = URL(string: urlWithVideoId)
+    private func getImage(byUrl: String) -> UIImage {
+        let url = URL(string: byUrl)
         do {
             let data = try Data(contentsOf: url!)
             return UIImage(data: data)!
@@ -76,9 +75,25 @@ final class ImageCaches {
         }
     }
     
-    private func setupTmps() {
-        tmp.updateValue(UIImage.initWithTintColorWhite(systemName: "xmark.circle.fill")!, forKey: "8月のおすすめ")
-        tmp.updateValue(UIImage.initWithTintColorWhite(systemName: "xmark.circle.fill")!, forKey: "7月のおすすめ")
-        tmp.updateValue(UIImage.initWithTintColorWhite(systemName: "xmark.circle.fill")!, forKey: "6月のおすすめ")
+    private func setupMyFavoriteIcons() {
+        for myFavorite in Songs.shared.myFavorites {
+            let image = getImage(byFavoriteName: myFavorite)
+            myFavoritesCaches.updateValue(image, forKey: myFavorite)
+        }
+    }
+    
+    private func getImage(byFavoriteName: String) -> UIImage {
+        // songsの中からランダムに4つ取り出して画像を作成
+        if let songs = Songs.shared.myFavoriteSongs[byFavoriteName] {
+            let count = songs.count
+            
+            let image0 = getImage(byVideoId: songs[Int.random(in: 0..<count)].videoid).cropSeihoukei()
+            let image1 = getImage(byVideoId: songs[Int.random(in: 0..<count)].videoid).cropSeihoukei()
+            let image2 = getImage(byVideoId: songs[Int.random(in: 0..<count)].videoid).cropSeihoukei()
+            let image3 = getImage(byVideoId: songs[Int.random(in: 0..<count)].videoid).cropSeihoukei()
+            
+            return UIImage.montageFourSeihoukei(images: [image0, image1, image2, image3])
+        }
+        return UIImage(systemName: "xmark.circle.fill")!
     }
 }
