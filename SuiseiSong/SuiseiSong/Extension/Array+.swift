@@ -25,4 +25,14 @@ extension Array where Element == String {
         }
         return tmp.sorted { $0 > $1 }
     }
+    
+    func unique() -> [String] {
+        var tmp: [String] = []
+        for item in self {
+            if !tmp.contains(item) {
+                tmp.append(item)
+            }
+        }
+        return tmp
+    }
 }

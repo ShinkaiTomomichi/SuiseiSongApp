@@ -41,7 +41,7 @@ extension UIImage {
             let rect = CGRect(x: CGFloat((i/2))*imageW, y: CGFloat((i%2))*imageH, width: imageW, height: imageH)
             image.draw(in: rect)
         }
-           
+        
         //カレンダーに表示する画像の生成
         let calendarImage = UIGraphicsGetImageFromCurrentImageContext()
            

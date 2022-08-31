@@ -83,16 +83,21 @@ final class ImageCaches {
     }
     
     private func getImage(byFavoriteName: String) -> UIImage {
-        // songsの中からランダムに4つ取り出して画像を作成
+        // songsの中から画像を取得しランダムに合成
         if let songs = Songs.shared.myFavoriteSongs[byFavoriteName] {
-            let count = songs.count
-            
-            let image0 = getImage(byVideoId: songs[Int.random(in: 0..<count)].videoid).cropSeihoukei()
-            let image1 = getImage(byVideoId: songs[Int.random(in: 0..<count)].videoid).cropSeihoukei()
-            let image2 = getImage(byVideoId: songs[Int.random(in: 0..<count)].videoid).cropSeihoukei()
-            let image3 = getImage(byVideoId: songs[Int.random(in: 0..<count)].videoid).cropSeihoukei()
-            
-            return UIImage.montageFourSeihoukei(images: [image0, image1, image2, image3])
+            let videoIds = songs.map { $0.videoid }
+            let uniqueVideoIds = videoIds.unique().shuffled()
+            if uniqueVideoIds.count == 0 {
+                return UIImage(systemName: "xmark.circle.fill")!
+            } else if uniqueVideoIds.count == 1 {
+                return getImage(byVideoId: videoIds[0]).cropSeihoukei()
+            } else if uniqueVideoIds.count == 2 {
+                return UIImage.montageFourSeihoukei(images: [getImage(byVideoId: uniqueVideoIds[0]).cropSeihoukei(), getImage(byVideoId: uniqueVideoIds[1]).cropSeihoukei(), getImage(byVideoId: uniqueVideoIds[1]).cropSeihoukei(), getImage(byVideoId: uniqueVideoIds[0]).cropSeihoukei()])
+            } else if uniqueVideoIds.count == 3 {
+                return UIImage.montageFourSeihoukei(images: [getImage(byVideoId: uniqueVideoIds[0]).cropSeihoukei(), getImage(byVideoId: uniqueVideoIds[1]).cropSeihoukei(), getImage(byVideoId: uniqueVideoIds[2]).cropSeihoukei(), getImage(byVideoId: uniqueVideoIds[0]).cropSeihoukei()])
+            } else {
+                return UIImage.montageFourSeihoukei(images: [getImage(byVideoId: uniqueVideoIds[0]).cropSeihoukei(), getImage(byVideoId: uniqueVideoIds[1]).cropSeihoukei(), getImage(byVideoId: uniqueVideoIds[2]).cropSeihoukei(), getImage(byVideoId: uniqueVideoIds[3]).cropSeihoukei()])
+            }
         }
         return UIImage(systemName: "xmark.circle.fill")!
     }
