@@ -72,7 +72,7 @@ class HomeViewController: UIViewController {
             // NavigationBarの文字色を変更
             self.navigationController?.navigationBar.tintColor = .white
             
-            setupBackground()
+            setBackground()
         }, comment: "viewDidLoad")
     }
     
@@ -93,6 +93,8 @@ class HomeViewController: UIViewController {
         favoriteView.resetSongs(songs: Songs.shared.favoriteSongs)
         historyView.resetSongs(songs: Songs.shared.historySongs)
         playListView.resetSongs(playListSongs: Songs.shared.playListSongs)
+        // プレイリストを変更する場合もありうるため更新
+        playListView.resetKeys(playListKeys: Songs.shared.playList)
         
         // TODO: 汎用化して存在しないモジュールは表示できないようにしておきたい
         playListView.isHidden = PlayLists.shared.playListIds.isEmpty
@@ -110,10 +112,6 @@ class HomeViewController: UIViewController {
         playListView.collectionView.reloadData()
     }
     
-    private func setupBackground() {
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.png")!)
-    }
-
     @objc func settingBarButtonTapped(_ sender: UIBarButtonItem) {
         let storyboard = UIStoryboard(name: "Setting", bundle: nil)
         let nextViewController = storyboard.instantiateViewController(withIdentifier: "Setting") as! SettingViewController

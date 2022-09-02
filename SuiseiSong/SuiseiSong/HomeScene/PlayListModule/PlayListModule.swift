@@ -55,6 +55,10 @@ class PlayListView: UIView {
     func resetSongs(playListSongs: [String:[Song]]) {
         self.playListSongs = playListSongs
     }
+    
+    func resetKeys(playListKeys: [String]) {
+        self.playListKeys = playListKeys
+    }
 }
 
 extension PlayListView: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -96,7 +100,11 @@ extension PlayListView: UICollectionViewDelegate, UICollectionViewDataSource {
         
         let storyboard = UIStoryboard(name: "Search", bundle: nil)
         let nextViewController = storyboard.instantiateViewController(withIdentifier: "Search") as! SearchViewController
-        
+        if playListStyle == .playList {
+            nextViewController.searchType = .addPlayList
+            nextViewController.playListTitle = playListKeys[indexPath.row]
+        }
+
         if let navigationController = self.navigationController,
             let songs = playListSongs[playListKeys[indexPath.row]] {
             Songs.shared.setDisplaySongs(songs: songs)

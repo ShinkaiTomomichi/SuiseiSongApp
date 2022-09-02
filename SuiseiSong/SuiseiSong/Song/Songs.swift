@@ -36,7 +36,6 @@ final class Songs {
     var artists: [String] = []
     var artistsSongs: [String: [Song]] = [:]
     // プレイリスト
-    // あー、こことキャッシュを更新しないとダメか...
     var playList: [String] = []
     var playListSongs: [String: [Song]] = [:]
     // お気に入りと履歴
@@ -207,6 +206,10 @@ final class Songs {
                 }
             }
         }
+    }
+    
+    func resetPlayListSongs() {
+        setupPlayListSongs()
     }
     
     func resetDisplaySongs() {

@@ -41,6 +41,13 @@ class SongTableViewForChoiceCell: UITableViewCell {
         if let song = song {
             song.choice.toggle()
             setChoiceButton(enable: song.choice)
+            if song.choice {
+                vc?.playListIds.append(song.id)
+            } else {
+                vc?.playListIds.removeAll(where: {$0 == song.id})
+            }
+            setChoiceButton(enable: song.choice)
+
         }
     }
     
@@ -51,14 +58,10 @@ class SongTableViewForChoiceCell: UITableViewCell {
     }
     
     private func setChoiceButton(enable: Bool) {
-        if let id = song?.id {
-            if enable {
-                self.choice.setImage(UIImage.initWithTintColorWhite(systemName: "checkmark.square.fill"), for: .normal)
-                vc?.playListIds.append(id)
-            } else {
-                self.choice.setImage(UIImage.initWithTintColorWhite(systemName: "square"), for: .normal)
-                vc?.playListIds.removeAll(where: {$0 == id})
-            }
+        if enable {
+            self.choice.setImage(UIImage.initWithTintColorWhite(systemName: "checkmark.square.fill"), for: .normal)
+        } else {
+            self.choice.setImage(UIImage.initWithTintColorWhite(systemName: "square"), for: .normal)
         }
     }
 }

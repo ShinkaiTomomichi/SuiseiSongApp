@@ -13,9 +13,14 @@ extension UIImage {
         return UIImage(systemName: systemName)?.withTintColor(.white, renderingMode: .alwaysOriginal)
     }
     
-    // 横長画像の中心部を正方形にクロップする
+    // 存在しない時の画像を定義
     static func notFound() -> UIImage {
         return UIImage.initWithTintColorWhite(systemName: "xmark.circle.fill")!
+    }
+    
+    // バックグラウンド画像を定義
+    static func background() -> UIImage {
+        return UIImage(named: "background.png")!
     }
     
     // 4つの画像を合成する

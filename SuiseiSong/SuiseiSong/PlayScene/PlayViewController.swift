@@ -86,13 +86,9 @@ class PlayViewController: UIViewController {
 
         NotificationCenter.default.addObserver(self, selector: #selector(reloadRepeatTypeButton), name: .didChangedRepeatType, object: nil)
         
-        setupBackground()
+        setBackground()
     }
-    
-    private func setupBackground() {
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.png")!)
-    }
-    
+        
     // 再度復帰した際に画面が表示されなくなる不具合がある
     // TODO: そもそもこれ必要なのか検討
     override func viewDidDisappear(_ animated: Bool) {

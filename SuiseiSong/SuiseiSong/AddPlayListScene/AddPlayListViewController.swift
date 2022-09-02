@@ -26,8 +26,7 @@ class AddPlayListViewController: UIViewController {
         songTableView.register(UINib(nibName: "SongTableViewForChoiceCell", bundle: nil), forCellReuseIdentifier: "SongTableViewForChoiceCell")
         searchBar.delegate = self
         
-        saveBarButtonItem = UIBarButtonItem(image: UIImage.initWithTintColorWhite(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(saveBarButtonTapped(_:)))
-        
+        saveBarButtonItem = UIBarButtonItem(title: "次へ", style: .done, target: self, action: #selector(saveBarButtonTapped(_:)))        
         self.navigationItem.rightBarButtonItems = [saveBarButtonItem]
     }
     
@@ -39,6 +38,10 @@ class AddPlayListViewController: UIViewController {
     @IBAction func tapSortButton(_ sender: Any) {
         // sort形式をtoggleする
         // displaySongsを再セットするとかか?
+    }
+    
+    func setPlayListIds(playListIds: [Int]) {
+        self.playListIds = playListIds
     }
 }
 
@@ -106,14 +109,23 @@ extension AddPlayListViewController {
 
         // 実行ボタンを追加
         alert.addAction(UIAlertAction(title: "保存", style: .default, handler: {(action) -> Void in
-            
-            guard let playListTitle = playListTitleTextField?.text, !playListTitle.isEmpty else {
-                self.presentCautionAlert(message: "プレイリスト名が不正です")
+            guard let playListTitle = playListTitleTextField?.text else {
+                self.presentCautionAlert(message: "プレイリスト名が取得できませんでした")
                 return
             }
             
+            guard !playListTitle.isEmpty else {
+                self.presentCautionAlert(message: "プレイリスト名を入力してください")
+                return
+            }
+
             guard Songs.shared.allSongs.filter({ $0.choice }).count != 0 else {
                 self.presentCautionAlert(message: "プレイリストに追加する曲を選択してください")
+                return
+            }
+            
+            guard !Songs.shared.playList.contains(playListTitle) else {
+                self.presentCautionAlert(message: "既に存在するプレイリスト名です")
                 return
             }
             
@@ -139,6 +151,7 @@ extension AddPlayListViewController {
     private func savePlayList(title: String) {
         Logger.log(message: playListIds)
         PlayLists.shared.addPlayListIds(playListTitle: title, songIds: playListIds)
+        Songs.shared.resetPlayListSongs()
         self.navigationController?.popToRootViewController(animated: true)
     }
 }

@@ -20,11 +20,69 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="5h4-eG-Ldl">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="51"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="hyR-94-yZI"/>
+                                        </constraints>
                                         <textInputTraits key="textInputTraits"/>
                                     </searchBar>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gPp-mt-e9v" userLabel="Edit Play List View">
+                                        <rect key="frame" x="0.0" y="35" width="414" height="90"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lU3-sI-eUv" userLabel="Play List Label">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w5p-g5-Kpn">
+                                                <rect key="frame" x="0.0" y="50" width="414" height="40"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WKW-ZL-HfP" userLabel="Change">
+                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="40" id="vZD-f2-z6P"/>
+                                                            <constraint firstAttribute="height" constant="40" id="xR7-9z-SXw"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain"/>
+                                                        <connections>
+                                                            <action selector="tapChangeTitleButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Csl-kU-a6x"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eHn-7A-sFq" userLabel="Add">
+                                                        <rect key="frame" x="40" y="0.0" width="40" height="40"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="40" id="Lcw-ao-n2S"/>
+                                                            <constraint firstAttribute="height" constant="40" id="lTZ-by-HP4"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain"/>
+                                                        <connections>
+                                                            <action selector="tapAddSongButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="eJv-oA-imp"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I1n-Q5-SQ3" userLabel="Delete">
+                                                        <rect key="frame" x="80" y="0.0" width="40" height="40"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="40" id="2WD-P2-lhs"/>
+                                                            <constraint firstAttribute="width" constant="40" id="pNp-Lc-hla"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain"/>
+                                                        <connections>
+                                                            <action selector="tapDeletePlayListButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="J1U-Zy-HHX"/>
+                                                        </connections>
+                                                    </button>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zuk-5I-9bE">
+                                                        <rect key="frame" x="120" y="0.0" width="294" height="40"/>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="mWF-R5-DeC">
-                                        <rect key="frame" x="0.0" y="51" width="414" height="767"/>
+                                        <rect key="frame" x="0.0" y="125" width="414" height="693"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableView>
                                 </subviews>
@@ -40,6 +98,11 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addSongButton" destination="eHn-7A-sFq" id="LIB-2C-pXB"/>
+                        <outlet property="changeTitleButton" destination="WKW-ZL-HfP" id="pb4-sz-nnp"/>
+                        <outlet property="deletePlayListButton" destination="I1n-Q5-SQ3" id="gE0-dA-FfA"/>
+                        <outlet property="editPlayListLabel" destination="lU3-sI-eUv" id="5dp-wD-u3a"/>
+                        <outlet property="editPlayListView" destination="gPp-mt-e9v" id="XRR-zn-LhG"/>
                         <outlet property="searchBar" destination="5h4-eG-Ldl" id="fOV-sh-cxy"/>
                         <outlet property="songTableView" destination="mWF-R5-DeC" id="Xqt-Ti-s5N"/>
                     </connections>

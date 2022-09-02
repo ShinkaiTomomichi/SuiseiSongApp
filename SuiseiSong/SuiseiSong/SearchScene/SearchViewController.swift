@@ -11,6 +11,15 @@ import UIKit
 class SearchViewController: UIViewController {
     @IBOutlet weak var songTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var editPlayListView: UIStackView!
+    @IBOutlet weak var editPlayListLabel: UILabel!
+    
+    var searchType: SearchType = .none
+    var playListTitle: String?
+    
+    @IBOutlet weak var changeTitleButton: UIButton!
+    @IBOutlet weak var addSongButton: UIButton!
+    @IBOutlet weak var deletePlayListButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,14 +29,33 @@ class SearchViewController: UIViewController {
         songTableView.register(UINib(nibName: "SongTableViewCell", bundle: nil), forCellReuseIdentifier: "SongTableViewCell")
         searchBar.delegate = self
         
-        setupBackground()
-    }
-    
-    private func setupBackground() {
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.png")!)
+        self.changeTitleButton.setImage(UIImage.initWithTintColorWhite(systemName: "pencil"), for: .normal)
+        self.addSongButton.setImage(UIImage.initWithTintColorWhite(systemName: "plus"), for: .normal)
+        self.deletePlayListButton.setImage(UIImage.initWithTintColorWhite(systemName: "trash"), for: .normal)
         
+        if searchType != .addPlayList {
+            editPlayListView.isHidden = true
+        } else {
+            if let title = playListTitle {
+                editPlayListLabel.text = title
+            }
+        }
+        
+        setBackground()
         // searchBarは背景に画像がセットされているためこれを削除する
         searchBar.backgroundImage = UIImage()
+    }
+    
+    @IBAction func tapChangeTitleButton(_ sender: Any) {
+        Logger.log(message: #function)
+    }
+    
+    @IBAction func tapAddSongButton(_ sender: Any) {
+        Logger.log(message: #function)
+    }
+    
+    @IBAction func tapDeletePlayListButton(_ sender: Any) {
+        Logger.log(message: #function)
     }
 }
 
@@ -82,5 +110,10 @@ extension SearchViewController: UISearchBarDelegate {
             songTableView.reloadData()
         }
     }
+}
+
+enum SearchType {
+    case none
+    case addPlayList
 }
 
