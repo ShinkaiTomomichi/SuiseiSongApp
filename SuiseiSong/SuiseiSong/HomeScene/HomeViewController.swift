@@ -15,6 +15,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var notStreamView: SuggestModuleView!
     @IBOutlet weak var myPlayListView: PlayListView!
     @IBOutlet weak var collabView: PlayListView!
+    @IBOutlet weak var artistView: PlayListView!
     @IBOutlet weak var playListView: PlayListView!
     
     // NavigationBarに追加するボタン
@@ -44,6 +45,11 @@ class HomeViewController: UIViewController {
                              songs: Songs.shared.holoMembersSongs,
                              playListStyle: .collaboration,
                              navigationController: nc)
+            artistView.setup(title: "アーティスト",
+                             keys: Songs.shared.artists,
+                             songs: Songs.shared.artistsSongs,
+                             playListStyle: .artist,
+                             navigationController: nc)
             myPlayListView.setup(title: "ホロライブおすすめ",
                                  keys: Songs.shared.myFavorites,
                                  songs: Songs.shared.myFavoriteSongs,
@@ -54,6 +60,7 @@ class HomeViewController: UIViewController {
                                songs: Songs.shared.playListSongs,
                                playListStyle: .playList,
                                navigationController: nc)
+            
             
             settingBarButtonItem = UIBarButtonItem(image: UIImage.initWithTintColorWhite(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(settingBarButtonTapped(_:)))
             addPlayListBarButtonItem = UIBarButtonItem(image: UIImage.initWithTintColorWhite(systemName: "plus"), style: .plain, target: self, action: #selector(addPlayListBarButtonTapped(_:)))
@@ -76,6 +83,7 @@ class HomeViewController: UIViewController {
         resetScrollAndReload(favoriteView)
         resetScrollAndReload(notStreamView)
         resetScrollAndReload(collabView)
+        resetScrollAndReload(artistView)
         resetScrollAndReload(myPlayListView)
         resetScrollAndReload(playListView)
         

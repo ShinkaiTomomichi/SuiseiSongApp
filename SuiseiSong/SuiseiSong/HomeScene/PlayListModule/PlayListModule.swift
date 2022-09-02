@@ -77,6 +77,8 @@ extension PlayListView: UICollectionViewDelegate, UICollectionViewDataSource {
                 icon = UIImage.notFound()
             case .collaboration:
                 icon = ImageCaches.shared.getImageHoloMemberIcon(byName: key)
+            case .artist:
+                icon = ImageCaches.shared.getImageArtistIcon(byName: key)
             case .myFavorite:
                 icon = ImageCaches.shared.getImageMyFavorites(byTitle: key)
             case .playList:
@@ -108,6 +110,7 @@ extension PlayListView: UICollectionViewDelegate, UICollectionViewDataSource {
 enum PlayListStyle {
     case none
     case collaboration
+    case artist
     case myFavorite
     case playList
 }

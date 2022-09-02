@@ -48,6 +48,7 @@ final class Songs {
         setupFilteredSongs()
         setupOtherSongs()
         setupHoloMeberSongs()
+        setupArtistSongs()
         setupMyFavoriteSongs()
         setupPlayListSongs()
         resetDisplaySongs()
@@ -154,11 +155,25 @@ final class Songs {
                 }
             }
         }
-        holoMembers = holoMembers_.uniqueSortedByCount().prefix(5).map { $0 }
+        holoMembers = holoMembers_.uniqueSortedByCount().prefix(10).map { $0 }
         
         for holoMember in holoMembers {
             holoMembersSongs[holoMember] = filteredSongs.filter {
                 $0.members.contains(holoMember)
+            }
+        }
+    }
+    
+    private func setupArtistSongs() {
+        var artists_: [String] = []
+        for song in filteredSongs {
+            artists_.append(song.artistname)
+        }
+        artists = artists_.uniqueSortedByCount().prefix(10).map { $0 }
+        
+        for artist in artists {
+            artistsSongs[artist] = filteredSongs.filter {
+                $0.artistname == artist
             }
         }
     }

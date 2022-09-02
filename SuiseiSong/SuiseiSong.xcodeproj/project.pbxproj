@@ -11,6 +11,8 @@
 		DA41E87128BF9A3F0092DFA3 /* PlayList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA41E87028BF9A3F0092DFA3 /* PlayList.swift */; };
 		DA41E87428C042320092DFA3 /* ImageURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA41E87328C042320092DFA3 /* ImageURL.swift */; };
 		DA41E87728C18E610092DFA3 /* CheckTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA41E87628C18E600092DFA3 /* CheckTimer.swift */; };
+		DA41E87A28C23C600092DFA3 /* artists.json in Resources */ = {isa = PBXBuildFile; fileRef = DA41E87828C23C600092DFA3 /* artists.json */; };
+		DA41E87B28C23C600092DFA3 /* members.json in Resources */ = {isa = PBXBuildFile; fileRef = DA41E87928C23C600092DFA3 /* members.json */; };
 		DA4D2C0F28A707BF00260B4C /* PlayListModuleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4D2C0D28A707BF00260B4C /* PlayListModuleCollectionViewCell.swift */; };
 		DA4D2C1028A707BF00260B4C /* PlayListModuleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA4D2C0E28A707BF00260B4C /* PlayListModuleCollectionViewCell.xib */; };
 		DA6078132886D5C20002A524 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6078122886D5C20002A524 /* Int+.swift */; };
@@ -89,6 +91,8 @@
 		DA41E87028BF9A3F0092DFA3 /* PlayList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayList.swift; sourceTree = "<group>"; };
 		DA41E87328C042320092DFA3 /* ImageURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageURL.swift; sourceTree = "<group>"; };
 		DA41E87628C18E600092DFA3 /* CheckTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckTimer.swift; sourceTree = "<group>"; };
+		DA41E87828C23C600092DFA3 /* artists.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = artists.json; path = ../../../Dataset/artists.json; sourceTree = "<group>"; };
+		DA41E87928C23C600092DFA3 /* members.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = members.json; path = ../../../Dataset/members.json; sourceTree = "<group>"; };
 		DA4D2C0D28A707BF00260B4C /* PlayListModuleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayListModuleCollectionViewCell.swift; sourceTree = "<group>"; };
 		DA4D2C0E28A707BF00260B4C /* PlayListModuleCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayListModuleCollectionViewCell.xib; sourceTree = "<group>"; };
 		DA6078122886D5C20002A524 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
@@ -335,6 +339,8 @@
 		DA9950DF288056A30037D8E5 /* DataBase */ = {
 			isa = PBXGroup;
 			children = (
+				DA41E87828C23C600092DFA3 /* artists.json */,
+				DA41E87928C23C600092DFA3 /* members.json */,
 				DAD6CF8D28BB83D500A51851 /* suisei_songs.json */,
 				DA9950DD288056510037D8E5 /* JSONFileManager.swift */,
 			);
@@ -523,6 +529,7 @@
 				DA9950B2287B27270037D8E5 /* Assets.xcassets in Resources */,
 				DA60783E28989D6E0002A524 /* Search.storyboard in Resources */,
 				DAA257F628B91E7900728EF0 /* SongTableViewForChoiceCell.xib in Resources */,
+				DA41E87A28C23C600092DFA3 /* artists.json in Resources */,
 				DA60784C28994A7B0002A524 /* SuggestModule.xib in Resources */,
 				DA60784A2898A9990002A524 /* SongTableViewCell.xib in Resources */,
 				DA9950B0287B271F0037D8E5 /* Play.storyboard in Resources */,
@@ -533,6 +540,7 @@
 				DAC2393828A6F9CB00091E1D /* PlayListModule.xib in Resources */,
 				DAA257F128B853AB00728EF0 /* AddPlayList.storyboard in Resources */,
 				DA60785F289C214E0002A524 /* Setting.storyboard in Resources */,
+				DA41E87B28C23C600092DFA3 /* members.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
