@@ -30,6 +30,6 @@ class SuggestModuleCollectionViewCell: UICollectionViewCell {
     
     // Youtubeのサムネイル画像を取得
     private func getImageByVideoId(videoId: String) {
-        self.icon.image = ImageCaches.shared.caches[videoId]
+        self.icon.image = ImageCaches.shared.getImageThumbnail(byVideoId: videoId)
     }
 }

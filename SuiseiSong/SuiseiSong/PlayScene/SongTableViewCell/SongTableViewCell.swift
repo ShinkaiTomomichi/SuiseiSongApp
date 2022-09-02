@@ -54,7 +54,7 @@ class SongTableViewCell: UITableViewCell {
     // Youtubeのサムネイル画像を取得
     // 現状cellの描画以外に利用しないためcell直下に用意
     private func getImageByVideoId(videoId: String) {
-        self.icon.image = ImageCaches.shared.caches[videoId]        
+        self.icon.image = ImageCaches.shared.getImageThumbnail(byVideoId: videoId)
     }
     
     private func setFavoriteStar() {

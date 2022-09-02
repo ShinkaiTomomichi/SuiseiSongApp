@@ -14,21 +14,14 @@ extension UIImage {
     }
     
     // 横長画像の中心部を正方形にクロップする
-    func trimSquare() -> UIImage {
-        let imageW = self.size.width
-        let imageH = self.size.height
-        let posX = (imageW - imageH) / 2
-        let trimArea = CGRect(x: posX, y: 0, width: imageH, height: imageH)
-        if let selfRef = self.cgImage, let tmp = selfRef.cropping(to: trimArea) {
-            return UIImage(cgImage: tmp)
-        }
-        return UIImage(systemName: "xmark.circle.fill")!
+    static func notFound() -> UIImage {
+        return UIImage.initWithTintColorWhite(systemName: "xmark.circle.fill")!
     }
     
     // 4つの画像を合成する
     static func concatenateSquareImage(images: [UIImage]) -> UIImage {
         if images.count < 4 {
-            return UIImage(systemName: "xmark.circle.fill")!
+            return UIImage.notFound()
         }
         
         let imageW = images[0].size.width
@@ -47,4 +40,17 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return concatenatedImage
     }
+    
+    // 横長画像の中心部を正方形にクロップする
+    func trimSquare() -> UIImage {
+        let imageW = self.size.width
+        let imageH = self.size.height
+        let posX = (imageW - imageH) / 2
+        let trimArea = CGRect(x: posX, y: 0, width: imageH, height: imageH)
+        if let selfRef = self.cgImage, let tmp = selfRef.cropping(to: trimArea) {
+            return UIImage(cgImage: tmp)
+        }
+        return UIImage(systemName: "xmark.circle.fill")!
+    }
+
 }

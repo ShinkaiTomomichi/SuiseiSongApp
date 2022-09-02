@@ -31,39 +31,42 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let nc = self.navigationController
-        recentView.setup(title: "最近の動画", songs: Songs.shared.displaySongs, navigationController: nc)
-        live3DView.setup(title: "3Dライブ", songs: Songs.shared.live3DSongs, navigationController: nc)
-        historyView.setup(title: "履歴", songs: Songs.shared.historySongs, navigationController: nc)
-        favoriteView.setup(title: "お気に入り", songs: Songs.shared.favoriteSongs, navigationController: nc)
-        notStreamView.setup(title: "歌動画", songs: Songs.shared.notStreamSongs, navigationController: nc)
-        collabView.setup(title: "コラボ",
-                         keys: Songs.shared.holoMembers,
-                         songs: Songs.shared.holoMembersSongs,
-                         icons: ImageCaches.shared.holoMembersCaches,
-                         navigationController: nc)
-        myPlayListView.setup(title: "ホロライブおすすめ",
-                             keys: Songs.shared.myFavorites,
-                             songs: Songs.shared.myFavoriteSongs,
-                             icons: ImageCaches.shared.myFavoritesCaches,
+        var checkTimer = CheckTimer()
+        checkTimer.check(handler: {
+            let nc = self.navigationController
+            recentView.setup(title: "最近の動画", songs: Songs.shared.displaySongs, navigationController: nc)
+            live3DView.setup(title: "3Dライブ", songs: Songs.shared.live3DSongs, navigationController: nc)
+            historyView.setup(title: "履歴", songs: Songs.shared.historySongs, navigationController: nc)
+            favoriteView.setup(title: "お気に入り", songs: Songs.shared.favoriteSongs, navigationController: nc)
+            notStreamView.setup(title: "歌動画", songs: Songs.shared.notStreamSongs, navigationController: nc)
+            collabView.setup(title: "コラボ",
+                             keys: Songs.shared.holoMembers,
+                             songs: Songs.shared.holoMembersSongs,
+                             playListStyle: .collaboration,
                              navigationController: nc)
-        playListView.setup(title: "プレイリスト",
-                           keys: Songs.shared.playList,
-                           songs: Songs.shared.playListSongs,
-                           icons: ImageCaches.shared.playListCaches,
-                           navigationController: nc)
-        
-        settingBarButtonItem = UIBarButtonItem(image: UIImage.initWithTintColorWhite(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(settingBarButtonTapped(_:)))
-        addPlayListBarButtonItem = UIBarButtonItem(image: UIImage.initWithTintColorWhite(systemName: "plus"), style: .plain, target: self, action: #selector(addPlayListBarButtonTapped(_:)))
-        
-        self.navigationItem.rightBarButtonItems = [settingBarButtonItem, addPlayListBarButtonItem]
-        
-        // フリックを入れるとスライダーと相性が悪いので無効化
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        // NavigationBarの文字色を変更
-        self.navigationController?.navigationBar.tintColor = .white
-        
-        setupBackground()
+            myPlayListView.setup(title: "ホロライブおすすめ",
+                                 keys: Songs.shared.myFavorites,
+                                 songs: Songs.shared.myFavoriteSongs,
+                                 playListStyle: .myFavorite,
+                                 navigationController: nc)
+            playListView.setup(title: "プレイリスト",
+                               keys: Songs.shared.playList,
+                               songs: Songs.shared.playListSongs,
+                               playListStyle: .playList,
+                               navigationController: nc)
+            
+            settingBarButtonItem = UIBarButtonItem(image: UIImage.initWithTintColorWhite(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(settingBarButtonTapped(_:)))
+            addPlayListBarButtonItem = UIBarButtonItem(image: UIImage.initWithTintColorWhite(systemName: "plus"), style: .plain, target: self, action: #selector(addPlayListBarButtonTapped(_:)))
+            
+            self.navigationItem.rightBarButtonItems = [settingBarButtonItem, addPlayListBarButtonItem]
+            
+            // フリックを入れるとスライダーと相性が悪いので無効化
+            self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+            // NavigationBarの文字色を変更
+            self.navigationController?.navigationBar.tintColor = .white
+            
+            setupBackground()
+        }, comment: "viewDidLoad")
     }
     
     private func reloadSuggestAndPlayListModule() {

@@ -50,12 +50,9 @@ final class Songs {
         setupHoloMeberSongs()
         setupMyFavoriteSongs()
         setupPlayListSongs()
-        
         resetDisplaySongs()
-        ImageCaches.shared.setup()
         
-        // debug
-        checkIdForDebug()
+        checkIdForDebug() // debug
     }
     
     private func setupAllSongs() {

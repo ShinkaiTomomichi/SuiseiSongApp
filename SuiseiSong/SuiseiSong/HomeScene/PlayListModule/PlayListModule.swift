@@ -17,7 +17,7 @@ class PlayListView: UIView {
     // 多重リストとiconのキャッシュをプロパティとして持つ
     var playListKeys: [String] = []
     var playListSongs: [String: [Song]] = [:]
-    var playListIcons: [String: UIImage] = [:]
+    var playListStyle: PlayListStyle = .none
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,11 +44,11 @@ class PlayListView: UIView {
         self.collectionView.register(UINib(nibName: "PlayListModuleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PlayListModuleCollectionViewCell")
     }
         
-    func setup(title: String, keys: [String], songs: [String: [Song]], icons: [String: UIImage], navigationController: UINavigationController?) {
+    func setup(title: String, keys: [String], songs: [String: [Song]], playListStyle: PlayListStyle, navigationController: UINavigationController?) {
         self.title.text = title
         self.playListKeys = keys
         self.playListSongs = songs
-        self.playListIcons = icons
+        self.playListStyle = playListStyle
         self.navigationController = navigationController
     }
     
@@ -69,12 +69,22 @@ extension PlayListView: UICollectionViewDelegate, UICollectionViewDataSource {
         cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PlayListModuleCollectionViewCell", for: indexPath) as! PlayListModuleCollectionViewCell
         
         let key = playListKeys[indexPath.row]
-        if let songs = playListSongs[key], let icon = playListIcons[key] {
-            cell.setCell(title: key, songsCount: songs.count, icon: icon)
+        if let songs = playListSongs[key] {
+            var icon: UIImage?
+            switch (playListStyle) {
+            case .none:
+                Logger.log(message: "playListStyleがセットされていません")
+                icon = UIImage.notFound()
+            case .collaboration:
+                icon = ImageCaches.shared.getImageHoloMemberIcon(byName: key)
+            case .myFavorite:
+                icon = ImageCaches.shared.getImageMyFavorites(byTitle: key)
+            case .playList:
+                icon = ImageCaches.shared.getImagePlayListIcon(byTitle: key)
+            }
+            cell.setCell(title: key, songsCount: songs.count, icon: icon!)
         } else {
             Logger.log(message: "見つかりませんでした")
-            Logger.log(message: playListSongs.keys.contains(key))
-            Logger.log(message: playListIcons.keys.contains(key))
         }
         return cell
     }
@@ -93,4 +103,11 @@ extension PlayListView: UICollectionViewDelegate, UICollectionViewDataSource {
             Logger.log(message: "navigationControllerのセットが完了していません")
         }
     }
+}
+
+enum PlayListStyle {
+    case none
+    case collaboration
+    case myFavorite
+    case playList
 }

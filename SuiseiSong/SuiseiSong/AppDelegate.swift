@@ -13,7 +13,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
             
         // データベースをセット
-        Songs.shared.setup()
+        var checkTimer = CheckTimer()
+        checkTimer.check(handler: {
+            Songs.shared.setup()
+            // TODO: 画像キャッシュの作成など非同期でできる処理を実装しておきたい
+        }, comment: "AppDelegate")
+        
         return true
     }
 
