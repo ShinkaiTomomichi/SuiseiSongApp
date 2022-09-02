@@ -58,6 +58,7 @@ extension AddPlayListViewController: UITableViewDelegate, UITableViewDataSource 
         // セルに対応する歌をセット
         let index = indexPath.row
         cell.song = Songs.shared.displaySongsForSearch[index]
+        cell.vc = self
         
         return cell
     }
@@ -106,7 +107,7 @@ extension AddPlayListViewController {
         // 実行ボタンを追加
         alert.addAction(UIAlertAction(title: "保存", style: .default, handler: {(action) -> Void in
             
-            guard let title = playListTitleTextField?.text, !title.isEmpty else {
+            guard let playListTitle = playListTitleTextField?.text, !playListTitle.isEmpty else {
                 self.presentCautionAlert(message: "プレイリスト名が不正です")
                 return
             }
@@ -117,7 +118,7 @@ extension AddPlayListViewController {
             }
             
             // TODO: プレイリスト名が重複する場合も気をつけたい
-            self.savePlayList(title: title)
+            self.savePlayList(title: playListTitle)
         }))
         
         // キャンセルボタンを追加
@@ -131,12 +132,13 @@ extension AddPlayListViewController {
         let alert = UIAlertController(title: "不正な入力です",
                                       message: message,
                                       preferredStyle: .alert)
-        
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     
     private func savePlayList(title: String) {
-        Logger.log(message: "ここでUDに保存")
+        Logger.log(message: playListIds)
+        PlayLists.shared.addPlayListIds(playListTitle: title, songIds: playListIds)
         self.navigationController?.popToRootViewController(animated: true)
     }
 }

@@ -36,3 +36,14 @@ extension Array where Element == String {
         return tmp
     }
 }
+
+extension Array where Element == Int {
+    func toString() -> String {
+        var str = ""
+        for item in self {
+            str += (String(item) + ",")
+        }
+        return str
+    }
+}
+

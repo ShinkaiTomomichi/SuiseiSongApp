@@ -44,12 +44,16 @@ class PlayListView: UIView {
         self.collectionView.register(UINib(nibName: "PlayListModuleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PlayListModuleCollectionViewCell")
     }
         
-    func setupPlayListModule(title: String, keys: [String], songs: [String: [Song]], icons: [String: UIImage], navigationController: UINavigationController?) {
+    func setup(title: String, keys: [String], songs: [String: [Song]], icons: [String: UIImage], navigationController: UINavigationController?) {
         self.title.text = title
         self.playListKeys = keys
         self.playListSongs = songs
         self.playListIcons = icons
         self.navigationController = navigationController
+    }
+    
+    func resetSongs(playListSongs: [String:[Song]]) {
+        self.playListSongs = playListSongs
     }
 }
 
@@ -67,6 +71,10 @@ extension PlayListView: UICollectionViewDelegate, UICollectionViewDataSource {
         let key = playListKeys[indexPath.row]
         if let songs = playListSongs[key], let icon = playListIcons[key] {
             cell.setCell(title: key, songsCount: songs.count, icon: icon)
+        } else {
+            Logger.log(message: "見つかりませんでした")
+            Logger.log(message: playListSongs.keys.contains(key))
+            Logger.log(message: playListIcons.keys.contains(key))
         }
         return cell
     }

@@ -15,18 +15,20 @@ extension PlayViewController: YTPlayerViewDelegate {
         switch (state) {
         case YTPlayerState.unstarted:
             YTPlayerViewWrapper.shared.playing = false
-            print("停止中")
+            Logger.log(message: "停止中")
         case YTPlayerState.playing:
             YTPlayerViewWrapper.shared.playing = true
-            print("再生中")
+            Logger.log(message: "再生中")
         case YTPlayerState.paused:
             YTPlayerViewWrapper.shared.playing = false
-            print("一時停止中")
+            Logger.log(message: "一時停止中")
         case YTPlayerState.buffering:
-            print("バッファリング中")
+            Logger.log(message: "バッファリング中")
         case YTPlayerState.ended:
             YTPlayerViewWrapper.shared.playing = false
-            print("再生終了")
+            // 動画終了時も次の動画に遷移するよう修正
+            goToNextSong()
+            Logger.log(message: "再生終了")
         default:
             break
         }
@@ -47,11 +49,11 @@ extension PlayViewController: YTPlayerViewDelegate {
         // 次の動画に進めない場合は停止する
         if let endtime = SelectedStatus.shared.song?.endtime,
             playTime >= Float(endtime) {
-            endtimeExceed()
+            goToNextSong()
         }
     }
     
-    private func endtimeExceed() {
+    private func goToNextSong() {
         // ここに次の動画へ進む処理を挟みたい
         // singleRepeatの場合は同じ動画へループする
         if Settings.shared.repeatType == .singleRepeat {
@@ -61,7 +63,6 @@ extension PlayViewController: YTPlayerViewDelegate {
             let goNextSuccessed = SelectedStatus.shared.selectNextID()
             if !goNextSuccessed {
                 playerView.pauseVideo()
-                // TODO: 止めるだけではなく動画を動かなくする必要がある
             }
         }
     }

@@ -19,7 +19,6 @@ class SongTableViewForChoiceCell: UITableViewCell {
     @IBOutlet weak var artist: UILabel!
     @IBOutlet weak var choice: UIButton!
 
-    // うーむ、Songに格納してしまうのが楽かね???
     var song: Song? = nil {
         // songをセットした際に自動で他の要素をセットする
         didSet {
@@ -31,6 +30,7 @@ class SongTableViewForChoiceCell: UITableViewCell {
             }
         }
     }
+    var vc: AddPlayListViewController?
         
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -51,10 +51,14 @@ class SongTableViewForChoiceCell: UITableViewCell {
     }
     
     private func setChoiceButton(enable: Bool) {
-        if enable {
-            self.choice.setImage(UIImage.initWithTintColorWhite(systemName: "checkmark.square.fill"), for: .normal)
-        } else {
-            self.choice.setImage(UIImage.initWithTintColorWhite(systemName: "square"), for: .normal)
+        if let id = song?.id {
+            if enable {
+                self.choice.setImage(UIImage.initWithTintColorWhite(systemName: "checkmark.square.fill"), for: .normal)
+                vc?.playListIds.append(id)
+            } else {
+                self.choice.setImage(UIImage.initWithTintColorWhite(systemName: "square"), for: .normal)
+                vc?.playListIds.removeAll(where: {$0 == id})
+            }
         }
     }
 }

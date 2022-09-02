@@ -59,7 +59,7 @@ class SuggestModuleView: UIView {
         }
     }
         
-    func setupSuggestModule(title: String, songs: [Song], navigationController: UINavigationController?) {
+    func setup(title: String, songs: [Song], navigationController: UINavigationController?) {
         self.navigationController = navigationController
         self.title.text = title
         self.songs = songs

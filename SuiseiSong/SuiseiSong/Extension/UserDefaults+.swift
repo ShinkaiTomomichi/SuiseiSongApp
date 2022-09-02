@@ -9,21 +9,34 @@ import Foundation
 
 extension UserDefaults {
     // プレイリストの保存
-    // 面倒なのでKeyChainでもいいかも
     static func keyPlayList() -> String {
         return "playlist"
     }
     
+    // 文字列から変換する処理を入れる
     static func savePlayList() {
-        let histories = Histories.shared.historyIds
-        UserDefaults.standard.set(histories, forKey: keyHistory())
+        let playListIds = PlayLists.shared.playListIds
+        Logger.log(message: playListIds)
+        var playListIds_:[String:String] = [:]
+        for (key, value) in playListIds {
+            let str = value.toString()
+            playListIds_.updateValue(str, forKey: key)
+        }
+        UserDefaults.standard.set(playListIds_, forKey: keyPlayList())
     }
     
-    static func loadPlayList() -> [Int]? {
-        guard let history = UserDefaults.standard.array(forKey: keyHistory()) else {
+    static func loadPlayList() -> [String: [Int]]? {
+        guard let playListIds = UserDefaults.standard.dictionary(forKey: keyPlayList()) else {
             return nil
         }
-        return history.compactMap { $0 as? Int }
+        var playListIds_:[String:[Int]] = [:]
+        for (key, value) in playListIds {
+            let str = value as! String
+            let intList = str.components(separatedBy: ",").compactMap { Int($0) }
+            playListIds_.updateValue(intList, forKey: key)
+        }
+        
+        return playListIds_
     }
     
     static func removePlayList() {

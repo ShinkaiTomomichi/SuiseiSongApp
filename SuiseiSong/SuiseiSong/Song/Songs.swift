@@ -29,14 +29,16 @@ final class Songs {
     // ホロメンごとにリスト化
     var holoMembers: [String] = []
     var holoMembersSongs: [String: [Song]] = [:]
-    
     // 月ごとのお気に入りでリスト化
     var myFavorites: [String] = []
     var myFavoriteSongs: [String: [Song]] = [:]
-    
     // アーティストごとでリスト化
-    let artists: [String] = []
+    var artists: [String] = []
     var artistsSongs: [String: [Song]] = [:]
+    // プレイリスト
+    // あー、こことキャッシュを更新しないとダメか...
+    var playList: [String] = []
+    var playListSongs: [String: [Song]] = [:]
     // お気に入りと履歴
     var favoriteSongs: [Song] = []
     var historySongs: [Song] = []
@@ -47,6 +49,7 @@ final class Songs {
         setupOtherSongs()
         setupHoloMeberSongs()
         setupMyFavoriteSongs()
+        setupPlayListSongs()
         
         resetDisplaySongs()
         ImageCaches.shared.setup()
@@ -56,7 +59,7 @@ final class Songs {
     }
     
     private func setupAllSongs() {
-        self.allSongs = JSONFileManager.getSuiseiSongs(forResource: "suisei_songs")
+        self.allSongs = JSONFileManager.getSongs(forResource: "suisei_songs")
         
         sortAllSongs()
         setFavoriteAllSongs()
@@ -69,9 +72,9 @@ final class Songs {
     
     private func setupFilteredSongs() {
         // TODO: オプションで変更できるようにしておく
-        removeDuplication(enable: Settings.shared.filteredDuplication)
         removeAcappella(enable: Settings.shared.filteredAcappella)
         removeNotSuisei(enable: true)
+        removeDuplication(enable: Settings.shared.filteredDuplication)
         filteredSongs = allSongs.filter { !$0.filter }
     }
     
@@ -80,9 +83,9 @@ final class Songs {
     private func removeDuplication(enable: Bool) {
         var songTitles: [String] = []
         for song in allSongs {
-            if song.members.count == 1 && !song.live3d && song.stream && songTitles.contains(song.songname) {
+            if song.members.count == 1 && !song.live3d && song.stream && !song.filter && songTitles.contains(song.songname) {
                 song.filter = enable
-            } else if song.members.count == 1 && !song.live3d && song.stream {
+            } else if song.members.count == 1 && !song.live3d && song.stream && !song.filter {
                 songTitles.append(song.songname)
             }
         }
@@ -96,7 +99,6 @@ final class Songs {
         }
     }
     
-    // TODO: 別途フラグを用意したい
     private func removeNotSuisei(enable: Bool) {
         for song in allSongs {
             if !song.suisei {
@@ -147,15 +149,15 @@ final class Songs {
     }
     
     private func setupHoloMeberSongs() {
-        var holoMembersTmp: [String] = []
+        var holoMembers_: [String] = []
         for song in filteredSongs {
             for member in song.members {
                 if member != "星街すいせい" {
-                    holoMembersTmp.append(member)
+                    holoMembers_.append(member)
                 }
             }
         }
-        holoMembers = holoMembersTmp.uniqueSortedByCount().prefix(5).map { $0 }
+        holoMembers = holoMembers_.uniqueSortedByCount().prefix(5).map { $0 }
         
         for holoMember in holoMembers {
             holoMembersSongs[holoMember] = filteredSongs.filter {
@@ -165,17 +167,32 @@ final class Songs {
     }
     
     private func setupMyFavoriteSongs() {
-        var myFavoritesTmp: [String] = []
+        var myFavorites_: [String] = []
         for song in allSongs {
             if song.listtype != "None" {
-                myFavoritesTmp.append(song.listtype)
+                myFavorites_.append(song.listtype)
             }
         }
-        myFavorites = myFavoritesTmp.uniqueSortedByName()
+        myFavorites = myFavorites_.uniqueSortedByName()
         
         for myFavorite in myFavorites {
             myFavoriteSongs[myFavorite] = allSongs.filter {
                 $0.listtype == myFavorite
+            }
+        }
+    }
+    
+    private func setupPlayListSongs() {
+        playList = []
+        for (key, _) in PlayLists.shared.playListIds {
+            playList.append(key)
+        }
+        
+        for title in playList {
+            if let playListIds = PlayLists.shared.playListIds[title] {
+                playListSongs[title] = allSongs.filter {
+                    playListIds.contains($0.id)
+                }
             }
         }
     }
@@ -200,14 +217,14 @@ final class Songs {
     }
         
     func shuffleDisplaySongsExpectSelectedSong() {
-        var displaySongsTmp = self.displaySongs.shuffled()
+        var displaySongs_ = self.displaySongs.shuffled()
         if let selectedSong = SelectedStatus.shared.song {
-            displaySongsTmp.removeAll(where: {$0 == selectedSong})
-            displaySongsTmp.insert(selectedSong, at: 0)
+            displaySongs_.removeAll(where: {$0 == selectedSong})
+            displaySongs_.insert(selectedSong, at: 0)
         } else {
             Logger.log(message: "selectedSongが存在しません")
         }
-        self.displaySongs = displaySongsTmp
+        self.displaySongs = displaySongs_
         if let selectedSong = SelectedStatus.shared.song {
             SelectedStatus.shared.setSelectedSong(song: selectedSong)
         }
