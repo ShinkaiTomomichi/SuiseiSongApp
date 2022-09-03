@@ -211,8 +211,6 @@ final class Songs {
                 }
             }
         }
-        Logger.log(message: "ids: \(PlayLists.shared.playListIds)")
-        Logger.log(message: "songs: \(playListSongs)")
     }
     
     func resetPlayListSongs() {

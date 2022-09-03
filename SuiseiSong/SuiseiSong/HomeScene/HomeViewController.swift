@@ -73,7 +73,7 @@ class HomeViewController: UIViewController {
             self.navigationController?.navigationBar.tintColor = .white
             
             setBackground()
-        }, comment: "viewDidLoad")
+        }, comment: #function)
     }
     
     private func resetContent() {

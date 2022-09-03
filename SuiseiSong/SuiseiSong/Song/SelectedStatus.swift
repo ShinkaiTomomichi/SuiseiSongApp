@@ -77,7 +77,6 @@ final class SelectedStatus {
             return false
         }
         
-        Logger.log(message: "現在のID \(id)")
         if id > 0 {
             setSelectedSong(song: Songs.shared.displaySongs[id-1])
             return true

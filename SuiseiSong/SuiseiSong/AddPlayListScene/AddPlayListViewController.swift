@@ -14,6 +14,7 @@ class AddPlayListViewController: UIViewController {
     @IBOutlet weak var songTableView: UITableView!
     
     var playListTitle: String?
+    var sortType: SortType = .recent
     var playListIds: [Int] = []
     
     // NavigationBarに追加するボタン
@@ -44,8 +45,35 @@ class AddPlayListViewController: UIViewController {
     }
     
     @IBAction func tapSortButton(_ sender: Any) {
-        // sort形式をtoggleする
-        // displaySongsを再セットするとかか?
+        toggleSortType()
+        switch (sortType) {
+        case .recent:
+            Songs.shared.setDisplaySongs(songs: Songs.shared.filteredSongs)
+            sortButton.setTitle("ソート：投稿順", for: .normal)
+            songTableView.setContentOffset(.zero, animated: false)
+            songTableView.reloadData()
+        case .history:
+            Songs.shared.setDisplaySongs(songs: Songs.shared.historySongs)
+            sortButton.setTitle("ソート：履歴", for: .normal)
+            songTableView.setContentOffset(.zero, animated: false)
+            songTableView.reloadData()
+        case .other:
+            Songs.shared.setDisplaySongs(songs: Songs.shared.allSongs.filter{ !$0.suisei })
+            sortButton.setTitle("ソート：その他", for: .normal)
+            songTableView.setContentOffset(.zero, animated: false)
+            songTableView.reloadData()
+        }
+    }
+    
+    private func toggleSortType() {
+        switch (sortType) {
+        case .recent:
+            sortType = .history
+        case .history:
+            sortType = .other
+        case .other:
+            sortType = .recent
+        }
     }
 }
 
@@ -144,7 +172,6 @@ extension AddPlayListViewController {
     }
         
     private func savePlayList(title: String) {
-        Logger.log(message: playListIds)
         PlayLists.shared.setPlayListIds(playListTitle: title, songIds: playListIds)
         Songs.shared.resetPlayListSongs()
         self.navigationController?.popToRootViewController(animated: true)
@@ -186,4 +213,5 @@ extension AddPlayListViewController {
 enum SortType {
     case recent
     case history
+    case other
 }

@@ -16,7 +16,6 @@ extension UserDefaults {
     // 文字列から変換する処理を入れる
     static func savePlayList() {
         let playListIds = PlayLists.shared.playListIds
-        Logger.log(message: playListIds)
         var playListIds_:[String:String] = [:]
         for (key, value) in playListIds {
             let str = value.toString()

@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         checkTimer.check(handler: {
             Songs.shared.setup()
             // TODO: 画像キャッシュの作成など非同期でできる処理を実装しておきたい
-        }, comment: "AppDelegate")
+        }, comment: #function)
         
         return true
     }
