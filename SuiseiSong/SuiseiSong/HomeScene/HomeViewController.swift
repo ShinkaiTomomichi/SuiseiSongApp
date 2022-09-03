@@ -25,8 +25,8 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // モジュールによっては表示する度にシャッフルする
-        Songs.shared.sortOtherSongs()
-        reloadSuggestAndPlayListModule()
+        Songs.shared.sortFavoriteAndHistory()
+        resetContent()
     }
     
     override func viewDidLoad() {
@@ -76,39 +76,42 @@ class HomeViewController: UIViewController {
         }, comment: "viewDidLoad")
     }
     
-    private func reloadSuggestAndPlayListModule() {
-        resetScrollAndReload(recentView)
-        resetScrollAndReload(live3DView)
-        resetScrollAndReload(historyView)
-        resetScrollAndReload(favoriteView)
-        resetScrollAndReload(notStreamView)
-        resetScrollAndReload(collabView)
-        resetScrollAndReload(artistView)
-        resetScrollAndReload(myPlayListView)
-        resetScrollAndReload(playListView)
-        
-        // 順序が変わらないものは適用しない
-        live3DView.resetSongs(songs: Songs.shared.live3DSongs)
-        notStreamView.resetSongs(songs: Songs.shared.notStreamSongs)
+    private func resetContent() {
+        // 順序や内容が変わらないものは適用しない
+        // TODO: スクロールや更新しない予定のViewのreloadは別途検討
+        // recentView.resetSongs(songs: Songs.shared.filteredSongs)
+        // live3DView.resetSongs(songs: Songs.shared.live3DSongs)
+        // notStreamView.resetSongs(songs: Songs.shared.notStreamSongs)
         favoriteView.resetSongs(songs: Songs.shared.favoriteSongs)
         historyView.resetSongs(songs: Songs.shared.historySongs)
-        playListView.resetSongs(playListSongs: Songs.shared.playListSongs)
-        // プレイリストを変更する場合もありうるため更新
-        playListView.resetKeys(playListKeys: Songs.shared.playList)
-        
+        playListView.resetKeyAndSongs(playListKeys: Songs.shared.playList,
+                                      playListSongs: Songs.shared.playListSongs)
+        // collabView.resetKeyAndSongs(playListKeys: Songs.shared.holoMembers,
+        //                             playListSongs: Songs.shared.holoMembersSongs)
+        // artistView.resetKeyAndSongs(playListKeys: Songs.shared.artists,
+        //                             playListSongs: Songs.shared.artistsSongs)
+        // myPlayListView.resetKeyAndSongs(playListKeys: Songs.shared.myFavorites,
+        //                                 playListSongs: Songs.shared.myFavoriteSongs)
+                
         // TODO: 汎用化して存在しないモジュールは表示できないようにしておきたい
         playListView.isHidden = PlayLists.shared.playListIds.isEmpty
         historyView.isHidden = Histories.shared.historyIds.count == 0
         favoriteView.isHidden = Favorites.shared.favoriteIds.count == 0
     }
     
-    private func resetScrollAndReload(_ suggestModuleView: SuggestModuleView) {
+    private func resetScroll(_ suggestModuleView: SuggestModuleView) {
         suggestModuleView.collectionView.setContentOffset(.zero, animated: false)
-        suggestModuleView.collectionView.reloadData()
+    }
+
+    private func resetScroll(_ playListView: PlayListView) {
+        playListView.collectionView.setContentOffset(.zero, animated: false)
     }
     
-    private func resetScrollAndReload(_ playListView: PlayListView) {
-        playListView.collectionView.setContentOffset(.zero, animated: false)
+    private func reload(_ suggestModuleView: SuggestModuleView) {
+        suggestModuleView.collectionView.reloadData()
+    }
+
+    private func reload(_ playListView: PlayListView) {
         playListView.collectionView.reloadData()
     }
     

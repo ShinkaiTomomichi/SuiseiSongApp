@@ -26,7 +26,7 @@ class AddPlayListViewController: UIViewController {
         songTableView.register(UINib(nibName: "SongTableViewForChoiceCell", bundle: nil), forCellReuseIdentifier: "SongTableViewForChoiceCell")
         searchBar.delegate = self
         
-        saveBarButtonItem = UIBarButtonItem(title: "次へ", style: .done, target: self, action: #selector(saveBarButtonTapped(_:)))        
+        saveBarButtonItem = UIBarButtonItem(title: "次へ", style: .done, target: self, action: #selector(saveBarButtonTapped(_:)))
         self.navigationItem.rightBarButtonItems = [saveBarButtonItem]
     }
     
@@ -129,7 +129,6 @@ extension AddPlayListViewController {
                 return
             }
             
-            // TODO: プレイリスト名が重複する場合も気をつけたい
             self.savePlayList(title: playListTitle)
         }))
         
@@ -139,15 +138,7 @@ extension AddPlayListViewController {
         // AlertViewを表示
         self.present(alert, animated: true, completion: nil)
     }
-    
-    private func presentCautionAlert(message: String) {
-        let alert = UIAlertController(title: "不正な入力です",
-                                      message: message,
-                                      preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
+        
     private func savePlayList(title: String) {
         Logger.log(message: playListIds)
         PlayLists.shared.addPlayListIds(playListTitle: title, songIds: playListIds)

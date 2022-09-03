@@ -123,8 +123,8 @@ final class Songs {
         historySongs = allSongs.filter {
             Histories.shared.historyIds.contains($0.id)
         }
-        
         sortOtherSongs()
+        sortFavoriteAndHistory()
     }
     
     // reload時に呼び出すためpublicにする
@@ -135,11 +135,14 @@ final class Songs {
         notStreamSongs = sorted(byIds: notStreamIds)
         let live3DIds = Recommend.randomize(songs: live3DSongs)
         live3DSongs = sorted(byIds: live3DIds)
-        
+    }
+
+    func sortFavoriteAndHistory() {
         // 履歴とお気に入りは追加順で固定
         favoriteSongs = sorted(byIds: Favorites.shared.favoriteIds.reversed())
         historySongs = sorted(byIds: Histories.shared.historyIds.reversed())
     }
+
     
     private func sorted(byIds: [Int]) -> [Song] {
         return byIds.map { getSong(byId: $0) }
@@ -186,6 +189,7 @@ final class Songs {
         }
         myFavorites = myFavorites_.uniqueSortedByName()
         
+        myFavoriteSongs = [:]
         for myFavorite in myFavorites {
             myFavoriteSongs[myFavorite] = allSongs.filter {
                 $0.listtype == myFavorite
@@ -199,6 +203,7 @@ final class Songs {
             playList.append(key)
         }
         
+        playListSongs = [:]
         for title in playList {
             if let playListIds = PlayLists.shared.playListIds[title] {
                 playListSongs[title] = allSongs.filter {
@@ -206,6 +211,8 @@ final class Songs {
                 }
             }
         }
+        Logger.log(message: "ids: \(PlayLists.shared.playListIds)")
+        Logger.log(message: "songs: \(playListSongs)")
     }
     
     func resetPlayListSongs() {

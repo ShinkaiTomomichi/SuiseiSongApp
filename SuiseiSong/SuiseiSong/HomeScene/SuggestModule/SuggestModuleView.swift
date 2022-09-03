@@ -67,6 +67,7 @@ class SuggestModuleView: UIView {
     
     func resetSongs(songs: [Song]) {
         self.songs = songs
+        self.collectionView.reloadData()
     }
 }
 

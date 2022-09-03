@@ -47,7 +47,7 @@ class SearchViewController: UIViewController {
     }
     
     @IBAction func tapChangeTitleButton(_ sender: Any) {
-        Logger.log(message: #function)
+        presentChangeTitleAlert()
     }
     
     @IBAction func tapAddSongButton(_ sender: Any) {
@@ -55,7 +55,7 @@ class SearchViewController: UIViewController {
     }
     
     @IBAction func tapDeletePlayListButton(_ sender: Any) {
-        Logger.log(message: #function)
+        deletePlayListAlert()
     }
 }
 
@@ -110,6 +110,78 @@ extension SearchViewController: UISearchBarDelegate {
             songTableView.reloadData()
         }
     }
+}
+
+extension SearchViewController {
+    private func presentChangeTitleAlert() {
+        let alert = UIAlertController(title: "プレイリスト名の変更",
+                                      message: "プレイリスト名を入力し変更ボタンを押してください",
+                                      preferredStyle: .alert)
+
+        // textFieldを追加
+        var playListTitleTextField: UITextField?
+        alert.addTextField(configurationHandler: {(textField) -> Void in
+            playListTitleTextField = textField
+            playListTitleTextField?.placeholder = self.playListTitle ?? ""
+            }
+        )
+
+        // 実行ボタンを追加
+        alert.addAction(UIAlertAction(title: "変更", style: .default, handler: {(action) -> Void in
+            guard let newPlayListTitle = playListTitleTextField?.text else {
+                self.presentCautionAlert(message: "プレイリスト名が取得できませんでした")
+                return
+            }
+            
+            guard !newPlayListTitle.isEmpty else {
+                self.presentCautionAlert(message: "プレイリスト名を入力してください")
+                return
+            }
+            
+            guard !Songs.shared.playList.contains(newPlayListTitle) else {
+                self.presentCautionAlert(message: "既に存在するプレイリスト名です")
+                return
+            }
+            
+            self.changeTitle(title: newPlayListTitle)
+        }))
+        
+        // キャンセルボタンを追加
+        alert.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler: nil))
+        
+        // AlertViewを表示
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func changeTitle(title: String) {
+        PlayLists.shared.changePlayListTitle(playListTitle: self.playListTitle!, newPlayListTitle: title)
+        Songs.shared.resetPlayListSongs()
+        self.editPlayListLabel.text = title
+    }
+    
+    private func deletePlayListAlert() {
+        let alert = UIAlertController(title: "プレイリストの削除",
+                                      message: "このプレイリストを削除しますか？",
+                                      preferredStyle: .alert)
+
+        // 実行ボタンを追加
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {(action) -> Void in
+            self.removePlayList(title: self.playListTitle!)
+        }))
+        
+        // キャンセルボタンを追加
+        alert.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler: nil))
+        
+        // AlertViewを表示
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func removePlayList(title: String) {
+        PlayLists.shared.removePlayList(playListTitle: playListTitle!)
+        Songs.shared.resetPlayListSongs()
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+
 }
 
 enum SearchType {

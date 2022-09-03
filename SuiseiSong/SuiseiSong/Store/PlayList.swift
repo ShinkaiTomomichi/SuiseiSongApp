@@ -21,6 +21,21 @@ final class PlayLists {
         }
         UserDefaults.savePlayList()
     }
+
+    func changePlayListTitle(playListTitle: String, newPlayListTitle: String) {
+        guard let changePlayListIds = playListIds[playListTitle] else {
+            Logger.log(message: "プレイリスト名の変更に失敗しました")
+            return
+        }
+        playListIds.updateValue(changePlayListIds, forKey: newPlayListTitle)
+        playListIds.removeValue(forKey: playListTitle)
+        UserDefaults.savePlayList()
+    }
+
+    func removePlayList(playListTitle: String) {
+        playListIds.removeValue(forKey: playListTitle)
+        UserDefaults.savePlayList()
+    }
     
     func removePlayListIds(playListTitle: String, songIds: [Int]) {
         for songId in songIds {

@@ -52,18 +52,18 @@ class PlayListView: UIView {
         self.navigationController = navigationController
     }
     
-    func resetSongs(playListSongs: [String:[Song]]) {
-        self.playListSongs = playListSongs
-    }
-    
-    func resetKeys(playListKeys: [String]) {
+    func resetKeyAndSongs(playListKeys: [String], playListSongs: [String:[Song]]) {
         self.playListKeys = playListKeys
-    }
+        self.playListSongs = playListSongs
+        self.collectionView.reloadData()
+    }    
 }
 
 extension PlayListView: UICollectionViewDelegate, UICollectionViewDataSource {
     // セルの数
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        Logger.log(message: playListKeys)
+        Logger.log(message: playListSongs.keys.count)
         return playListSongs.keys.count
     }
     
