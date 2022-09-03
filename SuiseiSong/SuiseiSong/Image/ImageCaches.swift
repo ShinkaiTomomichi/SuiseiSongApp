@@ -153,6 +153,10 @@ final class ImageCaches {
             }
         }
     }
+    
+    func removeImagePlayListIcon() {
+        playListCaches.removeAll()
+    }
 }
 
 enum Quority {

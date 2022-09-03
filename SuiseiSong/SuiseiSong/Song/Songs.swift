@@ -217,6 +217,7 @@ final class Songs {
     
     func resetPlayListSongs() {
         setupPlayListSongs()
+        ImageCaches.shared.removeImagePlayListIcon()
     }
     
     func resetDisplaySongs() {
@@ -263,6 +264,14 @@ final class Songs {
         }
         displaySongsForSearch = displaySongs.filter {
             $0.songname.contains(by) || $0.artistname.contains(by)
+        }
+    }
+    
+    func setupChoicies(playListIds: [Int]) {
+        for song in allSongs {
+            if playListIds.contains(song.id) {
+                song.choice = true
+            }
         }
     }
     

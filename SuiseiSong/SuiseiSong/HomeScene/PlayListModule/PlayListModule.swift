@@ -56,14 +56,12 @@ class PlayListView: UIView {
         self.playListKeys = playListKeys
         self.playListSongs = playListSongs
         self.collectionView.reloadData()
-    }    
+    }
 }
 
 extension PlayListView: UICollectionViewDelegate, UICollectionViewDataSource {
     // セルの数
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        Logger.log(message: playListKeys)
-        Logger.log(message: playListSongs.keys.count)
         return playListSongs.keys.count
     }
     

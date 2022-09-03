@@ -14,7 +14,7 @@ final class PlayLists {
     }() ?? [String:[Int]]()
     private init() {}
     
-    func addPlayListIds(playListTitle: String, songIds: [Int]) {
+    func setPlayListIds(playListTitle: String, songIds: [Int]) {
         playListIds[playListTitle] = []
         for songId in songIds {
             playListIds[playListTitle]?.append(songId)

@@ -13,13 +13,16 @@ class AddPlayListViewController: UIViewController {
     @IBOutlet weak var sortButton: UIButton!
     @IBOutlet weak var songTableView: UITableView!
     
+    var playListTitle: String?
     var playListIds: [Int] = []
     
     // NavigationBarに追加するボタン
     var saveBarButtonItem: UIBarButtonItem!
+    var updateBarButtonItem: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Songs.shared.setupChoicies(playListIds: playListIds)
 
         songTableView.dataSource = self
         songTableView.delegate = self
@@ -27,7 +30,12 @@ class AddPlayListViewController: UIViewController {
         searchBar.delegate = self
         
         saveBarButtonItem = UIBarButtonItem(title: "次へ", style: .done, target: self, action: #selector(saveBarButtonTapped(_:)))
-        self.navigationItem.rightBarButtonItems = [saveBarButtonItem]
+        updateBarButtonItem = UIBarButtonItem(title: "更新", style: .done, target: self, action: #selector(updateBarButtonTapped(_:)))
+        if playListIds.count == 0 && playListTitle == nil {
+            self.navigationItem.rightBarButtonItems = [saveBarButtonItem]
+        } else {
+            self.navigationItem.rightBarButtonItems = [updateBarButtonItem]
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -38,10 +46,6 @@ class AddPlayListViewController: UIViewController {
     @IBAction func tapSortButton(_ sender: Any) {
         // sort形式をtoggleする
         // displaySongsを再セットするとかか?
-    }
-    
-    func setPlayListIds(playListIds: [Int]) {
-        self.playListIds = playListIds
     }
 }
 
@@ -141,10 +145,42 @@ extension AddPlayListViewController {
         
     private func savePlayList(title: String) {
         Logger.log(message: playListIds)
-        PlayLists.shared.addPlayListIds(playListTitle: title, songIds: playListIds)
+        PlayLists.shared.setPlayListIds(playListTitle: title, songIds: playListIds)
         Songs.shared.resetPlayListSongs()
         self.navigationController?.popToRootViewController(animated: true)
     }
+    
+    @objc func updateBarButtonTapped(_ sender: UIBarButtonItem) {
+        presentUpdateAlert()
+    }
+    
+    private func presentUpdateAlert() {
+        let alert = UIAlertController(title: "プレイリストの更新",
+                                      message: "プレイリストを更新しますか？",
+                                      preferredStyle: .alert)
+
+        // 実行ボタンを追加
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {(action) -> Void in
+
+            guard Songs.shared.allSongs.filter({ $0.choice }).count != 0 else {
+                self.presentCautionAlert(message: "プレイリストに追加する曲を選択してください")
+                return
+            }
+            
+            if let playListTitle = self.playListTitle {
+                self.savePlayList(title: playListTitle)
+            } else {
+                Logger.log(message: "playListTitleがセットされていません")
+            }
+        }))
+        
+        // キャンセルボタンを追加
+        alert.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler: nil))
+        
+        // AlertViewを表示
+        self.present(alert, animated: true, completion: nil)
+    }
+
 }
 
 enum SortType {

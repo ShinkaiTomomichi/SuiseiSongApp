@@ -51,7 +51,17 @@ class SearchViewController: UIViewController {
     }
     
     @IBAction func tapAddSongButton(_ sender: Any) {
-        Logger.log(message: #function)
+        // displaySongsを更新しなくてはならない
+        Songs.shared.resetDisplaySongs()
+        
+        let storyboard = UIStoryboard(name: "AddPlayList", bundle: nil)
+        let nextViewController = storyboard.instantiateViewController(withIdentifier: "AddPlayList") as! AddPlayListViewController
+        if let playListTitle = playListTitle,
+            let playListIds = PlayLists.shared.playListIds[playListTitle] {
+            nextViewController.playListIds = playListIds
+            nextViewController.playListTitle = playListTitle
+        }
+        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
     @IBAction func tapDeletePlayListButton(_ sender: Any) {
@@ -181,7 +191,6 @@ extension SearchViewController {
         Songs.shared.resetPlayListSongs()
         self.navigationController?.popToRootViewController(animated: true)
     }
-
 }
 
 enum SearchType {

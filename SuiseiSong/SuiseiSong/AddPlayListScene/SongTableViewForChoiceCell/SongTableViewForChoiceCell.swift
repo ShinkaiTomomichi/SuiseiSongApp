@@ -47,7 +47,6 @@ class SongTableViewForChoiceCell: UITableViewCell {
                 vc?.playListIds.removeAll(where: {$0 == song.id})
             }
             setChoiceButton(enable: song.choice)
-
         }
     }
     
